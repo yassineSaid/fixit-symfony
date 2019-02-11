@@ -14,15 +14,10 @@
     <link href="{{ asset("BackResources/css/app.css") }}" rel="stylesheet">
 
 </head>
-{% endblock %}
-<!--************************************
-           Board Start
-   *************************************-->
-
-
 <body>
+{% endblock %}
+{% block sidebar %}
 <div class="wrapper">
-    {% block board %}
     <nav class="sidebar sidebar-sticky">
         <div class="sidebar-content  js-simplebar">
             <a class="sidebar-brand" href="index.html">
@@ -174,13 +169,7 @@
         </div>
     </nav>
     {% endblock %}
-    <!--************************************
-           Board End
-   *************************************-->
-    <!--************************************
-           Header Start
-   *************************************-->
-    {% block header %}
+        {% block navbar %}
     <div class="main">
         <nav class="navbar navbar-expand navbar-light bg-white sticky-top">
             <a class="sidebar-toggle d-flex mr-3">
@@ -348,19 +337,9 @@
                 </ul>
             </div>
         </nav>
-{% endblock %}
-        <!--************************************
-           Header End
-   *************************************-->
-
-        <!--************************************
-   Content Start
-*************************************-->
+        {% endblock %}
         {% block content %}
         {% endblock %}
-        <!--************************************
-Content End
-*************************************-->
         {% block footer %}
         <footer class="footer">
             <div class="container-fluid">
@@ -389,11 +368,12 @@ Content End
                 </div>
             </div>
         </footer>
-        {% endblock %}
     </div>
 </div>
-
+{% endblock %}
+{% block js %}
 <script src="{{ asset("BackResources/js/app.js") }}"></script>
 </body>
 
 </html>
+{% endblock %}
