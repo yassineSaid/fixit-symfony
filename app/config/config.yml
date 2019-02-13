@@ -84,8 +84,11 @@ fos_user:
             name: fos_user_registration_form
             validation_groups: [Registration, Default]
         confirmation:
-            enabled: true
+            enabled: false
             template: '@FOSUser/Registration/email.txt.twig'
+            from_email:
+                address:        noreply@example.com
+                sender_name:    Demo App
     profile:
         form:
             type: FOS\UserBundle\Form\Type\ProfileFormType

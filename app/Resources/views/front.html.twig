@@ -99,7 +99,7 @@
                             {% if app.user==null %}
                             <div class="tg-loginregister">
                                 <a class="tg-btnlogin" href="{{ path('login') }}">Login</a>
-                                <a class="tg-btnregister" href="javascript:void(0);">Register</a>
+                                <a class="tg-btnregister" href="{{ path('register') }}">Register</a>
                             </div>
                             {% else %}
                             <div class="tg-useradminbox">
