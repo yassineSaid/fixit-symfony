@@ -10,6 +10,9 @@ admin_index:
 login:
   path:     /login
   defaults: { _controller: BackBundle:Security:login }
+register:
+  path:     /register/
+  defaults: { _controller: BackBundle:Registration:register }
 logout:
   path:     /logout
   defaults: { _controller: BackBundle:Security:logout }
