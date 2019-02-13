@@ -1,4 +1,5 @@
 {% extends "front.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
 {% block title %}Connexion{% endblock %}
 {% block content %}
     <!--************************************
@@ -29,6 +30,10 @@
         <!--************************************
                 Login Register Start
         *************************************-->
+
+        {% if error %}
+            <div class="bg-danger">{{ error|trans({}, 'FOSUserBundle') }}</div>
+        {% endif %}
         <div class="tg-main-section tg-haslayout">
             <div class="container">
                 <div class="row">
@@ -40,8 +45,9 @@
                                 </div>
 
                                 <fieldset>
-                                    <form action="{{ path('fos_user_registration_register') }}" method="post">
-                                    <div class="tg-themetabcontent tab-content">
+                                    <form action="{{ path('fos_user_registration_register') }}" method="post" name="fos_user_registration_form">
+                                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                                        <div class="tg-themetabcontent tab-content">
                                         <div class="tab-pane active fade in" id="regularuser">
                                             <div class="form-group">
                                                 <div class="tg-registeras">
@@ -81,7 +87,7 @@
                                                     <label for="terms">I have read the <a href="#">Terms &amp; Conditions</a> and accept them</label>
                                                 </div>
                                             </div>
-                                            <button class="tg-btn" type="submit">Register Now</button>
+                                            <input class="tg-btn" type="submit" value="{{ 'registration.submit'|trans }}">Register Now</input>
                                             <ul class="tg-socialicons tg-socialsharewithtext">
                                                 <li class="tg-facebook">
                                                     <a class="tg-roundicontext" href="javascript:void(0);">
@@ -141,9 +147,6 @@
                                 <div class="tg-loginarea">
                                     <div class="tg-bordertitle">
                                         <h3>Login Now</h3>
-                                        {% if error %}
-                                            <div class="bg-danger">{{ error|trans({}, 'FOSUserBundle') }}</div>
-                                        {% endif %}
                                     </div>
                                     <fieldset>
                                         <form action="{{ path("fos_user_security_check") }}" method="post">
