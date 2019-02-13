@@ -5,6 +5,7 @@ namespace MainBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 
+
 /**
  * Class User
  * @package MainBundle\Entity
@@ -82,6 +83,15 @@ class User extends BaseUser
      */
     protected $phone;
 
+    /**
+     * Many Users have Many Services.
+     * @ORM\ManyToMany(targetEntity="Service")
+     * @ORM\JoinTable(name="ServiceUser",
+     *      joinColumns={@ORM\JoinColumn(name="id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="Service", referencedColumnName="id")}
+     *      )
+     */
+    private $Services;
     /**
      * Constructor
      */
