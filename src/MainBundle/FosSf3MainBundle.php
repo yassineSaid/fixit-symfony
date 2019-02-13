@@ -1,6 +1,6 @@
 <?php
 
-namespace FosSf3\MainBundle;
+namespace MainBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

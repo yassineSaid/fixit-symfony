@@ -3,84 +3,200 @@
 namespace MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
- * User
- *
+ * Class User
+ * @package MainBundle\Entity
  * @ORM\Table(name="user")
- * @ORM\Entity(repositoryClass="MainBundle\Repository\UserRepository")
+ * @ORM\Entity
  */
-class User
+class User extends BaseUser
 {
+    const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
+    const ROLE_ADMIN = 'ROLE_ADMIN';
+    const ROLE_USER = 'ROLE_USER';
+
     /**
-     * @var int
+     * @var integer
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
-     * @var string
+     * @var
      *
-     * @ORM\Column(name="sexe", type="string", length=255)
+     * @ORM\Column(name="gender", type="string", length=255, nullable=true)
      */
-    private $sexe;
+    protected $gender;
 
     /**
-     * @var string
+     * @var
      *
-     * @ORM\Column(name="prenom", type="string", length=255)
+     * @ORM\Column(name="firstname", type="string", length=255, nullable=true)
      */
-    private $prenom;
+    protected $firstname;
 
     /**
-     * @var string
+     * @var
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="lastname", type="string", length=255, nullable=true)
      */
-    private $nom;
+    protected $lastname;
 
     /**
-     * @var string
+     * @var
      *
-     * @ORM\Column(name="addresse", type="string", length=255)
+     * @ORM\Column(name="address", type="text", nullable=true, nullable=true)
      */
-    private $addresse;
+    protected $address;
 
     /**
-     * @var string
+     * @var
      *
-     * @ORM\Column(name="zip", type="string", length=255)
+     * @ORM\Column(name="zip_code", type="string", length=255, nullable=true)
      */
-    private $zip;
+    protected $zipCode;
 
     /**
-     * @var string
+     * @var
      *
-     * @ORM\Column(name="ville", type="string", length=255)
+     * @ORM\Column(name="city", type="string", length=255, nullable=true)
      */
-    private $ville;
+    protected $city;
 
     /**
-     * @var string
+     * @var
      *
-     * @ORM\Column(name="pays", type="string", length=255)
+     * @ORM\Column(name="country", type="string", length=255, nullable=true)
      */
-    private $pays;
+    protected $country;
 
     /**
-     * @var string
+     * @var
      *
-     * @ORM\Column(name="telephone", type="string", length=255)
+     * @ORM\Column(name="phone", type="string", length=255, nullable=true)
      */
-    private $telephone;
+    protected $phone;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * @param mixed $gender
+     */
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    /**
+     * @param mixed $firstname
+     */
+    public function setFirstname($firstname)
+    {
+        $this->firstname = $firstname;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    /**
+     * @param mixed $lastname
+     */
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+
 
 
     /**
-     * Get id
-     *
+     * @param mixed $address
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param mixed $city
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param mixed $country
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
      * @return int
      */
     public function getId()
@@ -89,195 +205,35 @@ class User
     }
 
     /**
-     * Set sexe
-     *
-     * @param string $sexe
-     *
-     * @return User
+     * @param mixed $zipCode
      */
-    public function setSexe($sexe)
+    public function setZipCode($zipCode)
     {
-        $this->sexe = $sexe;
-
-        return $this;
+        $this->zipCode = $zipCode;
     }
 
     /**
-     * Get sexe
-     *
-     * @return string
+     * @return mixed
      */
-    public function getSexe()
+    public function getZipCode()
     {
-        return $this->sexe;
+        return $this->zipCode;
     }
 
     /**
-     * Set prenom
-     *
-     * @param string $prenom
-     *
-     * @return User
+     * @param mixed $phone
      */
-    public function setPrenom($prenom)
+    public function setPhone($phone)
     {
-        $this->prenom = $prenom;
-
-        return $this;
+        $this->phone = $phone;
     }
 
     /**
-     * Get prenom
-     *
-     * @return string
+     * @return mixed
      */
-    public function getPrenom()
+    public function getPhone()
     {
-        return $this->prenom;
+        return $this->phone;
     }
 
-    /**
-     * Set nom
-     *
-     * @param string $nom
-     *
-     * @return User
-     */
-    public function setNom($nom)
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    /**
-     * Get nom
-     *
-     * @return string
-     */
-    public function getNom()
-    {
-        return $this->nom;
-    }
-
-    /**
-     * Set addresse
-     *
-     * @param string $addresse
-     *
-     * @return User
-     */
-    public function setAddresse($addresse)
-    {
-        $this->addresse = $addresse;
-
-        return $this;
-    }
-
-    /**
-     * Get addresse
-     *
-     * @return string
-     */
-    public function getAddresse()
-    {
-        return $this->addresse;
-    }
-
-    /**
-     * Set zip
-     *
-     * @param string $zip
-     *
-     * @return User
-     */
-    public function setZip($zip)
-    {
-        $this->zip = $zip;
-
-        return $this;
-    }
-
-    /**
-     * Get zip
-     *
-     * @return string
-     */
-    public function getZip()
-    {
-        return $this->zip;
-    }
-
-    /**
-     * Set ville
-     *
-     * @param string $ville
-     *
-     * @return User
-     */
-    public function setVille($ville)
-    {
-        $this->ville = $ville;
-
-        return $this;
-    }
-
-    /**
-     * Get ville
-     *
-     * @return string
-     */
-    public function getVille()
-    {
-        return $this->ville;
-    }
-
-    /**
-     * Set pays
-     *
-     * @param string $pays
-     *
-     * @return User
-     */
-    public function setPays($pays)
-    {
-        $this->pays = $pays;
-
-        return $this;
-    }
-
-    /**
-     * Get pays
-     *
-     * @return string
-     */
-    public function getPays()
-    {
-        return $this->pays;
-    }
-
-    /**
-     * Set telephone
-     *
-     * @param string $telephone
-     *
-     * @return User
-     */
-    public function setTelephone($telephone)
-    {
-        $this->telephone = $telephone;
-
-        return $this;
-    }
-
-    /**
-     * Get telephone
-     *
-     * @return string
-     */
-    public function getTelephone()
-    {
-        return $this->telephone;
-    }
 }
-
