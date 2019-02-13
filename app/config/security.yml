@@ -23,26 +23,15 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        admin:
-            pattern:            /admin/(.*)
-            form_login:
-                provider:       fos_userbundle
-                login_path:     admin_login
-                check_path:     admin_login_check
-                default_target_path: /admin/
-            logout:
-                path:           admin_logout
-                target:         admin_login
-            anonymous:        true
-            context:          application
-
         main:
             pattern: ^/
             form_login:
                 always_use_default_target_path: true
                 default_target_path: /login
 
-            logout:       true
+            logout:
+                path: /logout
+                target: /index
             anonymous:    true
             # activate different ways to authenticate
 

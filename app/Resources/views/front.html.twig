@@ -7,10 +7,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Service Provider</title>
+    <title>{% block title %}Service Provider{% endblock %}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="rel" type="image/png"  href="{{ asset("service/images/icon.png") }}">
     <link rel="stylesheet" href="{{ asset("service/css/bootstrap.min.css") }}">
     <link rel="stylesheet" href="{{ asset("service/css/normalize.css") }}">
     <link rel="stylesheet" href="{{ asset("service/css/font-awesome.min.css") }}">
@@ -96,15 +96,17 @@
                             </ul>
                         </div>
                         <div class="tg-adminbox">
+                            {% if app.user==null %}
                             <div class="tg-loginregister">
-                                <a class="tg-btnlogin" href="javascript:void(0);">Login</a>
+                                <a class="tg-btnlogin" href="{{ path('login') }}">Login</a>
                                 <a class="tg-btnregister" href="javascript:void(0);">Register</a>
                             </div>
+                            {% else %}
                             <div class="tg-useradminbox">
                                 <div class="tg-themedropdown tg-userdropdown">
                                     <a href="dashboard.html" id="tg-usermenu" class="tg-btndropdown">
                                         <em><img src="{{ asset("service/images/thumbnails/img-01.jpg") }}" alt="image description"></em>
-                                        <span>Hi! Kena Maresca</span>
+                                        <span>Bonjour {{  app.user.firstname }} {{  app.user.lastname }}  </span>
                                         <i class="fa fa-angle-down"></i>
                                     </a>
                                     <div class="tg-dropdownmenu tg-usermenu" aria-labelledby="tg-usermenu">
@@ -226,7 +228,7 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#">
+                                                    <a href="{{ path('logout') }}">
                                                         <i class="lnr lnr-exit"></i>
                                                         <span>Logout</span>
                                                     </a>
@@ -236,6 +238,7 @@
                                     </div>
                                 </div>
                             </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

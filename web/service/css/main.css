@@ -1196,7 +1196,7 @@ body.tg-home .tg-main{padding: 20px 0;}
 .tg-loginregister .tg-btnlogin{margin-left: 0;}
 .tg-loginregister .tg-btnregister{margin-right: 0;}
 .tg-useradminbox,
-body.tg-login .tg-loginregister{display: none;}
+body.tg-login .tg-loginregister{display: block;}
 body.tg-login .tg-useradminbox,
 .tg-loginregister{display: block;}
 .tg-userdropdown{
