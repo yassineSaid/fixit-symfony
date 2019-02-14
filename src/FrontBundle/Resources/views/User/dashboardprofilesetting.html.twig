@@ -1,0 +1,605 @@
+{% extends "dashboard_front.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block title %}Connexion{% endblock %}
+{% block content %}
+    <!--************************************
+				Inner Page Banner Start
+		*************************************-->
+    <div class="tg-innerpagebanner">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="tg-pagetitle">
+                        <h1>Profil</h1>
+                    </div>
+                    <ol class="tg-breadcrumb">
+                        <li><a href="#">Accueil</a></li>
+                        <li class="tg-active">Profil</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block sidebar %}
+ {{ parent() }}
+{% endblock %}
+    {% block content_dashboard %}
+                    <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
+                        <div id="tg-content" class="tg-content">
+                            <div class="tg-dashboard tg-dashboardprofilesetting">
+                                <form class="tg-themeform">
+                                    <fieldset>
+                                        <div class="tg-dashboardbox tg-basicinformation">
+                                            <div class="tg-dashboardtitle">
+                                                <h2>Informations générales</h2>
+                                            </div>
+                                            <div class="tg-basicinformationbox">
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" name="firstname" placeholder="Your Name" value="{{  app.user.firstname }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" name="Lastname" placeholder="Company Title" value="{{  app.user.lastname }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" name="email" placeholder="Email" value="{{  app.user.email }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" name="username" placeholder="Mobile" value="{{  app.user.username }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tg-dashboardbox tg-socialinformation">
+                                            <div class="tg-dashboardtitle">
+                                                <h2>Social Infomartion</h2>
+                                                <a class="tg-btnaddnew" href="#" data-toggle="modal" data-target=".tg-socialModal">+ add new</a>
+                                            </div>
+                                            <div class="tg-socialinformationbox">
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                        <div class="form-group tg-inputwithicon tg-facebook">
+                                                            <i class="tg-icon fa fa-facebook"></i>
+                                                            <input type="text" class="form-control" name="facebooklink" placeholder="Facebook Link">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                        <div class="form-group tg-inputwithicon tg-twitter">
+                                                            <i class="tg-icon fa fa-twitter"></i>
+                                                            <input type="text" class="form-control" name="twitterlink" placeholder="twitter Link">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                        <div class="form-group tg-inputwithicon tg-linkedin">
+                                                            <i class="tg-icon fa fa-linkedin"></i>
+                                                            <input type="text" class="form-control" name="linkedinlink" placeholder="linkedin Link">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                        <div class="form-group tg-inputwithicon tg-skype">
+                                                            <i class="tg-icon fa fa-skype"></i>
+                                                            <input type="text" class="form-control" name="skypelink" placeholder="skype Link">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                        <div class="form-group tg-inputwithicon tg-googleplus">
+                                                            <i class="tg-icon fa fa-google-plus"></i>
+                                                            <input type="text" class="form-control" name="googlepluslink" placeholder="google Plus Link">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                        <div class="form-group tg-inputwithicon tg-pinterestp">
+                                                            <i class="tg-icon fa fa-pinterest-p"></i>
+                                                            <input type="text" class="form-control" name="pinterestlink" placeholder="pinterest Link">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tg-dashboardbox tg-location">
+                                            <div class="tg-dashboardtitle">
+                                                <h2>Location</h2>
+                                                <a class="tg-btnaddnew" href="#">+ add new</a>
+                                            </div>
+                                            <div class="tg-locationbox">
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                                        <div class="form-group tg-inputwithicon">
+                                                            <input type="text" class="form-control" name="country" placeholder="Country">
+                                                            <i class="fa fa-crosshairs tg-icon"></i>
+                                                            <i class="fa fa-angle-down tg-icon"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" name="city" placeholder="City">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" name="state" placeholder="State">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="tg-locationmap" class="tg-locationmap"></div>
+                                            </div>
+                                        </div>
+                                        <div class="tg-dashboardbox tg-introduction">
+                                            <div class="tg-dashboardtitle">
+                                                <h2>Introduction</h2>
+                                            </div>
+                                            <div class="tg-introductionbox">
+                                                <textarea class="form-control" name="introduction" placeholder="Introduction Here"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="tg-dashboardbox tg-languages">
+                                            <div class="tg-dashboardtitle">
+                                                <h2>Languages</h2>
+                                            </div>
+                                            <div class="tg-languagesbox">
+                                                <div class="form-group">
+														<span class="tg-select">
+															<select>
+																<option>Select Language</option>
+																<option>English</option>
+																<option>Arabic</option>
+																<option>Portuguese</option>
+																<option>Russian</option>
+																<option>Japanese</option>
+																<option>German</option>
+																<option>Korean</option>
+																<option>French</option>
+																<option>Turkish</option>
+																<option>Italian</option>
+																<option>Persian</option>
+																<option>Romanian</option>
+																<option>Dutch</option>
+																<option>Greek</option>
+															</select>
+														</span>
+                                                    <button class="tg-btn" type="button">add now</button>
+                                                </div>
+                                                <ul class="tg-tagdashboardlist">
+                                                    <li>
+															<span class="tg-tagdashboard">
+																<i class="fa fa-close"></i>
+																<em>English</em>
+															</span>
+                                                    </li>
+                                                    <li>
+															<span class="tg-tagdashboard">
+																<i class="fa fa-close"></i>
+																<em>Arabic</em>
+															</span>
+                                                    </li>
+                                                    <li>
+															<span class="tg-tagdashboard">
+																<i class="fa fa-close"></i>
+																<em>Portuguese</em>
+															</span>
+                                                    </li>
+                                                    <li>
+															<span class="tg-tagdashboard">
+																<i class="fa fa-close"></i>
+																<em>Russian</em>
+															</span>
+                                                    </li>
+                                                    <li>
+															<span class="tg-tagdashboard">
+																<i class="fa fa-close"></i>
+																<em>Japanese</em>
+															</span>
+                                                    </li>
+                                                    <li>
+															<span class="tg-tagdashboard">
+																<i class="fa fa-close"></i>
+																<em>German</em>
+															</span>
+                                                    </li>
+                                                    <li>
+															<span class="tg-tagdashboard">
+																<i class="fa fa-close"></i>
+																<em>Korean</em>
+															</span>
+                                                    </li>
+                                                    <li>
+															<span class="tg-tagdashboard">
+																<i class="fa fa-close"></i>
+																<em>French</em>
+															</span>
+                                                    </li>
+                                                    <li>
+															<span class="tg-tagdashboard">
+																<i class="fa fa-close"></i>
+																<em>Turkish</em>
+															</span>
+                                                    </li>
+                                                    <li>
+															<span class="tg-tagdashboard">
+																<i class="fa fa-close"></i>
+																<em>Italian</em>
+															</span>
+                                                    </li>
+                                                    <li>
+															<span class="tg-tagdashboard">
+																<i class="fa fa-close"></i>
+																<em>Persian</em>
+															</span>
+                                                    </li>
+                                                    <li>
+															<span class="tg-tagdashboard">
+																<i class="fa fa-close"></i>
+																<em>Romanian</em>
+															</span>
+                                                    </li>
+                                                    <li>
+															<span class="tg-tagdashboard">
+																<i class="fa fa-close"></i>
+																<em>Dutch</em>
+															</span>
+                                                    </li>
+                                                    <li>
+															<span class="tg-tagdashboard">
+																<i class="fa fa-close"></i>
+																<em>Greek</em>
+															</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="tg-dashboardbox tg-certificatesawards">
+                                            <div class="tg-dashboardtitle">
+                                                <h2>Certificates &amp; Awards</h2>
+                                                <a class="tg-btnaddnew" href="#" class="" data-toggle="modal" data-target=".tg-certificatesawardsModal">+ add new</a>
+                                            </div>
+                                            <div class="tg-certificatesawardsbox">
+                                                <div class="tg-certificatesaward">
+                                                    <div class="tg-imgandtitle">
+                                                        <figure><a href="#"><img src="images/thumbnails/img-14.jpg" align="image description"></a></figure>
+                                                        <h3><a href="javascript:void(0);">Best Service Provider</a></h3>
+                                                    </div>
+                                                    <div class="tg-btntimeedit">
+                                                        <span>June 27, 2016</span>
+                                                        <button class="tg-btnedite"><i class="lnr lnr-pencil"></i></button>
+                                                        <button class="tg-btndel"><i class="lnr lnr-trash"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div class="tg-certificatesaward">
+                                                    <div class="tg-imgandtitle">
+                                                        <figure><a href="#"><img src="images/thumbnails/img-15.jpg" align="image description"></a></figure>
+                                                        <h3><a href="javascript:void(0);">Best Customer Support</a></h3>
+                                                    </div>
+                                                    <div class="tg-btntimeedit">
+                                                        <span>April 13, 2016</span>
+                                                        <button class="tg-btnedite"><i class="lnr lnr-pencil"></i></button>
+                                                        <button class="tg-btndel"><i class="lnr lnr-trash"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div class="tg-certificatesaward">
+                                                    <div class="tg-imgandtitle">
+                                                        <figure><a href="#"><img src="images/thumbnails/img-16.jpg" align="image description"></a></figure>
+                                                        <h3><a href="javascript:void(0);">Client Satisfaction Award</a></h3>
+                                                    </div>
+                                                    <div class="tg-btntimeedit">
+                                                        <span>June 27, 2016</span>
+                                                        <button class="tg-btnedite"><i class="lnr lnr-pencil"></i></button>
+                                                        <button class="tg-btndel"><i class="lnr lnr-trash"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div class="tg-certificatesaward">
+                                                    <div class="tg-imgandtitle">
+                                                        <figure><a href="#"><img src="images/thumbnails/img-17.jpg" align="image description"></a></figure>
+                                                        <h3><a href="javascript:void(0);">Best Service Provider</a></h3>
+                                                    </div>
+                                                    <div class="tg-btntimeedit">
+                                                        <span>January 27, 2017</span>
+                                                        <button class="tg-btnedite"><i class="lnr lnr-pencil"></i></button>
+                                                        <button class="tg-btndel"><i class="lnr lnr-trash"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tg-dashboardbox tg-amenitiesfeatures">
+                                            <div class="tg-dashboardtitle">
+                                                <h2>Amenities / Features</h2>
+                                            </div>
+                                            <div class="tg-amenitiesfeaturesbox">
+                                                <div class="form-group">
+														<span class="tg-select">
+															<select>
+																<option>Amenities / Features</option>
+																<option>Consectetur Adipisicing</option>
+																<option>Eiusmod Tempor</option>
+																<option>Incididunt Ut Labore</option>
+																<option>Dolore Magna Aliqua</option>
+																<option>Ad Minim Veniam</option>
+																<option>Exercitation Ullamco</option>
+															</select>
+														</span>
+                                                    <button class="tg-btn" type="button">add now</button>
+                                                </div>
+                                                <ul class="tg-tagdashboardlist">
+                                                    <li>
+															<span class="tg-tagdashboard">
+																<i class="fa fa-close"></i>
+																<em>Consectetur Adipisicing</em>
+															</span>
+                                                    </li>
+                                                    <li>
+															<span class="tg-tagdashboard">
+																<i class="fa fa-close"></i>
+																<em>Eiusmod Tempor</em>
+															</span>
+                                                    </li>
+                                                    <li>
+															<span class="tg-tagdashboard">
+																<i class="fa fa-close"></i>
+																<em>Incididunt Ut Labore</em>
+															</span>
+                                                    </li>
+                                                    <li>
+															<span class="tg-tagdashboard">
+																<i class="fa fa-close"></i>
+																<em>Dolore Magna Aliqua</em>
+															</span>
+                                                    </li>
+                                                    <li>
+															<span class="tg-tagdashboard">
+																<i class="fa fa-close"></i>
+																<em>Ad Minim Veniam</em>
+															</span>
+                                                    </li>
+                                                    <li>
+															<span class="tg-tagdashboard">
+																<i class="fa fa-close"></i>
+																<em>Exercitation Ullamco</em>
+															</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="tg-dashboardbox tg-imggallery">
+                                            <div class="tg-dashboardtitle">
+                                                <h2>Gallery</h2>
+                                            </div>
+                                            <div class="tg-imggallerybox">
+                                                <div class="tg-upload">
+                                                    <div class="tg-uploadhead">
+															<span>
+																<h3>Upload Photo Gallery</h3>
+																<i class="fa fa-exclamation-circle"></i>
+															</span>
+                                                        <i class="lnr lnr-upload"></i>
+                                                    </div>
+                                                    <div class="tg-box">
+                                                        <label class="tg-fileuploadlabel" for="tg-photogallery">
+                                                            <i class="lnr lnr-cloud-upload"></i>
+                                                            <span>Or Drag Your Files Here To Upload</span>
+                                                            <input id="tg-photogallery" class="tg-fileinput" type="file" name="file">
+                                                        </label>
+                                                        <div class="tg-gallery tg-horizontalthemescrollbar">
+                                                            <div class="tg-galleryimages">
+                                                                <div class="tg-galleryimg">
+                                                                    <figure>
+                                                                        <img src="images/thumbnails/img-30.jpg" alt="image description">
+                                                                        <figcaption><i class="fa fa-close"></i></figcaption>
+                                                                    </figure>
+                                                                </div>
+                                                                <div class="tg-galleryimg tg-uploading">
+                                                                    <figure>
+                                                                        <img src="images/thumbnails/img-31.jpg" alt="image description">
+                                                                        <span class="tg-loader"><i class="fa fa-spinner"></i></span>
+                                                                        <span class="tg-uploadingbar"></span>
+                                                                    </figure>
+                                                                </div>
+                                                                <div class="tg-galleryimg tg-uploading">
+                                                                    <figure>
+                                                                        <img src="images/thumbnails/img-32.jpg" alt="image description">
+                                                                        <span class="tg-loader"><i class="fa fa-spinner"></i></span>
+                                                                        <span class="tg-uploadingbar"></span>
+                                                                    </figure>
+                                                                </div>
+                                                                <div class="tg-galleryimg">
+                                                                    <figure>
+                                                                        <img src="images/thumbnails/img-33.jpg" alt="image description">
+                                                                        <figcaption><i class="fa fa-close"></i></figcaption>
+                                                                    </figure>
+                                                                </div>
+                                                                <div class="tg-galleryimg">
+                                                                    <figure>
+                                                                        <img src="images/thumbnails/img-34.jpg" alt="image description">
+                                                                        <figcaption><i class="fa fa-close"></i></figcaption>
+                                                                    </figure>
+                                                                </div>
+                                                                <div class="tg-galleryimg">
+                                                                    <figure>
+                                                                        <img src="images/thumbnails/img-35.jpg" alt="image description">
+                                                                        <figcaption><i class="fa fa-close"></i></figcaption>
+                                                                    </figure>
+                                                                </div>
+                                                                <div class="tg-galleryimg">
+                                                                    <figure>
+                                                                        <img src="images/thumbnails/img-36.jpg" alt="image description">
+                                                                        <figcaption><i class="fa fa-close"></i></figcaption>
+                                                                    </figure>
+                                                                </div>
+                                                                <div class="tg-galleryimg">
+                                                                    <figure>
+                                                                        <img src="images/thumbnails/img-24.jpg" alt="image description">
+                                                                        <figcaption><i class="fa fa-close"></i></figcaption>
+                                                                    </figure>
+                                                                </div>
+                                                                <div class="tg-galleryimg">
+                                                                    <figure>
+                                                                        <img src="images/thumbnails/img-25.jpg" alt="image description">
+                                                                        <figcaption><i class="fa fa-close"></i></figcaption>
+                                                                    </figure>
+                                                                </div>
+                                                                <div class="tg-galleryimg">
+                                                                    <figure>
+                                                                        <img src="images/thumbnails/img-26.jpg" alt="image description">
+                                                                        <figcaption><i class="fa fa-close"></i></figcaption>
+                                                                    </figure>
+                                                                </div>
+                                                                <div class="tg-galleryimg">
+                                                                    <figure>
+                                                                        <img src="images/thumbnails/img-27.jpg" alt="image description">
+                                                                        <figcaption><i class="fa fa-close"></i></figcaption>
+                                                                    </figure>
+                                                                </div>
+                                                                <div class="tg-galleryimg">
+                                                                    <figure>
+                                                                        <img src="images/thumbnails/img-28.jpg" alt="image description">
+                                                                        <figcaption><i class="fa fa-close"></i></figcaption>
+                                                                    </figure>
+                                                                </div>
+                                                                <div class="tg-galleryimg">
+                                                                    <figure>
+                                                                        <img src="images/thumbnails/img-29.jpg" alt="image description">
+                                                                        <figcaption><i class="fa fa-close"></i></figcaption>
+                                                                    </figure>
+                                                                </div>
+                                                                <div class="tg-galleryimg">
+                                                                    <figure>
+                                                                        <img src="images/thumbnails/img-30.jpg" alt="image description">
+                                                                        <figcaption><i class="fa fa-close"></i></figcaption>
+                                                                    </figure>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tg-dashboardbox tg-videogallery">
+                                            <div class="tg-dashboardtitle">
+                                                <h2>Videos</h2>
+                                            </div>
+                                            <div class="tg-videogallerybox">
+                                                <div class="form-group">
+                                                    <input type="text" name="videourl" class="form-control" placeholder="Enter Video URL Here">
+                                                    <button class="tg-btn" type="button">add now</button>
+                                                </div>
+                                                <ul>
+                                                    <li>
+                                                        <div class="tg-videobox">
+                                                            <figure>
+                                                                <a href="images/placeholder/img-03.jpg" data-rel="prettyPhoto[videogallery]" rel="prettyPhoto[videogallery]">
+                                                                    <img src="images/placeholder/img-03.jpg" alt="image description">
+                                                                </a>
+                                                            </figure>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="tg-videobox">
+                                                            <figure>
+                                                                <a href="images/placeholder/img-04.jpg" data-rel="prettyPhoto[videogallery]" rel="prettyPhoto[videogallery]">
+                                                                    <img src="images/placeholder/img-04.jpg" alt="image description">
+                                                                </a>
+                                                            </figure>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="tg-videobox">
+                                                            <figure>
+                                                                <a href="images/placeholder/img-05.jpg" data-rel="prettyPhoto[videogallery]" rel="prettyPhoto[videogallery]">
+                                                                    <img src="images/placeholder/img-05.jpg" alt="image description">
+                                                                </a>
+                                                            </figure>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="tg-videobox">
+                                                            <figure>
+                                                                <a href="images/placeholder/img-06.jpg" data-rel="prettyPhoto[videogallery]" rel="prettyPhoto[videogallery]">
+                                                                    <img src="images/placeholder/img-06.jpg" alt="image description">
+                                                                </a>
+                                                            </figure>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="tg-videobox">
+                                                            <figure>
+                                                                <a href="images/placeholder/img-06.jpg" data-rel="prettyPhoto[videogallery]" rel="prettyPhoto[videogallery]">
+                                                                    <img src="images/placeholder/img-06.jpg" alt="image description">
+                                                                </a>
+                                                            </figure>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="tg-videobox">
+                                                            <figure>
+                                                                <a href="images/placeholder/img-06.jpg" data-rel="prettyPhoto[videogallery]" rel="prettyPhoto[videogallery]">
+                                                                    <img src="images/placeholder/img-06.jpg" alt="image description">
+                                                                </a>
+                                                            </figure>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="tg-dashboardbox tg-brochureupload">
+                                            <div class="tg-dashboardtitle">
+                                                <h2>Brochure</h2>
+                                            </div>
+                                            <div class="tg-brochureuploadbox">
+                                                <div class="tg-upload">
+                                                    <div class="tg-uploadhead">
+															<span>
+																<h3>Upload Brochure</h3>
+																<i class="fa fa-exclamation-circle"></i>
+															</span>
+                                                        <i class="lnr lnr-upload"></i>
+                                                    </div>
+                                                    <div class="tg-box">
+                                                        <label class="tg-fileuploadlabel" for="tg-photogallery">
+                                                            <i class="lnr lnr-cloud-upload"></i>
+                                                            <span>Or Drag Your Files Here To Upload</span>
+                                                            <input id="tg-photogallery" class="tg-fileinput" type="file" name="file">
+                                                        </label>
+                                                        <ul class="tg-tagdashboardlist">
+                                                            <li>
+																	<span class="tg-tagdashboard">
+																		<i class="fa fa-close"></i>
+																		<em>2017 Document.pdf</em>
+																	</span>
+                                                            </li>
+                                                            <li>
+																	<span class="tg-tagdashboard">
+																		<i class="fa fa-close"></i>
+																		<em>2016 Document.pdf</em>
+																	</span>
+                                                            </li>
+                                                            <li>
+																	<span class="tg-tagdashboard">
+																		<i class="fa fa-close"></i>
+																		<em>2015 Document.ppt</em>
+																	</span>
+                                                            </li>
+                                                            <li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="tg-updateall" class="tg-updateall">
+                                            <div class="tg-holder">
+                                                <span class="tg-note">* Click <strong>Update Now</strong> to update latest added detail (s).</span>
+                                                <a class="tg-btn" href="#">Update Now</a>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+        {% endblock %}

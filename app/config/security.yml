@@ -26,8 +26,9 @@ security:
         main:
             pattern: ^/
             form_login:
+                login_path: /login
                 always_use_default_target_path: true
-                default_target_path: /login
+                default_target_path: login_check
 
             logout:
                 path: /logout
@@ -46,3 +47,5 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/index, role: ROLE_ADMIN }
+        - { path: ^/admin/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/.*, role: ROLE_ADMIN }

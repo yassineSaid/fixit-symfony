@@ -98,8 +98,8 @@
                         <div class="tg-adminbox">
                             {% if app.user==null %}
                             <div class="tg-loginregister">
-                                <a class="tg-btnlogin" href="{{ path('login') }}">Login</a>
-                                <a class="tg-btnregister" href="javascript:void(0);">Register</a>
+                                <a class="tg-btnlogin" href="{{ path('login') }}">Connexion</a>
+                                <a class="tg-btnregister" href="{{ path('register') }}">S'inscrire</a>
                             </div>
                             {% else %}
                             <div class="tg-useradminbox">
@@ -119,9 +119,9 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="dashboardprofilesetting.html">
+                                                    <a href="{{ path("profile_setting") }}">
                                                         <i class="lnr lnr-cog"></i>
-                                                        <span>Profile Settings</span>
+                                                        <span>Profil</span>
                                                     </a>
                                                 </li>
                                                 <li>
@@ -230,7 +230,7 @@
                                                 <li>
                                                     <a href="{{ path('logout') }}">
                                                         <i class="lnr lnr-exit"></i>
-                                                        <span>Logout</span>
+                                                        <span>Se déconnecter</span>
                                                     </a>
                                                 </li>
                                             </ul>
@@ -451,7 +451,14 @@
     <!--************************************
             Header End
     *************************************-->
+
     {% block content %}
+    {% endblock %}
+    {% block sidebar %}
+    {% endblock %}
+    {% block content_dashboard %}
+    {% endblock %}
+    {% block content_dashboard1 %}
     {% endblock %}
     <!--************************************
             Footer Start
