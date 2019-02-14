@@ -94,15 +94,15 @@ class RegistrationController extends Controller
 
             $event = new FormEvent($form, $request);
             $this->eventDispatcher->dispatch(FOSUserEvents::REGISTRATION_FAILURE, $event);
-
-            if (null !== $response = $event->getResponse()) {
+            $router = $this->container->get('router');
+            return $this->redirect($this->generateUrl('login',array('registration'=>'failure')));
+            /*if (null !== $response = $event->getResponse()) {
                 return $response;
-            }
+            }*/
         }
-
-        return $this->render('@Front/User/register.html.twig', array(
-            'form' => $form->createView(),
-        ));
+        $url = $this->generateUrl('login');
+        $response = new RedirectResponse($url);
+        return $response;
     }
 
     /**

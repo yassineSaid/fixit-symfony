@@ -32,9 +32,6 @@
                 Login Register Start
         *************************************-->
 
-        {% if error %}
-            <div class="bg-danger">{{ error|trans({}, 'FOSUserBundle') }}</div>
-        {% endif %}
         <div class="tg-main-section tg-haslayout">
             <div class="container">
                 <div class="row">
@@ -46,9 +43,12 @@
                                 </div>
 
                                 <fieldset>
-                                    <form action="{{ path('fos_user_registration_register') }}" method="post" name="fos_user_registration_form">
-                                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-                                        <div class="tg-themetabcontent tab-content">
+                                {% if registrationFailure %}
+                                    {{ dump('1') }}
+                                    {% endif %}
+                                    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+
+                                    <div class="tg-themetabcontent tab-content">
                                         <div class="tab-pane active fade in" id="regularuser">
                                             <div class="form-group">
                                                 <div class="tg-registeras">
@@ -56,28 +56,22 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" name="username" class="form-control" placeholder="Your Name">
+                                                {{ form_widget(form.username, {'attr': {'class': 'form-control','placeholder':'Pseudo'}}) }}
                                             </div>
                                             <div class="form-group">
-													<span class="tg-select">
-														<select>
-															<option>Gender</option>
-															<option>Male</option>
-															<option>Female</option>
-														</select>
-													</span>
+                                                {{ form_widget(form.email, {'attr': {'class': 'form-control','placeholder':'Email'}}) }}
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" name="text" class="form-control" placeholder="Mobile">
+                                                {{ form_widget(form.firstname, {'attr': {'class': 'form-control','placeholder':'Prenom'}}) }}
                                             </div>
                                             <div class="form-group">
-                                                <input type="email" name="email" class="form-control" placeholder="Email">
+                                                {{ form_widget(form.lastname, {'attr': {'class': 'form-control','placeholder':'Nom'}}) }}
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" name="plainPassword" class="form-control" placeholder="Password">
+                                                {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control','placeholder':'Mot de passe'}}) }}
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" name="retype-password" class="form-control" placeholder="Retype Password">
+                                                {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control','placeholder':'Confirmez votre mot de passe'}}) }}
                                             </div>
                                             <div class="form-group">
                                                 <img src="images/placeholder/img-02.png" alt="image description">
@@ -88,7 +82,7 @@
                                                     <label for="terms">I have read the <a href="#">Terms &amp; Conditions</a> and accept them</label>
                                                 </div>
                                             </div>
-                                            <input class="tg-btn" type="submit" value="{{ 'registration.submit'|trans }}">Register Now</input>
+                                            <button class="tg-btn" type="submit" value="{{ 'registration.submit'|trans }}">Register Now</button>
                                             <ul class="tg-socialicons tg-socialsharewithtext">
                                                 <li class="tg-facebook">
                                                     <a class="tg-roundicontext" href="javascript:void(0);">
@@ -141,7 +135,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    </form>
+                                    {{ form_end(form) }}
                                 </fieldset>
                             </div>
                             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
@@ -150,6 +144,10 @@
                                         <h3>Login Now</h3>
                                     </div>
                                     <fieldset>
+
+                                        {% if error %}
+                                            <div class="bg-danger">Vérifiez vos données</div>
+                                        {% endif %}
                                         <form action="{{ path("fos_user_security_check") }}" method="post">
                                             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
                                         <div class="form-group">

@@ -52,6 +52,8 @@ class SecurityController extends Controller
             $error = null; // The value does not come from the security component.
         }
         // last username entered by the user
+        $formFactory = $this->get('fos_user.registration.form.factory');
+        $form = $formFactory->createForm();
         $lastUsername = (null === $session) ? '' : $session->get($lastUsernameKey);
         $csrfToken = $this->tokenManager
             ? $this->tokenManager->getToken('authenticate')->getValue()
@@ -60,6 +62,7 @@ class SecurityController extends Controller
             'last_username' => $lastUsername,
             'error' => $error,
             'csrf_token' => $csrfToken,
+            'form' => $form->createView()
         ));
     }
     public function checkAction()
@@ -92,6 +95,17 @@ class SecurityController extends Controller
      */
     protected function renderLogin(array $data)
     {
+        //var_dump($_GET['registration']);
+        if (isset($_GET['registration']))
+        {
+            $ar=array('registrationFailure'=>true);
+            $data=$data+$ar;
+        }
+        else
+        {
+            $ar=array('registrationFailure'=>false);
+            $data=$data+$ar;
+        }
         $requestAttributes = $this->container->get('router.request_context')->getPathInfo();
         if ($requestAttributes=="/admin/login")
         {
