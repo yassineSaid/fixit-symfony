@@ -1,0 +1,119 @@
+{% extends "back.html.twig" %}
+{% block content %}
+    <main class="content">
+        <div class="container-fluid p-0">
+
+            <div class="row">
+
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Default</h5>
+                            <h6 class="card-subtitle text-muted">Highly flexible tool that many advanced features to any HTML table.</h6>
+                        </div>
+                        <div class="card-body">
+                            <table id="datatables-basic" class="table table-striped" style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Prénom</th>
+                                    <th>Nom</th>
+                                    <th>Pseudo</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for user in users %}
+                                    <tr>
+                                        <td>{{ user.id }}</td>
+                                        <td>{{ user.firstname }}</td>
+                                        <td>{{ user.lastname }}</td>
+                                        <td>{{ user.username }}</td>
+                                        <td>{{ user.email }}</td>
+
+                                            {% if "ROLE_SUPER_ADMIN" in user.roles %}
+                                                <td>Administrateur
+                                                {% if  app.user.id  != user.id %}
+                                                    <a href="{{ path('user_downgrade',{'id': user.id}) }}">
+                                                        <i class="align-middle mr-2 fas fa-fw fa-arrow-down" style="color:red;"></i>
+                                                    </a>
+                                                {% endif %}
+                                                </td>
+                                            {% else %}
+                                                <td>Utilisateur
+                                                {% if  app.user.id  != user.id %}
+                                                    <a href="{{ path('user_upgrade',{'id': user.id}) }}">
+                                                        <i class="align-middle mr-2 fas fa-fw fa-arrow-up" style="color:forestgreen;"></i>
+                                                    </a>
+                                                {% endif %}
+                                                </td>
+                                            {% endif %}
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Prénom</th>
+                                    <th>Nom</th>
+                                    <th>Pseudo</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </main>
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+            // Datatables basic
+            $('#datatables-basic').DataTable({
+                responsive: true,
+                "language": {
+                    "sEmptyTable":     "Aucune donnée disponible dans le tableau",
+                    "sInfo":           "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
+                    "sInfoEmpty":      "Affichage de l'élément 0 à 0 sur 0 élément",
+                    "sInfoFiltered":   "(filtré à partir de _MAX_ éléments au total)",
+                    "sInfoPostFix":    "",
+                    "sInfoThousands":  ",",
+                    "sLengthMenu":     "Afficher _MENU_ éléments",
+                    "sLoadingRecords": "Chargement...",
+                    "sProcessing":     "Traitement...",
+                    "sSearch":         "Rechercher :",
+                    "sZeroRecords":    "Aucun élément correspondant trouvé",
+                    "oPaginate": {
+                        "sFirst":    "Premier",
+                        "sLast":     "Dernier",
+                        "sNext":     "Suivant",
+                        "sPrevious": "Précédent"
+                    },
+                    "oAria": {
+                        "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
+                        "sSortDescending": ": activer pour trier la colonne par ordre décroissant"
+                    },
+                    "select": {
+                        "rows": {
+                            "_": "%d lignes sélectionnées",
+                            "0": "Aucune ligne sélectionnée",
+                            "1": "1 ligne sélectionnée"
+                        }
+                    }
+                }
+            });
+            // Datatables with Buttons
+            var datatablesButtons = $('#datatables-buttons').DataTable({
+                lengthChange: !1,
+                buttons: ["copy", "print"],
+                responsive: true
+            });
+            datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
+        });
+    </script>
+{% endblock %}

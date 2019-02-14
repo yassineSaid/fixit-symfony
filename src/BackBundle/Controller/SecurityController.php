@@ -64,7 +64,19 @@ class SecurityController extends Controller
     }
     public function checkAction()
     {
-        throw new \RuntimeException('You must configure the check path to be handled by the firewall using form_login in your security firewall configuration.');
+        $authChecker = $this->container->get('security.authorization_checker');
+        $router = $this->container->get('router');
+        if ($authChecker->isGranted('ROLE_SUPER_ADMIN')) {
+            return new RedirectResponse($router->generate('back_homepage'), 307);
+        }
+
+        else if ($authChecker->isGranted('ROLE_USER')) {
+            return new RedirectResponse($router->generate('front_homepage'), 307);
+        }
+
+        else {
+            return new RedirectResponse($router->generate('front_homepage'), 307);
+        }
     }
     public function logoutAction()
     {
@@ -87,7 +99,7 @@ class SecurityController extends Controller
         }
         else
         {
-            return $this->render('@Front/Default/login.html.twig',$data);
+            return $this->render('@Front/User/login.html.twig',$data);
         }
 
     }

@@ -1,6 +1,7 @@
 {% extends "front.html.twig" %}
 {% trans_default_domain 'FOSUserBundle' %}
 {% block title %}Connexion{% endblock %}
+{% block sidebar %}{% endblock %}
 {% block content %}
     <!--************************************
 				Inner Page Banner Start
@@ -10,10 +11,10 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="tg-pagetitle">
-                        <h1>Login / Register</h1>
+                        <h1>Connexion / Inscription</h1>
                     </div>
                     <ol class="tg-breadcrumb">
-                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Accueil</a></li>
                         <li class="tg-active">Login - Register</li>
                     </ol>
                 </div>
@@ -31,6 +32,9 @@
                 Login Register Start
         *************************************-->
 
+        {% if error %}
+            <div class="bg-danger">{{ error|trans({}, 'FOSUserBundle') }}</div>
+        {% endif %}
         <div class="tg-main-section tg-haslayout">
             <div class="container">
                 <div class="row">
@@ -42,9 +46,9 @@
                                 </div>
 
                                 <fieldset>
-                                    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-
-                                    <div class="tg-themetabcontent tab-content">
+                                    <form action="{{ path('fos_user_registration_register') }}" method="post" name="fos_user_registration_form">
+                                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                                        <div class="tg-themetabcontent tab-content">
                                         <div class="tab-pane active fade in" id="regularuser">
                                             <div class="form-group">
                                                 <div class="tg-registeras">
@@ -52,22 +56,28 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                {{ form_widget(form.username, {'attr': {'class': 'form-control','placeholder':'Pseudo'}}) }}
+                                                <input type="text" name="username" class="form-control" placeholder="Your Name">
                                             </div>
                                             <div class="form-group">
-                                                {{ form_widget(form.email, {'attr': {'class': 'form-control','placeholder':'Email'}}) }}
+													<span class="tg-select">
+														<select>
+															<option>Gender</option>
+															<option>Male</option>
+															<option>Female</option>
+														</select>
+													</span>
                                             </div>
                                             <div class="form-group">
-                                                {{ form_widget(form.firstname, {'attr': {'class': 'form-control','placeholder':'Prenom'}}) }}
+                                                <input type="text" name="text" class="form-control" placeholder="Mobile">
                                             </div>
                                             <div class="form-group">
-                                                {{ form_widget(form.lastname, {'attr': {'class': 'form-control','placeholder':'Nom'}}) }}
+                                                <input type="email" name="email" class="form-control" placeholder="Email">
                                             </div>
                                             <div class="form-group">
-                                                {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control','placeholder':'Mot de passe'}}) }}
+                                                <input type="password" name="plainPassword" class="form-control" placeholder="Password">
                                             </div>
                                             <div class="form-group">
-                                                {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control','placeholder':'Confirmez votre mot de passe'}}) }}
+                                                <input type="password" name="retype-password" class="form-control" placeholder="Retype Password">
                                             </div>
                                             <div class="form-group">
                                                 <img src="images/placeholder/img-02.png" alt="image description">
@@ -78,7 +88,7 @@
                                                     <label for="terms">I have read the <a href="#">Terms &amp; Conditions</a> and accept them</label>
                                                 </div>
                                             </div>
-                                            <button class="tg-btn" type="submit" value="{{ 'registration.submit'|trans }}">Register Now</button>
+                                            <input class="tg-btn" type="submit" value="{{ 'registration.submit'|trans }}">Register Now</input>
                                             <ul class="tg-socialicons tg-socialsharewithtext">
                                                 <li class="tg-facebook">
                                                     <a class="tg-roundicontext" href="javascript:void(0);">
@@ -131,7 +141,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    {{ form_end(form) }}
+                                    </form>
                                 </fieldset>
                             </div>
                             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
@@ -141,17 +151,17 @@
                                     </div>
                                     <fieldset>
                                         <form action="{{ path("fos_user_security_check") }}" method="post">
-
-                                            <div class="form-group">
-                                                <input type="username" id="username" name="_username" class="form-control" placeholder="Email">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="password" id="password" name="_password" class="form-control" placeholder="Password">
-                                            </div>
-                                            <div class="form-group">
-                                                <button class="tg-btn tg-btn-lg" id="_submit" name="_submit" type="submit">Login Now</button>
-                                            </div>
-                                            <a class="tg-btnforgotpass" href="#">Forgot your password?</a>
+                                            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                                        <div class="form-group">
+                                            <input type="username" id="username" name="_username" class="form-control" placeholder="Email">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" id="password" name="_password" class="form-control" placeholder="Password">
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="tg-btn tg-btn-lg" id="_submit" name="_submit" type="submit">Login Now</button>
+                                        </div>
+                                        <a class="tg-btnforgotpass" href="#">Forgot your password?</a>
                                         </form>
                                     </fieldset>
                                 </div>

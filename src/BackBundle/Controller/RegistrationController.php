@@ -100,7 +100,7 @@ class RegistrationController extends Controller
             }
         }
 
-        return $this->render('@Front/Default/register.html.twig', array(
+        return $this->render('@Front/User/register.html.twig', array(
             'form' => $form->createView(),
         ));
     }

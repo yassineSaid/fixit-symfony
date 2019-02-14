@@ -10,9 +10,21 @@ admin_index:
 login:
   path:     /login
   defaults: { _controller: BackBundle:Registration:register }
+login_check:
+  path:     /login_check
+  defaults: { _controller: BackBundle:Security:login }
 register:
   path:     /register/
   defaults: { _controller: BackBundle:Registration:register }
 logout:
   path:     /logout
   defaults: { _controller: BackBundle:Security:logout }
+users_list:
+  path:     /admin/listuser
+  defaults: { _controller: BackBundle:Admin:list }
+user_upgrade:
+  path:     /admin/upgrade/{id}
+  defaults: { _controller: BackBundle:Admin:upgrade }
+user_downgrade:
+  path:     /admin/downgrade/{id}
+  defaults: { _controller: BackBundle:Admin:downgrade }
