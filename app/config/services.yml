@@ -5,9 +5,13 @@ parameters:
 
 services:
     app.form.registration:
-        class: BackBundle\Form\RegistrationType
+        class: UserBundle\Form\RegistrationType
         tags:
         - { name: form.type, alias: app_user_registration }
+    app.form.change_password:
+        class: UserBundle\Form\ChangePasswordFormType
+        tags:
+        - { name: form.type, alias: app_change_password }
     # default configuration for services in *this* file
     _defaults:
         # automatically injects dependencies in your services

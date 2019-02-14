@@ -44,7 +44,7 @@
 
                                 <fieldset>
                                 {% if registrationFailure %}
-                                    {{ dump('1') }}
+                                    <div class="alert alert-danger">Vérifiez vos données</div>
                                     {% endif %}
                                     {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
 
@@ -145,10 +145,10 @@
                                     </div>
                                     <fieldset>
 
-                                        {% if error %}
-                                            <div class="bg-danger">Vérifiez vos données</div>
-                                        {% endif %}
                                         <form action="{{ path("fos_user_security_check") }}" method="post">
+                                            {% if error %}
+                                                <div class="alert alert-danger">Vérifiez vos données</div>
+                                            {% endif %}
                                             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
                                         <div class="form-group">
                                             <input type="username" id="username" name="_username" class="form-control" placeholder="Email">
