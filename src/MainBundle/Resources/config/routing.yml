@@ -16,3 +16,9 @@ main_mes_reclamation:
 main_supprimer_reclamation:
     path:     /Reclamer/Supprimer/{rec}
     defaults: { _controller: MainBundle:Reclamation:SupprimerReclamation }
+main_ajouterCategorieOutil:
+    path: /ajouterCategorieOutil
+    defaults: { _controller: MainBundle:categorieOutil:ajouter }
+main_ajouterOutil:
+    path: /ajouterOutil
+    defaults: { _controller: MainBundle:Outil:ajouter }
