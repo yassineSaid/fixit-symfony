@@ -56,5 +56,9 @@ class RealisationService
     {
         return $this->id;
     }
+    public function getUserDemandeur()
+    {
+        return $this->UserDemandeur;
+    }
 }
 

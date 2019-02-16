@@ -10,4 +10,11 @@ namespace MainBundle\Repository;
  */
 class ReclamationRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findReclamation($idUser)
+    {
+        $query=$this->getEntityManager()
+            ->createQuery("SELECT r FROM MainBundle:Reclamation r where r.user=:id")
+            ->setParameter('id',$idUser);
+        return $query->getResult();
+    }
 }

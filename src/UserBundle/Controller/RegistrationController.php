@@ -76,6 +76,7 @@ class RegistrationController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
+
             if ($form->isValid()) {
                 $event = new FormEvent($form, $request);
                 $this->eventDispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
@@ -94,15 +95,25 @@ class RegistrationController extends Controller
 
             $event = new FormEvent($form, $request);
             $this->eventDispatcher->dispatch(FOSUserEvents::REGISTRATION_FAILURE, $event);
-            $router = $this->container->get('router');
-            return $this->redirect($this->generateUrl('login',array('registration'=>'failure')));
-            /*if (null !== $response = $event->getResponse()) {
+
+            if (null !== $response = $event->getResponse()) {
                 return $response;
-            }*/
+            }
+            $transport = \Swift_SmtpTransport::newInstance('smtp.gmail.com', 465,'ssl')->setUsername('mustapha.benhajminyaoui@esprit.tn')->setPassword('icarus09626776');
+
+            $mailer = \Swift_Mailer::newInstance($transport);
+            $message = \Swift_Message::newInstance()
+                ->setSubject("FormArmor - Confirmation d'inscription")
+                ->setFrom(array('mustapha.benhajminyaoui@esprit.tn' => 'mustapha.benhajminyaoui@esprit.tn'))
+                ->setTo(array($user->getEmail() => $user->getEmail()))// email du client pour teste replacer par son @
+                ->addPart('Hello !','text/html');
+            $result = $mailer->send($message);
+
         }
-        $url = $this->generateUrl('login');
-        $response = new RedirectResponse($url);
-        return $response;
+
+        return $this->render('@Front/User/register.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
 
     /**
@@ -174,10 +185,11 @@ class RegistrationController extends Controller
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
-        return $this->render('@FOSUser/Registration/confirmed.html.twig', array(
+        return $this->redirectToRoute('profile_setting');
+        /*return $this->render('@FOSUser/Registration/confirmed.html.twig', array(
             'user' => $user,
             'targetUrl' => $this->getTargetUrlFromSession($request->getSession()),
-        ));
+        ));*/
     }
 
     /**
@@ -193,4 +205,5 @@ class RegistrationController extends Controller
 
         return null;
     }
+
 }

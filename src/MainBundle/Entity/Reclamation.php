@@ -3,6 +3,7 @@
 namespace MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * Reclamation
@@ -34,8 +35,23 @@ class Reclamation
      * @ORM\Column(name="Description", type="string", length=255)
      */
     private $description;
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="DateReclamation", type="date")
+     */
+    private $DateReclamation;
 
-
+    /**
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="userreclame", referencedColumnName="id")
+     */
+    private $userreclame;
+    /**
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user", referencedColumnName="id")
+     */
+    private $user;
     /**
      * Get id
      *
@@ -93,5 +109,58 @@ class Reclamation
     {
         return $this->description;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUserreclame()
+    {
+        return $this->userreclame;
+    }
+
+    /**
+     * @param mixed $userreclame
+     */
+    public function setUserreclame($userreclame)
+    {
+        $this->userreclame = $userreclame;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateReclamation()
+    {
+        return $this->DateReclamation;
+    }
+
+    /**
+     * @param \DateTime $DateReclamation
+     */
+    public function setDateReclamation($DateReclamation)
+    {
+        $this->DateReclamation = $DateReclamation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+
+
+
+
 }
 

@@ -65,6 +65,8 @@ doctrine:
 swiftmailer:
     transport: '%mailer_transport%'
     host: '%mailer_host%'
+    port: '%mailer_port%'
+    encryption: '%mailer_encryption%'
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
@@ -85,11 +87,11 @@ fos_user:
             name: fos_user_registration_form
             validation_groups: [Registration, Default]
         confirmation:
-            enabled: false
+            enabled: true
             template: '@FOSUser/Registration/email.txt.twig'
             from_email:
-                address:        noreply@example.com
-                sender_name:    Demo App
+                address:        mustapha.benhajminyaoui@esprit.tn
+                sender_name:    FixIt Now
     change_password:
         form:
             type: UserBundle\Form\ChangePasswordFormType
