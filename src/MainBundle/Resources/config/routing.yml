@@ -1,3 +1,9 @@
 main_homepage:
     path:     /
     defaults: { _controller: MainBundle:Default:index }
+main_ajouterCategorieOutil:
+    path: /ajouterCategorieOutil
+    defaults: { _controller: MainBundle:categorieOutil:ajouter }
+main_ajouterOutil:
+    path: /ajouterOutil
+    defaults: { _controller: MainBundle:Outil:ajouter }

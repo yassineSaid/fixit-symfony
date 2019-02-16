@@ -35,6 +35,28 @@ class Outils
      */
     private $quantite;
     /**
+     * @var datetime
+     *
+     * @ORM\Column(name="dateLocation", type="datetime")
+     */
+    private $dateLocation;
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="dateResiliation", type="datetime")
+     */
+    private $dateResiliation;
+
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="duree", type="integer")
+     */
+    private $duree;
+
+    /**
      * @ORM\ManyToOne(targetEntity="CategorieOutils")
      * @ORM\JoinColumn(name="idCategorieOutils", referencedColumnName="id")
      */
@@ -97,6 +119,70 @@ class Outils
     public function getQuantite()
     {
         return $this->quantite;
+    }
+
+    /**
+     * @return datetime
+     */
+    public function getDateLocation()
+    {
+        return $this->dateLocation;
+    }
+
+    /**
+     * @param datetime $dateLocation
+     */
+    public function setDateLocation($dateLocation)
+    {
+        $this->dateLocation = $dateLocation;
+    }
+
+    /**
+     * @return datetime
+     */
+    public function getDateResiliation()
+    {
+        return $this->dateResiliation;
+    }
+
+    /**
+     * @param datetime $dateResiliation
+     */
+    public function setDateResiliation($dateResiliation)
+    {
+        $this->dateResiliation = $dateResiliation;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDuree()
+    {
+        return $this->duree;
+    }
+
+    /**
+     * @param int $duree
+     */
+    public function setDuree($duree)
+    {
+        $this->duree = $duree;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategorieOutils()
+    {
+        return $this->CategorieOutils;
+    }
+
+    /**
+     * @param mixed $CategorieOutils
+     */
+    public function setCategorieOutils($CategorieOutils)
+    {
+        $this->CategorieOutils = $CategorieOutils;
     }
 }
 
