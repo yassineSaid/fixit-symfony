@@ -27,6 +27,28 @@ class CategorieOutils
      * @ORM\Column(name="Nom", type="string", length=255, unique=true)
      */
     private $nom;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="nbrOutil", type="integer")
+     */
+    private $nbrOutil;
+
+    /**
+     * @return int
+     */
+    public function getNbrOutil()
+    {
+        return $this->nbrOutil;
+    }
+
+    /**
+     * @param int $nbrOutil
+     */
+    public function setNbrOutil($nbrOutil)
+    {
+        $this->nbrOutil = $nbrOutil;
+    }
 
 
     /**
