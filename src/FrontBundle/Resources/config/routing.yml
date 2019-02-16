@@ -4,3 +4,8 @@ front_homepage:
 profile_setting:
     path:     /profil
     defaults: { _controller: FrontBundle:User:profil }
+account_setting:
+    path:     /compte
+    defaults: { _controller: UserBundle:ChangePassword:changePassword }
+fos_user_profile_show:
+  path: /compte

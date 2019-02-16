@@ -9,16 +9,16 @@ admin_index:
   defaults: { _controller: BackBundle:Security:login }
 login:
   path:     /login
-  defaults: { _controller: BackBundle:Registration:register }
+  defaults: { _controller: UserBundle:Security:login }
 login_check:
   path:     /login_check
-  defaults: { _controller: BackBundle:Security:login }
+  defaults: { _controller: UserBundle:Security:login }
 register:
   path:     /register/
-  defaults: { _controller: BackBundle:Registration:register }
+  defaults: { _controller: UserBundle:Registration:register }
 logout:
   path:     /logout
-  defaults: { _controller: BackBundle:Security:logout }
+  defaults: { _controller: UserBundle:Security:logout }
 users_list:
   path:     /admin/listuser
   defaults: { _controller: BackBundle:Admin:list }

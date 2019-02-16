@@ -1,6 +1,6 @@
 {% extends "dashboard_front.html.twig" %}
 {% trans_default_domain 'FOSUserBundle' %}
-{% block title %}Connexion{% endblock %}
+{% block title %}Profil{% endblock %}
 {% block content %}
     <!--************************************
 				Inner Page Banner Start
@@ -13,7 +13,7 @@
                         <h1>Profil</h1>
                     </div>
                     <ol class="tg-breadcrumb">
-                        <li><a href="#">Accueil</a></li>
+                        <li><a href="{{ path('front_homepage') }}">Accueil</a></li>
                         <li class="tg-active">Profil</li>
                     </ol>
                 </div>

@@ -1,7 +1,7 @@
 <?php
 // src/AppBundle/Form/RegistrationType.php
 
-namespace BackBundle\Form;
+namespace UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,7 +22,7 @@ class RegistrationType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'app_user_registration';
+        return 'fos_user_change_password';
     }
 
 }
