@@ -1,3 +1,18 @@
 main_homepage:
     path:     /
     defaults: { _controller: MainBundle:Default:index }
+main_reclamation_Ajout:
+    path:     /Reclamer
+    defaults: { _controller: MainBundle:Reclamation:AjouterReclamation }
+main_affiche_Detail_Reclamation:
+        path:     /Reclamer/Detail/{reclamation}
+        defaults: { _controller: MainBundle:Reclamation:AfficherDetail }
+main_modifier_reclamation:
+    path:     /Reclamer/Modifier/{rec}
+    defaults: { _controller: MainBundle:Reclamation:ModifierReclamation }
+main_mes_reclamation:
+    path:     /listreclamations
+    defaults: { _controller: MainBundle:Reclamation:MesReclamation }
+main_supprimer_reclamation:
+    path:     /Reclamer/Supprimer/{rec}
+    defaults: { _controller: MainBundle:Reclamation:SupprimerReclamation }
