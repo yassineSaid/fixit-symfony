@@ -98,5 +98,10 @@ class ReclamationController extends Controller
         $em->flush();
         return $this->redirectToRoute("main_mes_reclamation");
     }
+    public function ListeReclamationAdminAction()
+    {
+
+    }
+
 
 }
