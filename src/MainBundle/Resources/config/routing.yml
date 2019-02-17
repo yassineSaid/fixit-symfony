@@ -33,6 +33,9 @@ main_supprimer_reclamation_admin:
     defaults: { _controller: MainBundle:Reclamation:supprimeradmin }
 
 ############################ END ROUNTING DE MUSTAPHA ##########################
+main_ajouterCategori_Produit:
+    path:    /ajouterCategorieProduits
+    defaults: { _controller: MainBundle:CategorieProduit:ajouter }
 main_ajouterCategorieOutil:
     path: /ajouterCategorieOutil
     defaults: { _controller: MainBundle:categorieOutil:ajouter }
