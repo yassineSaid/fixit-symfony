@@ -10,4 +10,10 @@ namespace MainBundle\Repository;
  */
 class ServiceRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function groupByCat()
+    {
+        $query=$this->getEntityManager()->createQuery("SELECT m from MainBundle:Service m group by m.CategorieService");
+        return $query->getResult();
+
+    }
 }

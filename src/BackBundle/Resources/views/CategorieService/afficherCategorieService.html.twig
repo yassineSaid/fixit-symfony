@@ -1,0 +1,73 @@
+{% extends "back.html.twig" %}
+{% block content %}
+<main class="content">
+    <div class="container-fluid p-0">
+
+        <h1 class="h3 mb-3">Liste des Categories de Service</h1>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <a href="{{ path('main_ajouterCategorieService') }}"><button class="btn btn-pill btn-primary"> Ajouter une categorie</button></a>
+                    </div>
+                    <div class="card-body">
+                        <table id="datatables-basic" class="table table-striped" style="width:100%">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nom</th>
+                                <th>Description</th>
+                                <th>Modifier</th>
+                                <th>Supprimer</th>
+
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for categorie in categorie %}
+                            <tr>
+                                <td>{{ categorie.id }}</td>
+                                <td>{{ categorie.nom }}</td>
+                                <td>{{ categorie.description }}</td>
+                                <td><a href="{{ path('main_modifierCategorieService',{'id': categorie.id}) }}"><button class="btn btn-warning"> Modifier</button></a> </td>
+                                <td><a href="{{ path('main_supprimerCategorieService',{'id': categorie.id}) }}"><button class="btn btn-danger">Supprimer</button></a> </td>
+                            </tr>
+                            {% endfor %}
+
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nom</th>
+                                <th>Description</th>
+
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function(event) {
+                // Datatables basic
+                $('#datatables-basic').DataTable({
+                    responsive: true
+                });
+                // Datatables with Buttons
+                var datatablesButtons = $('#datatables-buttons').DataTable({
+                    lengthChange: !1,
+                    buttons: ["copy", "print"],
+                    responsive: true
+                });
+                datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
+            });
+        </script>
+
+    </div>
+</main>
+{% endblock %}

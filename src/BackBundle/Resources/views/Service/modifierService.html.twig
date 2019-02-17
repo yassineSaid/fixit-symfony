@@ -1,0 +1,38 @@
+{% extends "back.html.twig" %}
+{% block content %}
+    <main class="content">
+        <div class="container-fluid p-0">
+
+            <h1 class="h3 mb-3">Modifier un service</h1>
+
+            <div class="row">
+                <div class="col-12 col-xl-6">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <form method="POST">
+
+                                <div class="form-group">
+                                    <label class="form-label">Nom</label>
+                                    <input type="text" class="form-control" placeholder="Nom" name="Nom" value="{{ service.nom }}">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Categorie de Service</label>
+                                    <select class="form-control" name="IdCat">
+                                        {% for c in categorie %}
+                                            <option value="{{ c.id }}">{{ c.Nom }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+{% endblock %}
