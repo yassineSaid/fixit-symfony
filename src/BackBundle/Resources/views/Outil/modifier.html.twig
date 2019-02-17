@@ -1,0 +1,52 @@
+{% extends "back.html.twig" %}
+{% block content %}
+    <main class="content">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Modifier outli</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+
+                        <div class="form-group col-md-2">
+                            <label for="inputZip">Nom</label>
+                            <input type="text" class="form-control" name="inputNom" value="{{ outil.nom }}">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputQuantite">Quantité</label>
+                            <input type="text" class="form-control" name="inputQuantite" value="{{ outil.quantite }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDuree">La durée maximale</label>
+                            <input type="text" class="form-control" name="inputDuree" value="{{ outil.dureeMaximale }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPrix">Prix en Scoin</label>
+                            <input type="text" class="form-control" name="inputPrix" value="{{ outil.prix }}" >
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="inputCategorie">Categorie</label>
+                            <select name="inputCategorie" class="form-control" value="{{ outil.CategorieOutils.nom }}">
+                                <option value="{{ outil.CategorieOutils.id }}">
+                                    {{ outil.CategorieOutils.nom }}
+                                </option>
+                                {% for c in categorie %}
+                                {% if c.id != outil.CategorieOutils.id %}
+                                    <option value="{{ c.id }}">
+                                        {{ c.nom }}
+                                    </option>
+                                {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}

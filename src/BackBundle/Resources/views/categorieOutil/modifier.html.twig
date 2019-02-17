@@ -1,0 +1,24 @@
+{% extends "back.html.twig" %}
+{% block content %}
+    <main class="content">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Modifier catégorie outli</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+
+                        <div class="form-group col-md-2">
+                            <label for="inputZip">Nom</label>
+                            <input type="text" class="form-control" name="inputNom" value="{{ categorie.nom }}">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}
