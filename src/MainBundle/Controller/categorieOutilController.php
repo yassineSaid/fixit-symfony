@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use MainBundle\Entity\CategorieOutils;
 
-class categorieOutilController extends Controller
+class CategorieOutilController extends Controller
 {
     public function ajouterAction(Request $request)
     {
@@ -24,7 +24,12 @@ class categorieOutilController extends Controller
         }
         var_dump($categorie);
         return $this->render("@Back/categorieOutil/ajouterCategorie.html.twig");
-
+    }
+    public function ListeAction()
+    {
+        $em=$this->getDoctrine()->getManager();
+        $categorie=$em->getRepository(CategorieOutils::class)->findAll();
+        return $this->render('@Back/categorieOutil/list.html.twig',array("categorie"=>$categorie));
 
     }
 }
