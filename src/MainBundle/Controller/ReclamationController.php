@@ -29,6 +29,7 @@ class ReclamationController extends Controller
             $dater=new \DateTime();
             $reclamation->setDateReclamation($dater);
             $reclamation->setUser($this->getUser());
+            $reclamation->setSeen(0);
             $em=$this->getDoctrine()->getManager();
             $em->persist($reclamation);
             $em->flush();
@@ -100,7 +101,37 @@ class ReclamationController extends Controller
     }
     public function ListeReclamationAdminAction()
     {
+        $em=$this->getDoctrine()->getManager();
+        $reclamation=$em->getRepository(Reclamation::class)->findAll();
+        return $this->render('@Back/Reclamations/ListReclamationAdmin.html.twig',array("recs"=>$reclamation));
 
+    }
+
+    public  function detaillerecadminAction($rec)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $rec=$em->getRepository(Reclamation::class)->find($rec);
+        $rec->setSeen(1);
+        $em->flush();
+        return $this->render('@Back/Reclamations/detaillerec.html.twig',array("rec"=>$rec));
+    }
+
+    public function traiteadminAction($rec)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $rec=$em->getRepository(Reclamation::class)->find($rec);
+        $rec->setTraite(1);
+        $em->flush();
+        return $this->redirectToRoute('main_liste_reclamation_admin');
+    }
+
+    public function supprimeradminAction($rec)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $reclamation=$em->getRepository(Reclamation::class)->find($rec);
+        $em->remove($reclamation);
+        $em->flush();
+        return $this->redirectToRoute('main_liste_reclamation_admin');
     }
 
 

@@ -53,6 +53,19 @@ class Reclamation
      */
     private $user;
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="seen", type="integer")
+     */
+    private $seen;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="traite", type="integer")
+     */
+    private $traite;
+    /**
      * Get id
      *
      * @return int
@@ -157,6 +170,41 @@ class Reclamation
     {
         $this->user = $user;
     }
+
+    /**
+     * @return int
+     */
+    public function getSeen()
+    {
+        return $this->seen;
+    }
+
+    /**
+     * @param int $seen
+     */
+    public function setSeen($seen)
+    {
+        $this->seen = $seen;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTraite()
+    {
+        return $this->traite;
+    }
+
+    /**
+     * @param int $traite
+     */
+    public function setTraite($traite)
+    {
+        $this->traite = $traite;
+    }
+
+
+
 
 
 

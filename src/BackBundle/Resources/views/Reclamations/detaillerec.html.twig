@@ -1,0 +1,52 @@
+{% extends "back.html.twig" %}
+
+{% block content %}
+    <center>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+        <div class="col-12 col-lg-6">
+        <div class="tab tab-vertical tab-danger">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#colored-vertical-icon-tab-1" data-toggle="tab" role="tab">
+                        <i class="align-middle" data-feather="home"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#colored-vertical-icon-tab-2" data-toggle="tab" role="tab">
+                        <i class="align-middle" data-feather="settings"></i>
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="colored-vertical-icon-tab-1" role="tabpanel">
+                    <h4 class="tab-title">Reclamation Numero : {{ rec.id }} Posté : {{ rec.DateReclamation|date('F jS \\a\\t g:ia') }}</h4>
+                    <p><bold> de la part de </bold> {{ rec.user.firstname }}</p>
+                    <p><bold>Contre : {{ rec.userreclame }}</bold> </p>
+                    <p><bold>Objet : </bold>{{ rec.Object }}</p>
+                    <p><bold>Description : </bold>{{ rec.Description }}</p>
+                </div>
+                <div class="tab-pane" id="colored-vertical-icon-tab-2" role="tabpanel">
+                    <h4 class="tab-title">Actions</h4>
+                    <form action="{{ path('main_traite_reclamation_admin',{'rec':rec.id}) }}">
+                    <button class="btn btn-success">Traiter cette reclamation</button>
+                    </form>
+                    <br>
+                    <br>
+                    <form action="{{ path('main_supprimer_reclamation_admin',{'rec':rec.id}) }} }}">
+                        <button class="btn btn-primary">Supprimer cette reclamation</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </center>
+{% endblock %}

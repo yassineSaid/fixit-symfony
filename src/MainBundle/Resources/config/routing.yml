@@ -19,7 +19,18 @@ main_mes_reclamation:
 main_supprimer_reclamation:
     path:     /Reclamer/Supprimer/{rec}
     defaults: { _controller: MainBundle:Reclamation:SupprimerReclamation }
-
+main_liste_reclamation_admin:
+    path:     /Backoffice/ListeReclamation
+    defaults: { _controller: MainBundle:Reclamation:ListeReclamationAdmin }
+main_change_status_reclamation:
+    path:     /Backoffice/detaillerec/{rec}
+    defaults: { _controller: MainBundle:Reclamation:detaillerecadmin }
+main_traite_reclamation_admin:
+    path:     /Backoffice/traite/{rec}
+    defaults: { _controller: MainBundle:Reclamation:traiteadmin }
+main_supprimer_reclamation_admin:
+    path:     /Backoffice/supp/{rec}
+    defaults: { _controller: MainBundle:Reclamation:supprimeradmin }
 
 ############################ END ROUNTING DE MUSTAPHA ##########################
 main_ajouterCategorieOutil:
