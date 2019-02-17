@@ -1,0 +1,97 @@
+{% extends "dashboard_front.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block title %}Paramètres du compte{% endblock %}
+{% block content %}
+    <!--************************************
+				Inner Page Banner Start
+		*************************************-->
+    <div class="tg-innerpagebanner">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="tg-pagetitle">
+                        <h1>Paramètres du compte</h1>
+                    </div>
+                    <ol class="tg-breadcrumb">
+                        <li><a href="{{ path("front_homepage") }}">Accueil</a></li>
+                        <li class="tg-active">Paramètres du compte</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block sidebar %}
+ {{ parent() }}
+{% endblock %}
+    {% block content_dashboard %}
+        <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
+            <div id="tg-content" class="tg-content">
+                <div class="tg-dashboardsecuritysetting">
+                        <fieldset>
+                            <h2>Change Your Password</h2>
+                            <div class="row">
+                                {{ form_start(form, {'method': 'post', 'action': path('fos_user_change_password'), 'attr': {'class': 'fos_user_change_password'}}) }}
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                        {{ form_widget(form.current_password, {'attr': {'class': 'form-control','placeholder':'Votre mot de passe actuel'}}) }}
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                        {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control','placeholder':'Votre nouveau mot de passe'}}) }}
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                        {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control','placeholder':'Confirmez le mot de passe'}}) }}
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <button class="tg-btn" type="submit">Enregistrer</button>
+                                </div>
+                            </div>
+                            {{ form_end(form) }}
+                        </fieldset>
+                        <fieldset>
+                            <h2>Deactivate Account</h2>
+                            <div class="tg-description">
+                                <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim adia minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip extea commodo consequat.</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    <div class="form-group">
+														<span class="tg-select">
+															<select>
+																<option>Reason Of Leaving?</option>
+																<option>Reason Of Leaving?</option>
+																<option>Reason Of Leaving?</option>
+																<option>Reason Of Leaving?</option>
+															</select>
+														</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                        <input type="password" name="currentpassword" class="form-control" placeholder="Current Password">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                        <input type="password" name="retypepassword" class="form-control" placeholder="Retype Password">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <textarea placeholder="Description"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <a href="#" class="tg-btn tg-btndeactivate" data-toggle="modal" data-target=".tg-categoryModal">Deactivate Now</a>
+                                </div>
+                            </div>
+                        </fieldset>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
