@@ -45,7 +45,6 @@ class CategorieService
     {
         return $this->id;
     }
-
     /**
      * Set nom
      *

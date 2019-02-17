@@ -33,6 +33,44 @@ class Service
      * @ORM\JoinColumn(name="idCategorieService", referencedColumnName="id")
      */
     private $CategorieService;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="NbrProviders", type="integer")
+     */
+    private $NbrProviders;
+
+    /**
+     * @return string
+     */
+    public function getNbrProviders()
+    {
+        return $this->NbrProviders;
+    }
+
+    /**
+     * @param integer $NbrProviders
+     */
+    public function setNbrProviders($NbrProviders)
+    {
+        $this->NbrProviders = $NbrProviders;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategorieService()
+    {
+        return $this->CategorieService;
+    }
+
+    /**
+     * @param mixed $CategorieService
+     */
+    public function setCategorieService($CategorieService)
+    {
+        $this->CategorieService = $CategorieService;
+    }
 
 
     /**

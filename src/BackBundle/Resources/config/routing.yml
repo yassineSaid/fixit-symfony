@@ -31,3 +31,6 @@ user_downgrade:
 registration_confirmed:
   path:     /register/confirmed
   defaults: { _controller: UserBundle:Registration:confirmed }
+ajouter_service:
+  path:     /service/ajouter
+  defaults: { _controller: BackBundle:CategorieService:confirmed }
