@@ -36,7 +36,7 @@ class CategorieServiceController extends Controller
     }
     public function modifierAction(Request $r,$id)
     {
-        //$id=$_GET['id'];
+        //$id=$_GET['id']
         $em=$this->getDoctrine()->getManager();
         $categorie=$em->getRepository(CategorieService::class)->find($id);
         if ($r->isMethod("POST"))
