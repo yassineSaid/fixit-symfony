@@ -20,9 +20,8 @@ class OutilController extends Controller
             $connexion1=$this->getDoctrine();
             $outil->setNom($request->get("inputNom"));
             $outil->setQuantite($request->get("inputQuantite"));
-            $outil->setDateLocation(new \DateTime($request->get("inputDateLocation")));
-            $outil->setDateResiliation(new \DateTime($request->get("inputDateResiliation")));
-            $outil->setDuree(0);
+            $outil->setDureeMaximale($request->get("inputDuree"));
+            $outil->setPrix($request->get("inputPrix"));
             $outil->setCategorieOutils($connexion1->getRepository("MainBundle:CategorieOutils")->find($request->get("inputCategorie")));
             $em=$this->getDoctrine()->getManager();
             $em->persist($outil);

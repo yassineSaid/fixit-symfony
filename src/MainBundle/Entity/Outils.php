@@ -34,27 +34,20 @@ class Outils
      * @ORM\Column(name="Quantite", type="integer")
      */
     private $quantite;
-    /**
-     * @var datetime
-     *
-     * @ORM\Column(name="dateLocation", type="datetime")
-     */
-    private $dateLocation;
-    /**
-     * @var datetime
-     *
-     * @ORM\Column(name="dateResiliation", type="datetime")
-     */
-    private $dateResiliation;
-
-
 
     /**
      * @var int
      *
-     * @ORM\Column(name="duree", type="integer")
+     * @ORM\Column(name="dureeMaximale", type="integer")
      */
-    private $duree;
+    private $dureeMaximale;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="prix", type="integer")
+     */
+    private $prix;
 
     /**
      * @ORM\ManyToOne(targetEntity="CategorieOutils")
@@ -121,53 +114,6 @@ class Outils
         return $this->quantite;
     }
 
-    /**
-     * @return datetime
-     */
-    public function getDateLocation()
-    {
-        return $this->dateLocation;
-    }
-
-    /**
-     * @param datetime $dateLocation
-     */
-    public function setDateLocation($dateLocation)
-    {
-        $this->dateLocation = $dateLocation;
-    }
-
-    /**
-     * @return datetime
-     */
-    public function getDateResiliation()
-    {
-        return $this->dateResiliation;
-    }
-
-    /**
-     * @param datetime $dateResiliation
-     */
-    public function setDateResiliation($dateResiliation)
-    {
-        $this->dateResiliation = $dateResiliation;
-    }
-
-    /**
-     * @return int
-     */
-    public function getDuree()
-    {
-        return $this->duree;
-    }
-
-    /**
-     * @param int $duree
-     */
-    public function setDuree($duree)
-    {
-        $this->duree = $duree;
-    }
 
     /**
      * @return mixed
@@ -184,5 +130,38 @@ class Outils
     {
         $this->CategorieOutils = $CategorieOutils;
     }
+
+    /**
+     * @return int
+     */
+    public function getDureeMaximale()
+    {
+        return $this->dureeMaximale;
+    }
+
+    /**
+     * @param int $dureeMaximale
+     */
+    public function setDureeMaximale($dureeMaximale)
+    {
+        $this->dureeMaximale = $dureeMaximale;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPrix()
+    {
+        return $this->prix;
+    }
+
+    /**
+     * @param int $prix
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+    }
+
 }
 
