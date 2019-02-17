@@ -60,10 +60,66 @@ main_mes_produit:
     defaults: { _controller: MainBundle:Produit:MesProduit }
     #######################end routing ali #########################
     ################# ROUTING DE Sl-Wassim PLEASE DON'T TOUCH #####################
+main_ajouterCategori_Produit:
+    path:    /ajouterCategorieProduits
+    defaults: { _controller: MainBundle:CategorieProduit:ajouter }
 main_ajouterCategorieOutil:
+  path: /ajouterCategorieOutil
+  defaults: { _controller: MainBundle:CategorieOutil:ajouter }
+main_listCategorieOutil:
+  path: /listCategorieOutil
+  defaults: { _controller: MainBundle:CategorieOutil:liste }
+main_modifierCategorieOutil:
+  path: /modifierCategorieOutil
+  defaults: { _controller: MainBundle:CategorieOutil:modifier }
+main_supprimerCategorieOutil:
+  path: /supprimerCategorieOutil
+  defaults: { _controller: MainBundle:CategorieOutil:supprimer }
     path: /ajouterCategorieOutil
     defaults: { _controller: MainBundle:categorieOutil:ajouter }
 main_ajouterOutil:
-    path: /ajouterOutil
-    defaults: { _controller: MainBundle:Outil:ajouter }
+  path: /ajouterOutil
+  defaults: { _controller: MainBundle:Outil:ajouter }
+main_listOutil:
+  path: /listOutil
+  defaults: { _controller: MainBundle:Outil:liste }
+main_modifierOutil:
+  path: /modifierOutil
+  defaults: { _controller: MainBundle:Outil:modifier }
+main_supprimerOutil:
+  path: /supprimerOutil
+  defaults: { _controller: MainBundle:Outil:supprimer }
+main_afficherFrontOutil:
+  path: /afficherFrontOutil
+  defaults: { _controller: MainBundle:Outil:afficherFront }
 ############################ END ROUNTING DE Sl-Wassim ##########################
+############################ END ROUNTING DE Sl-Wassim ##########################
+########################### Routing de Slim PLEASE DON'T TOUCH ####################
+main_ajouterCategorieService:
+    path: /ajouterCategorieService
+    defaults: { _controller: MainBundle:CategorieService:ajouter }
+
+main_afficherCategorieService:
+    path: /afficherCategorieService
+    defaults: { _controller: MainBundle:CategorieService:afficher }
+main_modifierCategorieService:
+    path: /modifierCategorieService/{id}
+    defaults: { _controller: MainBundle:CategorieService:modifier }
+main_supprimerCategorieService:
+    path: /supprimerCategorieService/{id}
+    defaults: { _controller: MainBundle:CategorieService:supprimer }
+
+main_ajouterService:
+    path: /ajouterService
+    defaults: { _controller: MainBundle:Service:ajouter }
+main_afficherService:
+    path: /afficherService
+    defaults: { _controller: MainBundle:Service:afficher }
+main_modifierService:
+    path: /modifierService
+    defaults: { _controller: MainBundle:Service:modifier }
+main_supprimerService:
+    path: /supprimerService
+    defaults: { _controller: MainBundle:Service:supprimer }
+
+########################### END Routing de Slim ######################################
