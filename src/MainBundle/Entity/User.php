@@ -84,6 +84,13 @@ class User extends BaseUser
     protected $phone;
 
     /**
+     * @var
+     *
+     * @ORM\Column(name="solde", type="integer", nullable=false)
+     */
+    protected $solde = 0;
+
+    /**
      * Many Users have Many Services.
      * @ORM\ManyToMany(targetEntity="Service")
      * @ORM\JoinTable(name="ServiceUser",
@@ -245,5 +252,23 @@ class User extends BaseUser
     {
         return $this->phone;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSolde()
+    {
+        return $this->solde;
+    }
+
+    /**
+     * @param mixed $solde
+     */
+    public function setSolde($solde)
+    {
+        $this->solde = $solde;
+    }
+
+
 
 }

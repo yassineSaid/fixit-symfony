@@ -9,3 +9,6 @@ account_setting:
     defaults: { _controller: UserBundle:ChangePassword:changePassword }
 fos_user_profile_show:
   path: /compte
+paiement:
+    path:     /paiement
+    defaults: { _controller: FrontBundle:User:paiement }

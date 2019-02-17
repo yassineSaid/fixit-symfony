@@ -20,16 +20,53 @@
             </div>
         </div>
     </div>
+    {% set menu_selected='profile_setting' %}
 {% endblock %}
 {% block sidebar %}
  {{ parent() }}
 {% endblock %}
     {% block content_dashboard %}
+        <script type="text/javascript">
+            function amount() {
+                document.getElementById("montantscoin").value=(document.getElementById("scoin").value/2).toString().concat(" DT");
+            }
+        </script>
                     <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
                         <div id="tg-content" class="tg-content">
                             <div class="tg-dashboard tg-dashboardprofilesetting">
-                                <form class="tg-themeform">
+                                <div class="tg-themeform">
                                     <fieldset>
+                                        <div class="tg-dashboardbox tg-basicinformation">
+                                            <div class="tg-dashboardtitle">
+                                                <h2>Votre solde</h2>
+                                            </div>
+                                            <div class="tg-basicinformationbox">
+                                                <div style="font-size: 30px; text-align: center;">
+                                                    {{ app.user.solde }}
+                                                    <img src="{{ asset("service/images/icons/scoin.png") }}">
+                                                </div>
+                                                <form method="post" action="{{ path('paiement') }}" onkeyup="amount()">
+                                                    <div style="padding-top: 10px">
+                                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                                            <div class="form-group">
+                                                                <input type="number" id="scoin" class="form-control" name="scoin" placeholder="SCoin">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                                            <div class="form-group">
+                                                                <input type="text" id="montantscoin" class="form-control" name="montantscoin" placeholder="Montant" disabled="disabled">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                                            <div class="form-group">
+                                                                <button class="tg-btn" type="submit" id="customButton">Acheter</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                <p>0,5 DT/SCoin</p>
+                                            </div>
+                                        </div>
                                         <div class="tg-dashboardbox tg-basicinformation">
                                             <div class="tg-dashboardtitle">
                                                 <h2>Informations générales</h2>
@@ -103,34 +140,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="tg-dashboardbox tg-location">
-                                            <div class="tg-dashboardtitle">
-                                                <h2>Location</h2>
-                                                <a class="tg-btnaddnew" href="#">+ add new</a>
-                                            </div>
-                                            <div class="tg-locationbox">
-                                                <div class="row">
-                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                                        <div class="form-group tg-inputwithicon">
-                                                            <input type="text" class="form-control" name="country" placeholder="Country">
-                                                            <i class="fa fa-crosshairs tg-icon"></i>
-                                                            <i class="fa fa-angle-down tg-icon"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" name="city" placeholder="City">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" name="state" placeholder="State">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div id="tg-locationmap" class="tg-locationmap"></div>
                                             </div>
                                         </div>
                                         <div class="tg-dashboardbox tg-introduction">
@@ -598,7 +607,7 @@
                                             </div>
                                         </div>
                                     </fieldset>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
