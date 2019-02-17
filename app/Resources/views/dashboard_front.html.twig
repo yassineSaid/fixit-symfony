@@ -31,13 +31,13 @@
                         <div class="tg-widgetdashboard">
                             <nav id="tg-dashboardnav" class="tg-dashboardnav">
                                 <ul>
-                                    <li>
-                                        <a href="dashboard.html">
-                                            <i class="lnr lnr-database"></i>
-                                            <span>Insights</span>
+                                    <li {% if menu_selected|default('profile_setting') == 'profile_setting' %} class="tg-active"{% endif %}>
+                                        <a href="{{ path('profile_setting') }}">
+                                            <i class="lnr lnr-user"></i>
+                                            <span>Mon profil</span>
                                         </a>
                                     </li>
-                                    <li class="tg-active">
+                                    <li>
                                         <a href="dashboardprofilesetting.html">
                                             <i class="lnr lnr-cog"></i>
                                             <span>Profile Settings</span>

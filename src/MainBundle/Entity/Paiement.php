@@ -7,10 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Paiment
  *
- * @ORM\Table(name="paiment")
- * @ORM\Entity(repositoryClass="MainBundle\Repository\PaimentRepository")
+ * @ORM\Table(name="paiement")
+ * @ORM\Entity(repositoryClass="PaiementRepository")
  */
-class Paiment
+class Paiement
 {
     /**
      * @var int
@@ -20,6 +20,12 @@ class Paiment
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="IdUser", referencedColumnName="id")
+     */
+    private $IdUser;
 
     /**
      * @var float
@@ -34,6 +40,21 @@ class Paiment
      * @ORM\Column(name="NombreScoin", type="integer")
      */
     private $nombreScoin;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="stripeToken", type="string")
+     */
+    private $stripeToken;
+
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="datePaiement", type="datetime")
+     */
+    private $datePaiement;
+
 
 
     /**
@@ -93,5 +114,54 @@ class Paiment
     {
         return $this->nombreScoin;
     }
+
+    /**
+     * @return string
+     */
+    public function getStripeToken()
+    {
+        return $this->stripeToken;
+    }
+
+    /**
+     * @param string $stripeToken
+     */
+    public function setStripeToken($stripeToken)
+    {
+        $this->stripeToken = $stripeToken;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdUser()
+    {
+        return $this->IdUser;
+    }
+
+    /**
+     * @param mixed $IdUser
+     */
+    public function setIdUser($IdUser)
+    {
+        $this->IdUser = $IdUser;
+    }
+
+    /**
+     * @return datetime
+     */
+    public function getDatePaiement()
+    {
+        return $this->datePaiement;
+    }
+
+    /**
+     * @param datetime $datePaiement
+     */
+    public function setDatePaiement($datePaiement)
+    {
+        $this->datePaiement = $datePaiement;
+    }
+
 }
 
