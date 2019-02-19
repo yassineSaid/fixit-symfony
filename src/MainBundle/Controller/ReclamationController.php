@@ -30,12 +30,13 @@ class ReclamationController extends Controller
             $reclamation->setDateReclamation($dater);
             $reclamation->setUser($this->getUser());
             $reclamation->setSeen(0);
+            $reclamation->setTraite(0);
             $em=$this->getDoctrine()->getManager();
             $em->persist($reclamation);
             $em->flush();
             return $this->redirectToRoute('main_affiche_Detail_Reclamation',array("reclamation"=>$reclamation->getId()));
         }
-        return $this->render('@Front/User/AjouterReclamation.html.twig',['user'=>$rec]);
+        return $this->render('@Front/User/ajouterReclamation.html.twig',['user'=>$rec]);
     }
 
     public function AfficherDetailAction($reclamation)
@@ -46,7 +47,7 @@ class ReclamationController extends Controller
         }
         $em=$this->getDoctrine()->getManager();
         $rec=$em->getRepository(Reclamation::class)->find($reclamation);
-        return $this->render('@Front/User/AfficherDetailReclamation.html.twig',array("reclamation"=>$rec));
+        return $this->render('@Front/User/detailsReclamation.html.twig',array("reclamation"=>$rec));
     }
 
     public function ModifierReclamationAction($rec,Request $request)
@@ -73,7 +74,7 @@ class ReclamationController extends Controller
             $em->flush();
             return $this->redirectToRoute('main_affiche_Detail_Reclamation',array("reclamation"=>$reclamation->getId()));
         }
-        return $this->render('@Front/User/ModifierReclamation.html.twig',array("user"=>$user,"reclamation"=>$reclamation));
+        return $this->render('@Front/User/modifierReclamation.html.twig',array("user"=>$user,"reclamation"=>$reclamation));
     }
 
     public function MesReclamationAction()
@@ -84,7 +85,7 @@ class ReclamationController extends Controller
         }
         $em=$this->getDoctrine()->getManager();
         $recs=$em->getRepository(Reclamation::class)->findReclamation($this->getUser()->getId());
-        return $this->render('@Front/User/MesReclamations.html.twig',array("reclamations"=>$recs));
+        return $this->render('@Front/User/listReclamations.html.twig',array("reclamations"=>$recs));
     }
 
     public function SupprimerReclamationAction($rec)
@@ -121,8 +122,32 @@ class ReclamationController extends Controller
         $em=$this->getDoctrine()->getManager();
         $rec=$em->getRepository(Reclamation::class)->find($rec);
         $rec->setTraite(1);
+        $userrec=$rec->getUserreclame();
+        $user=$rec->getUser();
         $em->flush();
+        $transport = \Swift_SmtpTransport::newInstance('smtp.gmail.com', 465,'ssl')->setUsername('mustapha.benhajminyaoui@esprit.tn')->setPassword('icarus09626776');
+
+        $mailer = \Swift_Mailer::newInstance($transport);
+        $message = \Swift_Message::newInstance()
+            ->setSubject("Reclamation contre vous")
+            ->setFrom(array('mustapha.benhajminyaoui@esprit.tn' => 'mustapha.benhajminyaoui@esprit.tn'))
+            ->setTo(array($userrec->getEmail() => $userrec->getEmail()))// email du client pour teste replacer par son @
+            ->addPart('Votre Réclamation a été bien traité . votre satisfaction est importante pour nous','text/html');
+        $result = $mailer->send($message);
+
+
+
+        $mailer = \Swift_Mailer::newInstance($transport);
+        $message = \Swift_Message::newInstance()
+            ->setSubject("Reclamation contre vous")
+            ->setFrom(array('mustapha.benhajminyaoui@esprit.tn' => 'mustapha.benhajminyaoui@esprit.tn'))
+            ->setTo(array($user->getEmail() => $user->getEmail()))// email du client pour teste replacer par son @
+            ->addPart('Quelqun a porté une plainte contre vous','text/html');
+        $result = $mailer->send($message);
         return $this->redirectToRoute('main_liste_reclamation_admin');
+        return $this->redirectToRoute('main_liste_reclamation_admin');
+
+
     }
 
     public function supprimeradminAction($rec)

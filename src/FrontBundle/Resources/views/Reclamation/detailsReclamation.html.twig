@@ -1,0 +1,138 @@
+
+{% set menu_selected = 'main_reclamation_Ajout' %}{% extends "dashboard_front.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block title %}Réclamer un service{% endblock %}
+{% block content %}
+    <!--************************************
+				Inner Page Banner Start
+		*************************************-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            ajaxCall();
+                function ajaxCall() {
+                    $.ajax({
+                        url: '{{ path('main_affiche_Detail_Reclamationscript') }}',
+                        method: 'post',
+                        data: {id : "{{ reclamation.id }}"},
+                        success: function(msg) {
+                            refreshList(msg);
+                            console.log(msg.seen);
+                        }
+                    });
+                }
+            function refreshList(msg) {
+                    console.log(msg.seen)
+                    if(msg.seen==1)
+                    {
+                        $("#test").html("<ul class=\"tg-formprogressbar \">\n" +
+                            "                                                                <li><span>Votre Reclamation est envoyé elle est en cours de traitemant</span></li>\n" +
+                            "                                                                <li class=\"tg-active\" ><span>Votre Reclamation est vu par l'un de nos administrateur elle sera traité bientôt</span></li>\n" +
+                            "                                                                <li><span>Instructions</span></li>\n" +
+                            "\n" +
+                            "                                                            </ul>");
+                    }
+            }
+            setInterval(function(){
+                ajaxCall();
+            }, 5000);
+
+        });
+    </script>
+    <div class="tg-innerpagebanner">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="tg-pagetitle">
+                        <h1>Profil</h1>
+                    </div>
+                    <ol class="tg-breadcrumb">
+                        <li><a href="{{ path('front_homepage') }}">Accueil</a></li>
+                        <li class="tg-active">Profil</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block sidebar %}
+    {{ parent() }}
+{% endblock %}
+    {% block content_dashboard %}
+        <script type="text/javascript">
+            function amount() {
+                document.getElementById("montantscoin").value=(document.getElementById("scoin").value/2).toString().concat(" DT");
+            }
+        </script>
+        <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
+            <div id="tg-content" class="tg-content">
+                <div class="tg-dashboard tg-dashboardprofilesetting">
+                    <div class="tg-themeform">
+                        <fieldset>
+                            <div class="tg-dashboardbox tg-basicinformation">
+
+                                <div class="tg-basicinformationbox">
+                                    <div style="font-size: 30px; text-align: center;">
+
+                                    <div class="tg-sectiontitle">
+                                        <br>
+                                        <br>
+                                        <h2>Details de la reclamation</h2>
+                                    </div>
+                                    <div class="tg-contactusarea">
+                                        <div class="tg-appointmentsetting">
+                                            <form class="tg-formbookappointment">
+                                                <fieldset class="tg-formstepone tg-current">
+                                                    <div class="tg-appointmenthead">
+                                                        <a class="tg-btn tg-btnedite" href="{{ path('main_modifier_reclamation',{'rec':reclamation.id}) }}"><i class="lnr lnr-pencil"></i></a>
+                                                        <div class="tg-appointmentheading">
+                                                            <h2>{{ reclamation.DateReclamation|date('F jS \\a\\t g:ia') }}</h2>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tg-progressbox">
+                                                        <div id="test">
+                                                        {% if reclamation.seen ==0 and reclamation.traite == 0 %}
+                                                            <ul class="tg-formprogressbar">
+                                                                <li class="tg-active"><span>Votre Reclamation est envoyé elle est en cours de traitemant</span></li>
+                                                                <li><span>Votre reclamation est vu par l'un de nos administrateurs elle sera traité bientôt</span></li>
+                                                                <li><span>Instructions</span></li>
+
+                                                            </ul>
+                                                        {% endif %}
+                                                        {% if reclamation.seen ==1 and reclamation.traite == 0 %}
+                                                            <ul class="tg-formprogressbar ">
+                                                                <li><span>Votre Reclamation est envoyé elle est en cours de traitemant</span></li>
+                                                                <li class="tg-active" ><span>Votre Reclamation est vu par l'un de nos administrateur elle sera traité bientôt</span></li>
+                                                                <li><span>Instructions</span></li>
+
+                                                            </ul>
+                                                        {% endif %}
+                                                        {% if reclamation.seen ==1 and reclamation.traite == 1 %}
+                                                            <ul class="tg-formprogressbar">
+                                                                <li ><span>Votre Reclamation est envoyé elle est en cours de traitemant</span></li>
+                                                                <li ><span>Votre Reclamation est vu par l'un de nos administrateur elle sera traité bientôt</span></li>
+                                                                <li class="tg-active"><span>Votre Reclamation à été bien traité. Notre objectif est toujours satisfaire nos client</span></li>
+
+                                                            </ul>
+                                                        {% endif %}
+                                                        </div>
+                                                        <h3>{{ reclamation.Object }}</h3>
+                                                        <div class="tg-description">
+                                                            <p>{{ reclamation.Description }}</p>
+                                                        </div>
+                                                        <div class="tg-btnarea">
+                                                            <a href="{{ path("front_homepage") }}" class="tg-btn tg-btnnext">Retour à la page d'accueil</a>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endblock %}

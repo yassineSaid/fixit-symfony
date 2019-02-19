@@ -12,6 +12,34 @@ fos_user_profile_show:
 paiement:
     path:     /paiement
     defaults: { _controller: FrontBundle:User:paiement }
+
+############################ ROUTING DE MUSTAPHA PLEASE DON'T TOUCH #######################
+main_reclamation_Ajout:
+  path:     /compte/reclamer
+  defaults: { _controller: FrontBundle:ReclamationFront:AjouterReclamation }
+main_affiche_Detail_Reclamation:
+  path:     /compte/reclamer/detail/{reclamation}
+  defaults: { _controller: FrontBundle:ReclamationFront:AfficherDetail }
+main_modifier_reclamation:
+  path:     /compte/reclamer/modifier/{rec}
+  defaults: { _controller: FrontBundle:ReclamationFront:ModifierReclamation }
+main_mes_reclamation:
+  path:     /compte/listReclamations
+  defaults: { _controller: FrontBundle:ReclamationFront:MesReclamation }
+main_supprimer_reclamation:
+  path:     /compte/reclamer/supprimer/{rec}
+  defaults: { _controller: FrontBundle:ReclamationFront:SupprimerReclamation }
+main_affiche_Detail_Reclamationscript:
+    path:     /compte/reclamer/d/
+    defaults: { _controller: FrontBundle:ReclamationFront:ListRec }
+    #methods: [post]
+main_affiche_list_service_accompli:
+  path:     /compte/listserviceaccompli
+  defaults: { _controller: FrontBundle:ReclamationFront:ListSerAcc }
+main_ajout_note_service_accompli:
+  path:     /compte/Avis
+  defaults: { _controller: FrontBundle:AvisFront:NoterService }
+############################        END ROUTING DE MUSTAPHA         #######################
 languesUser:
   path:     /compte/langues
   defaults: { _controller: FrontBundle:Langue:listLangues }

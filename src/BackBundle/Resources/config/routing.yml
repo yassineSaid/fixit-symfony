@@ -40,3 +40,19 @@ registration_confirmed:
 ajouter_service:
   path:     /service/ajouter
   defaults: { _controller: BackBundle:CategorieService:confirmed }
+
+
+############################ ROUTING DE MUSTAPHA PLEASE DON'T TOUCH #######################
+main_liste_reclamation_admin:
+  path:     /admin/listeReclamation
+  defaults: { _controller: BackBundle:ReclamationBack:ListeReclamationAdmin }
+main_change_status_reclamation:
+  path:     /admin/detaillerec/{rec}
+  defaults: { _controller: BackBundle:ReclamationBack:detaillerecadmin }
+main_traite_reclamation_admin:
+  path:     /admin/traite/{rec}
+  defaults: { _controller: BackBundle:ReclamationBack:traiteadmin }
+main_supprimer_reclamation_admin:
+  path:     /admin/supp/{rec}
+  defaults: { _controller: BackBundle:ReclamationBack:supprimeradmin }
+  ############################        END ROUTING DE MUSTAPHA         #######################

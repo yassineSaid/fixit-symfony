@@ -60,5 +60,55 @@ class RealisationService
     {
         return $this->UserDemandeur;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUserOffreur()
+    {
+        return $this->UserOffreur;
+    }
+
+    /**
+     * @param mixed $UserOffreur
+     */
+    public function setUserOffreur($UserOffreur)
+    {
+        $this->UserOffreur = $UserOffreur;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getService()
+    {
+        return $this->service;
+    }
+
+    /**
+     * @param mixed $service
+     */
+    public function setService($service)
+    {
+        $this->service = $service;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOutil()
+    {
+        return $this->outil;
+    }
+
+    /**
+     * @param mixed $outil
+     */
+    public function setOutil($outil)
+    {
+        $this->outil = $outil;
+    }
+
+
 }
 

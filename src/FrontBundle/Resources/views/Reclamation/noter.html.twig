@@ -1,0 +1,204 @@
+
+{% set menu_selected = 'main_reclamation_Ajout' %}{% extends "dashboard_front.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block title %}Réclamer un service{% endblock %}
+{% block content %}
+    <!--************************************
+				Inner Page Banner Start
+		*************************************-->
+    <div class="tg-innerpagebanner">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="tg-pagetitle">
+                        <h1>Profil</h1>
+                    </div>
+                    <ol class="tg-breadcrumb">
+                        <li><a href="{{ path('front_homepage') }}">Accueil</a></li>
+                        <li class="tg-active">Profil</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block sidebar %}
+    {{ parent() }}
+{% endblock %}
+    {% block content_dashboard %}
+        <style type="text/css">
+            .rate-area {
+
+                float: left;
+
+                border-style: none;
+
+            }
+
+
+
+            .rate-area:not(:checked) > input {
+
+                position: absolute;
+
+                top: -9999px;
+
+                clip: rect(0,0,0,0);
+
+            }
+
+
+
+            .rate-area:not(:checked) > label {
+
+                float: right;
+
+                width: 1em;
+
+                padding: 0 .1em;
+
+                overflow: hidden;
+
+                white-space: nowrap;
+
+                cursor: pointer;
+
+                font-size: 400%;
+
+                line-height: 1.2;
+
+                color: lightgrey;
+
+                text-shadow: 1px 1px #bbb;
+
+            }
+
+
+
+            .rate-area:not(:checked) > label:before { content: '★ '; }
+
+
+
+            .rate-area > input:checked ~ label {
+
+                color: gold;
+
+                text-shadow: 1px 1px #c60;
+
+                font-size: 450% !important;
+
+            }
+
+
+
+            .rate-area:not(:checked) > label:hover, .rate-area:not(:checked) > label:hover ~ label { color: gold; }
+
+
+
+            .rate-area > input:checked + label:hover, .rate-area > input:checked + label:hover ~ label, .rate-area > input:checked ~ label:hover, .rate-area > input:checked ~ label:hover ~ label, .rate-area > label:hover ~ input:checked ~ label {
+
+                color: gold;
+
+                text-shadow: 1px 1px goldenrod;
+
+            }
+
+
+
+            .rate-area > label:active {
+
+                position: relative;
+
+                top: 2px;
+
+                left: 2px;
+
+            }
+
+        </style>
+
+        <script type="text/javascript">
+            function amount() {
+                document.getElementById("montantscoin").value=(document.getElementById("scoin").value/2).toString().concat(" DT");
+            }
+        </script>
+        <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
+            <div id="tg-content" class="tg-content">
+                <div class="tg-dashboard tg-dashboardprofilesetting">
+                    <div class="tg-themeform">
+                        <fieldset>
+                            <div class="tg-dashboardbox tg-basicinformation">
+
+                                <div class="tg-basicinformationbox">
+                                    <div style="font-size: 30px; text-align: center;">
+                                        <div class="tg-sectionhead">
+                                            <div class="tg-sectiontitle">
+                                                <br>
+                                                <br>
+                                            </div>
+                                            <div class="tg-description" style="font-size: 15px; text-align: center;">
+                                                <p>Afin de vous satisfaire au mieux, nous allons prendre du le temps d'xaminer votre réclamation avec toute l’attention qu’elle mérite.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tg-sectiontitle">
+                                        <br>
+                                        <br>
+                                        <h2>Proposer mon avis</h2>
+                                    </div>
+                                    <div class="tg-contactusarea">
+                                        <div class="col-xs-12 col-sm-12 col-md-10 col-md-push-1 col-lg-10 col-lg-push-1">
+                                            <form class="tg-themeform" method="post">
+                                                <fieldset>
+                                                    <div class="row">
+                                                        <br>
+                                                        <center>
+                                                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" style="width: 500px" >
+                                                            <div class="form-group">
+                                                                <ul class="rate-area" style="align-content: center">
+
+                                                                    <input type="radio" id="5-star" name="rating" value="5" /><label for="5-star" title="Amazing">5 stars</label>
+
+                                                                    <input type="radio" id="4-star" name="rating" value="4" /><label for="4-star" title="Good">4 stars</label>
+
+                                                                    <input type="radio" id="3-star" name="rating" value="3" /><label for="3-star" title="Average">3 stars</label>
+
+                                                                    <input type="radio" id="2-star" name="rating" value="2" /><label for="2-star" title="Not Good">2 stars</label>
+
+                                                                    <input type="radio" id="1-star" name="rating" value="1" /><label for="1-star" title="Bad">1 star</label>
+
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        </center>
+                                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                            <div class="form-group">
+                                                                <textarea placeholder="Description" name="Description"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" style="width: 200px">
+                                                            <div class="form-group">
+                                                                <select class="form-control" name="satisfaction">
+                                                                    <option value="Non satisfait">Non satisfait</option>
+                                                                    <option value="Moyennement Satisfait">Moyennement Satisfait</option>
+                                                                    <option value="Totalement satisfait">Totalement satisfait</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                            <button type="submit" class="tg-btn">Submit</button>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endblock %}

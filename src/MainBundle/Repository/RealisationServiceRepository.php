@@ -10,4 +10,11 @@ namespace MainBundle\Repository;
  */
 class RealisationServiceRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findServiceRealise($idUser)
+    {
+        $query=$this->getEntityManager()
+            ->createQuery("SELECT s FROM MainBundle:RealisationService s where s.UserDemandeur=:id")
+            ->setParameter('id',$idUser);
+        return $query->getResult();
+    }
 }

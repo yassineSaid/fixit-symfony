@@ -756,6 +756,96 @@
     <!--************************************
             Main Start
     *************************************-->
+    <style type="text/css">
+        .rate-area {
+
+            float: left;
+
+            border-style: none;
+
+        }
+
+
+
+        .rate-area:not(:checked) > input {
+
+            position: absolute;
+
+            top: -9999px;
+
+            clip: rect(0,0,0,0);
+
+        }
+
+
+
+        .rate-area:not(:checked) > label {
+
+            float: right;
+
+            width: 1em;
+
+            padding: 0 .1em;
+
+            overflow: hidden;
+
+            white-space: nowrap;
+
+            cursor: pointer;
+
+            font-size: 400%;
+
+            line-height: 1.2;
+
+            color: lightgrey;
+
+            text-shadow: 1px 1px #bbb;
+
+        }
+
+
+
+        .rate-area:not(:checked) > label:before { content: '★ '; }
+
+
+
+        .rate-area > input:checked ~ label {
+
+            color: gold;
+
+            text-shadow: 1px 1px #c60;
+
+            font-size: 450% !important;
+
+        }
+
+
+
+        .rate-area:not(:checked) > label:hover, .rate-area:not(:checked) > label:hover ~ label { color: gold; }
+
+
+
+        .rate-area > input:checked + label:hover, .rate-area > input:checked + label:hover ~ label, .rate-area > input:checked ~ label:hover, .rate-area > input:checked ~ label:hover ~ label, .rate-area > label:hover ~ input:checked ~ label {
+
+            color: gold;
+
+            text-shadow: 1px 1px goldenrod;
+
+        }
+
+
+
+        .rate-area > label:active {
+
+            position: relative;
+
+            top: 2px;
+
+            left: 2px;
+
+        }
+
+    </style>
     <main id="tg-main" class="tg-main tg-haslayout">
         <!--************************************
                 Top Categories Start
@@ -877,70 +967,57 @@
         <!--************************************
                 Advantagies Start
         *************************************-->
-        <section class="tg-main-section tg-haslayout tg-bglight">
+        <section class="tg-main-section tg-haslayout tg-bglight" style="align-items: center;">
             <div class="container">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-10 col-md-push-1 col-lg-8 col-lg-push-2">
-                        <div class="tg-sectiontitle">
-                            <h2>Easiest Way To Get Services</h2>
-                        </div>
-                    </div>
-                    <div class="tg-advantagies">
-                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                            <div class="tg-advantage tg-advantageplan">
-									<span class="tg-advantageicon">
-										<i class="tg-badge">1</i>
-										<em><img src="{{ asset("service/images/advantagies/img-01.png") }}" alt="image description"></em>
-									</span>
-                                <div class="tg-title">
-                                    <h3><a href="#">Plan Your Task</a></h3>
-                                </div>
-                                <div class="tg-description">
-                                    <p>Adipisicing elit sed dotas eiusmod incididunt utia labore.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                            <div class="tg-advantage tg-advantagechoosebest">
-									<span class="tg-advantageicon">
-										<i class="tg-badge">2</i>
-										<em><img src="{{ asset("service/images/advantagies/img-02.png") }}" alt="image description"></em>
-									</span>
-                                <div class="tg-title">
-                                    <h3><a href="#">Choose Best Service</a></h3>
-                                </div>
-                                <div class="tg-description">
-                                    <p>Adipisicing elit sed dotas eiusmod incididunt utia labore.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                            <div class="tg-advantage tg-advantagestressfree">
-									<span class="tg-advantageicon">
-										<i class="tg-badge">3</i>
-										<em><img src="{{ asset("service/images/advantagies/img-03.png") }}" alt="image description"></em>
-									</span>
-                                <div class="tg-title">
-                                    <h3><a href="#">Live Stress Free</a></h3>
-                                </div>
-                                <div class="tg-description">
-                                    <p>Adipisicing elit sed dotas eiusmod incididunt utia labore.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                            <div class="tg-advantage tg-advantageexperience">
-									<span class="tg-advantageicon">
-										<i class="tg-badge">4</i>
-										<em><img src="{{ asset("service/images/advantagies/img-04.png") }}" alt="image description"></em>
-									</span>
-                                <div class="tg-title">
-                                    <h3><a href="#">Share Your Experience</a></h3>
-                                </div>
-                                <div class="tg-description">
-                                    <p>Adipisicing elit sed dotas eiusmod incididunt utia labore.</p>
-                                </div>
-                            </div>
+                    <div class="tg-contactusarea">
+                        <div class="col-xs-12 col-sm-12 col-md-10 col-md-push-1 col-lg-10 col-lg-push-1">
+                            <form class="tg-themeform" method="post">
+                                <fieldset>
+                                    <div class="tg-sectiontitle">
+                                        <h2>Votre Note Est important pour nous</h2>
+                                    </div>
+                                    <div class="row">
+                                        <br>
+                                        <center>
+                                            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" style="width: 700px; padding-left: 340px" >
+                                                <div class="form-group">
+                                                    <ul class="rate-area" style="align-content: center">
+
+                                                        <input type="radio" id="5-star" name="rating" value="5" /><label for="5-star" title="Amazing">5 stars</label>
+
+                                                        <input type="radio" id="4-star" name="rating" value="4" /><label for="4-star" title="Good">4 stars</label>
+
+                                                        <input type="radio" id="3-star" name="rating" value="3" /><label for="3-star" title="Average">3 stars</label>
+
+                                                        <input type="radio" id="2-star" name="rating" value="2" /><label for="2-star" title="Not Good">2 stars</label>
+
+                                                        <input type="radio" id="1-star" name="rating" value="1" /><label for="1-star" title="Bad">1 star</label>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </center>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <div class="form-group">
+                                                <textarea placeholder="Description" name="Description"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" style="width: 200px">
+                                            <div class="form-group">
+                                                <select class="form-control" name="satisfaction">
+                                                    <option value="Non satisfait">Non satisfait</option>
+                                                    <option value="Moyennement Satisfait">Moyennement Satisfait</option>
+                                                    <option value="Totalement satisfait">Totalement satisfait</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <button type="submit" class="tg-btn">Submit</button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
                         </div>
                     </div>
                 </div>

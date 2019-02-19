@@ -38,20 +38,16 @@ class Avis
     /**
      * @var string
      *
-     * @ORM\Column(name="Commentaire", type="string", length=255)
+     * @ORM\Column(name="satisfaction", type="string", length=255)
      */
-    private $commentaire;
+    private $satisfaction;
 
     /**
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="idUser", referencedColumnName="id")
      */
     private $User;
-    /**
-     * @ORM\ManyToOne(targetEntity="Service")
-     * @ORM\JoinColumn(name="idService", referencedColumnName="id")
-     */
-    private $Service;
+
 
 
     /**
@@ -113,27 +109,39 @@ class Avis
     }
 
     /**
-     * Set commentaire
-     *
-     * @param string $commentaire
-     *
-     * @return Avis
+     * @return string
      */
-    public function setCommentaire($commentaire)
+    public function getSatisfaction()
     {
-        $this->commentaire = $commentaire;
-
-        return $this;
+        return $this->satisfaction;
     }
 
     /**
-     * Get commentaire
-     *
-     * @return string
+     * @param string $satisfaction
      */
-    public function getCommentaire()
+    public function setSatisfaction($satisfaction)
     {
-        return $this->commentaire;
+        $this->satisfaction = $satisfaction;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->User;
+    }
+
+    /**
+     * @param mixed $User
+     */
+    public function setUser($User)
+    {
+        $this->User = $User;
+    }
+
+
+
+
 }
 

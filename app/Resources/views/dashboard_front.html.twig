@@ -43,10 +43,10 @@
                                             <span>Profile Settings</span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="dashboardbusinesshours.html">
-                                            <i class="lnr lnr-clock"></i>
-                                            <span>Business Hours</span>
+                                    <li {% if menu_selected == 'main_reclamation_Ajout' %} class="tg-active"{% endif %}>
+                                        <a href="{{ path('main_reclamation_Ajout') }}">
+                                            <i class="lnr lnr-bullhorn"></i>
+                                            <span>Reclamations</span>
                                         </a>
                                     </li>
                                     <li>
