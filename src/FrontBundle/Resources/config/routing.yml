@@ -12,3 +12,11 @@ fos_user_profile_show:
 paiement:
     path:     /paiement
     defaults: { _controller: FrontBundle:User:paiement }
+languesUser:
+  path:     /compte/langues
+  defaults: { _controller: FrontBundle:Langue:listLangues }
+  methods: [post]
+ajouterLangue:
+  path:     /compte/ajouterLangue
+  defaults: { _controller: FrontBundle:Langue:ajouter }
+  methods: [post]

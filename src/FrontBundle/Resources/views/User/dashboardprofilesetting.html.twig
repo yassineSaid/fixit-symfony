@@ -2,6 +2,52 @@
 {% trans_default_domain 'FOSUserBundle' %}
 {% block title %}Profil{% endblock %}
 {% block content %}
+    <script>
+        $(document).ready(function () {
+            ajaxCall();
+            $("#langue").click(
+                function () {
+                    ajaxAdd();
+                }
+            )
+            function ajaxAdd(){
+                $.ajax({
+                    url: "{{ path('ajouterLangue') }}",
+                    method: "post",
+                    data: {idUser: "{{ app.user.id }}",idLangue:$('#langues1 option:selected').val()}
+                }).success(function(msg) {
+                    console.log(msg)
+                });
+            }
+            function ajaxCall(){
+                $.ajax({
+                    url: "{{ path('languesUser') }}",
+                    method: "post",
+                    data: {id: "{{ app.user.id }}"}
+                }).success(function(msg) {
+                    refreshList(msg);
+                });
+            }
+            function refreshList(msg) {
+                $('#langues').text("");
+                $.each(msg.langues, function (i,item) {
+                    console.log(item);
+                    var li = document.createElement('li');
+                    var span = document.createElement('span');
+                    span.className='tg-tagdashboard';
+                    var i = document.createElement('i');
+                    i.className='fa fa-close';
+                    var em = document.createElement('em');
+                    var text = document.createTextNode(item.libelle);
+                    em.appendChild(text);
+                    span.appendChild(i);
+                    span.appendChild(em);
+                    li.appendChild(span);
+                    $('#langues').append(li);
+                });
+            }
+        });
+    </script>
     <!--************************************
 				Inner Page Banner Start
 		*************************************-->
@@ -96,6 +142,25 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="tg-dashboardbox tg-languages">
+                                            <div class="tg-dashboardtitle">
+                                                <h2>Langues parlées</h2>
+                                            </div>
+                                            <div class="tg-languagesbox">
+                                                <div class="form-group">
+														<span class="tg-select">
+															<select id="langues1">
+                                                                {% for langue in langues %}
+                                                                    <option value="{{ langue.id }}">{{ langue.libelle }}</option>
+                                                                {% endfor %}
+															</select>
+														</span>
+                                                    <button class="tg-btn" id="langue" type="button">Ajouter</button>
+                                                </div>
+                                                <ul class="tg-tagdashboardlist" id="langues">
+                                                </ul>
+                                            </div>
+                                        </div>
                                         <div class="tg-dashboardbox tg-socialinformation">
                                             <div class="tg-dashboardtitle">
                                                 <h2>Social Infomartion</h2>
@@ -148,121 +213,6 @@
                                             </div>
                                             <div class="tg-introductionbox">
                                                 <textarea class="form-control" name="introduction" placeholder="Introduction Here"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="tg-dashboardbox tg-languages">
-                                            <div class="tg-dashboardtitle">
-                                                <h2>Languages</h2>
-                                            </div>
-                                            <div class="tg-languagesbox">
-                                                <div class="form-group">
-														<span class="tg-select">
-															<select>
-																<option>Select Language</option>
-																<option>English</option>
-																<option>Arabic</option>
-																<option>Portuguese</option>
-																<option>Russian</option>
-																<option>Japanese</option>
-																<option>German</option>
-																<option>Korean</option>
-																<option>French</option>
-																<option>Turkish</option>
-																<option>Italian</option>
-																<option>Persian</option>
-																<option>Romanian</option>
-																<option>Dutch</option>
-																<option>Greek</option>
-															</select>
-														</span>
-                                                    <button class="tg-btn" type="button">add now</button>
-                                                </div>
-                                                <ul class="tg-tagdashboardlist">
-                                                    <li>
-															<span class="tg-tagdashboard">
-																<i class="fa fa-close"></i>
-																<em>English</em>
-															</span>
-                                                    </li>
-                                                    <li>
-															<span class="tg-tagdashboard">
-																<i class="fa fa-close"></i>
-																<em>Arabic</em>
-															</span>
-                                                    </li>
-                                                    <li>
-															<span class="tg-tagdashboard">
-																<i class="fa fa-close"></i>
-																<em>Portuguese</em>
-															</span>
-                                                    </li>
-                                                    <li>
-															<span class="tg-tagdashboard">
-																<i class="fa fa-close"></i>
-																<em>Russian</em>
-															</span>
-                                                    </li>
-                                                    <li>
-															<span class="tg-tagdashboard">
-																<i class="fa fa-close"></i>
-																<em>Japanese</em>
-															</span>
-                                                    </li>
-                                                    <li>
-															<span class="tg-tagdashboard">
-																<i class="fa fa-close"></i>
-																<em>German</em>
-															</span>
-                                                    </li>
-                                                    <li>
-															<span class="tg-tagdashboard">
-																<i class="fa fa-close"></i>
-																<em>Korean</em>
-															</span>
-                                                    </li>
-                                                    <li>
-															<span class="tg-tagdashboard">
-																<i class="fa fa-close"></i>
-																<em>French</em>
-															</span>
-                                                    </li>
-                                                    <li>
-															<span class="tg-tagdashboard">
-																<i class="fa fa-close"></i>
-																<em>Turkish</em>
-															</span>
-                                                    </li>
-                                                    <li>
-															<span class="tg-tagdashboard">
-																<i class="fa fa-close"></i>
-																<em>Italian</em>
-															</span>
-                                                    </li>
-                                                    <li>
-															<span class="tg-tagdashboard">
-																<i class="fa fa-close"></i>
-																<em>Persian</em>
-															</span>
-                                                    </li>
-                                                    <li>
-															<span class="tg-tagdashboard">
-																<i class="fa fa-close"></i>
-																<em>Romanian</em>
-															</span>
-                                                    </li>
-                                                    <li>
-															<span class="tg-tagdashboard">
-																<i class="fa fa-close"></i>
-																<em>Dutch</em>
-															</span>
-                                                    </li>
-                                                    <li>
-															<span class="tg-tagdashboard">
-																<i class="fa fa-close"></i>
-																<em>Greek</em>
-															</span>
-                                                    </li>
-                                                </ul>
                                             </div>
                                         </div>
                                         <div class="tg-dashboardbox tg-certificatesawards">

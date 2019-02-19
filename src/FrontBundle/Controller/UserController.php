@@ -3,8 +3,10 @@
 namespace FrontBundle\Controller;
 
 use FOS\UserBundle\Model\UserInterface;
+use MainBundle\Entity\Langue;
 use MainBundle\Entity\Paiement;
 use MainBundle\Entity\User;
+use MainBundle\Entity\UserLangue;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -12,7 +14,15 @@ class UserController extends Controller
 {
     public function profilAction(Request $request)
     {
-        return $this->render('@Front/User/dashboardprofilesetting.html.twig');
+        $connect1=$this->getDoctrine()->getManager();
+        $userLangue=new UserLangue(12,5);
+        //$userLangue->setIdUser("12");
+        //$userLangue->setIdLangue("5");
+        var_dump($userLangue);
+        $connect1->persist($userLangue);
+        $connect=$this->getDoctrine()->getManager();
+        $langues=$connect->getRepository(Langue::class)->findAll();
+        return $this->render('@Front/User/dashboardprofilesetting.html.twig',array("langues"=>$langues));
     }
     public function paiementAction(Request $request)
     {

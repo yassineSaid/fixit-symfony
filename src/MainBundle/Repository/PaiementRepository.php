@@ -10,4 +10,10 @@ namespace MainBundle\Repository;
  */
 class PaiementRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function paiementsUser($id)
+    {
+        $query=$this->getEntityManager()->createQuery("SELECT p FROM MainBundle:Paiement p where p.IdUser=:id");
+        $query->setParameter('id',$id);
+        return $query->getResult();
+    }
 }

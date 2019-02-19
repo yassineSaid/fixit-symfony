@@ -10,7 +10,7 @@ use FOS\UserBundle\Model\User as BaseUser;
  * Class User
  * @package MainBundle\Entity
  * @ORM\Table(name="user")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="MainBundle\Repository\UserRepository")
  */
 class User extends BaseUser
 {
@@ -267,6 +267,14 @@ class User extends BaseUser
     public function setSolde($solde)
     {
         $this->solde = $solde;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLangues()
+    {
+        return $this->Langues;
     }
 
 

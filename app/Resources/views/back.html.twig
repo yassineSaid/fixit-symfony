@@ -55,20 +55,29 @@
 
                 </li>
                 <li class="sidebar-item">
-                    <a href="#layouts" data-toggle="collapse" class="font-weight-bold sidebar-link collapsed">
+                    <a href="#services" data-toggle="collapse" class="font-weight-bold sidebar-link collapsed">
                         <i class="fas fa-american-sign-language-interpreting" data-feather="sidebar"></i> <span class="align-middle">Espace Services</span>
                     </a>
-                    <ul id="layouts" class="sidebar-dropdown list-unstyled collapse ">
+                    <ul id="services" class="sidebar-dropdown list-unstyled collapse ">
                         <li class="sidebar-item"><a class="sidebar-link" href="{{ path('main_afficherCategorieService') }}">Catégories</a></li>
                         <li class="sidebar-item"><a class="sidebar-link" href="{{ path('main_afficherService') }}">Services</a></li>
                     </ul>
                 </li>
 
                 <li class="sidebar-item">
-                    <a href="#layouts" data-toggle="collapse" class="font-weight-bold sidebar-link collapsed">
-                        <i class="align-middle" data-feather="sidebar"></i> <span class="align-middle">Espace Outils</span>
+                    <a href="#paiement" data-toggle="collapse" class="font-weight-bold sidebar-link collapsed">
+                        <i class="fas fa-coins" data-feather="sidebar"></i> <span class="align-middle">Paiement</span>
                     </a>
-                    <ul id="layouts" class="sidebar-dropdown list-unstyled collapse ">
+                    <ul id="paiement" class="sidebar-dropdown list-unstyled collapse ">
+                        <li class="sidebar-item"><a class="sidebar-link" href="{{ path('users_solde') }}">Solde des utilisateurs</a></li>
+                    </ul>
+                </li>
+
+                <li class="sidebar-item">
+                    <a href="#outils" data-toggle="collapse" class="font-weight-bold sidebar-link collapsed">
+                        <i class="fas fa-tools" data-feather="sidebar"></i> <span class="align-middle">Espace Outils</span>
+                    </a>
+                    <ul id="outils" class="sidebar-dropdown list-unstyled collapse ">
                         <li class="sidebar-item"><a class="sidebar-link" href="{{ path('main_listCategorieOutil') }}">Catégories</a></li>
                         <li class="sidebar-item"><a class="sidebar-link" href="{{ path('main_listOutil') }}">Outils</a></li>
                         <li class="sidebar-item"><a class="sidebar-link" href="layouts-boxed.html">Boxed Layout</a></li>

@@ -29,7 +29,7 @@ class Service
     private $nom;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CategorieService")
+     * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="idCategorieService", referencedColumnName="id")
      */
     private $CategorieService;

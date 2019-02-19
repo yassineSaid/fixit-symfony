@@ -5,10 +5,10 @@ namespace MainBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Paiment
+ * Paiement
  *
  * @ORM\Table(name="paiement")
- * @ORM\Entity(repositoryClass="PaiementRepository")
+ * @ORM\Entity(repositoryClass="MainBundle\Repository\PaiementRepository")
  */
 class Paiement
 {

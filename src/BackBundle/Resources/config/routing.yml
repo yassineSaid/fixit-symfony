@@ -22,6 +22,12 @@ logout:
 users_list:
   path:     /admin/listuser
   defaults: { _controller: BackBundle:Admin:list }
+users_solde:
+  path:     /admin/listSolde
+  defaults: { _controller: BackBundle:Paiement:list }
+paiement_historique:
+  path:     /admin/historiquePaiement/{id}
+  defaults: { _controller: BackBundle:Paiement:historiqueUser }
 user_upgrade:
   path:     /admin/upgrade/{id}
   defaults: { _controller: BackBundle:Admin:upgrade }
