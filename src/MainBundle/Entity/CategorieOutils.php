@@ -4,6 +4,8 @@ namespace MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * CategorieOutils
  *
@@ -28,28 +30,11 @@ class CategorieOutils
      */
     private $nom;
     /**
-     * @var int
-     *
-     * @ORM\Column(name="nbrOutil", type="integer")
+     * @var string
+     * @Assert\File(mimeTypes={ "image/jpeg", "image/png"})
+     * @ORM\Column(name="logo", type="string")
      */
-    private $nbrOutil;
-
-    /**
-     * @return int
-     */
-    public function getNbrOutil()
-    {
-        return $this->nbrOutil;
-    }
-
-    /**
-     * @param int $nbrOutil
-     */
-    public function setNbrOutil($nbrOutil)
-    {
-        $this->nbrOutil = $nbrOutil;
-    }
-
+    private $logo;
 
     /**
      * Get id
@@ -84,5 +69,22 @@ class CategorieOutils
     {
         return $this->nom;
     }
+
+    /**
+     * @return string
+     */
+    public function getLogo()
+    {
+        return $this->logo;
+    }
+
+    /**
+     * @param string $logo
+     */
+    public function setLogo($logo)
+    {
+        $this->logo = $logo;
+    }
+
 }
 

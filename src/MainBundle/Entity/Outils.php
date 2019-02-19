@@ -3,6 +3,8 @@
 namespace MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Outils
@@ -48,8 +50,33 @@ class Outils
      * @ORM\Column(name="prix", type="integer")
      */
     private $prix;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adresse", type="string")
+     */
+    private $adresse;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="codePostal", type="integer")
+     */
+    private $codePostal;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ville", type="string")
+     */
+    private $ville;
+    /**
+     * @var string
+     * @Assert\File(mimeTypes={ "image/jpeg", "image/png"})
+     * @ORM\Column(name="image", type="string")
+     */
+    private $image;
 
     /**
+     *
      * @ORM\ManyToOne(targetEntity="CategorieOutils")
      * @ORM\JoinColumn(name="idCategorieOutils", referencedColumnName="id")
      */
@@ -161,6 +188,70 @@ class Outils
     public function setPrix($prix)
     {
         $this->prix = $prix;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
+
+    /**
+     * @param string $adresse
+     */
+    public function setAdresse($adresse)
+    {
+        $this->adresse = $adresse;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCodePostal()
+    {
+        return $this->codePostal;
+    }
+
+    /**
+     * @param int $codePostal
+     */
+    public function setCodePostal($codePostal)
+    {
+        $this->codePostal = $codePostal;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVille()
+    {
+        return $this->ville;
+    }
+
+    /**
+     * @param string $ville
+     */
+    public function setVille($ville)
+    {
+        $this->ville = $ville;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
     }
 
 }

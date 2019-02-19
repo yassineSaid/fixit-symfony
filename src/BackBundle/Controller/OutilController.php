@@ -1,8 +1,10 @@
 <?php
 
-namespace MainBundle\Controller;
+namespace BackBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use MainBundle\Entity\CategorieOutils;
 use MainBundle\Entity\Outils;
@@ -22,15 +24,22 @@ class OutilController extends Controller
             $outil->setQuantite($request->get("inputQuantite"));
             $outil->setDureeMaximale($request->get("inputDuree"));
             $outil->setPrix($request->get("inputPrix"));
+            $outil->setAdresse($request->get("inputAdresse"));
+            $outil->setCodePostal($request->get("inputCodePostal"));
+            $outil->setVille($request->get("inputVille"));
             $outil->setCategorieOutils($connexion1->getRepository("MainBundle:CategorieOutils")->find($request->get("inputCategorie")));
-            $em1=$this->getDoctrine()->getManager();
-            $categorie1=$em1->getRepository(CategorieOutils::class)->find($request->get("inputCategorie"));
-            $categorie1->setNbrOutil($categorie1->getNbrOutil()+1);
+            $file=$request->files->get("inputImage");
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+            $outil->setImage($fileName);
+            $file->move(
+                $this->getParameter('outil_directory'),
+                $fileName
+            );
             $em=$this->getDoctrine()->getManager();
             $em->persist($outil);
             $em->flush();
             //return $this->render('@CalendrierMedecins/Patient/Ajout.html.twig',array("medecin"=>$medecins));
-            return $this->redirectToRoute("main_ajouterOutil");
+            return $this->redirectToRoute("back_listOutil");
         }
         return $this->render('@Back/Outil/ajouter.html.twig',array("categorie"=>$categorie));
     }
@@ -43,10 +52,6 @@ class OutilController extends Controller
     }
     public function modifierAction(Request $request)
     {
-        if ($this->getUser()==null)
-        {
-            return $this->redirectToRoute('login');
-        }
         $connexion=$this->getDoctrine();
         $categorie=$connexion->getRepository("MainBundle:CategorieOutils")->findAll();
         $id=$_GET['id'];
@@ -59,31 +64,37 @@ class OutilController extends Controller
             $outil->setQuantite($request->get("inputQuantite"));
             $outil->setDureeMaximale($request->get("inputDuree"));
             $outil->setPrix($request->get("inputPrix"));
+            $outil->setAdresse($request->get("inputAdresse"));
+            $outil->setCodePostal($request->get("inputCodePostal"));
+            $outil->setVille($request->get("inputVille"));
             $outil->setCategorieOutils($connexion1->getRepository("MainBundle:CategorieOutils")->find($request->get("inputCategorie")));
+            $image = $outil->getImage();
+            if($image!=null)
+            {unlink($this->getParameter('outil_directory').'/'.$image);}
+            $file=$request->files->get("inputImage");
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+            $outil->setImage($fileName);
+            $file->move(
+                $this->getParameter('outil_directory'),
+                $fileName
+            );
             $em->flush();
-            return $this->redirectToRoute("main_listOutil");
+            return $this->redirectToRoute("back_listOutil");
         }
         return $this->render("@Back/Outil/modifier.html.twig",array("outil"=>$outil,"categorie"=>$categorie));
     }
     public function SupprimerAction(Request $request)
     {
-
-        if ($this->getUser()==null)
-        {
-            return $this->redirectToRoute('login');
-        }
         $id=$_GET['id'];
         $em=$this->getDoctrine()->getManager();
         $outil=$em->getRepository(Outils::class)->find($id);
+        $image = $outil->getImage();
+        if($image!=null)
+        {unlink($this->getParameter('outil_directory').'/'.$image);}
         $em->remove($outil);
         $em->flush();
-        return $this->redirectToRoute("main_listOutil");
+        return $this->redirectToRoute("back_listOutil");
     }
-    public function afficherFrontAction(Request $request)
-    {
 
-
-        return $this->render("@Front/Outil/liste.html.twig");
-    }
 
 }

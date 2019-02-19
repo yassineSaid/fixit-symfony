@@ -10,6 +10,8 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    outil_directory: '%kernel.root_dir%/../web/uploads/images/outil'
+    categorieOutil_directory: '%kernel.root_dir%/../web/uploads/images/categorieOutil'
 
 framework:
     #esi: ~

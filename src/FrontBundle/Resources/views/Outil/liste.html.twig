@@ -1,484 +1,303 @@
 {% extends "front.html.twig" %}
 {% block content %}
+
     <!--************************************
-				Home Slider Start
-		*************************************-->
-    <div class="tg-homebannerandslider">
-        <div class="container-fluid">
+            Main Start
+    *************************************-->
+    <main id="tg-main" class="tg-main tg-haslayout">
+        <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                    <div class="row">
-                        <div class="tg-accordionandcategorysearch hidden-xs">
-                            <div class="tg-categoreyaccordion">
-                                <div class="tg-themescrollbar">
-                                    <div id="tg-accordion" class="tg-accordion" role="tablist" aria-multiselectable="true">
-
-
-
-
-                                        <div class="tg-panel">
-                                            <div class="tg-accordionheading tg-transportationtravel tg-radio">
-                                                <input type="radio" id="tg-radiotransportationtravel" name="tg-categories" value="Transportation &amp; Travel">
-                                                <label for="tg-radiotransportationtravel">
-                                                    <span class="lnr lnr-train tg-categoryicon"></span>
-                                                    <span class="tg-catenameandtypes">
-															<span class="tg-categoryname">Transportation &amp; Travel</span>
-															<span class="tg-typesandjobs">1715 Providers</span>
-														</span>
-                                                </label>
-                                            </div>
-                                            <div class="tg-panelcontent">
-                                                <div class="tg-subcategoryradio tg-radio">
-                                                    <input type="radio" id="tg-radiopacker&amp;movers" name="tg-categories" value="Packer &amp; Movers">
-                                                    <label for="tg-radiopacker&amp;movers">
-                                                        <span class="tg-categoryname">Packer &amp; Movers</span>
-                                                        <span class="tg-typesandjobs">609 Providers</span>
-                                                    </label>
-                                                </div>
-                                                <div class="tg-subcategoryradio tg-radio">
-                                                    <input type="radio" id="tg-radiotourtravelservice" name="tg-categories" value="Tour &amp; Travel Service">
-                                                    <label for="tg-radiotourtravelservice">
-                                                        <span class="tg-categoryname">Tour &amp; Travel Service</span>
-                                                        <span class="tg-typesandjobs">225 Providers</span>
-                                                    </label>
+                <div id="tg-twocolumns" class="tg-twocolumns">
+                    <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9 pull-right">
+                        <div class="row">
+                            <div id="tg-content" class="tg-content">
+                                <div class="tg-listing tg-listview">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <span class="tg-totallistingfound">256 Results Found</span>
+                                        <form method="Post">
+                                        <div class="tg-sortfilters">
+                                            <div class="tg-sortfilter tg-sortby">
+                                                <span>Trier par:</span>
+                                                <div class="tg-select">
+                                                    <select id="tri">
+                                                         <option value="nom" {% if tri=="nom" %}selected{% endif %}>Nom </option>
+                                                        <option value="prix" {% if tri=="prix" %}selected{% endif %}>Prix</option>
+                                                    </select>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                    <div class="row">
-                        <div class="tg-accordionandcategorysearch hidden-xs">
-                            <div class="tg-categoreyaccordion">
-                                <div class="tg-themescrollbar">
-                                    <div id="tg-accordion" class="tg-accordion" role="tablist" aria-multiselectable="true">
-
-
-
-
-                                        <div class="tg-panel">
-                                            <div class="tg-accordionheading tg-transportationtravel tg-radio">
-                                                <input type="radio" id="tg-radiotransportationtravel" name="tg-categories" value="Transportation &amp; Travel">
-                                                <label for="tg-radiotransportationtravel">
-                                                    <span class="lnr lnr-train tg-categoryicon"></span>
-                                                    <span class="tg-catenameandtypes">
-															<span class="tg-categoryname">Transportation &amp; Travel</span>
-															<span class="tg-typesandjobs">1715 Providers</span>
-														</span>
-                                                </label>
-                                            </div>
-                                            <div class="tg-panelcontent">
-                                                <div class="tg-subcategoryradio tg-radio">
-                                                    <input type="radio" id="tg-radiopacker&amp;movers" name="tg-categories" value="Packer &amp; Movers">
-                                                    <label for="tg-radiopacker&amp;movers">
-                                                        <span class="tg-categoryname">Packer &amp; Movers</span>
-                                                        <span class="tg-typesandjobs">609 Providers</span>
-                                                    </label>
+                                            <div class="tg-sortfilter tg-arrange">
+                                                <span>Arrange:</span>
+                                                <div class="tg-select">
+                                                    <select>
+                                                        <option>des</option>
+                                                        <option>Asc</option>
+                                                    </select>
                                                 </div>
-                                                <div class="tg-subcategoryradio tg-radio">
-                                                    <input type="radio" id="tg-radiotourtravelservice" name="tg-categories" value="Tour &amp; Travel Service">
-                                                    <label for="tg-radiotourtravelservice">
-                                                        <span class="tg-categoryname">Tour &amp; Travel Service</span>
-                                                        <span class="tg-typesandjobs">225 Providers</span>
-                                                    </label>
+                                            </div>
+                                            <div class="tg-sortfilter tg-show">
+                                                <span>Show:</span>
+                                                <div class="tg-select">
+                                                    <select>
+                                                        <option>12</option>
+                                                        <option>24</option>
+                                                        <option>all</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
+                                        </form>
+                                    </div>
+                                    {% for o in outil %}
+                                    <div class="tg-serviceproviders">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <div class="tg-serviceprovider tg-automotive">
+                                                <figure class="tg-featuredimg">
+                                                    <img src="{{ asset('uploads/images/outil/' ~ o.image ) }}" width="150" alt="image description">
+
+                                                </figure>
+                                                <div class="tg-companycontent">
+
+                                                    <div class="tg-title">
+                                                        <h2><a href="#">{{ o.nom }}</a></h2>
+                                                    </div>
+
+                                                    <ul class="tg-companycontactinfo">
+                                                        <li>
+                                                            <img src="{{ asset('uploads/images/categorieOutil/' ~ o.CategorieOutils.logo ) }}" width="30">
+                                                            <span data-toggle="tooltip" data-placement="top" title="Click to view Number" data-last="34 - 562 - 6">{{ o.CategorieOutils.nom }}</em></span>
+                                                        </li>
+                                                        <li>
+                                                            <img src="{{ asset("service/images/icons/adresse.png") }}" width="30">
+                                                            <span data-toggle="tooltip" data-placement="top" title="Click to view Number" data-last="34 - 562 - 6">{{ o.adresse }} ,{{ o.ville }}</em></span>
+                                                        </li>
+
+                                                        <li>
+                                                            <img src="{{ asset("service/images/icons/scoin.png") }}" width="30">
+                                                            <span data-toggle="tooltip" data-placement="top" title="Click to view Number" data-last="34 - 562 - 6">{{ o.prix }}</em></span>
+                                                        </li>
+                                                    </ul>
+                                                    <a class="tg-btn" href="#">Louer</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    {% endfor %}
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <nav class="tg-pagination">
+                                            <ul>
+                                                <li class="tg-prevpage"><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                                                <li><a href="#">1</a></li>
+                                                <li><a href="#">2</a></li>
+                                                <li><a href="#">3</a></li>
+                                                <li><a href="#">4</a></li>
+                                                <li class="tg-active"><a href="#">5</a></li>
+                                                <li>...</li>
+                                                <li><a href="#">10</a></li>
+                                                <li class="tg-nextpage"><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                                            </ul>
+                                        </nav>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3 pull-left">
+                        <aside id="tg-sidebar" class="tg-sidebar">
+                            <form class="tg-themeform tg-formrefinesearch">
+                                <fieldset>
+                                    <h4>Filtrer par catégorie</h4>
+                                    <div class="tg-checkboxgroup">
+                                        {% for c in categorie2 %}
+											<span class="tg-checkbox">
+												<input type="checkbox" id="tg-cabservice" name="subcategories" value="Any" >
+												<label for="tg-cabservice">{{ c.nom}}</label>
+											</span>
+                                        {% endfor %}
+
+                                        <a href="javascript:void(0);" data-toggle="modal" data-target=".tg-categoryModal">View All</a>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <h4>Filter By Location</h4>
+                                    <div class="tg-checkboxgroup">
+                                        <div class="form-group">
+												<span class="tg-select">
+													<select>
+														<option>Select Country</option>
+														<option>Pakistan</option>
+														<option>United States</option>
+														<option>United Kingdom</option>
+														<option>United Arab Emirates</option>
+													</select>
+												</span>
+                                        </div>
+                                        <div class="form-group">
+												<span class="tg-select">
+													<select>
+														<option>Select States</option>
+														<option>Texas</option>
+														<option>Virginia</option>
+														<option>New York</option>
+														<option>Washington</option>
+													</select>
+												</span>
+                                        </div>
+                                        <div class="form-group tg-inpuicon">
+                                            <input type="text" name="zipcode" class="form-control" placeholder="Zip Codes">
+                                        </div>
+                                        <span class="tg-checkbox">
+												<input type="checkbox" id="tg-abbeywood" name="filterbylocation" value="abbeywood">
+												<label for="tg-abbeywood">Abbey Wood</label>
+											</span>
+                                        <span class="tg-checkbox">
+												<input type="checkbox" id="tg-addington" name="filterbylocation" value="Addington">
+												<label for="tg-addington">Addington</label>
+											</span>
+                                        <span class="tg-checkbox">
+												<input type="checkbox" id="tg-addiscombe" name="filterbylocation" value="Addiscombe">
+												<label for="tg-addiscombe">Addiscombe</label>
+											</span>
+                                        <span class="tg-checkbox">
+												<input type="checkbox" id="tg-aldboroughhatch" name="filterbylocation" value="Aldborough Hatch">
+												<label for="tg-aldboroughhatch">Aldborough Hatch</label>
+											</span>
+                                        <span class="tg-checkbox">
+												<input type="checkbox" id="tg-aperfield" name="filterbylocation" value="Aperfield">
+												<label for="tg-aperfield">Aperfield</label>
+											</span>
+                                        <a href="javascript:void(0);" data-toggle="modal" data-target=".tg-categoryModal">View All</a>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <button class="tg-btn" type="submit">apply</button>
+                                    <button class="tg-btn" type="reset">reset</button>
+                                </fieldset>
+                            </form>
+                        </aside>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                    <div class="row">
-                        <div class="tg-featuredprofiles">
-                            <h1><span>Featured</span><span>Service Providers</span></h1>
-                            <div id="tg-featuredprofileslider" class="tg-featuredprofileslider owl-carousel">
-                                <div class="item tg-profile tg-featuredprofile">
-                                    <figure>
-                                        <img src="{{ asset("service/images/slider/img-01.jpg") }}" alt="image description">
-                                        <figcaption>
-                                            <div class="tg-featuredprofilecontent">
-                                                <div class="tg-contentbox">
-                                                    <div class="tg-companylogo"><a href="#"><img src="{{ asset("service/images/logos/img-01.png") }}" alt="image description"></a></div>
-                                                    <div class="tg-companycontent">
-                                                        <ul class="tg-tags">
-                                                            <li><a class="tg-tag tg-featuredtag" href="#">featured</a></li>
-                                                            <li><a class="tg-tag tg-verifiedtag" href="#">verified</a></li>
-                                                        </ul>
-                                                        <div class="tg-title">
-                                                            <h3><a href="#">Bright Future Group &amp; Company</a></h3>
-                                                        </div>
-                                                        <ul class="tg-matadata">
-                                                            <li><span class="tg-stars"><span></span></span></li>
-                                                            <li>
-                                                                <i class="fa fa-thumbs-o-up"></i>
-                                                                <em>99% (1009 votes)</em>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <a class="tg-btn" href="listingdetail.html">View Profile</a>
-                                            </div>
-                                        </figcaption>
-                                    </figure>
-                                </div>
-                                <div class="item tg-profile tg-featuredprofile">
-                                    <figure>
-                                        <img src="{{ asset("service/images/slider/img-02.jpg") }}" alt="image description">
-                                        <figcaption>
-                                            <div class="tg-featuredprofilecontent">
-                                                <div class="tg-contentbox">
-                                                    <div class="tg-companylogo"><a href="#"><img src="{{ asset("service/images/logos/img-01.png") }}" alt="image description"></a></div>
-                                                    <div class="tg-companycontent">
-                                                        <ul class="tg-tags">
-                                                            <li><a class="tg-tag tg-featuredtag" href="#">featured</a></li>
-                                                            <li><a class="tg-tag tg-verifiedtag" href="#">verified</a></li>
-                                                        </ul>
-                                                        <div class="tg-title">
-                                                            <h3><a href="#">Bright Future Group &amp; Company</a></h3>
-                                                        </div>
-                                                        <ul class="tg-matadata">
-                                                            <li><span class="tg-stars"><span></span></span></li>
-                                                            <li>
-                                                                <i class="fa fa-thumbs-o-up"></i>
-                                                                <em>99% (1009 votes)</em>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <a class="tg-btn" href="listingdetail.html">View Profile</a>
-                                            </div>
-                                        </figcaption>
-                                    </figure>
-                                </div>
-                                <div class="item tg-profile tg-featuredprofile">
-                                    <figure>
-                                        <img src="{{ asset("service/images/slider/img-03.jpg") }}" alt="image description">
-                                        <figcaption>
-                                            <div class="tg-featuredprofilecontent">
-                                                <div class="tg-contentbox">
-                                                    <div class="tg-companylogo"><a href="#"><img src="{{ asset("service/images/logos/img-01.png") }}" alt="image description"></a></div>
-                                                    <div class="tg-companycontent">
-                                                        <ul class="tg-tags">
-                                                            <li><a class="tg-tag tg-featuredtag" href="#">featured</a></li>
-                                                            <li><a class="tg-tag tg-verifiedtag" href="#">verified</a></li>
-                                                        </ul>
-                                                        <div class="tg-title">
-                                                            <h3><a href="#">Bright Future Group &amp; Company</a></h3>
-                                                        </div>
-                                                        <ul class="tg-matadata">
-                                                            <li><span class="tg-stars"><span></span></span></li>
-                                                            <li>
-                                                                <i class="fa fa-thumbs-o-up"></i>
-                                                                <em>99% (1009 votes)</em>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <a class="tg-btn" href="listingdetail.html">View Profile</a>
-                                            </div>
-                                        </figcaption>
-                                    </figure>
-                                </div>
-                                <div class="item tg-profile tg-featuredprofile">
-                                    <figure>
-                                        <img src="{{ asset("service/images/slider/img-04.jpg") }}" alt="image description">
-                                        <figcaption>
-                                            <div class="tg-featuredprofilecontent">
-                                                <div class="tg-contentbox">
-                                                    <div class="tg-companylogo"><a href="#"><img src="{{ asset("service/images/logos/img-01.png") }}" alt="image description"></a></div>
-                                                    <div class="tg-companycontent">
-                                                        <ul class="tg-tags">
-                                                            <li><a class="tg-tag tg-featuredtag" href="#">featured</a></li>
-                                                            <li><a class="tg-tag tg-verifiedtag" href="#">verified</a></li>
-                                                        </ul>
-                                                        <div class="tg-title">
-                                                            <h3><a href="#">Bright Future Group &amp; Company</a></h3>
-                                                        </div>
-                                                        <ul class="tg-matadata">
-                                                            <li><span class="tg-stars"><span></span></span></li>
-                                                            <li>
-                                                                <i class="fa fa-thumbs-o-up"></i>
-                                                                <em>99% (1009 votes)</em>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <a class="tg-btn" href="listingdetail.html">View Profile</a>
-                                            </div>
-                                        </figcaption>
-                                    </figure>
-                                </div>
+            </div>
+        </div>
+    </main>
+    <!--************************************
+            Main End
+    *************************************-->
+    <!--************************************
+			Theme Modal Box Start
+	*************************************-->
+    <div class="modal fade tg-categoryModal" tabindex="-1">
+        <div class="modal-dialog tg-modaldialog" role="document">
+            <div class="modal-content tg-modalcontent">
+                <div class="tg-modalhead">
+                    <h2>Toute les catégories</h2>
+                    <span class="tg-selecteditems">05 Items Selected</span>
+                </div>
+                <div class="tg-modalbody">
+                    <form class="tg-themeform tg-formrefinesearch">
+                        <div class="tg-column">
+                            <h3>Automotive</h3>
+                            <div class="tg-checkboxgroup">
+								<span class="tg-checkbox">
+									<input type="checkbox" id="tg-cabserviceone" name="automotive" value="Cab Service">
+									<label for="tg-cabserviceone">Cab Service</label>
+								</span>
+                                <span class="tg-checkbox">
+									<input type="checkbox" id="tg-carcareservicingone" name="automotive" value="Car Care &amp; Servicing">
+									<label for="tg-carcareservicingone">Car Care &amp; Servicing</label>
+								</span>
+                                <span class="tg-checkbox">
+									<input type="checkbox" id="tg-cardealerone" name="automotive" value="Car Dealer">
+									<label for="tg-cardealerone">Car Dealer</label>
+								</span>
+                                <span class="tg-checkbox">
+									<input type="checkbox" id="tg-rentacarone" name="automotive" value="Rent A Car">
+									<label for="tg-rentacarone">Rent A Car</label>
+								</span>
                             </div>
                         </div>
-                    </div>
+                        <div class="tg-column">
+                            <h3>Automotive</h3>
+                            <div class="tg-checkboxgroup">
+								<span class="tg-checkbox">
+									<input type="checkbox" id="tg-cabserviceone" name="automotive" value="Cab Service">
+									<label for="tg-cabserviceone">Cab Service</label>
+								</span>
+                                <span class="tg-checkbox">
+									<input type="checkbox" id="tg-carcareservicingone" name="automotive" value="Car Care &amp; Servicing">
+									<label for="tg-carcareservicingone">Car Care &amp; Servicing</label>
+								</span>
+                                <span class="tg-checkbox">
+									<input type="checkbox" id="tg-cardealerone" name="automotive" value="Car Dealer">
+									<label for="tg-cardealerone">Car Dealer</label>
+								</span>
+                                <span class="tg-checkbox">
+									<input type="checkbox" id="tg-rentacarone" name="automotive" value="Rent A Car">
+									<label for="tg-rentacarone">Rent A Car</label>
+								</span>
+                            </div>
+                        </div>
+
+                        <div class="tg-column">
+                            <h3>Beauty &amp; Personal Care</h3>
+                            <div class="tg-checkboxgroup">
+								<span class="tg-checkbox">
+									<input type="checkbox" id="tg-beautyparlor" name="beautypersonalcare" value="Beauty Parlor">
+									<label for="tg-beautyparlor">Beauty Parlor</label>
+								</span>
+                                <span class="tg-checkbox">
+									<input type="checkbox" id="tg-spacenter" name="beautypersonalcare" value="Spa Center">
+									<label for="tg-spacenter">Spa Center</label>
+								</span>
+                                <span class="tg-checkbox">
+									<input type="checkbox" id="tg-massagecenter" name="beautypersonalcare" value="Massage Center">
+									<label for="tg-massagecenter">Massage Center</label>
+								</span>
+                            </div>
+                        </div>
+                        <div class="tg-column">
+                            <h3>Business</h3>
+                            <div class="tg-checkboxgroup">
+								<span class="tg-checkbox">
+									<input type="checkbox" id="tg-eventorganizer" name="business" value="Event Organizer">
+									<label for="tg-eventorganizer">Event Organizer</label>
+								</span>
+                                <span class="tg-checkbox">
+									<input type="checkbox" id="tg-financeandlegal" name="business" value="Finance &amp; Legal">
+									<label for="tg-financeandlegal">Finance &amp; Legal</label>
+								</span>
+                                <span class="tg-checkbox">
+									<input type="checkbox" id="tg-marketing" name="business" value="Marketing">
+									<label for="tg-marketing">Marketing</label>
+								</span>
+                                <span class="tg-checkbox">
+									<input type="checkbox" id="tg-webdevelopment" name="business" value="IT/Web Development">
+									<label for="tg-webdevelopment">IT/Web Development</label>
+								</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="tg-modalfoot">
+                    <button class="tg-btn" type="submit">apply</button>
+                    <button class="tg-btn" type="submit">Reset</button>
                 </div>
             </div>
         </div>
     </div>
     <!--************************************
-            Home Slider End
+            Theme Modal Box End
     *************************************-->
-    <!--************************************
-            Main Start
-    *************************************-->
-    <main id="tg-main" class="tg-main tg-haslayout">
-        <!--************************************
-                Top Categories Start
-        *************************************-->
-        <section class="tg-main-section tg-haslayout">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-10 col-md-push-1 col-lg-8 col-lg-push-2">
-                        <div class="tg-sectionhead">
-                            <div class="tg-sectiontitle">
-                                <h2>Start With Top Categories</h2>
-                            </div>
-                            <div class="tg-description">
-                                <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim adia minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip extea commodo consequat.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tg-topcategories">
-                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-                            <div class="tg-category">
-                                <figure>
-                                    <img src="{{ asset("service/images/categories/img-01.png") }}" alt="image description">
-                                    <figcaption class="tg-automotive">
-                                        <span class="lnr lnr-car tg-categoryicon"></span>
-                                        <span class="tg-categoryname">Automotive</span>
-                                        <a href="#" class="tg-themetag tg-tagjobcount">
-                                            <i class="fa fa-clone"></i>
-                                            <em>3215</em>
-                                        </a>
-                                    </figcaption>
-                                </figure>
-                            </div>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-                            <div class="tg-category">
-                                <figure>
-                                    <img src="{{ asset("service/images/categories/img-02.png") }}" alt="image description">
-                                    <figcaption class="tg-beautypersonalcare">
-                                        <span class="lnr lnr-heart tg-categoryicon"></span>
-                                        <span class="tg-categoryname">beauty &amp; personal care</span>
-                                        <a href="#" class="tg-themetag tg-tagjobcount">
-                                            <i class="fa fa-clone"></i>
-                                            <em>3045</em>
-                                        </a>
-                                    </figcaption>
-                                </figure>
-                            </div>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-                            <div class="tg-category">
-                                <figure>
-                                    <img src="{{ asset("service/images/categories/img-03.png") }}" alt="image description">
-                                    <figcaption class="tg-business">
-                                        <span class="lnr lnr-apartment tg-categoryicon"></span>
-                                        <span class="tg-categoryname">business</span>
-                                        <a href="#" class="tg-themetag tg-tagjobcount">
-                                            <i class="fa fa-clone"></i>
-                                            <em>2478</em>
-                                        </a>
-                                    </figcaption>
-                                </figure>
-                            </div>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-                            <div class="tg-category">
-                                <figure>
-                                    <img src="{{ asset("service/images/categories/img-04.png") }}" alt="image description">
-                                    <figcaption class="tg-childcare">
-                                        <span class="lnr lnr-smile tg-categoryicon"></span>
-                                        <span class="tg-categoryname">child care</span>
-                                        <a href="#" class="tg-themetag tg-tagjobcount">
-                                            <i class="fa fa-clone"></i>
-                                            <em>2655</em>
-                                        </a>
-                                    </figcaption>
-                                </figure>
-                            </div>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-                            <div class="tg-category">
-                                <figure>
-                                    <img src="{{ asset("service/images/categories/img-05.png") }}" alt="image description">
-                                    <figcaption class="tg-cleaning">
-                                        <span class="lnr lnr-magic-wand tg-categoryicon"></span>
-                                        <span class="tg-categoryname">cleaning</span>
-                                        <a href="#" class="tg-themetag tg-tagjobcount">
-                                            <i class="fa fa-clone"></i>
-                                            <em>2242</em>
-                                        </a>
-                                    </figcaption>
-                                </figure>
-                            </div>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-                            <div class="tg-category">
-                                <figure>
-                                    <img src="{{ asset("service/images/categories/img-06.png") }}" alt="image description">
-                                    <figcaption class="tg-computermobile">
-                                        <span class="lnr lnr-laptop tg-categoryicon"></span>
-                                        <span class="tg-categoryname">computer &amp; mobile services</span>
-                                        <a href="#" class="tg-themetag tg-tagjobcount">
-                                            <i class="fa fa-clone"></i>
-                                            <em>1206</em>
-                                        </a>
-                                    </figcaption>
-                                </figure>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tg-btnbox">
-                        <a class="tg-btn tg-btnviewall" href="#">view all</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--************************************
-                Top Categories End
-        *************************************-->
 
-        <!--************************************
-                News & Posts Start
-        *************************************-->
-        <section class="tg-main-section tg-haslayout">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-10 col-md-push-1 col-lg-8 col-lg-push-2">
-                        <div class="tg-sectionhead">
-                            <div class="tg-sectiontitle">
-                                <h2>News Articles &amp; Tips</h2>
-                            </div>
-                            <div class="tg-description">
-                                <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim adia minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip extea commodo consequat.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tg-newsandposts">
-                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                            <article class="tg-post">
-                                <figure class="tg-featuredimg">
-                                    <a href="javascript:void(0);"><img src="{{ asset("service/images/post/img-01.jpg") }}" alt="image description"></a>
-                                </figure>
-                                <div class="tg-postcontent">
-                                    <div class="tg-title">
-                                        <h3><a href="#">Manchester Cleaning Service</a></h3>
-                                    </div>
-                                    <ul class="tg-postmatadata">
-                                        <li>
-                                            <a href="#">
-                                                <i class="lnr lnr-user"></i>
-                                                <span>BY: Tamika Darbonne</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="lnr lnr-calendar-full"></i>
-                                                <span>June 27, 2017</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                            <article class="tg-post">
-                                <figure class="tg-featuredimg">
-                                    <a href="javascript:void(0);"><img src="{{ asset("service/images/post/img-02.jpg") }}" alt="image description"></a>
-                                </figure>
-                                <div class="tg-postcontent">
-                                    <div class="tg-title">
-                                        <h3><a href="#">Manchester Cleaning Service</a></h3>
-                                    </div>
-                                    <ul class="tg-postmatadata">
-                                        <li>
-                                            <a href="#">
-                                                <i class="lnr lnr-user"></i>
-                                                <span>BY: Tamika Darbonne</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="lnr lnr-calendar-full"></i>
-                                                <span>June 27, 2017</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                            <article class="tg-post">
-                                <figure class="tg-featuredimg">
-                                    <a href="javascript:void(0);"><img src="{{ asset("service/images/post/img-03.jpg") }}" alt="image description"></a>
-                                </figure>
-                                <div class="tg-postcontent">
-                                    <div class="tg-title">
-                                        <h3><a href="#">Manchester Cleaning Service</a></h3>
-                                    </div>
-                                    <ul class="tg-postmatadata">
-                                        <li>
-                                            <a href="#">
-                                                <i class="lnr lnr-user"></i>
-                                                <span>BY: Tamika Darbonne</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="lnr lnr-calendar-full"></i>
-                                                <span>June 27, 2017</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                            <article class="tg-post">
-                                <figure class="tg-featuredimg">
-                                    <a href="javascript:void(0);"><img src="{{ asset("service/images/post/img-04.jpg") }}" alt="image description"></a>
-                                </figure>
-                                <div class="tg-postcontent">
-                                    <div class="tg-title">
-                                        <h3><a href="#">Manchester Cleaning Service</a></h3>
-                                    </div>
-                                    <ul class="tg-postmatadata">
-                                        <li>
-                                            <a href="#">
-                                                <i class="lnr lnr-user"></i>
-                                                <span>BY: Tamika Darbonne</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="lnr lnr-calendar-full"></i>
-                                                <span>June 27, 2017</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--************************************
-                News & Posts End
-        *************************************-->
-    </main>
-    <!--************************************
-            Main End
-    *************************************-->
+    {% block js %}
+        {{ parent() }}
+    {% endblock %}
+<script>
+    $(document).ready(function () {
+        $("#tri").on('change',function(){
+            var value = $('#tri').val();
+            window.location= "{{ path('front_afficherTriFrontOutil') }}"+"?tri="+value;
+        });
+    })
+</script>
 {% endblock %}

@@ -49,3 +49,4 @@ security:
         - { path: ^/admin/index, role: ROLE_ADMIN }
         - { path: ^/admin/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/.*, role: ROLE_ADMIN }
+        - { path: ^/compte/.*, role: ROLE_USER }

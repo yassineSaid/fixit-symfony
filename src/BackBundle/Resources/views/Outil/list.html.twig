@@ -11,7 +11,7 @@
                             <h5 class="card-title">Liste des outils</h5>
                         </div>
                         <div class="card-body">
-                            <a href="{{ path('main_ajouterOutil') }}"><button class="btn btn-pill btn-primary" >Ajouter un outil</button></a>
+                            <a href="{{ path('back_ajouterOutil') }}"><button class="btn btn-pill btn-primary" >Ajouter un outil</button></a>
                             <table id="datatables-basic" class="table table-striped" style="width:100%">
                                 <thead>
                                 <tr>
@@ -20,7 +20,11 @@
                                     <th>Quantité</th>
                                     <th>Durée maximale</th>
                                     <th>Prix</th>
+                                    <th>Adresse</th>
+                                    <th>Code postal</th>
+                                    <th>Ville</th>
                                     <th>Catégorie</th>
+                                    <th>Image</th>
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
@@ -43,13 +47,26 @@
                                             {{ o.prix }}
                                         </td>
                                         <td>
+                                            {{ o.adresse }}
+                                        </td>
+                                        <td>
+                                            {{ o.codePostal }}
+                                        </td>
+                                        <td>
+                                            {{ o.ville }}
+                                        </td>
+                                        <td>
                                             {{ o.CategorieOutils.nom }}
                                         </td>
                                         <td>
-                                            <a href="{{ path('main_modifierOutil',{'id': o.id}) }}" ><i class="align-middle" data-feather="edit-2"></i></a>
+                                            <img src="{{ asset('uploads/images/outil/' ~ o.image ) }}" width="150">
+                                        </td>
+
+                                        <td>
+                                            <a href="{{ path('back_modifierOutil',{'id': o.id}) }}" ><i class="align-middle" data-feather="edit-2"></i></a>
                                         </td>
                                         <td>
-                                            <a href="{{ path('main_supprimerOutil',{'id': o.id}) }}" ><i class="align-middle" data-feather="trash"></i></i></a>
+                                            <a href="{{ path('back_supprimerOutil',{'id': o.id}) }}" ><i class="align-middle" data-feather="trash"></i></a>
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -61,7 +78,11 @@
                                     <th>Quantité</th>
                                     <th>Durée maximale</th>
                                     <th>Prix</th>
+                                    <th>Adresse</th>
+                                    <th>Code postal</th>
+                                    <th>Ville</th>
                                     <th>Catégorie</th>
+                                    <th>Image</th>
                                     <th>Actions</th>
                                 </tr>
                                 </tfoot>

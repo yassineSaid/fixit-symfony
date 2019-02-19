@@ -48,3 +48,11 @@ ajouterLangue:
   path:     /compte/ajouterLangue
   defaults: { _controller: FrontBundle:Langue:ajouter }
   methods: [post]
+################# ROUTING DE Sl-Wassim PLEASE DON'T TOUCH #####################
+front_afficherFrontOutil:
+  path: /compte/afficherFrontOutil
+  defaults: { _controller: FrontBundle:Outil:afficherFront }
+front_afficherTriFrontOutil:
+  path: /compte/afficherTriFrontOutil
+  defaults: { _controller: FrontBundle:Outil:afficherTriFront }
+############################ END ROUNTING DE Sl-Wassim ##########################

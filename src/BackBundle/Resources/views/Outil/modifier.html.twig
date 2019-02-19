@@ -7,7 +7,7 @@
                     <h5 class="card-title">Modifier outli</h5>
                 </div>
                 <div class="card-body">
-                    <form method="post">
+                    <form method="post" enctype="multipart/form-data">
 
                         <div class="form-group col-md-2">
                             <label for="inputZip">Nom</label>
@@ -24,6 +24,24 @@
                         <div class="form-group">
                             <label for="inputPrix">Prix en Scoin</label>
                             <input type="text" class="form-control" name="inputPrix" value="{{ outil.prix }}" >
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="inputAdresse">Adresse</label>
+                                <input type="text" class="form-control" name="inputAdresse" value="{{ outil.adresse }}" >
+                            </div>
+                            <div class="form-group">
+                                <label for="inputCodePostal">Code postal</label>
+                                <input type="text" class="form-control" name="inputCodePostal" value="{{ outil.codePostal }}" >
+                            </div>
+                            <div class="form-group">
+                                <label for="inputVille">Ville</label>
+                                <input type="text" class="form-control" name="inputVille" value="{{ outil.ville }}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label w-100">Ajouter une image</label>
+                            <input type="file" name="inputImage">
                         </div>
 
                         <div class="form-group col-md-4">
@@ -42,7 +60,7 @@
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Confirmer</button>
                     </form>
                 </div>
             </div>

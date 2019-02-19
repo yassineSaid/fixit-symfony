@@ -56,3 +56,29 @@ main_supprimer_reclamation_admin:
   path:     /admin/supp/{rec}
   defaults: { _controller: BackBundle:ReclamationBack:supprimeradmin }
   ############################        END ROUTING DE MUSTAPHA         #######################
+################# ROUTING DE Sl-Wassim PLEASE DON'T TOUCH #####################
+back_ajouterCategorieOutil:
+  path: /admin/ajouterCategorieOutil
+  defaults: { _controller: BackBundle:CategorieOutil:ajouter }
+back_listCategorieOutil:
+  path: /admin/listCategorieOutil
+  defaults: { _controller: BackBundle:CategorieOutil:liste }
+back_modifierCategorieOutil:
+  path: /admin/modifierCategorieOutil
+  defaults: { _controller: BackBundle:CategorieOutil:modifier }
+back_supprimerCategorieOutil:
+  path: /admin/supprimerCategorieOutil
+  defaults: { _controller: BackBundle:CategorieOutil:supprimer }
+back_ajouterOutil:
+  path: /admin/ajouterOutil
+  defaults: { _controller: BackBundle:Outil:ajouter }
+back_listOutil:
+  path: /admin/listOutil
+  defaults: { _controller: BackBundle:Outil:liste }
+back_modifierOutil:
+  path: /admin/modifierOutil
+  defaults: { _controller: BackBundle:Outil:modifier }
+back_supprimerOutil:
+  path: /admin/supprimerOutil
+  defaults: { _controller: BackBundle:Outil:supprimer }
+############################ END ROUNTING DE Sl-Wassim ##########################

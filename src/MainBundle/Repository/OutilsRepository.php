@@ -10,4 +10,14 @@ namespace MainBundle\Repository;
  */
 class OutilsRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function triNomASC()
+    {
+        $query=$this->getEntityManager()->createQuery("SELECT o FROM MainBundle:Outils o ORDER BY o.nom ");
+        return $query->getResult();
+    }
+    public function triPrixASC()
+    {
+        $query=$this->getEntityManager()->createQuery("SELECT o FROM MainBundle:Outils o ORDER BY o.prix ");
+        return $query->getResult();
+    }
 }

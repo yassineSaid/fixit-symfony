@@ -10,4 +10,18 @@ namespace MainBundle\Repository;
  */
 class CategorieOutilsRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function listeCategorie()
+    {
+        $query=$this->getEntityManager()->createQuery("SELECT c.id,c.nom ,c.logo, Count(o.id) AS nbr
+                                                            FROM MainBundle:CategorieOutils c
+                                                            LEFT OUTER JOIN MainBundle:Outils o WITH o.CategorieOutils = c.id
+                                                            GROUP BY c.id ");
+        return $query->getResult();
+    }
+    public function listeCategorieRestreinte()
+    {
+        $query=$this->getEntityManager()->createQuery("SELECT c FROM MainBundle:CategorieOutils c ORDER BY c.nom  ");
+        $query->setMaxResults(4);
+        return $query->getResult();
+    }
 }
