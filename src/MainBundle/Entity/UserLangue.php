@@ -29,16 +29,7 @@ class UserLangue
      */
     private $idLangue;
 
-    /**
-     * UserLangue constructor.
-     * @param int $idUser
-     * @param int $idLangue
-     */
-    public function __construct($idUser, $idLangue)
-    {
-        $this->idUser = $idUser;
-        $this->idLangue = $idLangue;
-    }
+
 
     /**
      * Set idUser
@@ -47,7 +38,7 @@ class UserLangue
      *
      * @return UserLangue
      */
-    
+
     public function setIdUser($idUser)
     {
         $this->idUser = $idUser;

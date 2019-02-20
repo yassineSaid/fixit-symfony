@@ -10,8 +10,11 @@ account_setting:
 fos_user_profile_show:
   path: /compte
 paiement:
-    path:     /paiement
-    defaults: { _controller: FrontBundle:User:paiement }
+    path:     /compte/paiement
+    defaults: { _controller: FrontBundle:Paiement:paiement }
+liste_paiement:
+  path:     /compte/listePaiement
+  defaults: { _controller: FrontBundle:Paiement:liste }
 
 ############################ ROUTING DE MUSTAPHA PLEASE DON'T TOUCH #######################
 main_reclamation_Ajout:
@@ -47,6 +50,10 @@ languesUser:
 ajouterLangue:
   path:     /compte/ajouterLangue
   defaults: { _controller: FrontBundle:Langue:ajouter }
+  methods: [post]
+supprimerLangue:
+  path:     /compte/supprimerLangue
+  defaults: { _controller: FrontBundle:Langue:supprimer }
   methods: [post]
 ################# ROUTING DE Sl-Wassim PLEASE DON'T TOUCH #####################
 front_afficherFrontOutil:

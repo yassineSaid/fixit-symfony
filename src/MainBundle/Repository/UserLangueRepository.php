@@ -10,4 +10,13 @@ namespace MainBundle\Repository;
  */
 class UserLangueRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function deleteLangueUser($idUser,$idLangue)
+    {
+        $query=$this->getEntityManager()->createQuery("
+        DELETE FROM MainBundle:UserLangue lu WHERE lu.idUser=:idUser AND lu.idLangue=:idLangue");
+        $query->setParameter('idUser',$idUser);
+        $query->setParameter('idLangue',$idLangue);
+        $query->execute();
+        //return $query->getResult();
+    }
 }

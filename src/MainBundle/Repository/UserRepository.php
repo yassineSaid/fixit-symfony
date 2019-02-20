@@ -13,7 +13,7 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
     public function listLangueUser($id)
     {
         $query=$this->getEntityManager()->createQuery("
-        SELECT l.libelle 
+        SELECT l.libelle,l.id 
         FROM MainBundle:Langue l,MainBundle:UserLangue lu
         where lu.idUser=:id AND lu.idLangue=l.id");
         $query->setParameter('id',$id);

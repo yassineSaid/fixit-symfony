@@ -1,4 +1,4 @@
-{% extends "dashboard_front.html.twig" %}
+{% extends "dashboard_front.html.twig" %}{% set menu_selected='profile_setting' %}
 {% trans_default_domain 'FOSUserBundle' %}
 {% block title %}Paramètres du compte{% endblock %}
 {% block content %}
@@ -25,9 +25,14 @@
  {{ parent() }}
 {% endblock %}
     {% block content_dashboard %}
+        <script>
+            $(document).ready(function () {
+                $('#payer').trigger('click');
+            })
+        </script>
         <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
-            <div id="tg-content" class="tg-content">
-                <div class="tg-dashboardsecuritysetting">
+            <div id="tg-content" class="tg-content" style="text-align: center">
+                <div class="tg-dashboardsecuritysetting" style="display: inline-block; margin-left: auto; margin-right: auto;">
                     <form method="POST">
                         <script
                                 src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -45,7 +50,7 @@
                         </script>
                         <input type="hidden" name="app" value="1">
                         <input type="hidden" name="scoin" value="{{ scoin*100 }}">
-                        <button class="tg-btn" type="submit">Acheter</button>
+                        <button class="tg-btn" id="payer" type="submit">Payer</button>
                     </form>
                 </div>
             </div>

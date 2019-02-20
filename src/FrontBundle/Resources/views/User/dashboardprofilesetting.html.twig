@@ -1,10 +1,13 @@
- {% extends "dashboard_front.html.twig" %}
+ {% extends "dashboard_front.html.twig" %}{% set menu_selected='profile_setting' %}
 {% trans_default_domain 'FOSUserBundle' %}
 {% block title %}Profil{% endblock %}
 {% block content %}
     <script>
         $(document).ready(function () {
             ajaxCall();
+            var $scoin=$('#scoin');
+            var $bouton=$('#customButton');
+            var verif=0;
             $("#langue").click(
                 function () {
                     ajaxAdd();
@@ -16,7 +19,16 @@
                     method: "post",
                     data: {idUser: "{{ app.user.id }}",idLangue:$('#langues1 option:selected').val()}
                 }).success(function(msg) {
-                    console.log(msg)
+                    ajaxCall();
+                });
+            }
+            function ajaxRemove(){
+                $.ajax({
+                    url: "{{ path('supprimerLangue') }}",
+                    method: "post",
+                    data: {idUser: "{{ app.user.id }}",idLangue:this.id}
+                }).success(function(msg) {
+                    ajaxCall();
                 });
             }
             function ajaxCall(){
@@ -27,6 +39,7 @@
                 }).success(function(msg) {
                     refreshList(msg);
                 });
+
             }
             function refreshList(msg) {
                 $('#langues').text("");
@@ -37,6 +50,8 @@
                     span.className='tg-tagdashboard';
                     var i = document.createElement('i');
                     i.className='fa fa-close';
+                    i.setAttribute("id",item.id);
+                    i.onclick=ajaxRemove;
                     var em = document.createElement('em');
                     var text = document.createTextNode(item.libelle);
                     em.appendChild(text);
@@ -46,6 +61,30 @@
                     $('#langues').append(li);
                 });
             }
+            $scoin.keyup(function () {
+                if ( parseInt($(this).val())<1 || parseInt($(this).val())!=$(this).val())
+                {
+                    verif=0;
+                    $(this).css({
+                        borderColor: 'red',
+                        color: 'red'
+                    });
+                }
+                else
+                {
+                    verif=1
+                    $(this).css({
+                        borderColor: 'green',
+                        color: 'green'
+                    });
+                }
+            })
+            $bouton.click(function (e) {
+                if (verif==0)
+                {
+                    e.preventDefault();
+                }
+            })
         });
     </script>
     <!--************************************
@@ -66,7 +105,7 @@
             </div>
         </div>
     </div>
-    {% set menu_selected='profile_setting' %}
+
 {% endblock %}
 {% block sidebar %}
  {{ parent() }}
@@ -95,7 +134,7 @@
                                                     <div style="padding-top: 10px">
                                                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                                             <div class="form-group">
-                                                                <input type="number" id="scoin" class="form-control" name="scoin" placeholder="SCoin">
+                                                                <input type="text" id="scoin" class="form-control" name="scoin" placeholder="SCoin">
                                                             </div>
                                                         </div>
                                                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
@@ -111,6 +150,7 @@
                                                     </div>
                                                 </form>
                                                 <p>0,5 DT/SCoin</p>
+                                                <p><a href="{{ path('liste_paiement') }}">Mon historique de paiements</a></p>
                                             </div>
                                         </div>
                                         <div class="tg-dashboardbox tg-basicinformation">

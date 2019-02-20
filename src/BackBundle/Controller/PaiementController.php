@@ -3,6 +3,7 @@
 namespace BackBundle\Controller;
 
 use MainBundle\Entity\Paiement;
+use MainBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class PaiementController extends Controller
@@ -17,8 +18,10 @@ class PaiementController extends Controller
     public function historiqueUserAction($id)
     {
         $connect=$this->getDoctrine()->getManager();
+        $connect1=$this->getDoctrine()->getManager();
+        $user=$connect1->getRepository(User::class)->find($id);
         $paiements=$connect->getRepository(Paiement::class)->paiementsUser($id);
 
-        return $this->render('@Back/Paiement/historiquePaiement.html.twig', array('paiements' =>   $paiements));
+        return $this->render('@Back/Paiement/historiquePaiement.html.twig', array('paiements'=>$paiements,'user'=>$user));
     }
 }

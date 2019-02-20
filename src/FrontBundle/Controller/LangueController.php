@@ -2,6 +2,7 @@
 
 namespace FrontBundle\Controller;
 
+use MainBundle\Entity\Langue;
 use MainBundle\Entity\UserLangue;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Config\Definition\Exception\Exception;
@@ -27,20 +28,27 @@ class LangueController extends Controller
     {
         if ($request->isXmlHttpRequest())
         {
-            try{
-                $connect=$this->getDoctrine()->getManager();
-                $userLangue=new UserLangue();
-                $userLangue->setIdUser($request->get('idUser'));
-                $userLangue->setIdLangue($request->get('idLangue'));
-                $connect->persist($userLangue);
-                //$connect->flush();
-                return new Response("OK",200);
-            }
-            catch (Exception $e)
-            {
-                return new Response($this->get('session')->setFlash('flash_key',"Add not done: " . $e->getMessage()));
-            }
-            //var_dump($langues);
+            $connect1=$this->getDoctrine()->getManager();
+            $connect2=$this->getDoctrine()->getManager();
+            $connect3=$this->getDoctrine()->getManager();
+            $langue=$connect2->getRepository(Langue::class)->find($request->get('idLangue'));
+            $user=$connect3->getRepository(User::class)->find($request->get('idUser'));
+            $userLangue=new UserLangue();
+            $userLangue->setIdUser($user);
+            $userLangue->setIdLangue($langue);
+            $connect1->persist($userLangue);
+            $connect1->flush();
+            return new Response("OK",200);
+        }
+        return false;
+    }
+    public function supprimerAction(Request $request)
+    {
+        if ($request->isXmlHttpRequest())
+        {
+            $connect1=$this->getDoctrine()->getManager();
+            $connect1->getRepository(UserLangue::class)->deleteLangueUser($request->get("idUser"),$request->get("idLangue"));
+            return new Response("OK",200);
         }
         return false;
     }
