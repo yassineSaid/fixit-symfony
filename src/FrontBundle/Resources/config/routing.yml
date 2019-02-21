@@ -62,4 +62,8 @@ front_afficherFrontOutil:
 front_afficherTriFrontOutil:
   path: /compte/afficherTriFrontOutil
   defaults: { _controller: FrontBundle:Outil:afficherTriFront }
+
+front_louerOutil:
+  path: /compte/louerOutil
+  defaults: { _controller: FrontBundle:Outil:louer }
 ############################ END ROUNTING DE Sl-Wassim ##########################

@@ -38,11 +38,11 @@
 
                                             <img src="{{ asset('uploads/images/categorieOutil/' ~ c.logo ) }}" width="70">
                                         </td>
+
                                         <td>
                                             <a href="{{ path('back_modifierCategorieOutil',{'id': c.id}) }}" ><i class="align-middle" data-feather="edit-2"></i></a>
-                                        </td>
-                                        <td>
                                             <a href="{{ path('back_supprimerCategorieOutil',{'id': c.id}) }}" ><i class="align-middle" data-feather="trash"></i></a>
+
                                         </td>
                                     </tr>
                                 {% endfor %}

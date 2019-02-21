@@ -20,4 +20,14 @@ class OutilsRepository extends \Doctrine\ORM\EntityRepository
         $query=$this->getEntityManager()->createQuery("SELECT o FROM MainBundle:Outils o ORDER BY o.prix ");
         return $query->getResult();
     }
+    public function triNomDSC()
+    {
+        $query=$this->getEntityManager()->createQuery("SELECT o FROM MainBundle:Outils o ORDER BY o.nom DESC");
+        return $query->getResult();
+    }
+    public function triPrixDSC()
+    {
+        $query=$this->getEntityManager()->createQuery("SELECT o FROM MainBundle:Outils o ORDER BY o.prix DESC");
+        return $query->getResult();
+    }
 }
