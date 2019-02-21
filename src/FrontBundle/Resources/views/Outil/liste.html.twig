@@ -196,84 +196,63 @@
                 <div class="tg-modalbody">
                     <form class="tg-themeform tg-formrefinesearch">
                         <div class="tg-column">
-                            <h3>Automotive</h3>
                             <div class="tg-checkboxgroup">
+                                {% set nbr=0 %}
+                                {% for cc in categorie %}
+                                    {% set nbr=(nbr+1) %}
+                                {% endfor %}
+                                {% set i=0 %}
+                                {% for cc in categorie %}
+                                    {% if i<=(nbr-(3*(nbr/4))) %}
 								<span class="tg-checkbox">
 									<input type="checkbox" id="tg-cabserviceone" name="automotive" value="Cab Service">
-									<label for="tg-cabserviceone">Cab Service</label>
+									<label for="tg-cabserviceone">{{ cc.nom }}</label>
 								</span>
-                                <span class="tg-checkbox">
-									<input type="checkbox" id="tg-carcareservicingone" name="automotive" value="Car Care &amp; Servicing">
-									<label for="tg-carcareservicingone">Car Care &amp; Servicing</label>
-								</span>
-                                <span class="tg-checkbox">
-									<input type="checkbox" id="tg-cardealerone" name="automotive" value="Car Dealer">
-									<label for="tg-cardealerone">Car Dealer</label>
-								</span>
-                                <span class="tg-checkbox">
-									<input type="checkbox" id="tg-rentacarone" name="automotive" value="Rent A Car">
-									<label for="tg-rentacarone">Rent A Car</label>
-								</span>
+                                    {% endif %}
+                                    {% set i=(i+1) %}
+                                {% endfor %}
                             </div>
                         </div>
                         <div class="tg-column">
-                            <h3>Automotive</h3>
                             <div class="tg-checkboxgroup">
-								<span class="tg-checkbox">
+                                {% set i=0 %}
+                                {% for cc in categorie %}
+                                    {% if (nbr-(3*(nbr/4)))<i and i<=(nbr-(2*(nbr/4))) %}
+                                        <span class="tg-checkbox">
 									<input type="checkbox" id="tg-cabserviceone" name="automotive" value="Cab Service">
-									<label for="tg-cabserviceone">Cab Service</label>
+									<label for="tg-cabserviceone">{{ cc.nom }}</label>
 								</span>
-                                <span class="tg-checkbox">
-									<input type="checkbox" id="tg-carcareservicingone" name="automotive" value="Car Care &amp; Servicing">
-									<label for="tg-carcareservicingone">Car Care &amp; Servicing</label>
-								</span>
-                                <span class="tg-checkbox">
-									<input type="checkbox" id="tg-cardealerone" name="automotive" value="Car Dealer">
-									<label for="tg-cardealerone">Car Dealer</label>
-								</span>
-                                <span class="tg-checkbox">
-									<input type="checkbox" id="tg-rentacarone" name="automotive" value="Rent A Car">
-									<label for="tg-rentacarone">Rent A Car</label>
-								</span>
-                            </div>
-                        </div>
-
-                        <div class="tg-column">
-                            <h3>Beauty &amp; Personal Care</h3>
-                            <div class="tg-checkboxgroup">
-								<span class="tg-checkbox">
-									<input type="checkbox" id="tg-beautyparlor" name="beautypersonalcare" value="Beauty Parlor">
-									<label for="tg-beautyparlor">Beauty Parlor</label>
-								</span>
-                                <span class="tg-checkbox">
-									<input type="checkbox" id="tg-spacenter" name="beautypersonalcare" value="Spa Center">
-									<label for="tg-spacenter">Spa Center</label>
-								</span>
-                                <span class="tg-checkbox">
-									<input type="checkbox" id="tg-massagecenter" name="beautypersonalcare" value="Massage Center">
-									<label for="tg-massagecenter">Massage Center</label>
-								</span>
+                                    {% endif %}
+                                    {% set i=(i+1) %}
+                                {% endfor %}
                             </div>
                         </div>
                         <div class="tg-column">
-                            <h3>Business</h3>
                             <div class="tg-checkboxgroup">
-								<span class="tg-checkbox">
-									<input type="checkbox" id="tg-eventorganizer" name="business" value="Event Organizer">
-									<label for="tg-eventorganizer">Event Organizer</label>
+                                {% set i=0 %}
+                                {% for cc in categorie %}
+                                    {% if (nbr-(2*(nbr/4)))<i and i<=(nbr-(nbr/4)) %}
+                                        <span class="tg-checkbox">
+									<input type="checkbox" id="tg-cabserviceone" name="automotive" value="Cab Service">
+									<label for="tg-cabserviceone">{{ cc.nom }}</label>
 								</span>
-                                <span class="tg-checkbox">
-									<input type="checkbox" id="tg-financeandlegal" name="business" value="Finance &amp; Legal">
-									<label for="tg-financeandlegal">Finance &amp; Legal</label>
+                                    {% endif %}
+                                    {% set i=(i+1) %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="tg-column">
+                            <div class="tg-checkboxgroup">
+                                {% set i=0 %}
+                                {% for cc in categorie %}
+                                    {% if (nbr-(nbr/4))<i and i<=nbr %}
+                                        <span class="tg-checkbox">
+									<input type="checkbox" id="tg-cabserviceone" name="automotive" value="Cab Service">
+									<label for="tg-cabserviceone">{{ cc.nom }}</label>
 								</span>
-                                <span class="tg-checkbox">
-									<input type="checkbox" id="tg-marketing" name="business" value="Marketing">
-									<label for="tg-marketing">Marketing</label>
-								</span>
-                                <span class="tg-checkbox">
-									<input type="checkbox" id="tg-webdevelopment" name="business" value="IT/Web Development">
-									<label for="tg-webdevelopment">IT/Web Development</label>
-								</span>
+                                    {% endif %}
+                                    {% set i=(i+1) %}
+                                {% endfor %}
                             </div>
                         </div>
                     </form>
