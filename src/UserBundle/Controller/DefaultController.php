@@ -22,6 +22,7 @@ class DefaultController extends Controller
         else
         {
             $user->setSolde($user->getSolde()-$montant);
+            $connect->flush();
             return true;
         }
     }
