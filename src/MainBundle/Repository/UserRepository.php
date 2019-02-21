@@ -19,4 +19,13 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
         $query->setParameter('id',$id);
         return $query->getResult();
     }
+    public function getSolde($id)
+    {
+        $query=$this->getEntityManager()->createQuery("
+        SELECT u.solde
+        FROM MainBundle:User u
+        where u.id=:id");
+        $query->setParameter('id',$id);
+        return $query->getResult();
+    }
 }

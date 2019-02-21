@@ -15,5 +15,9 @@ class UserController extends Controller
         $langues=$connect->getRepository(Langue::class)->findAll();
         return $this->render('@Front/User/dashboardprofilesetting.html.twig',array("langues"=>$langues));
     }
+    public function rechercherAction(Request $request)
+    {
+        return $this->render('@Front/User/rechercher.html.twig');
+    }
 
 }

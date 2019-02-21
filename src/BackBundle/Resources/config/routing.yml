@@ -3,10 +3,10 @@ back_homepage:
   defaults: { _controller: BackBundle:Default:index }
 admin_login:
   path:     /admin/login
-  defaults: { _controller: BackBundle:Security:login }
+  defaults: { _controller: UserBundle:Security:login }
 admin_index:
   path:     /admin
-  defaults: { _controller: BackBundle:Security:login }
+  defaults: { _controller: UserBundle:Security:login }
 login:
   path:     /login
   defaults: { _controller: UserBundle:Security:login }

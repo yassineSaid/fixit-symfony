@@ -7,6 +7,9 @@ profile_setting:
 account_setting:
     path:     /compte
     defaults: { _controller: UserBundle:ChangePassword:changePassword }
+rechercherUser:
+  path:     /recherche
+  defaults: { _controller: FrontBundle:User:rechercher }
 fos_user_profile_show:
   path: /compte
 paiement:
@@ -15,6 +18,29 @@ paiement:
 liste_paiement:
   path:     /compte/listePaiement
   defaults: { _controller: FrontBundle:Paiement:liste }
+horraire_setting:
+  path:     /compte/horraire
+  defaults: { _controller: FrontBundle:Horraire:modifier }
+horrairesUser:
+  path:     /compte/listHorraires
+  defaults: { _controller: FrontBundle:Horraire:list }
+  methods: [post]
+supprimerHorraire:
+  path:     /compte/supprimerHorraire
+  defaults: { _controller: FrontBundle:Horraire:supprimer }
+  methods: [post]
+ajouterHorraire:
+  path:     /compte/ajouterHorraire
+  defaults: { _controller: FrontBundle:Horraire:ajouter }
+  methods: [post]
+supprimerJour:
+  path:     /compte/supprimerJour
+  defaults: { _controller: FrontBundle:Horraire:supprimerJour }
+  methods: [post]
+supprimerRepos:
+  path:     /compte/supprimerRepos
+  defaults: { _controller: FrontBundle:Horraire:supprimerRepos }
+  methods: [post]
 
 ############################ ROUTING DE MUSTAPHA PLEASE DON'T TOUCH #######################
 main_reclamation_Ajout:
