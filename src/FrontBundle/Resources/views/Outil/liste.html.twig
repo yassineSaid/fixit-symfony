@@ -13,7 +13,11 @@
                             <div id="tg-content" class="tg-content">
                                 <div class="tg-listing tg-listview">
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                        <span class="tg-totallistingfound">256 Results Found</span>
+                                        {% set nbrr=0 %}
+                                        {% for cc in outil %}
+                                            {% set nbrr=(nbrr+1) %}
+                                        {% endfor %}
+                                        <span class="tg-totallistingfound">{{ nbrr }} Resultas trouvés</span>
                                         <form method="Post">
                                         <div class="tg-sortfilters">
                                             <div class="tg-sortfilter tg-sortby">
@@ -28,9 +32,9 @@
                                             <div class="tg-sortfilter tg-arrange">
                                                 <span>Arrange:</span>
                                                 <div class="tg-select">
-                                                    <select>
-                                                        <option>des</option>
-                                                        <option>Asc</option>
+                                                    <select id="triDSC">
+                                                        <option value="asc" {% if triDSC=="asc" %}selected{% endif %}>Asc</option>
+                                                        <option value="dsc" {% if triDSC=="dsc" %}selected{% endif %}>DES</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -76,7 +80,7 @@
                                                             <span data-toggle="tooltip" data-placement="top" title="Click to view Number" data-last="34 - 562 - 6">{{ o.prix }}</em></span>
                                                         </li>
                                                     </ul>
-                                                    <a class="tg-btn" href="#">Louer</a>
+                                                    <a class="tg-btn" href="{{ path('front_louerOutil',{'id': o.id}) }}">Louer</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -115,7 +119,7 @@
 											</span>
                                         {% endfor %}
 
-                                        <a href="javascript:void(0);" data-toggle="modal" data-target=".tg-categoryModal">View All</a>
+                                        <a href="javascript:void(0);" data-toggle="modal" data-target=".tg-categoryModal">Voir tous</a>
                                     </div>
                                 </fieldset>
                                 <fieldset>
@@ -272,10 +276,20 @@
         {{ parent() }}
     {% endblock %}
 <script>
+
+
     $(document).ready(function () {
         $("#tri").on('change',function(){
             var value = $('#tri').val();
-            window.location= "{{ path('front_afficherTriFrontOutil') }}"+"?tri="+value;
+            var value2 = $('#triDSC').val();
+            window.location= "{{ path('front_afficherTriFrontOutil') }}"+"?tri="+value+"?triDSC="+value2;
+        });
+    })
+    $(document).ready(function () {
+        $("#triDSC").on('change',function(){
+            var value = $('#tri').val();
+            var value2 = $('#triDSC').val();
+            window.location= "{{ path('front_afficherTriFrontOutil') }}"+"?tri="+value+"?triDSC="+value2;
         });
     })
 </script>
