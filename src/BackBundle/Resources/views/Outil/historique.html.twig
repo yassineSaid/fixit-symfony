@@ -8,45 +8,55 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Liste des catégories des outils</h5>
+                            <h5 class="card-title">Historique des locations</h5>
                         </div>
                         <div class="card-body">
-                            <a href="{{ path('back_ajouterCategorieOutil') }}"><button class="btn btn-pill btn-primary" >Ajouter une catégorie</button></a><br /><br />
                             <table id="datatables-basic" class="table table-striped" style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th>Logo</th>
-                                    <th>Catégorie</th>
-                                    <th>Nombre d'outils</th>
-                                    <th>Actions</th>
+                                    <th>Nom de l'utilisateur</th>
+                                    <th>Nom de l'outil</th>
+                                    <th>Date de location</th>
+                                    <th>Date de retour</th>
+                                    <th>Prix</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for c in categorie %}
+                                {% for h in historique %}
                                     <tr>
+                                        {% for u in user %}
+                                        {% if u.id==h.idUser %}
                                         <td>
-                                            <img src="{{ asset('uploads/images/categorieOutil/' ~ c.logo ) }}" width="70">
+                                            {{ u.username }}
+                                        </td>
+                                        {% endif %}
+                                        {% endfor %}
+                                        {% for o in outil %}
+                                            {% if o.id==h.idOutil %}
+                                                <td>
+                                                    {{ o.nom }}
+                                                </td>
+                                            {% endif %}
+                                        {% endfor %}
+                                        <td>
+                                            {{ h.dateLocation|date("d/m/Y") }}
                                         </td>
                                         <td>
-                                            {{ c.nom }}
+                                            {{ h.dateRetour|date("d/m/Y") }}
                                         </td>
                                         <td>
-                                            {{ c.nbr }}
-                                        </td>
-                                        <td>
-                                            <a href="{{ path('back_modifierCategorieOutil',{'id': c.id}) }}" ><i class="align-middle" data-feather="edit-2"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <a href="{{ path('back_supprimerCategorieOutil',{'id': c.id}) }}" ><i class="align-middle" data-feather="trash"></i></a>
-
+                                            {{ h.total }}
                                         </td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <th>Logo</th>
-                                    <th>Catégorie</th>
-                                    <th>Nombre d'outils</th>
-                                    <th>Actions</th>
+                                    <th>Nom de l'utilisateur</th>
+                                    <th>Nom de l'outil</th>
+                                    <th>Date de location</th>
+                                    <th>Date de retour</th>
+                                    <th>Prix</th>
                                 </tr>
                                 </tfoot>
                             </table>

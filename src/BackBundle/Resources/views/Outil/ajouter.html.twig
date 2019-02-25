@@ -7,42 +7,45 @@
                     <h5 class="card-title">Ajouter outil</h5>
                 </div>
                 <div class="card-body">
+                    <div id="erreur" style="display: none">
+                        <p style="color: red">Vous n'avez pas rempli correctement les champs du formulaire !</p>
+                    </div>
                     <form method="post" enctype="multipart/form-data">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputNom">Nom</label>
-                                <input type="text" class="form-control" name="inputNom" placeholder="nom de l'outil">
+                                <input type="text" class="form-control" name="inputNom" id="inputNom" placeholder="nom de l'outil" >
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputQuantite">Quantité</label>
-                                <input type="text" class="form-control" name="inputQuantite" placeholder="quantité">
+                                <input type="number" class="form-control" name="inputQuantite" id="inputQuantite" placeholder="quantité" >
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputDuree">La durée maximale</label>
-                            <input type="text" class="form-control" name="inputDuree" placeholder="la durée maximale de location">
+                            <input type="number" class="form-control" name="inputDuree" id="inputDuree" placeholder="la durée maximale de location" >
                         </div>
                         <div class="form-group">
                             <label for="inputPrix">Prix en Scoin</label>
-                            <input type="text" class="form-control" name="inputPrix" placeholder="le prix de location de l'outil par jour">
+                            <input type="number" class="form-control" name="inputPrix" id="inputPrix" placeholder="le prix de location de l'outil par jour" >
                         </div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="inputAdresse">Adresse</label>
-                                <input type="text" class="form-control" name="inputAdresse" placeholder="Adresse">
-                            </div>
+                                <input type="text" class="form-control" name="inputAdresse" id="inputAdresse" placeholder="Adresse" >
+                            </div>&nbsp;&nbsp;&nbsp;
                             <div class="form-group">
                                 <label for="inputCodePostal">Code postal</label>
-                                <input type="text" class="form-control" name="inputCodePostal" placeholder="Code postal">
-                            </div>
+                                <input type="text" class="form-control" name="inputCodePostal" id="inputCodePostal" placeholder="Code postal" >
+                            </div>&nbsp;&nbsp;&nbsp;
                             <div class="form-group">
                                 <label for="inputVille">Ville</label>
-                                <input type="text" class="form-control" name="inputVille" placeholder="Ville">
+                                <input type="text" class="form-control" name="inputVille" id="inputVille" placeholder="Ville" >
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="form-label w-100">Ajouter une image</label>
-                            <input type="file" name="inputImage" >
+                            <input type="file" name="inputImage" id="inputImage" class="champ">
                         </div>
 
                             <div class="form-group col-md-4">
@@ -55,11 +58,125 @@
                                     {% endfor %}
                                 </select>
                             </div>
-                        <button type="submit" class="btn btn-primary">Confirmer</button>
+                        <button type="submit" id="confirmer" class="btn btn-primary" >Confirmer</button>&nbsp;&nbsp;&nbsp;<button type="reset" id="reset" class="btn btn-primary" >Rafraîchir</button>
                     </form>
                 </div>
             </div>
         </div>
     </main>
 
+
 {% endblock %}
+    {% block js %}
+        {{ parent() }}
+        <script>$(document).ready(function(){
+
+                var $nom = $('#inputNom'),
+                    $quantite = $('#inputQuantite'),
+                    $duree = $('#inputDuree'),
+                    $prix = $('#inputPrix'),
+                    $adresse = $('#inputAdresse'),
+                    $codePostal = $('#inputCodePostal'),
+                    $ville = $('#inputVille'),
+                    $image = $('#inputImage'),
+                    $confirmer = $('#confirmer'),
+                    $reset = $('#reset'),
+                    $erreur = $('#erreur'),
+                    $champ= $('.form-control');
+
+                $champ.keyup(function(){
+                    if($(this).val().length ==0){ // si la chaîne de caractères est inférieure à 5
+                        $(this).css({ // on rend le champ rouge
+                            borderColor : 'red',
+                            color : 'red'
+                        });
+                    }
+                    else{
+                        $(this).css({ // si tout est bon, on le rend vert
+                            borderColor : 'green',
+                            color : 'green'
+                        });
+                    }
+                });
+                $image.change(function(){
+                    console.log($(this).val());
+                    if($(this).val() ==""){ // si la chaîne de caractères est inférieure à 5
+                        $(this).css({ // on rend le champ rouge
+                            borderColor : 'red',
+                            color : 'red'
+                        });
+                    }
+                    else{
+                        $(this).css({ // si tout est bon, on le rend vert
+                            borderColor : 'green',
+                            color : 'green'
+                        });
+                    }
+                });
+
+                $codePostal.keyup(function(){
+                    if($(this).val().length !=4){ // si la confirmation est différente du mot de passe
+                        $(this).css({ // on rend le champ rouge
+                            borderColor : 'red',
+                            color : 'red'
+                        });
+                    }
+                    else{
+                        $(this).css({ // si tout est bon, on le rend vert
+                            borderColor : 'green',
+                            color : 'green'
+                        });
+                    }
+                });
+
+                $confirmer.click(function(e){
+                    if(!verifier($nom)||!verifier($quantite)||!verifier($duree)||!verifier($prix)||!verifier($adresse)||!verifier($codePostal)||!verifier($ville)||!verifier($image))
+                    {
+                        e.preventDefault();
+                        verifier($nom);
+                        verifier($quantite);
+                        verifier($duree);
+                        verifier($prix);
+                        verifier($adresse);
+                        verifier($codePostal);
+                        verifier($ville);
+                        verifier($image);
+                    }
+
+                });
+
+                $reset.click(function(){
+                    $image.css({ // on remet le style des champs comme on l'avait défini dans le style CSS
+                        borderColor : '#ccc',
+                        color : '#555'
+                    });
+                    $champ.css({ // on remet le style des champs comme on l'avait défini dans le style CSS
+                        borderColor : '#ccc',
+                        color : '#555'
+                    });
+                    $erreur.css('display', 'none'); // on prend soin de cacher le message d'erreur
+                });
+
+                function verifier(champ){
+                    if(champ.val() == "")
+                    { // si le champ est vide
+                        $erreur.css('display', 'block'); // on affiche le message d'erreur
+                        champ.css({ // on rend le champ rouge
+                            borderColor : 'red',
+                            color : 'red'
+                        });
+                        return false;
+                    }
+                    else
+                    {
+                        champ.css({ // on remet le style des champs comme on l'avait défini dans le style CSS
+                            borderColor : 'green',
+                            color : 'green'
+                        });
+                        return true;
+                    }
+                }
+
+            });
+        </script>
+    {% endblock %}

@@ -8,44 +8,51 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Liste des catégories des outils</h5>
+                            <h5 class="card-title">Liste des outils loués</h5>
                         </div>
                         <div class="card-body">
-                            <a href="{{ path('back_ajouterCategorieOutil') }}"><button class="btn btn-pill btn-primary" >Ajouter une catégorie</button></a><br /><br />
                             <table id="datatables-basic" class="table table-striped" style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th>Logo</th>
-                                    <th>Catégorie</th>
-                                    <th>Nombre d'outils</th>
+                                    <th>Nom de l'utilisateur</th>
+                                    <th>Nom de l'outil</th>
+                                    <th>Date de location</th>
+                                    <th>Date de retour</th>
+                                    <th>Prix</th>
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for c in categorie %}
+                                {% for o in userOutil %}
                                     <tr>
                                         <td>
-                                            <img src="{{ asset('uploads/images/categorieOutil/' ~ c.logo ) }}" width="70">
+                                            {{ o.idUser.username }}
                                         </td>
                                         <td>
-                                            {{ c.nom }}
+                                            {{ o.idOutil.nom }}
                                         </td>
                                         <td>
-                                            {{ c.nbr }}
+                                            {{ o.dateLocation|date("d/m/Y") }}
                                         </td>
                                         <td>
-                                            <a href="{{ path('back_modifierCategorieOutil',{'id': c.id}) }}" ><i class="align-middle" data-feather="edit-2"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <a href="{{ path('back_supprimerCategorieOutil',{'id': c.id}) }}" ><i class="align-middle" data-feather="trash"></i></a>
-
+                                            {{ o.dateRetour|date("d/m/Y") }}
+                                        </td>
+                                        <td>
+                                            {{ o.total }}
+                                        </td>
+                                        <td>
+                                            <a href="{{ path('back_retournerOutil',{'idUser': o.idUser.id,'idOutil': o.idOutil.id}) }}" >Retourner</a>
                                         </td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <th>Logo</th>
-                                    <th>Catégorie</th>
-                                    <th>Nombre d'outils</th>
+                                    <th>Nom de l'utilisateur</th>
+                                    <th>Nom de l'outil</th>
+                                    <th>Date de location</th>
+                                    <th>Date de retour</th>
+                                    <th>Prix</th>
                                     <th>Actions</th>
                                 </tr>
                                 </tfoot>

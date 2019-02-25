@@ -2,10 +2,12 @@
 
 namespace FrontBundle\Controller;
 
+use MainBundle\Entity\UserOutil;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use MainBundle\Entity\CategorieOutils;
 use MainBundle\Entity\Outils;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class OutilController extends Controller
 {
@@ -58,14 +60,75 @@ class OutilController extends Controller
 
 
     }
-    public function louerAction(Request $request)
+    public function detailAction(Request $request)
     {
         $id=$_GET['id'];
         $em=$this->getDoctrine()->getManager();
+        $em2=$this->getDoctrine()->getManager();
         $outil=$em->getRepository(Outils::class)->find($id);
+        $userOutil=$em2->getRepository(UserOutil::class)->premierOutilDQL($id);
         $user=$this->getUser();
+        if($outil->getQuantite()>0)
+        {
+            if($userOutil==null)
+            {
+                return $this->render("@Front/Outil/deatils.html.twig",array("outil"=>$outil,"user"=>$user));
+            }
+            elseif ($userOutil[0]->getIdUser()==$user)
+            {
+                return $this->render("@Front/Outil/dejaLoue.html.twig",array("uo"=>$userOutil,"outil"=>$outil));
+            }
+            else
+            {
+                return $this->render("@Front/Outil/indisponible.html.twig",array("outil"=>$outil,"userOutil"=>$userOutil));
+            }
+        }
+        else
+        {
+            if($userOutil==null)
+            {
+                return $this->render("@Front/Outil/epuiser.html.twig",array("outil"=>$outil));
+            }
+            elseif ($userOutil[0]->getIdUser()==$user)
+            {
+                return $this->render("@Front/Outil/dejaLoue.html.twig",array("uo"=>$userOutil,"outil"=>$outil));
+            }
+            else
+            {
+                return $this->render("@Front/Outil/indisponible.html.twig",array("outil"=>$outil,"userOutil"=>$userOutil));
+            }
+        }
 
-        return $this->render("@Front/Outil/louer.html.twig",array("outil"=>$outil,"user"=>$user));
+    }
+    public function louerAction(Request $request)
+    {
+        $idOutil=$_GET['id'];
+        $user=$this->getUser();
+        if($user->getSolde()>=($request->get("prixTotal")))
+            {
+
+                $connect1=$this->getDoctrine()->getManager();
+                $connect2=$this->getDoctrine()->getManager();
+                $outil=$connect2->getRepository(Outils::class)->find($idOutil);
+                $outil->setQuantite($outil->getQuantite()-1);
+                $user->setSolde($user->getSolde()-($request->get("prixTotal")));
+                $userOutil=new UserOutil();
+                $userOutil->setIdUser($user);
+                $userOutil->setIdOutil($outil);
+                $userOutil->setDateLocation(new \DateTime($request->get("dateLocation")));
+                $userOutil->setDateRetour(new \DateTime($request->get("dateRetour")));
+                $userOutil->setTotal($request->get("prixTotal"));
+                $connect1->persist($userOutil);
+                $connect1->flush();
+
+                return $this->redirectToRoute("front_afficherFrontOutil");
+
+            }
+            else
+            {
+                return $this->redirectToRoute("profile_setting");
+            }
+
     }
 
 }

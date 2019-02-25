@@ -66,6 +66,11 @@
                                                     </div>
 
                                                     <ul class="tg-companycontactinfo">
+                                                        {% if o.quantite>0 %}
+                                                        <li><a class="tg-tag tg-featuredtag" href="#" style="background: #00a243 ; color: white" >Disponible</a></li>
+                                                        {% else %}
+                                                            <li><a class="tg-tag tg-featuredtag" href="#" style="background: #bf0000 ; color: white" >Indisponible</a></li>
+                                                         {% endif %}
                                                         <li>
                                                             <img src="{{ asset('uploads/images/categorieOutil/' ~ o.CategorieOutils.logo ) }}" width="30">
                                                             <span data-toggle="tooltip" data-placement="top" title="Click to view Number" data-last="34 - 562 - 6">{{ o.CategorieOutils.nom }}</em></span>
@@ -80,7 +85,7 @@
                                                             <span data-toggle="tooltip" data-placement="top" title="Click to view Number" data-last="34 - 562 - 6">{{ o.prix }}</em></span>
                                                         </li>
                                                     </ul>
-                                                    <a class="tg-btn" href="{{ path('front_louerOutil',{'id': o.id}) }}">Louer</a>
+                                                    <a class="tg-btn"  href="{{ path('front_detailOutil',{'id': o.id}) }}">Détails</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -123,54 +128,20 @@
                                     </div>
                                 </fieldset>
                                 <fieldset>
-                                    <h4>Filter By Location</h4>
+                                    <h4>Filtrer par disponibilité</h4>
                                     <div class="tg-checkboxgroup">
-                                        <div class="form-group">
-												<span class="tg-select">
-													<select>
-														<option>Select Country</option>
-														<option>Pakistan</option>
-														<option>United States</option>
-														<option>United Kingdom</option>
-														<option>United Arab Emirates</option>
-													</select>
-												</span>
-                                        </div>
-                                        <div class="form-group">
-												<span class="tg-select">
-													<select>
-														<option>Select States</option>
-														<option>Texas</option>
-														<option>Virginia</option>
-														<option>New York</option>
-														<option>Washington</option>
-													</select>
-												</span>
-                                        </div>
-                                        <div class="form-group tg-inpuicon">
-                                            <input type="text" name="zipcode" class="form-control" placeholder="Zip Codes">
-                                        </div>
                                         <span class="tg-checkbox">
-												<input type="checkbox" id="tg-abbeywood" name="filterbylocation" value="abbeywood">
-												<label for="tg-abbeywood">Abbey Wood</label>
+												<input type="checkbox" id="tg-abbeywood" name="filterbylocation" value="Disponible">
+												<label for="tg-abbeywood">Disponible</label>
 											</span>
                                         <span class="tg-checkbox">
-												<input type="checkbox" id="tg-addington" name="filterbylocation" value="Addington">
-												<label for="tg-addington">Addington</label>
+												<input type="checkbox" id="tg-addington" name="filterbylocation" value="Indisponible">
+												<label for="tg-addington">Indisponible</label>
 											</span>
                                         <span class="tg-checkbox">
-												<input type="checkbox" id="tg-addiscombe" name="filterbylocation" value="Addiscombe">
-												<label for="tg-addiscombe">Addiscombe</label>
+												<input type="checkbox" id="tg-addington" name="filterbylocation" value="Tous">
+												<label for="tg-addington">Tous les outils</label>
 											</span>
-                                        <span class="tg-checkbox">
-												<input type="checkbox" id="tg-aldboroughhatch" name="filterbylocation" value="Aldborough Hatch">
-												<label for="tg-aldboroughhatch">Aldborough Hatch</label>
-											</span>
-                                        <span class="tg-checkbox">
-												<input type="checkbox" id="tg-aperfield" name="filterbylocation" value="Aperfield">
-												<label for="tg-aperfield">Aperfield</label>
-											</span>
-                                        <a href="javascript:void(0);" data-toggle="modal" data-target=".tg-categoryModal">View All</a>
                                     </div>
                                 </fieldset>
                                 <fieldset>
@@ -276,8 +247,6 @@
         {{ parent() }}
     {% endblock %}
 <script>
-
-
     $(document).ready(function () {
         $("#tri").on('change',function(){
             var value = $('#tri').val();

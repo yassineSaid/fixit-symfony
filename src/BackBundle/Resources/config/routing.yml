@@ -81,4 +81,13 @@ back_modifierOutil:
 back_supprimerOutil:
   path: /admin/supprimerOutil
   defaults: { _controller: BackBundle:Outil:supprimer }
+back_outilLoues:
+  path: /admin/outilLoues
+  defaults: { _controller: BackBundle:Outil:outilLoues }
+back_retournerOutil:
+  path: /admin/retournerOutil
+  defaults: { _controller: BackBundle:Outil:retourner }
+back_historique:
+  path: /admin/historique
+  defaults: { _controller: BackBundle:Outil:historique }
 ############################ END ROUNTING DE Sl-Wassim ##########################

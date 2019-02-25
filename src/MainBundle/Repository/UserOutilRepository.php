@@ -10,4 +10,21 @@ namespace MainBundle\Repository;
  */
 class UserOutilRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function premierOutilDQL($idOutil)
+    {
+        $query=$this->getEntityManager()->createQuery("SELECT uo FROM MainBundle:UserOutil uo 
+                                                            where uo.idOutil=:idOutil
+                                                            ORDER BY uo.dateRetour ");
+        $query->setParameter('idOutil',$idOutil);
+        $query->setMaxResults(1);
+        return $query->getResult();
+    }
+    public function location($idOutil,$idUser)
+    {
+        $query=$this->getEntityManager()->createQuery("SELECT uo FROM MainBundle:UserOutil uo 
+                                                            where uo.idOutil=:idOutil and uo.idUser=:idUser");
+        $query->setParameter('idOutil',$idOutil);
+        $query->setParameter('idUser',$idUser);
+        return $query->getResult();
+    }
 }

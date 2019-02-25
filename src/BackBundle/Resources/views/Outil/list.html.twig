@@ -2,20 +2,19 @@
 {% block content %}
     <main class="content">
         <div class="container-fluid p-0">
-
             <div class="row">
-
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title">Liste des outils</h5>
                         </div>
                         <div class="card-body">
-                            <a href="{{ path('back_ajouterOutil') }}"><button class="btn btn-pill btn-primary" >Ajouter un outil</button></a>
+                            <a href="{{ path('back_ajouterOutil') }}"><button class="btn btn-pill btn-primary" >Ajouter un outil</button></a><br /><br />
+
                             <table id="datatables-basic" class="table table-striped" style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th>ID Outil</th>
+                                    <th>Image</th>
                                     <th>Nom</th>
                                     <th>Quantité</th>
                                     <th>Durée maximale</th>
@@ -24,7 +23,6 @@
                                     <th>Code postal</th>
                                     <th>Ville</th>
                                     <th>Catégorie</th>
-                                    <th>Image</th>
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
@@ -32,7 +30,7 @@
                                 {% for o in outil %}
                                     <tr>
                                         <td>
-                                            {{ o.Id }}
+                                            <img src="{{ asset('uploads/images/outil/' ~ o.image ) }}" width="150">
                                         </td>
                                         <td>
                                             {{ o.nom }}
@@ -59,11 +57,7 @@
                                             {{ o.CategorieOutils.nom }}
                                         </td>
                                         <td>
-                                            <img src="{{ asset('uploads/images/outil/' ~ o.image ) }}" width="150">
-                                        </td>
-
-                                        <td>
-                                            <a href="{{ path('back_modifierOutil',{'id': o.id}) }}" ><i class="align-middle" data-feather="edit-2"></i></a>
+                                            <a href="{{ path('back_modifierOutil',{'id': o.id}) }}" ><i class="align-middle" data-feather="edit-2"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <a href="{{ path('back_supprimerOutil',{'id': o.id}) }}" ><i class="align-middle" data-feather="trash"></i></a>
 
                                         </td>
@@ -72,7 +66,7 @@
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <th>ID Outil</th>
+                                    <th>Image</th>
                                     <th>Nom</th>
                                     <th>Quantité</th>
                                     <th>Durée maximale</th>
@@ -81,7 +75,6 @@
                                     <th>Code postal</th>
                                     <th>Ville</th>
                                     <th>Catégorie</th>
-                                    <th>Image</th>
                                     <th>Actions</th>
                                 </tr>
                                 </tfoot>
@@ -90,8 +83,6 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
     </main>
     <script>

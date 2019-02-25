@@ -1,0 +1,236 @@
+{% extends "front.html.twig" %}
+{% block sidebar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <script src="{{ asset("service/js/moment.js") }}"></script>
+    <!--************************************
+				Main Start
+		*************************************-->
+    <main id="tg-main" class="tg-main tg-paddingzero tg-haslayout">
+        <!--************************************
+                Login Register Start
+        *************************************-->
+        <div class="tg-main-section tg-haslayout">
+            <div class="container">
+                <div class="row">
+                    <div id="tg-content" class="tg-content">
+                        <form class="tg-themeform " method="post" action="{{ path('front_louerOutil',{'id': outil.id}) }}">
+                            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                                <div class="tg-heading">
+                                    <h2>Informations de location</h2>
+                                </div>
+                                <fieldset>
+                                    <div class="tg-themetabcontent tab-content">
+                                        <div class="tab-pane active fade in" id="regularuser">
+                                            <div class="form-group">
+                                                <input type="text" name="username" class="form-control" value="{{ user.username }}" disabled>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputDuree">La date de location</label>
+                                                <input type="date" name="dateLocation" id="dateLocation" class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputDuree">La date de retour</label>
+                                                <input type="date" name="dateRetour" id="dateRetour" class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" id="total" class="form-control" placeholder="Prix total" disabled>
+                                                <input  type="hidden" name="prixTotal" id="prixTotal" value="0">
+
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="tg-checkbox">
+                                                    <input type="checkbox" value="0" id="condition">
+                                                    <label for="condition">J'ai lu les <a href="javascript:void(0);" data-toggle="modal" data-target=".tg-categoryModal">conditions</a> de location</label>
+                                                </div>
+                                            </div>
+                                            <button class="tg-btn"  id="louer" type="submit" disabled>Louer</button>
+                                            <a href="{{ path('front_afficherFrontOutil') }}">  <button class="tg-btn" type="button"  >Retour</button></a>
+                                            <span  type="hidden" id="invalide" style=" color: red"></span>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                <div >
+                                    <div class="tg-bordertitle">
+                                        <h2>Outil</h2>
+                                    </div>
+                                    <fieldset>
+                                        <figure class="tg-featuredimg">
+                                            <img src="{{ asset('uploads/images/outil/' ~ outil.image ) }}" style="width: 200px" alt="image description">
+
+                                        </figure>
+                                        <div class="tg-title">
+                                            <h2><a href="#">{{ outil.nom }}</a></h2>
+                                        </div>
+                                        <ul class="tg-companycontactinfo">
+                                            <li>
+                                                <img src="{{ asset('uploads/images/categorieOutil/' ~ outil.CategorieOutils.logo ) }}" width="30">
+                                                <span data-toggle="tooltip" data-placement="top" title="Click to view Number" data-last="34 - 562 - 6">{{ outil.CategorieOutils.nom }}</em></span>
+                                            </li>
+                                            <li>
+                                                <img src="{{ asset("service/images/icons/adresse.png") }}" width="30">
+                                                <span data-toggle="tooltip" data-placement="top" title="Click to view Number" data-last="34 - 562 - 6">{{ outil.adresse }} ,{{ outil.ville }}</em></span>
+                                            </li>
+
+                                            <li>
+                                                <img src="{{ asset("service/images/icons/scoin.png") }}" width="30">
+                                                <span data-toggle="tooltip" data-placement="top" title="Click to view Number" data-last="34 - 562 - 6">{{ outil.prix }}</em></span>
+                                            </li>
+                                        </ul>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--************************************
+                Login Register End
+        *************************************-->
+    </main>
+    <!--************************************
+            Main End
+    *************************************-->
+    <div class="modal fade tg-categoryModal" tabindex="-1">
+        <div class="modal-dialog tg-modaldialog" role="document">
+            <div class="modal-content tg-modalcontent">
+                <div class="tg-modalhead">
+                    <h2>Nos conditions de loction</h2>
+                </div>
+                <div class="tg-modalbody">
+                    <form class="tg-themeform tg-formrefinesearch" >
+                        <div class="tg-column">
+                            <div class="tg-checkboxgroup">
+                                {% set prix= (outil.prix+(outil.prix *0.25))|number_format %}
+                                <ul>
+                                    <li> Vous devez payez {{ outil.prix }} <img src="{{ asset("service/images/icons/scoin.png") }}" width="20">/jour si vous louez l'outil pendant {{ outil.dureeMaximale }} jour(s).</li>
+                                    <li> Vous devez payez {{ prix }} <img src="{{ asset("service/images/icons/scoin.png") }}" width="20">/jour si vous dépassez cette durée.</li>
+                                    <li> Si vous retournez l'outil aprés le <span id="dateFinal" style="color: #bf0000"></span> vous allez être penalisé de 10  <img src="{{ asset("service/images/icons/scoin.png") }}" width="20">.  </li>
+                                    <li> Si vous retournez l'outil aprés le <span id="dateLimit"style="color: #bf0000"></span> votre compte sera banné.  </li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('#dateRetour').change(function () {
+                var date=new Date (this.value);
+                var mois=date.getMonth()+1;
+                compare($("#dateRetour").val(),$("#dateLocation").val());
+                $("#dateFinal").html(date.getDate()+"/"+mois+"/"+date.getFullYear());
+                var dateL=new Date (this.value);
+                dateL.setDate(dateL.getDate() + 3);
+                var moisL=dateL.getMonth()+1;
+                $("#dateLimit").html(dateL.getDate()+"/"+moisL+"/"+dateL.getFullYear());
+            })
+            $('#dateLocation').change(function () {
+                compare($("#dateRetour").val(),$("#dateLocation").val())
+            })
+            function compare(fin,debut) {
+
+                var currentDate1=new Date();
+                var dateDebut=moment(debut);
+                var dateFin=moment(fin);
+                var currentDate=moment(currentDate1);
+                var diferenceCurrent=dateDebut.diff(currentDate,'days');
+                var prix={{ outil.prix }};
+                var prixx=({{ outil.prix }}+({{ outil.prix }}*0.25));
+                var prixM=Math.trunc( prixx )
+                var duree={{ outil.dureeMaximale }};
+                var difference=dateFin.diff(dateDebut,'days');
+                if (!isNaN(difference))
+                {
+                    if(difference>0 && diferenceCurrent>=0 )
+                    {
+                        if(duree>=difference)
+                        {
+                            $("#total").attr("value", (prix * difference).toString().concat(" SCoins"));
+                            $("#prixTotal").attr("value", (prix * difference).toString());
+                            $("#dateRetour").css("color","black");
+                            $("#dateLocation").css("color","black");
+                            $("#invalide").html("");
+                            if($("#condition").val()=="1")
+                            {
+                                document.getElementById("louer").disabled = false;
+                            }
+                            else
+                            {
+                                $("#invalide").html("Vous devez accepté nos conditions !");
+                            }
+
+                        }
+                        else
+                        {
+                            $("#total").attr("value", ((prixM * difference)).toString().concat(" SCoins"));
+                            $("#prixTotal").attr("value", ((prixM * difference)).toString());
+                            $("#dateRetour").css("color","black");
+                            $("#dateLocation").css("color","black");
+                            $("#invalide").html("");
+                            if($("#condition").val()=="1")
+                            {
+                                document.getElementById("louer").disabled = false;
+                            }
+                            else
+                            {
+                                $("#invalide").html("Vous devez accepté nos conditions !");
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        $("#dateRetour").css("color","red");
+                        $("#dateLocation").css("color","red");
+                        $("#invalide").html("Date invalide !");
+                        document.getElementById("louer").disabled = true;
+                    }
+                }
+
+            }
+            $("#condition").change(function () {
+                var dateDebut=moment($("#dateLocation").val());
+                var dateFin=moment($("#dateRetour").val());
+                var difference=dateFin.diff(dateDebut,'days');
+                var currentDate1=new Date();
+                var currentDate=moment(currentDate1);
+                var diferenceCurrent=dateDebut.diff(currentDate,'days');
+                if($("#condition").val()=="1")
+                {
+                    $("#condition").attr("value","0");
+                    document.getElementById("louer").disabled = true;
+                    $("#invalide").html("Vous devez accepté nos conditions !");
+                }
+                else
+                {
+                    $("#condition").attr("value","1");
+                    $("#invalide").html("");
+                    if(difference>0&& diferenceCurrent>=0 )
+                    {
+                        document.getElementById("louer").disabled = false;
+                    }
+                    else
+                    {
+                        $("#invalide").html("Date invalide !");
+                    }
+                }
+
+            })
+        })
+    </script>
+
+
+    <!--************************************
+            Theme Modal Box End
+    *************************************-->
+{% endblock %}

@@ -88,7 +88,9 @@ front_afficherFrontOutil:
 front_afficherTriFrontOutil:
   path: /compte/afficherTriFrontOutil
   defaults: { _controller: FrontBundle:Outil:afficherTriFront }
-
+front_detailOutil:
+  path: /compte/detailOutil
+  defaults: { _controller: FrontBundle:Outil:detail }
 front_louerOutil:
   path: /compte/louerOutil
   defaults: { _controller: FrontBundle:Outil:louer }

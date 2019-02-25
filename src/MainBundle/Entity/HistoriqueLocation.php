@@ -5,25 +5,29 @@ namespace MainBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * UserOutil
+ * HistoriqueLocation
  *
- * @ORM\Table(name="user_outil")
- * @ORM\Entity(repositoryClass="MainBundle\Repository\UserOutilRepository")
+ * @ORM\Table(name="historique_location")
+ * @ORM\Entity(repositoryClass="MainBundle\Repository\HistoriqueLocationRepository")
  */
-class UserOutil
+class HistoriqueLocation
 {
     /**
      * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="idUser",referencedColumnName="id")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    /**
+     * @var int
+     * @ORM\Column(name="idUser",type="integer")
      */
     private $idUser;
     /**
      * @var int
-     * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Outils")
-     * @ORM\JoinColumn(name="idOutil",referencedColumnName="id")
+     * @ORM\Column(name="idOutil",type="integer")
      */
     private $idOutil;
     /**
@@ -44,6 +48,22 @@ class UserOutil
      * @ORM\Column(name="total", type="integer")
      */
     private $total;
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
     /**
      * @return int
@@ -78,7 +98,7 @@ class UserOutil
     }
 
     /**
-     * @return datetime
+     * @return date
      */
     public function getDateLocation()
     {
@@ -86,7 +106,7 @@ class UserOutil
     }
 
     /**
-     * @param datetime $dateLocation
+     * @param date $dateLocation
      */
     public function setDateLocation($dateLocation)
     {
@@ -94,7 +114,7 @@ class UserOutil
     }
 
     /**
-     * @return datetime
+     * @return date
      */
     public function getDateRetour()
     {
@@ -102,7 +122,7 @@ class UserOutil
     }
 
     /**
-     * @param datetime $dateRetour
+     * @param date $dateRetour
      */
     public function setDateRetour($dateRetour)
     {
@@ -124,6 +144,9 @@ class UserOutil
     {
         $this->total = $total;
     }
+
+
+
 
 }
 
