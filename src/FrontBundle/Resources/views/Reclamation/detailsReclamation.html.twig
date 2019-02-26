@@ -22,8 +22,21 @@
                     });
                 }
             function refreshList(msg) {
-                    console.log(msg.seen)
-                    if(msg.seen==1)
+                    console.log(msg.seen);
+                console.log(msg.traite);
+                if(msg.seen==0 && msg.traite==0)
+                {
+                    $("#test").html("<ul class=\"tg-formprogressbar \">\n" +
+                        "                                                                <li class=\"tg-active\"><span>Votre Reclamation est envoyé elle est en cours de traitemant</span></li>\n" +
+                        "                                                                <li  ><span>Votre Reclamation est vu par l'un de nos administrateur elle sera traité bientôt</span></li>\n" +
+                        "                                                                <li><span>Instructions</span></li>\n" +
+                        "\n" +
+                        "                                                            </ul>");
+
+                }
+
+
+                    if(msg.seen==1 && msg.traite==0)
                     {
                         $("#test").html("<ul class=\"tg-formprogressbar \">\n" +
                             "                                                                <li><span>Votre Reclamation est envoyé elle est en cours de traitemant</span></li>\n" +
@@ -31,11 +44,28 @@
                             "                                                                <li><span>Instructions</span></li>\n" +
                             "\n" +
                             "                                                            </ul>");
+
+                        $("#modif").html("");
                     }
+                if(msg.seen==1 && msg.traite==1)
+                {
+                    $("#test").html("<ul class=\"tg-formprogressbar\">\n" +
+                        "                                                                <li ><span>Votre Reclamation est envoyé elle est en cours de traitemant</span></li>\n" +
+                        "                                                                <li ><span>Votre Reclamation est vu par l'un de nos administrateur elle sera traité bientôt</span></li>\n" +
+                        "                                                                <li class=\"tg-active\"><span>Votre Reclamation à été bien traité. Notre objectif est toujours satisfaire nos client</span></li>\n" +
+                        "\n" +
+                        "                                                            </ul>");
+
+                    $("#modif").html("<a class='tg-btn tg-btnedite' href=\"{{ asset('RapportsReclamation/r'~reclamation.id~'.pdf') }}\" target=\"_blank\" title=\"Download.pdf\"><i class=\"lnr lnr-arrow-down\"></i></a>");
+                }
             }
             setInterval(function(){
-                ajaxCall();
-            }, 5000);
+                    ajaxCall();
+                    if(msg.traite==1)
+                    {
+                        break;
+                    }
+            }, 500);
 
         });
     </script>
@@ -84,44 +114,23 @@
                                             <form class="tg-formbookappointment">
                                                 <fieldset class="tg-formstepone tg-current">
                                                     <div class="tg-appointmenthead">
+                                                        <div id="modif">
                                                         <a class="tg-btn tg-btnedite" href="{{ path('main_modifier_reclamation',{'rec':reclamation.id}) }}"><i class="lnr lnr-pencil"></i></a>
+                                                        </div>
                                                         <div class="tg-appointmentheading">
                                                             <h2>{{ reclamation.DateReclamation|date('F jS \\a\\t g:ia') }}</h2>
                                                         </div>
                                                     </div>
                                                     <div class="tg-progressbox">
                                                         <div id="test">
-                                                        {% if reclamation.seen ==0 and reclamation.traite == 0 %}
-                                                            <ul class="tg-formprogressbar">
-                                                                <li class="tg-active"><span>Votre Reclamation est envoyé elle est en cours de traitemant</span></li>
-                                                                <li><span>Votre reclamation est vu par l'un de nos administrateurs elle sera traité bientôt</span></li>
-                                                                <li><span>Instructions</span></li>
 
-                                                            </ul>
-                                                        {% endif %}
-                                                        {% if reclamation.seen ==1 and reclamation.traite == 0 %}
-                                                            <ul class="tg-formprogressbar ">
-                                                                <li><span>Votre Reclamation est envoyé elle est en cours de traitemant</span></li>
-                                                                <li class="tg-active" ><span>Votre Reclamation est vu par l'un de nos administrateur elle sera traité bientôt</span></li>
-                                                                <li><span>Instructions</span></li>
-
-                                                            </ul>
-                                                        {% endif %}
-                                                        {% if reclamation.seen ==1 and reclamation.traite == 1 %}
-                                                            <ul class="tg-formprogressbar">
-                                                                <li ><span>Votre Reclamation est envoyé elle est en cours de traitemant</span></li>
-                                                                <li ><span>Votre Reclamation est vu par l'un de nos administrateur elle sera traité bientôt</span></li>
-                                                                <li class="tg-active"><span>Votre Reclamation à été bien traité. Notre objectif est toujours satisfaire nos client</span></li>
-
-                                                            </ul>
-                                                        {% endif %}
                                                         </div>
                                                         <h3>{{ reclamation.Object }}</h3>
                                                         <div class="tg-description">
-                                                            <p>{{ reclamation.Description }}</p>
+                                                            <p style="font-size: 18px;">{{ reclamation.Description }}</p>
                                                         </div>
                                                         <div class="tg-btnarea">
-                                                            <a href="{{ path("front_homepage") }}" class="tg-btn tg-btnnext">Retour à la page d'accueil</a>
+                                                            <a href="{{ path("main_ajout_note_index") }}" class="tg-btn tg-btnnext">Retour à la page d'accueil</a>
                                                         </div>
                                                     </div>
                                                 </fieldset>

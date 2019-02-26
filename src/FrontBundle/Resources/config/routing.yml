@@ -41,6 +41,9 @@ supprimerRepos:
   path:     /compte/supprimerRepos
   defaults: { _controller: FrontBundle:Horraire:supprimerRepos }
   methods: [post]
+fos_user_registration_check_email:
+    path:     /register/check-email
+    defaults: { _controller: UserBundle:Registration:checkEmail }
 
 ############################ ROUTING DE MUSTAPHA PLEASE DON'T TOUCH #######################
 main_reclamation_Ajout:
@@ -65,9 +68,14 @@ main_affiche_Detail_Reclamationscript:
 main_affiche_list_service_accompli:
   path:     /compte/listserviceaccompli
   defaults: { _controller: FrontBundle:ReclamationFront:ListSerAcc }
-main_ajout_note_service_accompli:
+main_ajout_note:
   path:     /compte/Avis
   defaults: { _controller: FrontBundle:AvisFront:NoterService }
+
+main_select_service_a_reclame:
+  path:     /compte/ssar
+  defaults: { _controller: FrontBundle:ReclamationFront:selectserviceareclamer }
+  methods: [get]
 ############################        END ROUTING DE MUSTAPHA         #######################
 languesUser:
   path:     /compte/langues

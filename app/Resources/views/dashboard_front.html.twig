@@ -55,6 +55,12 @@
                                             <span>Reclamations</span>
                                         </a>
                                     </li>
+                                    <li {% if menu_selected == 'main_ajout_note' %} class="tg-active"{% endif %}>
+                                        <a href="{{ path("main_ajout_note") }}">
+                                            <i class="lnr lnr-heart"></i>
+                                            <span>Avis</span>
+                                        </a>
+                                    </li>
                                     <li{% if menu_selected == 'front_gererService' %} class="tg-active"{% endif %}>
                                         <a href="{{ path('front_gererService') }}">
                                             <i class="lnr lnr-briefcase"></i>

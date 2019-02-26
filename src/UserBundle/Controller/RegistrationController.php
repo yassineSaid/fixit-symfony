@@ -99,16 +99,24 @@ class RegistrationController extends Controller
             if (null !== $response = $event->getResponse()) {
                 return $response;
             }
-            $transport = \Swift_SmtpTransport::newInstance('smtp.gmail.com', 465,'ssl')->setUsername('mustapha.benhajminyaoui@esprit.tn')->setPassword('icarus09626776');
+            /*$transport = \Swift_SmtpTransport::newInstance('smtp.gmail.com', 465,'ssl')->setUsername('fixitnow.tn@gmail.com')->setPassword('challengers123');
 
             $mailer = \Swift_Mailer::newInstance($transport);
+            $message = \Swift_Message::newInstance()
+                ->setSubject("FormArmor - Confirmation d'inscription")
+                ->setFrom(array('fixitnow.tn@gmail.com' => 'fixitnow.tn@gmail.com'))
+                ->setTo(array($user->getEmail() => $user->getEmail()))// email du client pour teste replacer par son @
+                ->addPart('Hello !','text/html');
+            $result = $mailer->send($message);*/
+           /* $mailer = \Swift_Mailer::newInstance($transport);
             $message = \Swift_Message::newInstance()
                 ->setSubject("FormArmor - Confirmation d'inscription")
                 ->setFrom(array('mustapha.benhajminyaoui@esprit.tn' => 'mustapha.benhajminyaoui@esprit.tn'))
                 ->setTo(array($user->getEmail() => $user->getEmail()))// email du client pour teste replacer par son @
                 ->addPart('Hello !','text/html');
-            $result = $mailer->send($message);
+            $result = $mailer->send($message);*/
 
+            return $this->redirectToRoute('attente_de_confirmation');
         }
 
         return $this->render('@Front/User/register.html.twig', array(
@@ -128,14 +136,14 @@ class RegistrationController extends Controller
         }
 
         $request->getSession()->remove('fos_user_send_confirmation_email/email');
-        $user = $this->userManager->findUserByEmail($email);
+        //$user = $this->userManager->findUserByEmail($email);
 
-        if (null === $user) {
+        /*if (null === $user) {
             return new RedirectResponse($this->container->get('router')->generate('fos_user_security_login'));
-        }
+        }*/
 
-        return $this->render('@FOSUser/Registration/check_email.html.twig', array(
-            'user' => $user,
+        return $this->render('@Front/User/waitingforconfirmation.html.twig', array(
+            'email' => $email,
         ));
     }
 

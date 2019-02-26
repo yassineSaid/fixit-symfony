@@ -55,6 +55,9 @@ main_traite_reclamation_admin:
 main_supprimer_reclamation_admin:
   path:     /admin/supp/{rec}
   defaults: { _controller: BackBundle:ReclamationBack:supprimeradmin }
+main_afficher_note_admin:
+  path:     /admin/Avis
+  defaults: { _controller: BackBundle:AvisBack:AvisStatistics }
   ############################        END ROUTING DE MUSTAPHA         #######################
 ################# ROUTING DE Sl-Wassim PLEASE DON'T TOUCH #####################
 back_ajouterCategorieOutil:
