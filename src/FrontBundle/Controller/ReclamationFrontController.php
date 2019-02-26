@@ -58,8 +58,6 @@ class ReclamationFrontController extends Controller
             $reclamation->setUserreclame($user);
             $reclamation->setObject($request->get("Object"));
             $reclamation->setDescription($request->get("Description"));
-            $dater=new \DateTime();
-            $reclamation->setDateReclamation($dater);
             $em=$this->getDoctrine()->getManager();
             $em->flush();
             return $this->redirectToRoute('main_affiche_Detail_Reclamation',array("reclamation"=>$reclamation->getId()));
@@ -91,17 +89,35 @@ class ReclamationFrontController extends Controller
         {
             $em=$this->getDoctrine()->getManager();
             $rec=$em->getRepository(Reclamation::class)->find($request->get("id"));
-            //$rec=$em->getRepository(Reclamation::class)->find(16);
-            return new JsonResponse(array("seen"=>$rec->getSeen()));
+            return new JsonResponse(array("seen"=>$rec->getSeen(),"traite"=>$rec->getTraite()));
         }
         return false;
 
     }
-    public function ListSerAccAction()
-    {
-        $em=$this->getDoctrine()->getManager();
-        $recs=$em->getRepository(RealisationService::class)->findAll();
-        return $this->render('@Front/Reclamation/listserviceaccomplis.html.twig',array("services"=>$recs));
-    }
 
+    public function selectserviceareclamerAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $serv = $em->getRepository("MainBundle:RealisationService");
+
+        // Search the neighborhoods that belongs to the city with the given id as GET parameter "cityid"
+        $s = $serv->createQueryBuilder("q")
+            ->where("q.idUserOffreur = :cat")
+            ->setParameter("cat", $request->query->get("UserAReclamer"))
+            ->getQuery()
+            ->getResult();
+
+        // Serialize into an array the data that we need, in this case only name and id
+        // Note: you can use a serializer as well, for explanation purposes, we'll do it manually
+        $responseArray = array();
+        foreach($s as $a){
+            $responseArray[] = array(
+                "id" => $a->getId(),
+                "nom" => $a->getNom()
+            );
+        }
+
+        // Return array with structure of the neighborhoods of the providen city id
+        return new JsonResponse($responseArray);
+    }
 }

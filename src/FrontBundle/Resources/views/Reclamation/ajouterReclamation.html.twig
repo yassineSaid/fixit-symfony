@@ -26,11 +26,6 @@
     {{ parent() }}
 {% endblock %}
     {% block content_dashboard %}
-        <script type="text/javascript">
-            function amount() {
-                document.getElementById("montantscoin").value=(document.getElementById("scoin").value/2).toString().concat(" DT");
-            }
-        </script>
         <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
             <div id="tg-content" class="tg-content">
                 <div class="tg-dashboard tg-dashboardprofilesetting">
@@ -56,12 +51,14 @@
                                             {% for r in reclamations %}
                                                 <div class="tg-dashboardservice">
                                                     <div class="tg-servicetitle">
-                                                        <h2><a href="javascript:void(0);">{{ r.Object }}</a> <span>({{ r.userreclame.firstname }})</span></h2>
+                                                        <h2><a href="{{ path('main_affiche_Detail_Reclamation',{'reclamation':r.id}) }}">{{ r.Object }}</a> <span>({{ r.userreclame.firstname }})</span></h2>
                                                     </div>
                                                     <div class="tg-btntimeedit">
                                                         <span>{{ r.DateReclamation|date('F jS \\a\\t g:ia') }}</span>
+                                                        {% if r.seen==0 %}
                                                         <a class="tg-btnedite" href="{{ path('main_modifier_reclamation',{'rec':r.id}) }}"><i class="lnr lnr-pencil"></i></a>
                                                         <a class="tg-btndel" href="{{ path('main_supprimer_reclamation',{'rec':r.id}) }}"><i class="lnr lnr-trash"></i></a>
+                                                        {% endif %}
                                                     </div>
                                                 </div>
                                             {% endfor %}
@@ -80,10 +77,17 @@
                                                     <div class="row">
                                                         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                                                             <div class="form-group">
-                                                                <select class="form-control" name="UserAReclamer">
+                                                                <select class="form-control" name="cc" id="cc">
                                                                     {% for u in user %}
                                                                         <option value="{{ u.UserOffreur.id}}">{{ u.UserOffreur.firstname }}</option>
                                                                     {% endfor %}
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                                            <div class="form-group">
+                                                                <select class="form-control" name="cc" id="us">
+
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -112,5 +116,34 @@
                 </div>
             </div>
         </div>
+        <script>
+            $('#cc').change(function () {
+                alert("aaaaa");
+                var serviceSelector = $(this);
 
+                // Request the neighborhoods of the selected city.
+                $.ajax({
+                    url: "{{ path('main_select_service_a_reclame') }}",
+                    type: "GET",
+                    dataType: "JSON",
+                    data: {
+                        serviceid: serviceSelector.val()
+                    },
+                    success: function (neighborhoods) {
+                        alert("aaaaaaa");
+                        console.log(neighborhoods);
+                        $('#us').text("");
+                        $.each(neighborhoods, function (id, item) {
+                            var option=document.createElement('option');
+                            option.value=item.id;
+                            //option.attr("value",item.id)
+                            var text = document.createTextNode(item.nom);
+                            option.appendChild(text);
+                            $('#addService').append(option);
+                        });
+                    },
+
+                });
+            });
+        </script>
     {% endblock %}

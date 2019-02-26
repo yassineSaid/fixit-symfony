@@ -1,0 +1,37 @@
+{# default Sliding pagination control implementation #}
+
+{% if pageCount > 1 %}
+    <ul>
+
+        {% if previous is defined %}
+            <li class="tg-prevpage"><a href="{{ path(route, query|merge({(pageParameterName): previous})) }}"><i class="fa fa-angle-left"></i></a></li>
+        {% endif %}
+
+        {% if first is defined and current != first and first not in pagesInRange %}
+            <li><a href="{{ path(route, query|merge({(pageParameterName): first})) }}">1</a></li>
+            <li>...</li>
+        {% endif %}
+
+        {% for page in pagesInRange %}
+            {% if page != current %}
+                <li><a href="{{ path(route, query|merge({(pageParameterName): page})) }}">{{ page }}</a></li>
+            {% else %}
+                <li class="tg-active"><a href="{{ path(route, query|merge({(pageParameterName): page})) }}">{{ page }}</a></li>
+            {% endif %}
+
+        {% endfor %}
+
+        {% if last is defined and current != last and last not in pagesInRange %}
+            <li>...</li>
+            <li><a href="{{ path(route, query|merge({(pageParameterName): last})) }}">{{ last }}</a></li>
+        {% endif %}
+        {% if next is defined %}
+            <li class="tg-nextpage"><a href="{{ path(route, query|merge({(pageParameterName): next})) }}"><i class="fa fa-angle-right"></i></a></li>
+        {% endif %}
+
+    </ul>
+{% else %}
+    <ul>
+        <li class="tg-active"><a href="{{ path(route, query|merge({(pageParameterName): first})) }}">1</a></li>
+    </ul>
+{% endif %}

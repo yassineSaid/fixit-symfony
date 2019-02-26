@@ -1,0 +1,185 @@
+{% extends "front.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block title %}Recherche{% endblock %}
+{% block sidebar %}{% endblock %}
+{% block content %}
+    {#<script>
+        $(document).ready(function () {
+            ajaxCall();
+            function ajaxCall(){
+                $.ajax({
+                    url: "{{ path('languesUser') }}",
+                    method: "post",
+                    data: {id: "{{ app.user.id }}"}
+                }).success(function(msg) {
+                    refreshList(msg);
+                });
+
+            }
+            function refreshList(msg) {
+                $('#langues').text("");
+                $.each(msg.langues, function (i,item) {
+                    console.log(item);
+                    var divBoot = document.createElement('div');
+                    divBoot.className='col-xs-6 col-sm-12 col-md-6 col-lg-4';
+                    var divService=document.createElement('div');
+                    divService.className="tg-serviceprovider tg-automotive";
+                    var figure=document.createElement('figure');
+                    figure.className="tg-featuredimg";
+                    var img=document.createElement('img');
+                    img.className="{{ asset('uploads/images/user/' ~ item.image ) }}"
+                    img.style.cssText="width: 260px;height: 190px;";
+                    var divCompany=document.createElement('div');
+                    divCompany.className="tg-companycontent";
+                    var ul=document.createElement('ul');
+                    ul.className=""
+                    var span = document.createElement('span');
+                    span.className='tg-tagdashboard';
+                    var i = document.createElement('i');
+                    i.className='fa fa-close';
+                    i.setAttribute("id",item.id);
+                    i.onclick=ajaxRemove;
+                    var em = document.createElement('em');
+                    var text = document.createTextNode(item.libelle);
+                    em.appendChild(text);
+                    span.appendChild(i);
+                    span.appendChild(em);
+                    li.appendChild(span);
+                    $('#langues').append(li);
+                });
+            }
+        });
+    </script>#}
+    <!--************************************
+				Inner Page Banner Start
+		*************************************-->
+    <div class="tg-mapinnerbanner">
+        <div class="tg-searchbox">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-10 col-md-push-1 col-lg-10 col-lg-push-1">
+                        <form class="tg-themeform tg-formsearch" method="post">
+                            <fieldset>
+                                <div class="form-group">
+                                    <input type="text" name="nom" class="form-control" placeholder="Nom de la personne" {% if nom!="" %}value="{{ nom }}{% endif %}">
+                                </div>
+                                <button class="tg-btn" type="submit"><i class="lnr lnr-magnifier"></i></button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="tg-map" class="tg-map"></div>
+    </div>
+    <!--************************************
+            Inner Page Banner End
+    *************************************-->
+    <!--************************************
+            Main Start
+    *************************************-->
+    <main id="tg-main" class="tg-main tg-haslayout">
+        <div class="container">
+            <div class="row">
+                <div id="tg-twocolumns" class="tg-twocolumns">
+                    <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9 pull-right">
+                        <div class="row">
+                            <div id="tg-content" class="tg-content">
+                                <div class="tg-listing">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <span class="tg-totallistingfound">{{ pagination.getTotalItemCount }} résulats trouvés</span>
+                                    </div>
+                                    <div class="tg-serviceproviders" id="liste">
+                                        {% for user in pagination %}
+                                            {% if "ROLE_SUPER_ADMIN" not in user.roles %}
+                                            <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                                                <div class="tg-serviceprovider tg-automotive">
+                                                    <figure class="tg-featuredimg">
+                                                        <a href="{{ path('afficherProfil',{'id':user.id}) }}">
+                                                            <img src="{{ asset('uploads/images/user/' ~ user.image ) }}" style="width: 260px;height: 190px;">
+                                                        </a>
+                                                    </figure>
+                                                    <div class="tg-companycontent">
+                                                        <ul class="tg-tags">
+                                                            {% if user.enabled==1 %}
+                                                                <li><a class="tg-tag tg-verifiedtag" href="{{ path('afficherProfil',{'id':user.id}) }}">Vérifié</a></li>
+                                                            {% else %}
+                                                                <li><a class="tg-tag tg-verifiedtag" href="{{ path('afficherProfil',{'id':user.id}) }}">Non vérifié</a></li>
+                                                            {% endif %}
+                                                        </ul>
+                                                        <div class="tg-title">
+                                                            <h3><a href="{{ path('afficherProfil',{'id':user.id}) }}">{{ user.firstname }} {{ user.lastname }}</a></h3>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <nav class="tg-pagination">
+                                            {{ knp_pagination_render(pagination) }}
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3 pull-left">
+                        <aside id="tg-sidebar" class="tg-sidebar">
+                            <form class="tg-themeform tg-formrefinesearch" method="post">
+                                <fieldset>
+                                    <h4>Filter par localisation</h4>
+                                    <div class="tg-checkboxgroup">
+                                        <div class="form-group">
+												<span class="tg-select">
+													<select name="ville">
+                                                        <option value=""{% if ville=="" %}selected{% endif %}>Séléctionnez une ville</option>
+                                                        <option value="Ariana" {% if ville=="Ariana" %}selected{% endif %}>Ariana</option>
+                                                        <option value="Beja"{% if ville=="Beja" %}selected{% endif %}>Beja</option>
+                                                        <option value="Ben arous"{% if ville=="Ben arous" %}selected{% endif %}>Ben arous</option>
+                                                        <option value="Bizerte"{% if ville=="Bizerte" %}selected{% endif %}>Bizerte</option>
+                                                        <option value="Gabes"{% if ville=="Gabes" %}selected{% endif %}>Gabes</option>
+                                                        <option value="Gafsa"{% if ville=="Gafsa" %}selected{% endif %}>Gafsa</option>
+                                                        <option value="Jendouba"{% if ville=="Jendouba" %}selected{% endif %}>Jendouba</option>
+                                                        <option value="Kairouan"{% if ville=="Kairouan" %}selected{% endif %}>Kairouan</option>
+                                                        <option value="Kasserine"{% if ville=="Kasserine" %}selected{% endif %}>Kasserine</option>
+                                                        <option value="Kebili"{% if ville=="Kebili" %}selected{% endif %}>Kebili</option>
+                                                        <option value="Le kef"{% if ville=="Le kef" %}selected{% endif %}>Le kef</option>
+                                                        <option value="Mahdia"{% if ville=="Mahdia" %}selected{% endif %}>Mahdia</option>
+                                                        <option value="Manouba"{% if ville=="Manouba" %}selected{% endif %}>Manouba</option>
+                                                        <option value="Medenine"{% if ville=="Medenine" %}selected{% endif %}>Medenine</option>
+                                                        <option value="Monastir"{% if ville=="Monastir" %}selected{% endif %}>Monastir</option>
+                                                        <option value="Nabeul"{% if ville=="Nabeul" %}selected{% endif %}>Nabeul</option>
+                                                        <option value="Sfax"{% if ville=="Sfax" %}selected{% endif %}>Sfax</option>
+                                                        <option value="Sidi bouzid"{% if ville=="Sidi bouzid" %}selected{% endif %}>Sidi bouzid</option>
+                                                        <option value="Siliana"{% if ville=="Siliana" %}selected{% endif %}>Siliana</option>
+                                                        <option value="Sousse"{% if ville=="Sousse" %}selected{% endif %}>Sousse</option>
+                                                        <option value="Tataouine"{% if ville=="Tataouine" %}selected{% endif %}>Tataouine</option>
+                                                        <option value="Tozeur"{% if ville=="Tozeur" %}selected{% endif %}>Tozeur</option>
+                                                        <option value="Tunis"{% if ville=="Tunis" %}selected{% endif %}>Tunis</option>
+                                                        <option value="Zaghouan"{% if ville=="Zaghouan" %}selected{% endif %}>Zaghouan</option>
+                                                    </select>
+												</span>
+                                        </div>
+                                        <div class="form-group tg-inpuicon">
+                                            <i class="lnr lnr-magnifier"></i>
+                                            <input type="text" name="zipcode" class="form-control" placeholder="Code postal" {% if zipcode!="" %}value="{{ zipcode }}"{% endif %}>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <button class="tg-btn" type="submit">Appliquer</button>
+                                    <button class="tg-btn" type="reset">Vider</button>
+                                </fieldset>
+                            </form>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!--************************************
+            Main End
+    *************************************-->
+{% endblock %}

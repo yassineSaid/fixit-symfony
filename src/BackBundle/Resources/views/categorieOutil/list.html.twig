@@ -11,14 +11,13 @@
                             <h5 class="card-title">Liste des catégories des outils</h5>
                         </div>
                         <div class="card-body">
-                            <a href="{{ path('back_ajouterCategorieOutil') }}"><button class="btn btn-pill btn-primary" >Ajouter une catégorie</button></a>
+                            <a href="{{ path('back_ajouterCategorieOutil') }}"><button class="btn btn-pill btn-primary" >Ajouter une catégorie</button></a><br /><br />
                             <table id="datatables-basic" class="table table-striped" style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th>ID Catégorie</th>
-                                    <th>Nom</th>
-                                    <th>Nombre d'outils</th>
                                     <th>Logo</th>
+                                    <th>Catégorie</th>
+                                    <th>Nombre d'outils</th>
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
@@ -26,7 +25,7 @@
                                 {% for c in categorie %}
                                     <tr>
                                         <td>
-                                            {{ c.id }}
+                                            <img src="{{ asset('uploads/images/categorieOutil/' ~ c.logo ) }}" width="70">
                                         </td>
                                         <td>
                                             {{ c.nom }}
@@ -35,12 +34,7 @@
                                             {{ c.nbr }}
                                         </td>
                                         <td>
-
-                                            <img src="{{ asset('uploads/images/categorieOutil/' ~ c.logo ) }}" width="70">
-                                        </td>
-
-                                        <td>
-                                            <a href="{{ path('back_modifierCategorieOutil',{'id': c.id}) }}" ><i class="align-middle" data-feather="edit-2"></i></a>
+                                            <a href="{{ path('back_modifierCategorieOutil',{'id': c.id}) }}" ><i class="align-middle" data-feather="edit-2"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <a href="{{ path('back_supprimerCategorieOutil',{'id': c.id}) }}" ><i class="align-middle" data-feather="trash"></i></a>
 
                                         </td>
@@ -49,10 +43,9 @@
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <th>ID Catégorie</th>
-                                    <th>Nom</th>
-                                    <th>Nombre des outils</th>
                                     <th>Logo</th>
+                                    <th>Catégorie</th>
+                                    <th>Nombre d'outils</th>
                                     <th>Actions</th>
                                 </tr>
                                 </tfoot>

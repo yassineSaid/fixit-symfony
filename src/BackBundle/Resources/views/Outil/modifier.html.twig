@@ -7,36 +7,40 @@
                     <h5 class="card-title">Modifier outli</h5>
                 </div>
                 <div class="card-body">
+
+                    <div id="erreur" style="display: none">
+                        <p style="color: red">Vous n'avez pas rempli correctement les champs du formulaire !</p>
+                    </div>
                     <form method="post" enctype="multipart/form-data">
 
                         <div class="form-group col-md-2">
                             <label for="inputZip">Nom</label>
-                            <input type="text" class="form-control" name="inputNom" value="{{ outil.nom }}">
+                            <input type="text" class="form-control" name="inputNom" id="inputNom" value="{{ outil.nom }}">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputQuantite">Quantité</label>
-                            <input type="text" class="form-control" name="inputQuantite" value="{{ outil.quantite }}">
+                            <input type="number" class="form-control" name="inputQuantite" id="inputQuantite" value="{{ outil.quantite }}">
                         </div>
                         <div class="form-group">
                             <label for="inputDuree">La durée maximale</label>
-                            <input type="text" class="form-control" name="inputDuree" value="{{ outil.dureeMaximale }}">
+                            <input type="number" class="form-control" name="inputDuree" id="inputDuree" value="{{ outil.dureeMaximale }}">
                         </div>
                         <div class="form-group">
                             <label for="inputPrix">Prix en Scoin</label>
-                            <input type="text" class="form-control" name="inputPrix" value="{{ outil.prix }}" >
+                            <input type="number" class="form-control" name="inputPrix" id="inputPrix" value="{{ outil.prix }}" >
                         </div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="inputAdresse">Adresse</label>
-                                <input type="text" class="form-control" name="inputAdresse" value="{{ outil.adresse }}" >
+                                <input type="text" class="form-control" name="inputAdresse" id="inputAdresse" value="{{ outil.adresse }}" >
                             </div>
                             <div class="form-group">
                                 <label for="inputCodePostal">Code postal</label>
-                                <input type="text" class="form-control" name="inputCodePostal" value="{{ outil.codePostal }}" >
+                                <input type="number" class="form-control" name="inputCodePostal" id="inputCodePostal" value="{{ outil.codePostal }}" >
                             </div>
                             <div class="form-group">
                                 <label for="inputVille">Ville</label>
-                                <input type="text" class="form-control" name="inputVille" value="{{ outil.ville }}" >
+                                <input type="text" class="form-control" name="inputVille" id="inputVille" value="{{ outil.ville }}" >
                             </div>
                         </div>
                         <div class="form-group">
@@ -60,11 +64,102 @@
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Confirmer</button>
+                        <button type="submit" id="confirmer" class="btn btn-primary">Confirmer</button>&nbsp;&nbsp;&nbsp;<button type="reset" id="reset" class="btn btn-primary" >Rafraîchir</button>
                     </form>
                 </div>
             </div>
         </div>
     </main>
+{% endblock %}
+{% block js %}
+    {{ parent() }}
+    <script>$(document).ready(function(){
 
+            var $nom = $('#inputNom'),
+                $quantite = $('#inputQuantite'),
+                $duree = $('#inputDuree'),
+                $prix = $('#inputPrix'),
+                $adresse = $('#inputAdresse'),
+                $codePostal = $('#inputCodePostal'),
+                $ville = $('#inputVille'),
+                $confirmer = $('#confirmer'),
+                $reset = $('#reset'),
+                $erreur = $('#erreur'),
+                $champ= $('.form-control');
+
+            $champ.keyup(function(){
+                if($(this).val().length ==0){ // si la chaîne de caractères est inférieure à 5
+                    $(this).css({ // on rend le champ rouge
+                        borderColor : 'red',
+                        color : 'red'
+                    });
+                }
+                else{
+                    $(this).css({ // si tout est bon, on le rend vert
+                        borderColor : 'green',
+                        color : 'green'
+                    });
+                }
+            });
+
+            $codePostal.keyup(function(){
+                if($(this).val().length !=4){ // si la confirmation est différente du mot de passe
+                    $(this).css({ // on rend le champ rouge
+                        borderColor : 'red',
+                        color : 'red'
+                    });
+                }
+                else{
+                    $(this).css({ // si tout est bon, on le rend vert
+                        borderColor : 'green',
+                        color : 'green'
+                    });
+                }
+            });
+
+            $confirmer.click(function(e){
+                if(!verifier($nom)||!verifier($quantite)||!verifier($duree)||!verifier($prix)||!verifier($adresse)||!verifier($codePostal)||!verifier($ville))
+                {
+                    e.preventDefault();
+                    verifier($nom);
+                    verifier($quantite);
+                    verifier($duree);
+                    verifier($prix);
+                    verifier($adresse);
+                    verifier($codePostal);
+                    verifier($ville);
+                }
+
+            });
+
+            $reset.click(function(){
+                $champ.css({ // on remet le style des champs comme on l'avait défini dans le style CSS
+                    borderColor : '#ccc',
+                    color : '#555'
+                });
+                $erreur.css('display', 'none'); // on prend soin de cacher le message d'erreur
+            });
+
+            function verifier(champ){
+                if(champ.val() == "")
+                { // si le champ est vide
+                    $erreur.css('display', 'block'); // on affiche le message d'erreur
+                    champ.css({ // on rend le champ rouge
+                        borderColor : 'red',
+                        color : 'red'
+                    });
+                    return false;
+                }
+                else
+                {
+                    champ.css({ // on remet le style des champs comme on l'avait défini dans le style CSS
+                        borderColor : 'green',
+                        color : 'green'
+                    });
+                    return true;
+                }
+            }
+
+        });
+    </script>
 {% endblock %}

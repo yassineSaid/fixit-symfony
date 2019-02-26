@@ -16,4 +16,23 @@ class ServiceRepository extends \Doctrine\ORM\EntityRepository
         return $query->getResult();
 
     }
+    public function lister()
+    {
+        $query=$this->getEntityManager()->createQuery("SELECT m from MainBundle:Service m where m.CategorieService=:id")->setParameter('id',$_GET['id']);
+        return $query->getResult();
+
+    }
+    public function afficherBack()
+    {
+        $query=$this->getEntityManager()->createQuery("SELECT m from MainBundle:Service m where m.visible=:show")->setParameter('show',1);
+        return $query->getResult();
+
+    }
+    public function nbrByCat()
+    {
+        $query=$this->getEntityManager()->createQuery("SELECT SUM(m.NbrProviders),p.id from MainBundle:Service m,MainBundle:CategorieService p where m.CategorieService=p.id group by p.id ");
+        return $query->getResult();
+    }
+
+
 }

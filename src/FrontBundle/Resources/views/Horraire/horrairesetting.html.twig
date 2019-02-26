@@ -1,0 +1,347 @@
+ {% extends "dashboard_front.html.twig" %}{% set menu_selected='horraire_setting' %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block title %}Profil{% endblock %}
+{% block content %}
+    <script src="{{ asset("service/js/moment.min.js") }}"></script>
+    <script>
+        $(document).ready(function () {
+            ajaxCall();
+            function ajaxCall(){
+                $.ajax({
+                    url: "{{ path('horrairesUser') }}",
+                    method: "post",
+                    data: {id: "{{ app.user.id }}"}
+                }).success(function(msg) {
+                    //refreshList(msg);
+                    console.log(msg);
+                    refreshList(msg);
+                });
+            }
+            function verifier(e) {
+                e.preventDefault();
+                console.log(this.id);
+                var jour=this.id;
+                var debut=moment($('#heureDebut'+this.id).val(),'HH:mm');
+                var fin=moment($('#heureFin'+this.id).val(),'HH:mm');
+                console.log(debut.isBefore(fin));
+                if (debut.isBefore(fin))
+                {
+                    ajaxAdd(this.id);
+                }
+                else
+                {
+                    $('#heureDebut'+this.id).css("color","red");
+                    $('#heureFin'+this.id).css("color","red");
+                }
+            }
+            function ajaxAdd(id){
+                //,heureDebut:$('#heureDebut'+this.id),heureFin:$('#heureFin'+this.id)
+                var jour=id;
+                var debut=$('#heureDebut'+id).val();
+                var fin=$('#heureFin'+id).val();
+                console.log($('#heureDebut'+id).val());
+                $.ajax({
+                    url: "{{ path('ajouterHorraire') }}",
+                    method: "post",
+                    data: {idUser: "{{ app.user.id }}",heureDebut:debut,heureFin:fin,jour:jour}
+                }).success(function(msg) {
+                    ajaxCall();
+                });
+                return false;
+            }
+            function ajaxRemove(){
+                console.log(this.id);
+                $.ajax({
+                    url: "{{ path('supprimerHorraire') }}",
+                    method: "post",
+                    data: {idUser: "{{ app.user.id }}",idHorraire:this.id}
+                }).success(function(msg) {
+                    ajaxCall();
+                });
+                return false;
+            }
+            function ajaxRemoveRepos(id){
+                $.ajax({
+                    url: "{{ path('supprimerRepos') }}",
+                    method: "post",
+                    data: {idUser: "{{ app.user.id }}",idJour:id}
+                }).success(function(msg) {
+                    ajaxCall();
+                });
+                return false;
+            }
+            function ajaxRemoveDay(id){
+                $.ajax({
+                    url: "{{ path('supprimerJour') }}",
+                    method: "post",
+                    data: {idUser: "{{ app.user.id }}",idJour:id}
+                }).success(function(msg) {
+                    ajaxCall();
+                });
+                return false;
+            }
+            function ajouterChamp(item) {
+                var i=document.createElement('i');
+                i.className='lnr lnr-clock';
+
+                var div1=document.createElement('div');
+                div1.className='tg-startendtime';
+                var formGroup1=document.createElement('div');
+                formGroup1.className='form-group';
+                var inpuicon1=document.createElement('div');
+                inpuicon1.className='tg-inpuicon';
+                var heureDebut=document.createElement('input');
+                heureDebut.className='form-control';
+                heureDebut.setAttribute('type','time');
+                heureDebut.setAttribute('disabled','true');
+                heureDebut.setAttribute("value",moment(item.heureDebut.date).format('HH:mm'));
+
+                var div2=document.createElement('div');
+                div2.className='tg-startendtime';
+                var formGroup2=document.createElement('div');
+                formGroup2.className='form-group';
+                var inpuicon2=document.createElement('div');
+                inpuicon2.className='tg-inpuicon';
+                var heureFin=document.createElement('input');
+                heureFin.className='form-control';
+                heureFin.setAttribute('type','time');
+                heureFin.setAttribute('disabled','true');
+                heureFin.setAttribute("value",moment(item.heureFin.date).format('HH:mm'));
+
+                var bouton=document.createElement('button');
+                bouton.setAttribute("id",item.id)
+                bouton.className="tg-addtimeslot tg-deleteslot";
+                bouton.setAttribute("href","javascript:void(0)");
+                bouton.innerHTML="<i class='lnr lnr-trash'></i>";
+                bouton.onclick=ajaxRemove;
+
+                var jour=document.createElement('input');
+                jour.setAttribute("type","hidden");
+                jour.setAttribute("value",item.jour);
+
+                inpuicon1.appendChild(i);
+                inpuicon1.appendChild(heureDebut);
+                formGroup1.appendChild(inpuicon1);
+                inpuicon2.appendChild(i);
+                inpuicon2.appendChild(heureFin);
+                formGroup2.appendChild(inpuicon2);
+                div1.appendChild(formGroup1);
+                div1.appendChild(formGroup2);
+                div1.appendChild(bouton);
+
+                return div1;
+            }
+            function ajouterChampVide(jour) {
+                var i=document.createElement('i');
+                i.className='lnr lnr-clock';
+
+                var div1=document.createElement('div');
+                div1.className='tg-startendtime';
+                var formGroup1=document.createElement('div');
+                formGroup1.className='form-group';
+                var inpuicon1=document.createElement('div');
+                inpuicon1.className='tg-inpuicon';
+                var heureDebut=document.createElement('input');
+                heureDebut.className='form-control';
+                heureDebut.setAttribute('type','time');
+                heureDebut.setAttribute('id','heureDebut'+jour);
+
+                var div2=document.createElement('div');
+                div2.className='tg-startendtime';
+                var formGroup2=document.createElement('div');
+                formGroup2.className='form-group';
+                var inpuicon2=document.createElement('div');
+                inpuicon2.className='tg-inpuicon';
+                var heureFin=document.createElement('input');
+                heureFin.className='form-control';
+                heureFin.setAttribute('type','time');
+                heureFin.setAttribute('id','heureFin'+jour);
+
+                var bouton=document.createElement('button');
+                bouton.className="tg-addtimeslot";
+                bouton.setAttribute("href","javascript:void(0)");
+                bouton.setAttribute("id",jour);
+                bouton.innerHTML="+";
+                bouton.onclick=verifier;
+
+                var jour=document.createElement('input');
+                jour.setAttribute("type","hidden");
+                jour.setAttribute("value",jour);
+
+                inpuicon1.appendChild(i);
+                inpuicon1.appendChild(heureDebut);
+                formGroup1.appendChild(inpuicon1);
+                inpuicon2.appendChild(i);
+                inpuicon2.appendChild(heureFin);
+                formGroup2.appendChild(inpuicon2);
+                div1.appendChild(formGroup1);
+                div1.appendChild(formGroup2);
+                div1.appendChild(bouton);
+
+                return div1;
+            }
+            function refreshList(msg) {
+                var i=0;
+                for (i=0;i<7;i++)
+                {
+                    var jour='#jour'+i;
+                    $(jour).text("");
+                }
+                $.each(msg.horraires, function (i,item) {
+                    $('#jour'+item.jour).append(ajouterChamp(item));
+                });
+                for (i=0;i<7;i++)
+                {
+                    var jour='#jour'+i;
+                    var repos=jour+'Repos';
+                    if (!$(repos).is(':checked'))
+                        $(jour).append(ajouterChampVide(i));
+                }
+                $.each(msg.repos, function (i,item) {
+                    $('#jour'+item.id).text("");
+                    $('#jour'+item.id+"Repos").prop("checked","checked");
+                });
+            }
+            $(':checkbox').change(function () {
+                if (this.checked)
+                    ajaxRemoveDay(this.value);
+                else
+                {
+                    ajaxRemoveRepos(this.value);
+                    this.attr("unchecked","unchecked");
+                }
+                ajaxCall();
+            });
+        })
+    </script>
+    <!--************************************
+				Inner Page Banner Start
+		*************************************-->
+    <div class="tg-innerpagebanner">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="tg-pagetitle">
+                        <h1>Profil</h1>
+                    </div>
+                    <ol class="tg-breadcrumb">
+                        <li><a href="{{ path('front_homepage') }}">Accueil</a></li>
+                        <li class="tg-active">Horraires de travail</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block sidebar %}
+ {{ parent() }}
+{% endblock %}
+    {% block content_dashboard %}
+                    <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
+                        <div id="tg-content" class="tg-content">
+                            <div class="tg-dashboard tg-dashboardprofilesetting">
+                                <form class="tg-themeform">
+                                    <fieldset>
+                                        <div class="tg-dashboardbox tg-businesshours">
+                                            <div class="tg-dashboardtitle">
+                                                <h2>Horraires de travail</h2>
+                                            </div>
+                                            <div class="tg-businesshourssbox">
+                                                <div class="form-group">
+                                                    <div class="tg-daychckebox">
+                                                        <h3>Dimanche</h3>
+                                                        <div class="tg-checkbox">
+                                                            <input type="checkbox" name="jour0Repos" id="jour0Repos" value="0">
+                                                            <label for="jour0Repos">Marquer comme jour de repos</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="jour0">
+                                                </div>
+                                            </div>
+                                            <div class="tg-businesshourssbox">
+                                                <div class="form-group">
+                                                    <div class="tg-daychckebox">
+                                                        <h3>Lundi</h3>
+                                                        <div class="tg-checkbox">
+                                                            <input type="checkbox" name="jour1Repos" id="jour1Repos" value="1">
+                                                            <label for="jour1Repos">Marquer comme jour de repos</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="jour1">
+                                                </div>
+                                            </div>
+                                            <div class="tg-businesshourssbox">
+                                                <div class="form-group">
+                                                    <div class="tg-daychckebox">
+                                                        <h3>Mardi</h3>
+                                                        <div class="tg-checkbox">
+                                                            <input type="checkbox" name="jour2Repos" id="jour2Repos" value="2">
+                                                            <label for="jour2Repos">Marquer comme jour de repos</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="jour2">
+                                                </div>
+                                            </div>
+                                            <div class="tg-businesshourssbox">
+                                                <div class="form-group">
+                                                    <div class="tg-daychckebox">
+                                                        <h3>Mercredi</h3>
+                                                        <div class="tg-checkbox">
+                                                            <input type="checkbox" name="jour3Repos" id="jour3Repos" value="3">
+                                                            <label for="jour3Repos">Marquer comme jour de repos</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="jour3">
+                                                </div>
+                                            </div>
+                                            <div class="tg-businesshourssbox">
+                                                <div class="form-group">
+                                                    <div class="tg-daychckebox">
+                                                        <h3>Jeudi</h3>
+                                                        <div class="tg-checkbox">
+                                                            <input type="checkbox" name="jour4Repos" id="jour4Repos" value="4">
+                                                            <label for="jour4Repos">Marquer comme jour de repos</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="jour4">
+                                                </div>
+                                            </div>
+                                            <div class="tg-businesshourssbox">
+                                                <div class="form-group">
+                                                    <div class="tg-daychckebox">
+                                                        <h3>Vendredi</h3>
+                                                        <div class="tg-checkbox">
+                                                            <input type="checkbox" name="jour5Repos" id="jour5Repos" value="5">
+                                                            <label for="jour5Repos">Marquer comme jour de repos</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="jour5">
+                                                </div>
+                                            </div>
+                                            <div class="tg-businesshourssbox">
+                                                <div class="form-group">
+                                                    <div class="tg-daychckebox">
+                                                        <h3>Samedi</h3>
+                                                        <div class="tg-checkbox">
+                                                            <input type="checkbox" name="jour6Repos" id="jour6Repos" value="6">
+                                                            <label for="jour6Repos">Marquer comme jour de repos</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="jour6">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+        {% endblock %}

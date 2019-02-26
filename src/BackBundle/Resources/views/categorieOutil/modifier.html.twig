@@ -4,25 +4,90 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title">Modifier catégorie outli</h5>
+                    <h5 class="card-title">Modifier catégorie outil</h5>
                 </div>
                 <div class="card-body">
+                    <div id="erreur" style="display: none">
+                        <p style="color: red">Vous n'avez pas rempli correctement les champs du formulaire !</p>
+                    </div>
                     <form method="post" enctype="multipart/form-data">
 
                         <div class="form-group col-md-2">
                             <label for="inputZip">Nom</label>
-                            <input type="text" class="form-control" name="inputNom" value="{{ categorie.nom }}">
+                            <input type="text" class="form-control" name="inputNom" id="inputNom" value="{{ categorie.nom }}">
                         </div>
                         <div class="form-group">
                             <label class="form-label w-100">Ajouter un logo</label>
                             <input type="file" name="inputLogo">
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Confirmer</button>
+                        <button type="submit" id="confirmer" class="btn btn-primary">Confirmer</button>&nbsp;&nbsp;&nbsp;<button type="reset" id="reset" class="btn btn-primary" >Rafraîchir</button>
                     </form>
                 </div>
             </div>
         </div>
     </main>
-
 {% endblock %}
+    {% block js %}
+        {{ parent() }}
+        <script>$(document).ready(function(){
+
+                var $nom = $('#inputNom'),
+                    $confirmer = $('#confirmer'),
+                    $reset = $('#reset'),
+                    $erreur = $('#erreur');
+
+                $nom.keyup(function(){
+                    if($(this).val().length ==0){ // si la chaîne de caractères est inférieure à 5
+                        $(this).css({ // on rend le champ rouge
+                            borderColor : 'red',
+                            color : 'red'
+                        });
+                    }
+                    else{
+                        $(this).css({ // si tout est bon, on le rend vert
+                            borderColor : 'green',
+                            color : 'green'
+                        });
+                    }
+                });
+                $confirmer.click(function(e){
+                    if(!verifier($nom))
+                    {
+                        e.preventDefault();
+                        verifier($nom);
+                    }
+
+                });
+
+                $reset.click(function(){
+                    $nom.css({ // on remet le style des champs comme on l'avait défini dans le style CSS
+                        borderColor : '#ccc',
+                        color : '#555'
+                    });
+                    $erreur.css('display', 'none'); // on prend soin de cacher le message d'erreur
+                });
+
+                function verifier(champ){
+                    if(champ.val() == "")
+                    { // si le champ est vide
+                        $erreur.css('display', 'block'); // on affiche le message d'erreur
+                        champ.css({ // on rend le champ rouge
+                            borderColor : 'red',
+                            color : 'red'
+                        });
+                        return false;
+                    }
+                    else
+                    {
+                        champ.css({ // on remet le style des champs comme on l'avait défini dans le style CSS
+                            borderColor : 'green',
+                            color : 'green'
+                        });
+                        return true;
+                    }
+                }
+
+            });
+        </script>
+    {% endblock %}

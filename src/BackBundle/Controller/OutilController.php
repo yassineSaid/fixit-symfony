@@ -2,6 +2,9 @@
 
 namespace BackBundle\Controller;
 
+use MainBundle\Entity\HistoriqueLocation;
+use MainBundle\Entity\User;
+use MainBundle\Entity\UserOutil;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\HttpFoundation\File\File;
@@ -68,16 +71,19 @@ class OutilController extends Controller
             $outil->setCodePostal($request->get("inputCodePostal"));
             $outil->setVille($request->get("inputVille"));
             $outil->setCategorieOutils($connexion1->getRepository("MainBundle:CategorieOutils")->find($request->get("inputCategorie")));
-            $image = $outil->getImage();
-            if($image!=null)
-            {unlink($this->getParameter('outil_directory').'/'.$image);}
-            $file=$request->files->get("inputImage");
-            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-            $outil->setImage($fileName);
-            $file->move(
-                $this->getParameter('outil_directory'),
-                $fileName
-            );
+            if($request->get("inpuImage")!=null)
+            {
+                $image = $outil->getImage();
+                if($image!=null)
+                {unlink($this->getParameter('outil_directory').'/'.$image);}
+                $file=$request->files->get("inputImage");
+                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+                $outil->setImage($fileName);
+                $file->move(
+                    $this->getParameter('outil_directory'),
+                    $fileName
+                );
+            }
             $em->flush();
             return $this->redirectToRoute("back_listOutil");
         }
@@ -95,6 +101,47 @@ class OutilController extends Controller
         $em->flush();
         return $this->redirectToRoute("back_listOutil");
     }
+    public function outilLouesAction()
+    {
+        $em=$this->getDoctrine()->getManager();
+        $userOutil=$em->getRepository(UserOutil::class)->findAll();
+        return $this->render('@Back/Outil/outilLoues.html.twig',array("userOutil"=>$userOutil));
+
+    }
+    public function retournerAction()
+    {
+        $idOutil=$_GET['idOutil'];
+        $idUser=$_GET['idUser'];
+        $em=$this->getDoctrine()->getManager();
+        $outil=$em->getRepository(Outils::class)->find($idOutil);
+        $outil->setQuantite($outil->getQuantite()+1);
+        $em1=$this->getDoctrine()->getManager();
+        $userOutil=$em1->getRepository(UserOutil::class)->location($idOutil,$idUser);
+        $em2=$this->getDoctrine()->getManager();
+        $historique=new HistoriqueLocation();
+        $historique->setIdOutil($idOutil);
+        $historique->setIdUser($idUser);
+        $historique->setDateLocation($userOutil[0]->getDateLocation());
+        $historique->setDateRetour($userOutil[0]->getDateRetour());
+        $historique->setTotal($userOutil[0]->getTotal());
+        $em2->persist($historique);
+        $em2->flush();
+        $em1->remove($userOutil[0]);
+        $em1->flush();
+        return $this->redirectToRoute("back_outilLoues");
+    }
+    public function historiqueAction()
+    {
+        $em=$this->getDoctrine()->getManager();
+        $historique=$em->getRepository(HistoriqueLocation::class)->findAll();
+        $em1=$this->getDoctrine()->getManager();
+        $outil=$em1->getRepository(Outils::class)->findAll();
+        $em2=$this->getDoctrine()->getManager();
+        $user=$em2->getRepository(User::class)->findAll();
+        return $this->render('@Back/Outil/historique.html.twig',array("outil"=>$outil,"historique"=>$historique,"user"=>$user));
+
+    }
+
 
 
 }

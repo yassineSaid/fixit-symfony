@@ -3,6 +3,7 @@
 namespace MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Service
@@ -29,16 +30,94 @@ class Service
     private $nom;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="CategorieService")
      * @ORM\JoinColumn(name="idCategorieService", referencedColumnName="id")
      */
     private $CategorieService;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prixMini", type="integer")
+     */
+    private $prixMini;
+
+    /**
+     * @return int
+     */
+    public function getPrixMini()
+    {
+        return $this->prixMini;
+    }
+
+    /**
+     * @param int $prixMini
+     */
+    public function setPrixMini($prixMini)
+    {
+        $this->prixMini = $prixMini;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPrixMax()
+    {
+        return $this->prixMax;
+    }
+
+    /**
+     * @param int $prixMax
+     */
+    public function setPrixMax($prixMax)
+    {
+        $this->prixMax = $prixMax;
+    }
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prixMax", type="integer")
+     */
+    private $prixMax;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="visible", type="integer")
+     */
+    private $visible;
+
+    /**
+     * @return int
+     */
+    public function getVisible()
+    {
+        return $this->visible;
+    }
+
+    /**
+     * @param int $visible
+     */
+    public function setVisible($visible)
+    {
+        $this->visible = $visible;
+    }
+
+
     /**
      * @var integer
      *
      * @ORM\Column(name="NbrProviders", type="integer")
      */
     private $NbrProviders;
+    /**
+     * @var string
+     * @Assert\File(mimeTypes={ "image/jpeg", "image/png"})
+     * @ORM\Column(name="image_service", type="string" , nullable=true)
+     */
+    private $imageService;
+
 
     /**
      * @return string
@@ -106,5 +185,19 @@ class Service
     {
         return $this->nom;
     }
+    public function getImageService()
+    {
+        return $this->imageService;
+    }
+
+    /**
+     * @param string $imageService
+     */
+    public function setImageService($imageService)
+    {
+        $this->imageService = $imageService;
+    }
+
+
 }
 

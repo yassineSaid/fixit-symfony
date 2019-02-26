@@ -10,4 +10,44 @@ namespace MainBundle\Repository;
  */
 class AvisRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findAvis($idUser)
+    {
+        $query=$this->getEntityManager()
+            ->createQuery("SELECT a FROM MainBundle:Avis a where a.User=:id")
+            ->setParameter('id',$idUser);
+        return $query->getResult();
+    }
+    public function findfivelastAvis()
+    {
+        $query=$this->getEntityManager()
+            ->createQuery("SELECT a FROM MainBundle:Avis a Order By a.id DESC");
+        $query->setMaxResults(5);
+        return $query->getResult();
+    }
+    public function findSatisfactionCountsNon()
+    {
+        $query=$this->getEntityManager()
+            ->createQuery("SELECT COUNT(a) FROM MainBundle:Avis a where a.satisfaction = 'Non satisfait'");
+
+        return $query->getResult();
+    }
+    public function findSatisfactionCountsMoy()
+    {
+        $query=$this->getEntityManager()
+            ->createQuery("SELECT COUNT(a) FROM MainBundle:Avis a where a.satisfaction = 'Moyennement satisfait'");
+
+        return $query->getResult();
+    }
+    public function findSatisfactionCountsTot()
+    {
+        $query=$this->getEntityManager()
+            ->createQuery("SELECT COUNT(a) FROM MainBundle:Avis a where a.satisfaction = 'Totalement satisfait'");
+        return $query->getResult();
+    }
+    public function findMoyenneAvis()
+    {
+        $query=$this->getEntityManager()
+            ->createQuery("SELECT AVG(a.note) FROM MainBundle:Avis a");
+        return $query->getResult();
+    }
 }

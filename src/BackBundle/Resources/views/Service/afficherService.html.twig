@@ -4,22 +4,22 @@
         <div class="container-fluid p-0">
 
             <h1 class="h3 mb-3">Liste des Services</h1>
-
             <div class="row">
+
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{ path('main_ajouterService') }}"><button class="btn btn-pill btn-primary"> Ajouter un Service</button></a>
+                            <a href="{{ path('back_ajouterService') }}"><button class="btn btn-pill btn-primary"> Ajouter un Service</button></a>
                         </div>
                         <div class="card-body">
+
                             <table id="datatables-basic" class="table table-striped" style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th>Id</th>
+                                    <th>Image</th>
                                     <th>Nom</th>
                                     <th>Categorie</th>
-                                    <th>Modifier</th>
-                                    <th>Supprimer</th>
+                                    <th>Actions</th>
 
 
                                 </tr>
@@ -27,32 +27,34 @@
                                 <tbody>
                                 {% for s in service %}
                                     <tr>
-                                        <td>{{ s.id }}</td>
+                                        <td><img src="{{ asset('uploads/images/service/' ~ s.imageService ) }}" style="width: 150px"> </td>
                                         <td>{{ s.nom }}</td>
                                         <td>{{ s.CategorieService.nom }}</td>
-                                        <td><a href="{{ path('main_modifierService',{'id': s.id}) }}"><button class="btn btn-warning"> Modifier</button></a> </td>
-                                        <td><a href="{{ path('main_supprimerService',{'id': s.id}) }}"><button class="btn btn-danger">Supprimer</button></a> </td>
+                                        <td><a href="{{ path('back_modifierService',{'id': s.id}) }}"><i class="align-middle" data-feather="edit-2"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a href="{{ path('back_supprimerService',{'id': s.id}) }}"><i class="align-middle" data-feather="trash"></i></a> </td>
 
                                     </tr>
                                 {% endfor %}
 
                                 </tbody>
+
                                 <tfoot>
                                 <tr>
-                                    <th>Id</th>
+                                    <th>Image</th>
                                     <th>Nom</th>
-                                    <th>Description</th>
+                                    <th>Categorie</th>
+                                    <th>Actions</th>
 
                                 </tr>
                                 </tfoot>
                             </table>
+
                         </div>
                     </div>
                 </div>
 
 
             </div>
-
             <script>
                 document.addEventListener("DOMContentLoaded", function(event) {
                     // Datatables basic

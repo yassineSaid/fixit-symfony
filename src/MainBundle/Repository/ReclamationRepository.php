@@ -17,4 +17,13 @@ class ReclamationRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter('id',$idUser);
         return $query->getResult();
     }
+
+    public function findReclamationTraite()
+    {
+        $query=$this->getEntityManager()
+            ->createQuery("SELECT r FROM MainBundle:Reclamation r where r.traite=1");
+        return $query->getResult();
+    }
+
+
 }

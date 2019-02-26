@@ -1,34 +1,156 @@
 {% extends "back.html.twig" %}
+  {% block js %}
+      {{ parent() }}
+      <script>$(document).ready(function(){
+
+              var $nom = $('#Nom'),
+                  $description = $('#Description'),
+                  $prixMin = $('#prixMin'),
+                  $prixMax = $('#prixMax'),
+                  $image = $('#image'),
+                  $confirmer = $('#confirmer'),
+                  $reset = $('#reset'),
+                  $erreur = $('#erreur'),
+                  $champ= $('.form-control');
+
+              $champ.keyup(function(){
+                  if($(this).val().length ==0){ // si la chaîne de caractères est inférieure à 5
+                      $(this).css({ // on rend le champ rouge
+                          borderColor : 'red',
+                          color : 'red'
+                      });
+                  }
+                  else{
+                      $(this).css({ // si tout est bon, on le rend vert
+                          borderColor : 'green',
+                          color : 'green'
+                      });
+                  }
+              });
+              $image.change(function(){
+                  console.log($(this).val());
+                  if($(this).val() ==""){ // si la chaîne de caractères est inférieure à 5
+                      $(this).css({ // on rend le champ rouge
+                          borderColor : 'red',
+                          color : 'red'
+                      });
+                  }
+                  else{
+                      $(this).css({ // si tout est bon, on le rend vert
+                          borderColor : 'green',
+                          color : 'green'
+                      });
+                  }
+              });
+
+              $reset.click(function(){
+                  $image.css({ // on remet le style des champs comme on l'avait défini dans le style CSS
+                      borderColor : '#ccc',
+                      color : '#555'
+                  });
+                  $champ.css({ // on remet le style des champs comme on l'avait défini dans le style CSS
+                      borderColor : '#ccc',
+                      color : '#555'
+                  });
+                  $erreur.css('display', 'none'); // on prend soin de cacher le message d'erreur
+              });
+
+              $confirmer.click(function(e){
+                  if(!verifier($nom)||!verifier($description)||!verifier($prixMin)||!verifier($prixMax)||!verifier($image))
+                  {
+                      e.preventDefault();
+                      verifier($nom);
+                      verifier($description);
+                      verifier($prixMin);
+                      verifier($prixMax);
+                      verifier($image);
+                  }
+
+              });
+
+
+
+              function verifier(champ){
+                  if(champ.val() == "")
+                  { // si le champ est vide
+                      $erreur.css('display', 'block'); // on affiche le message d'erreur
+                      champ.css({ // on rend le champ rouge
+                          borderColor : 'red',
+                          color : 'red'
+                      });
+                      return false;
+                  }
+                  else
+                  {
+                      champ.css({ // on remet le style des champs comme on l'avait défini dans le style CSS
+                          borderColor : 'green',
+                          color : 'green'
+                      });
+                      return true;
+                  }
+              }
+
+          });
+
+      </script>
+  {% endblock %}
 {% block content %}
     <main class="content">
-        <div class="container-fluid p-0">
+        <div class="col-md-12">
 
             <h1 class="h3 mb-3">Ajouter une catégorie de service</h1>
 
-            <div class="row">
-                <div class="col-12 col-xl-6">
+
                     <div class="card">
 
                         <div class="card-body">
-                            <form method="POST">
+                            <div id="erreur" style="display: none">
+                                <p style="color: red">Vous n'avez pas rempli correctement les champs du formulaire !</p>
+                            </div>
+                            <form method="POST" enctype="multipart/form-data">
 
                                 <div class="form-group">
                                     <label class="form-label">Nom</label>
-                                    <input type="text" class="form-control" placeholder="Nom" name="Nom">
+                                    <input type="text" class="form-control" placeholder="Nom" name="Nom" id="Nom">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Description</label>
-                                    <textarea class="form-control" placeholder="Description" rows="1" name="Description"></textarea>
+                                    <textarea class="form-control" placeholder="Description" rows="1" name="Description" id="Description"></textarea>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <div class="form-row">
+                                <div class="form-group">
+
+                                    <label class="form-label">Prix entre</label>
+
+                                </div>
+                                <div class="form-group">
+
+                                    <label class="form-label"></label>
+                                    <input class="form-control" type="number" name="prixMin" id="prixMin" placeholder="prix minimal">
+                                </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <div class="form-group">
+
+                                        <br/>
+                                        <h4>__</h4>
+                                    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <div class="form-group">
+                                    <label class="form-label"></label>
+                                    <input type="number" class="form-control"  name="prixMax" id="prixMax" placeholder="prix maximal">
+                                </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Image</label>
+                                    <input type="file" class="form-control" name="image" id="image">
+                                </div>
+                                <button type="submit" class="btn btn-primary" id="confirmer">Ajouter</button>&nbsp;&nbsp;&nbsp;
+                                <button type="reset" class="btn btn-primary" id="reset">Reset</button>
                             </form>
                         </div>
                     </div>
                 </div>
 
-        </div>
-        </div>
     </main>
+
 
 {% endblock %}

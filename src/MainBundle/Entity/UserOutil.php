@@ -27,15 +27,15 @@ class UserOutil
      */
     private $idOutil;
     /**
-     * @var datetime
+     * @var date
      *
-     * @ORM\Column(name="dateLocation", type="datetime")
+     * @ORM\Column(name="dateLocation", type="date")
      */
     private $dateLocation;
     /**
-     * @var datetime
+     * @var date
      *
-     * @ORM\Column(name="dateRetour", type="datetime")
+     * @ORM\Column(name="dateRetour", type="date")
      */
     private $dateRetour;
     /**

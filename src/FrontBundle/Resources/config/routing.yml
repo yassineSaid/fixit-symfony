@@ -2,11 +2,21 @@ front_homepage:
     path:     /index
     defaults: { _controller: FrontBundle:Default:index }
 profile_setting:
-    path:     /profil
+    path:     /compte/profil
     defaults: { _controller: FrontBundle:User:profil }
 account_setting:
     path:     /compte
     defaults: { _controller: UserBundle:ChangePassword:changePassword }
+rechercherUser:
+  path:     /recherche
+  defaults: { _controller: FrontBundle:User:rechercher }
+afficherProfil:
+  path:     /profil/{id}
+  defaults: { _controller: FrontBundle:User:afficherUser }
+ajouterPhoto:
+  path:     /compte/ajouterPhoto
+  defaults: { _controller: FrontBundle:User:ajouterPhoto }
+  methods: [post]
 fos_user_profile_show:
   path: /compte
 paiement:
@@ -15,6 +25,32 @@ paiement:
 liste_paiement:
   path:     /compte/listePaiement
   defaults: { _controller: FrontBundle:Paiement:liste }
+horraire_setting:
+  path:     /compte/horraire
+  defaults: { _controller: FrontBundle:Horraire:modifier }
+horrairesUser:
+  path:     /compte/listHorraires
+  defaults: { _controller: FrontBundle:Horraire:list }
+  methods: [post]
+supprimerHorraire:
+  path:     /compte/supprimerHorraire
+  defaults: { _controller: FrontBundle:Horraire:supprimer }
+  methods: [post]
+ajouterHorraire:
+  path:     /compte/ajouterHorraire
+  defaults: { _controller: FrontBundle:Horraire:ajouter }
+  methods: [post]
+supprimerJour:
+  path:     /compte/supprimerJour
+  defaults: { _controller: FrontBundle:Horraire:supprimerJour }
+  methods: [post]
+supprimerRepos:
+  path:     /compte/supprimerRepos
+  defaults: { _controller: FrontBundle:Horraire:supprimerRepos }
+  methods: [post]
+fos_user_registration_check_email:
+    path:     /register/check-email
+    defaults: { _controller: UserBundle:Registration:checkEmail }
 
 ############################ ROUTING DE MUSTAPHA PLEASE DON'T TOUCH #######################
 main_reclamation_Ajout:
@@ -39,9 +75,14 @@ main_affiche_Detail_Reclamationscript:
 main_affiche_list_service_accompli:
   path:     /compte/listserviceaccompli
   defaults: { _controller: FrontBundle:ReclamationFront:ListSerAcc }
-main_ajout_note_service_accompli:
+main_ajout_note:
   path:     /compte/Avis
   defaults: { _controller: FrontBundle:AvisFront:NoterService }
+
+main_select_service_a_reclame:
+  path:     /compte/ssar
+  defaults: { _controller: FrontBundle:ReclamationFront:selectserviceareclamer }
+  methods: [get]
 ############################        END ROUTING DE MUSTAPHA         #######################
 languesUser:
   path:     /compte/langues
@@ -62,11 +103,46 @@ front_afficherFrontOutil:
 front_afficherTriFrontOutil:
   path: /compte/afficherTriFrontOutil
   defaults: { _controller: FrontBundle:Outil:afficherTriFront }
-
+front_detailOutil:
+  path: /compte/detailOutil
+  defaults: { _controller: FrontBundle:Outil:detail }
 front_louerOutil:
   path: /compte/louerOutil
   defaults: { _controller: FrontBundle:Outil:louer }
 ############################ END ROUNTING DE Sl-Wassim ##########################
+front_listeService:
+  path:     /listeService
+  defaults: { _controller: FrontBundle:Service:afficher }
+front_detailsService:
+  path:     /detailsService/{id}
+  defaults: { _controller: FrontBundle:Service:details }
+front_gererService:
+  path:     /compte/gererService
+  defaults: { _controller: FrontBundle:Service:gerer }
+front_gestionService:
+  path:     /compte/gestionService
+  defaults: { _controller: FrontBundle:Service:listServiceCat }
+  methods:  GET
+front_ajouterServiceUser:
+  path:     /compte/ajouterServiceUser
+  defaults: { _controller: FrontBundle:Service:ajouter }
+front_afficherServiceUser:
+  path:     /compte/afficherServiceUser
+  defaults: { _controller: FrontBundle:Service:afficherService }
+front_supprimerServiceUser:
+  path:     /compte/supprimerServiceUser/{id}
+  defaults: { _controller: FrontBundle:Service:supprimer }
+front_proposerServiceUser:
+  path:     /compte/proposerServiceUser
+  defaults: { _controller: FrontBundle:Service:ajouterProposition }
+front_listerServiceUser:
+  path:     /compte/listeService
+  defaults: { _controller: FrontBundle:Service:lister }
+front_search:
+  path:     /compte/search
+  defaults: { _controller: FrontBundle:Service:search }
+  methods:  GET
+
     ############routing ali##############
 main_ajouter_Produit:
     path:    /ajoutProduit

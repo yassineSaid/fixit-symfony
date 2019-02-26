@@ -303,6 +303,73 @@
                     </script>
                 </div>
             </div>
+            <div class="col-12 col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Nombre employés par categorie</h5>
+                        <h6 class="card-subtitle text-muted">Area charts are used to represent quantitative variations.</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart">
+                            <div id="apexcharts-area"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", function(event) {
+                        // Area chart
+                        var cat=new Array();
+                        var nb=new Array();
+
+                        {% for c in categorie %}
+                        cat.push("{{ c.nom }}");
+                        {% endfor %}
+                        {% for n in nbr %}
+                        nb.push("{{ nbr[0] }}");
+                        {% endfor %}
+
+                        console.log(nb);
+
+                        var options = {
+                            chart: {
+                                height: 350,
+                                type: 'area',
+                            },
+                            dataLabels: {
+                                enabled: false
+                            },
+                            stroke: {
+                                curve: 'smooth'
+                            },
+                            series: [{
+                                name: 'series1',
+                                data: nbr ,
+                            }, {
+                                name: 'series2',
+                                data: ""
+                            }],
+                            xaxis: {
+                                type: 'text',
+                                categories: cat,
+
+
+                            },
+                            tooltip: {
+                                x: {
+                                    format: 'dd/MM/yy HH:mm'
+                                },
+                            }
+                        }
+                        var chart = new ApexCharts(
+                            document.querySelector("#apexcharts-area"),
+                            options
+                        );
+                        chart.render();
+                    });
+                </script>
+            </div>
+
 
             <div class="row">
                 <div class="col-12 col-lg-6 col-xl-4 d-flex">

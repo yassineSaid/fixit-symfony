@@ -22,6 +22,8 @@ class AppKernel extends Kernel
             new BackBundle\BackBundle(),
             new MainBundle\MainBundle(),
             new UserBundle\UserBundle(),
+            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
 
         ];
 

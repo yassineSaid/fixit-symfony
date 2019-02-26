@@ -1,0 +1,117 @@
+{% extends "back.html.twig" %}
+{% block content %}
+    <main class="content">
+        <div class="container-fluid p-0">
+
+            <div class="row">
+
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Historique des locations</h5>
+                        </div>
+                        <div class="card-body">
+                            <table id="datatables-basic" class="table table-striped" style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>Nom de l'utilisateur</th>
+                                    <th>Nom de l'outil</th>
+                                    <th>Date de location</th>
+                                    <th>Date de retour</th>
+                                    <th>Prix</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for h in historique %}
+                                    <tr>
+                                        {% for u in user %}
+                                        {% if u.id==h.idUser %}
+                                        <td>
+                                            {{ u.username }}
+                                        </td>
+                                        {% endif %}
+                                        {% endfor %}
+                                        {% for o in outil %}
+                                            {% if o.id==h.idOutil %}
+                                                <td>
+                                                    {{ o.nom }}
+                                                </td>
+                                            {% endif %}
+                                        {% endfor %}
+                                        <td>
+                                            {{ h.dateLocation|date("d/m/Y") }}
+                                        </td>
+                                        <td>
+                                            {{ h.dateRetour|date("d/m/Y") }}
+                                        </td>
+                                        <td>
+                                            {{ h.total }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>Nom de l'utilisateur</th>
+                                    <th>Nom de l'outil</th>
+                                    <th>Date de location</th>
+                                    <th>Date de retour</th>
+                                    <th>Prix</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </main>
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+            // Datatables basic
+            $('#datatables-basic').DataTable({
+                responsive: true,
+                "language": {
+                    "sEmptyTable":     "Aucune donnée disponible dans le tableau",
+                    "sInfo":           "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
+                    "sInfoEmpty":      "Affichage de l'élément 0 à 0 sur 0 élément",
+                    "sInfoFiltered":   "(filtré à partir de _MAX_ éléments au total)",
+                    "sInfoPostFix":    "",
+                    "sInfoThousands":  ",",
+                    "sLengthMenu":     "Afficher _MENU_ éléments",
+                    "sLoadingRecords": "Chargement...",
+                    "sProcessing":     "Traitement...",
+                    "sSearch":         "Rechercher :",
+                    "sZeroRecords":    "Aucun élément correspondant trouvé",
+                    "oPaginate": {
+                        "sFirst":    "Premier",
+                        "sLast":     "Dernier",
+                        "sNext":     "Suivant",
+                        "sPrevious": "Précédent"
+                    },
+                    "oAria": {
+                        "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
+                        "sSortDescending": ": activer pour trier la colonne par ordre décroissant"
+                    },
+                    "select": {
+                        "rows": {
+                            "_": "%d lignes sélectionnées",
+                            "0": "Aucune ligne sélectionnée",
+                            "1": "1 ligne sélectionnée"
+                        }
+                    }
+                }
+            });
+            // Datatables with Buttons
+            var datatablesButtons = $('#datatables-buttons').DataTable({
+                lengthChange: !1,
+                buttons: ["copy", "print"],
+                responsive: true
+            });
+            datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
+        });
+    </script>
+
+{% endblock %}

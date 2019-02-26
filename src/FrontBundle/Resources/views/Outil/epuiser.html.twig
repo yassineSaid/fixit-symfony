@@ -1,0 +1,76 @@
+{% extends "front.html.twig" %}
+{% block sidebar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <!--************************************
+				Main Start
+		*************************************-->
+    <main id="tg-main" class="tg-main tg-paddingzero tg-haslayout">
+        <!--************************************
+                Login Register Start
+        *************************************-->
+        <div class="tg-main-section tg-haslayout">
+            <div class="container">
+                <div class="row">
+                    <div id="tg-content" class="tg-content">
+                        <form class="tg-themeform " action="{{ path('front_afficherFrontOutil') }}">
+                            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                                <div class="tg-heading">
+                                    <h2>Informations de location</h2>
+                                </div>
+                                <fieldset>
+                                    <div class="tg-themetabcontent tab-content">
+                                        <div class="tab-pane active fade in" id="regularuser">
+                                            <div class="form-group">
+                                                <h2 type="text"  style="color: #bf0000">Outil épuisé dans le stock</h2>
+                                            </div>
+                                            <div class="form-group">
+                                                <button class="tg-btn"  type="submit" >Retour</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                <div >
+                                    <div class="tg-bordertitle">
+                                        <h2>Outil</h2>
+                                    </div>
+                                    <fieldset>
+                                        <figure class="tg-featuredimg">
+                                            <img src="{{ asset('uploads/images/outil/' ~ outil.image ) }}" style="width: 200px" alt="image description">
+
+                                        </figure>
+                                        <div class="tg-title">
+                                            <h2><a href="#">{{ outil.nom }}</a></h2>
+                                        </div>
+                                        <ul class="tg-companycontactinfo">
+                                            <li>
+                                                <img src="{{ asset('uploads/images/categorieOutil/' ~ outil.CategorieOutils.logo ) }}" width="30">
+                                                <span data-toggle="tooltip" data-placement="top" title="Click to view Number" data-last="34 - 562 - 6">{{ outil.CategorieOutils.nom }}</em></span>
+                                            </li>
+                                            <li>
+                                                <img src="{{ asset("service/images/icons/adresse.png") }}" width="30">
+                                                <span data-toggle="tooltip" data-placement="top" title="Click to view Number" data-last="34 - 562 - 6">{{ outil.adresse }} ,{{ outil.ville }}</em></span>
+                                            </li>
+
+                                            <li>
+                                                <img src="{{ asset("service/images/icons/scoin.png") }}" width="30">
+                                                <span data-toggle="tooltip" data-placement="top" title="Click to view Number" data-last="34 - 562 - 6">{{ outil.prix }}</em></span>
+                                            </li>
+                                        </ul>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--************************************
+                Login Register End
+        *************************************-->
+
+{% endblock %}

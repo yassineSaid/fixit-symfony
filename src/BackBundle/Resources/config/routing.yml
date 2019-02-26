@@ -3,10 +3,10 @@ back_homepage:
   defaults: { _controller: BackBundle:Default:index }
 admin_login:
   path:     /admin/login
-  defaults: { _controller: BackBundle:Security:login }
+  defaults: { _controller: UserBundle:Security:login }
 admin_index:
   path:     /admin
-  defaults: { _controller: BackBundle:Security:login }
+  defaults: { _controller: UserBundle:Security:login }
 login:
   path:     /login
   defaults: { _controller: UserBundle:Security:login }
@@ -69,6 +69,9 @@ main_traite_reclamation_admin:
 main_supprimer_reclamation_admin:
   path:     /admin/supp/{rec}
   defaults: { _controller: BackBundle:ReclamationBack:supprimeradmin }
+main_afficher_note_admin:
+  path:     /admin/Avis
+  defaults: { _controller: BackBundle:AvisBack:AvisStatistics }
   ############################        END ROUTING DE MUSTAPHA         #######################
 ################# ROUTING DE Sl-Wassim PLEASE DON'T TOUCH #####################
 back_ajouterCategorieOutil:
@@ -95,4 +98,59 @@ back_modifierOutil:
 back_supprimerOutil:
   path: /admin/supprimerOutil
   defaults: { _controller: BackBundle:Outil:supprimer }
+back_outilLoues:
+  path: /admin/outilLoues
+  defaults: { _controller: BackBundle:Outil:outilLoues }
+back_retournerOutil:
+  path: /admin/retournerOutil
+  defaults: { _controller: BackBundle:Outil:retourner }
+back_historique:
+  path: /admin/historique
+  defaults: { _controller: BackBundle:Outil:historique }
 ############################ END ROUNTING DE Sl-Wassim ##########################
+########################### Routing de Slim PLEASE DON'T TOUCH ####################
+back_ajouterCategorieService:
+  path: /admin/ajouterCategorieService
+  defaults: { _controller: BackBundle:CategorieService:ajouter }
+
+back_afficherCategorieService:
+  path: /admin/afficherCategorieService
+  defaults: { _controller: BackBundle:CategorieService:afficher }
+back_modifierCategorieService:
+  path: /admin/modifierCategorieService/{id}
+  defaults: { _controller: BackBundle:CategorieService:modifier }
+back_supprimerCategorieService:
+  path: /admin/supprimerCategorieService/{id}
+  defaults: { _controller: BackBundle:CategorieService:supprimer }
+
+back_ajouterService:
+  path: /admin/ajouterService
+  defaults: { _controller: BackBundle:Service:ajouter }
+back_afficherService:
+  path: /admin/afficherService
+  defaults: { _controller: BackBundle:Service:afficher }
+back_modifierService:
+  path: /admin/modifierService/{id}
+  defaults: { _controller: BackBundle:Service:modifier }
+back_supprimerService:
+  path: /admin/supprimerService/{id}
+  defaults: { _controller: BackBundle:Service:supprimer }
+
+back_afficherServiceProposes:
+  path: /admin/afficherServiceProposes
+  defaults: { _controller: BackBundle:Service:afficherProposition }
+back_etudeProposition:
+  path: /admin/afficherServiceProposes/{id}
+  defaults: { _controller: BackBundle:Service:etudierProposition }
+back_ajouterProposition:
+  path: /admin/ajouterServiceProposes
+  defaults: { _controller: BackBundle:Service:ajouterProposition }
+back_historique:
+  path: /admin/historiqueService
+  defaults: { _controller: BackBundle:Service:afficherHistorique }
+back_recupererHistorique:
+  path: /admin/recupererHistoriqueService/{id}/{idh}
+  defaults: { _controller: BackBundle:Service:recupererHistorique }
+
+
+########################### END Routing de Slim ######################################
