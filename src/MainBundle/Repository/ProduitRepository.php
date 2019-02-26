@@ -10,4 +10,34 @@ namespace MainBundle\Repository;
  */
 class ProduitRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function mesProduitsDQL($id)
+    {
+
+        $query=$this->getEntityManager()->createQuery("SELECT p FROM MainBundle:Produit p where p.user = :id ");
+        $query->setParameter('id',$id);
+
+
+        return $query->getResult();
+    }
+    public function triNomASC()
+    {
+        $query=$this->getEntityManager()->createQuery("SELECT p FROM MainBundle:Produit p ORDER BY p.nom ");
+        return $query->getResult();
+    }
+    public function triPrixASC()
+    {
+        $query=$this->getEntityManager()->createQuery("SELECT p FROM MainBundle:Produit p ORDER BY p.prix ");
+        return $query->getResult();
+    }
+    public function triNomDSC()
+    {
+        $query=$this->getEntityManager()->createQuery("SELECT o FROM MainBundle:Produit p ORDER BY p.nom DESC");
+        return $query->getResult();
+    }
+    public function triPrixDSC()
+    {
+        $query=$this->getEntityManager()->createQuery("SELECT o FROM MainBundle:Produit p ORDER BY p.prix DESC");
+        return $query->getResult();
+    }
+
 }
