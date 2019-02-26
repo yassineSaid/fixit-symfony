@@ -118,8 +118,17 @@
                             {% else %}
                             <div class="tg-useradminbox">
                                 <div class="tg-themedropdown tg-userdropdown">
-                                    <a href="dashboard.html" id="tg-usermenu" class="tg-btndropdown">
-                                        <em><img src="{{ asset("service/images/thumbnails/img-01.jpg") }}" alt="image description"></em>
+                                    <a href="{{ path('profile_setting') }}" id="tg-usermenu" class="tg-btndropdown">
+                                        {% if app.user.image == null %}
+                                            <em><img src="{{ asset("service/images/thumbnails/img-01.jpg") }}" alt="image description"></em>
+                                        {% else %}
+                                            <em><img
+                                                    src="{{ asset('uploads/images/user/' ~ app.user.image ) }}"
+                                                    alt="image description"
+                                                    style="height: 30px; width: 30px;"
+                                            ></em>
+                                        {% endif %}
+
                                         <span>Bonjour {{  app.user.firstname }} {{  app.user.lastname }}  </span>
                                         <i class="fa fa-angle-down"></i>
                                     </a>
@@ -462,7 +471,7 @@
                                     </ul>
                                 </div>
                             </nav>
-                            <a class="tg-btn tg-btnpostanewjob" href="dashboard.html">Trouvez une personne</a>
+                            <a class="tg-btn tg-btnpostanewjob" href="{{ path('rechercherUser') }}">Trouvez une personne</a>
                         </div>
                     </div>
                 </div>

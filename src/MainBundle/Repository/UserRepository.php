@@ -28,4 +28,18 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
         $query->setParameter('id',$id);
         return $query->getResult();
     }
+    public function listUsers($nom,$languesR,$zipcode,$ville)
+    {
+        $str="SELECT u
+            FROM MainBundle:User u
+            where u.roles='a:0:{}' AND (upper(u.firstname) LIKE :name OR upper(u.lastname) LIKE :name)";
+        if (strlen($zipcode)!=0)
+            $str=$str."AND u.zipCode LIKE '%".$zipcode."%'";
+        if (strlen($ville)!=0)
+            $str=$str."AND upper(u.city) LIKE '%".strtoupper($ville)."%'";
+
+        $query=$this->getEntityManager()->createQuery($str);
+        $query->setParameter('name',"%".strtoupper($nom)."%");
+        return $query->getResult();
+    }
 }

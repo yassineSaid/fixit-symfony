@@ -2,7 +2,7 @@ front_homepage:
     path:     /index
     defaults: { _controller: FrontBundle:Default:index }
 profile_setting:
-    path:     /profil
+    path:     /compte/profil
     defaults: { _controller: FrontBundle:User:profil }
 account_setting:
     path:     /compte
@@ -10,6 +10,13 @@ account_setting:
 rechercherUser:
   path:     /recherche
   defaults: { _controller: FrontBundle:User:rechercher }
+afficherProfil:
+  path:     /profil/{id}
+  defaults: { _controller: FrontBundle:User:afficherUser }
+ajouterPhoto:
+  path:     /compte/ajouterPhoto
+  defaults: { _controller: FrontBundle:User:ajouterPhoto }
+  methods: [post]
 fos_user_profile_show:
   path: /compte
 paiement:

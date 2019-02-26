@@ -12,8 +12,16 @@
                             </figure>
                             <div class="tg-widgetcontent">
                                 <figure>
-                                    <img src="{{ asset("service/images/thumbnails/img-07.jpg") }}" alt="image description">
-                                    <a class="tg-btnedite" href="javascript:void(0);"><i class="lnr lnr-pencil"></i></a>
+                                    {% if app.user.image == null %}
+                                        <img src="{{ asset("service/images/thumbnails/img-07.jpg") }}" alt="image description">
+                                    {% else %}
+                                        <img
+                                                src="{{ asset('uploads/images/user/' ~ app.user.image ) }}"
+                                                alt="image description"
+                                                style="height: 100px; width: 100px;margin: auto"
+                                        >
+                                    {% endif %}
+                                    <a class="tg-btnedite" href="{{ path('profile_setting') }}"><i class="lnr lnr-pencil"></i></a>
                                 </figure>
                                 <div class="tg-admininfo">
                                     <h3>{{  app.user.firstname }} {{  app.user.lastname }}</h3>

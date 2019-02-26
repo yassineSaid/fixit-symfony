@@ -4,6 +4,7 @@ namespace MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -11,6 +12,7 @@ use FOS\UserBundle\Model\User as BaseUser;
  * @package MainBundle\Entity
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="MainBundle\Repository\UserRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class User extends BaseUser
 {
@@ -90,6 +92,23 @@ class User extends BaseUser
      */
     protected $solde = 0;
 
+    /**
+     * Many Users have Many Services.
+     * @ORM\ManyToMany(targetEntity="Service")
+     * @ORM\JoinTable(name="ServiceUser",
+     *      joinColumns={@ORM\JoinColumn(name="id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="Service", referencedColumnName="id")}
+     *      )
+     */
+    private $Services;
+
+    /**
+     * @var string
+     * @Assert\File(mimeTypes={"image/jpeg","image/png"})
+     *
+     * @ORM\Column(name="image", type="string", nullable=true)
+     */
+    protected $image;
 
     /**
      * Constructor
@@ -269,6 +288,37 @@ class User extends BaseUser
         return $this->Langues;
     }
 
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getServices()
+    {
+        return $this->Services;
+    }
+
+    /**
+     * @param mixed $Services
+     */
+    public function setServices($Services)
+    {
+        $this->Services = $Services;
+    }
 
 
 }

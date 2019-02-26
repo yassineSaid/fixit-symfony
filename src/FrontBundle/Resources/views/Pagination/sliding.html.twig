@@ -30,4 +30,8 @@
         {% endif %}
 
     </ul>
+{% else %}
+    <ul>
+        <li class="tg-active"><a href="{{ path(route, query|merge({(pageParameterName): first})) }}">1</a></li>
+    </ul>
 {% endif %}

@@ -8,11 +8,62 @@
             var $scoin=$('#scoin');
             var $bouton=$('#customButton');
             var verif=0;
+            function readURL(input) {
+                console.log("aaaaa");
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#file').html("");
+                        var img=document.createElement('img');
+                        var input=document.createElement('input');
+                        input.setAttribute('type','file');
+                        input.setAttribute('name','image');
+                        input.setAttribute('id','tg-photoandlogo');
+                        input.setAttribute('class','tg-fileinput');
+                        input.onchange=function () {
+                            readURL(input);
+                        };
+                        img.setAttribute('src', e.target.result);
+                        img.style.cssText='max-width:400px;max-height:200px';
+                        $("#file").append(img);
+                        $("#file").append(input);
+                        //$("#file").css({'width' : '190px' , 'height' : '190px' , 'text-align':'center'});
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                    $("#imageUploadForm").submit();
+                }
+            }
+            $('#imageUploadForm').on('submit',(function(e) {
+                e.preventDefault();
+                var formData = new FormData(this);
+
+                $.ajax({
+                    type:'POST',
+                    url: "{{ path('ajouterPhoto') }}",
+                    data:formData,
+                    cache:false,
+                    contentType: false,
+                    processData: false,
+                    success:function(data){
+                        console.log("success");
+                        console.log(data);
+                    },
+                    error: function(data){
+                        console.log("error");
+                        console.log(data);
+                    }
+                });
+            }));
+            $("#tg-photoandlogo").change(function () {
+                readURL(this);
+            });
             $("#langue").click(
                 function () {
                     ajaxAdd();
                 }
-            )
+            );
             function ajaxAdd(){
                 $.ajax({
                     url: "{{ path('ajouterLangue') }}",
@@ -121,6 +172,43 @@
                             <div class="tg-dashboard tg-dashboardprofilesetting">
                                 <div class="tg-themeform">
                                     <fieldset>
+                                        <div class="tg-dashboardbox tg-uploadphotos">
+                                            <div class="tg-dashboardtitle">
+                                                <h2>Photo de profil</h2>
+                                            </div>
+                                            <div class="tg-brochureuploadbox">
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                                        <div class="tg-upload">
+                                                            <form method="post" enctype="multipart/form-data" id="imageUploadForm">
+                                                                <div class="tg-uploadhead">
+																	<span>
+																		<h3>Cliquez sur la photo pour la changer</h3>
+																		<i class="fa fa-exclamation-circle"></i>
+																	</span>
+
+                                                                    <i class="lnr lnr-upload"><button type="submit"></button></i>
+
+                                                            </div>
+                                                                <div class="tg-box">
+                                                                <label class="tg-fileuploadlabel" for="tg-photoandlogo" id="file">
+                                                                    {% if app.user.image != null %}
+                                                                    <img
+                                                                            src="{{ asset('uploads/images/user/' ~ app.user.image ) }}"
+                                                                            style="max-width: 400px;max-height: 200px">
+                                                                    {% else %}
+                                                                    <i class="lnr lnr-cloud-upload"></i>
+                                                                    <span>Or Drag Your Files Here To Upload</span>
+                                                                    {% endif %}
+                                                                    <input id="tg-photoandlogo" class="tg-fileinput" type="file" name="image">
+                                                                </label>
+                                                            </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="tg-dashboardbox tg-basicinformation">
                                             <div class="tg-dashboardtitle">
                                                 <h2>Votre solde</h2>
