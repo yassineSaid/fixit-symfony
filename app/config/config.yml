@@ -12,6 +12,8 @@ parameters:
     locale: en
     outil_directory: '%kernel.root_dir%/../web/uploads/images/outil'
     categorieOutil_directory: '%kernel.root_dir%/../web/uploads/images/categorieOutil'
+    produit_directory: '%kernel.root_dir%/../web/uploads/images/produit'
+    categorieProduit_directory: '%kernel.root_dir%/../web/uploads/images/categorieProduit'
 
 framework:
     #esi: ~

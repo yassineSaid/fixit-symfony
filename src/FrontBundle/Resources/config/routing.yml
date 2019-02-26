@@ -67,3 +67,20 @@ front_louerOutil:
   path: /compte/louerOutil
   defaults: { _controller: FrontBundle:Outil:louer }
 ############################ END ROUNTING DE Sl-Wassim ##########################
+    ############routing ali##############
+main_ajouter_Produit:
+    path:    /ajoutProduit
+    defaults: { _controller: FrontBundle:Produit:ajouter }
+main_modifier_Produit:
+    path:    modifierProduits/{prod}
+    defaults: { _controller: FrontBundle:Produit:modifier }
+main_supprimer_Produit:
+    path:    supprimerProduits/{prod}
+    defaults: { _controller: FrontBundle:Produit:Supprimer }
+main_mes_produit:
+    path:     /listproduit
+    defaults: { _controller: FrontBundle:Produit:MesProduit }
+main_Detaille_produit:
+  path:     detailleProduit/{prod}
+  defaults: { _controller: FrontBundle:Produit:Detaill }
+      ###############end routing of ali############

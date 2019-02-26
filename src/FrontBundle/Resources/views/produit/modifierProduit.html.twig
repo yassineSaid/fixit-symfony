@@ -1,0 +1,82 @@
+{% extends "front.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block title %}Modifier un produit{% endblock %}
+{% block sidebar %}{% endblock %}
+{% block content %}
+
+
+
+
+
+    <div class="tg-main-section tg-haslayout">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-10 col-md-push-1 col-lg-8 col-lg-push-2">
+                    <div class="tg-sectionhead">
+                        <div class="tg-sectiontitle">
+                            <h2>Modifier un produit </h2>
+                        </div>
+                        <div class="tg-description">
+                        </div>
+                    </div>
+                </div>
+                <div class="tg-contactusarea">
+                    <div class="col-xs-12 col-sm-12 col-md-10 col-md-push-1 col-lg-10 col-lg-push-1">
+                        <form class="tg-themeform" method="post" enctype="multipart/form-data">
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <input type="text" name="nom" class="form-control" placeholder="nom">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <input type="text" name="quantite" class="form-control" placeholder="quantite">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <input type="text" name="prix" class="form-control" placeholder="prix en scoins">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <input type="date" name="date" class="form-control" placeholder="date d'expiration">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-label w-100">Ajouter un logo</label>
+                                            <input type="file" name="inputLogo">
+                                        </div>
+
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <select class="form-control" name="Categorie">
+                                                {% for u in categorie %}
+                                                    <option value="{{ u.id}}">{{ u.nom }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <button type="submit" class="tg-btn">Submit</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+{% endblock %}

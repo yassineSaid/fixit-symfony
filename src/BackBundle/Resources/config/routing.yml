@@ -40,6 +40,20 @@ registration_confirmed:
 ajouter_service:
   path:     /service/ajouter
   defaults: { _controller: BackBundle:CategorieService:confirmed }
+  #############routing ali######################
+main_ajouterCategori_Produit:
+  path:    /admin/ajouterCategorieProduits
+  defaults: { _controller: BackBundle:CategorieProduit:ajouter }
+main_listCategorie_Produit:
+  path:    /admin/listCategorieProduits
+  defaults: { _controller: BackBundle:CategorieProduit:lister }
+main_supprimerCategorie_Produit:
+  path:    /admin/supprimerCategorieProduits/{cat}
+  defaults: { _controller: BackBundle:CategorieProduit:supprimer }
+main_modifierCategorie_Produit:
+  path:    /admin/modfierCategorieProduits/{cat}
+  defaults: { _controller: BackBundle:CategorieProduit:modifier }
+  ########################################end routing of ali ################
 
 
 ############################ ROUTING DE MUSTAPHA PLEASE DON'T TOUCH #######################

@@ -8,32 +8,6 @@ main_homepage:
 
 
 ############################ END ROUNTING DE MUSTAPHA ##########################
-###########################ali#######################
-main_ajouterCategori_Produit:
-    path:    /ajouterCategorieProduits
-    defaults: { _controller: MainBundle:CategorieProduit:ajouter }
-main_listCategorie_Produit:
-    path:    /listCategorieProduits
-    defaults: { _controller: MainBundle:CategorieProduit:lister }
-main_supprimerCategorie_Produit:
-    path:    /listCategorieProduits
-    defaults: { _controller: MainBundle:CategorieProduit:supprimer }
-main_modifierCategorie_Produit:
-    path:    modfierCategorieProduits/{cat}
-    defaults: { _controller: MainBundle:CategorieProduit:modifier }
-main_ajouter_Produit:
-    path:    /ajoutProduits
-    defaults: { _controller: MainBundle:Produit:ajouter }
-main_modifier_Produit:
-    path:    modifierProduits/{prod}
-    defaults: { _controller: MainBundle:Produit:modifier }
-main_supprimer_Produit:
-    path:    supprimerProduits/{prod}
-    defaults: { _controller: MainBundle:Produit:Supprimer }
-main_mes_produit:
-    path:     /listproduit
-    defaults: { _controller: MainBundle:Produit:MesProduit }
-    #######################end routing ali #########################
     ################# ROUTING DE Sl-Wassim PLEASE DON'T TOUCH #####################
 
 ############################ END ROUNTING DE Sl-Wassim ##########################

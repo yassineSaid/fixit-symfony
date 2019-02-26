@@ -1,0 +1,70 @@
+{% extends "front.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block title %}Réclamer un service{% endblock %}
+{% block sidebar %}{% endblock %}
+{% block content %}
+
+
+
+
+
+    <div class="tg-main-section tg-haslayout">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-10 col-md-push-1 col-lg-8 col-lg-push-2">
+                    <div class="tg-sectionhead">
+                        <div class="tg-sectiontitle">
+                            <h2>Réclamer Un Service</h2>
+                        </div>
+                        <div class="tg-description">
+                            <p>Afin de vous satisfaire au mieux, nous allons prendre du le temps d'xaminer votre réclamation avec toute l’attention qu’elle mérite.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tg-contactusarea">
+                    <div class="col-xs-12 col-sm-12 col-md-10 col-md-push-1 col-lg-10 col-lg-push-1">
+                        <form class="tg-themeform" method="POST" action="{{ path('main_ajouter_Produit') }}">
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <select class="form-control" name="UserAReclamer" id="UserAReclamer">
+                                                {% for u in user %}
+                                                <option value="{{ u.UserDemandeur.id}}">{{ u.UserDemandeur.firstname }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <input type="text" name="Object" class="form-control" placeholder="Object">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <input type="text" name="name" class="form-control" placeholder="Subject">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <div class="form-group">
+                                            <textarea placeholder="Description" name="Description"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <button type="submit" class="tg-btn">Submit</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+{% endblock %}
