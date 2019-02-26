@@ -91,3 +91,49 @@ back_historique:
   path: /admin/historique
   defaults: { _controller: BackBundle:Outil:historique }
 ############################ END ROUNTING DE Sl-Wassim ##########################
+########################### Routing de Slim PLEASE DON'T TOUCH ####################
+back_ajouterCategorieService:
+  path: /admin/ajouterCategorieService
+  defaults: { _controller: BackBundle:CategorieService:ajouter }
+
+back_afficherCategorieService:
+  path: /admin/afficherCategorieService
+  defaults: { _controller: BackBundle:CategorieService:afficher }
+back_modifierCategorieService:
+  path: /admin/modifierCategorieService/{id}
+  defaults: { _controller: BackBundle:CategorieService:modifier }
+back_supprimerCategorieService:
+  path: /admin/supprimerCategorieService/{id}
+  defaults: { _controller: BackBundle:CategorieService:supprimer }
+
+back_ajouterService:
+  path: /admin/ajouterService
+  defaults: { _controller: BackBundle:Service:ajouter }
+back_afficherService:
+  path: /admin/afficherService
+  defaults: { _controller: BackBundle:Service:afficher }
+back_modifierService:
+  path: /admin/modifierService/{id}
+  defaults: { _controller: BackBundle:Service:modifier }
+back_supprimerService:
+  path: /admin/supprimerService/{id}
+  defaults: { _controller: BackBundle:Service:supprimer }
+
+back_afficherServiceProposes:
+  path: /admin/afficherServiceProposes
+  defaults: { _controller: BackBundle:Service:afficherProposition }
+back_etudeProposition:
+  path: /admin/afficherServiceProposes/{id}
+  defaults: { _controller: BackBundle:Service:etudierProposition }
+back_ajouterProposition:
+  path: /admin/ajouterServiceProposes
+  defaults: { _controller: BackBundle:Service:ajouterProposition }
+back_historique:
+  path: /admin/historiqueService
+  defaults: { _controller: BackBundle:Service:afficherHistorique }
+back_recupererHistorique:
+  path: /admin/recupererHistoriqueService/{id}/{idh}
+  defaults: { _controller: BackBundle:Service:recupererHistorique }
+
+
+########################### END Routing de Slim ######################################

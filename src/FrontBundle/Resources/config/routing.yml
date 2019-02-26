@@ -95,3 +95,35 @@ front_louerOutil:
   path: /compte/louerOutil
   defaults: { _controller: FrontBundle:Outil:louer }
 ############################ END ROUNTING DE Sl-Wassim ##########################
+front_listeService:
+  path:     /listeService
+  defaults: { _controller: FrontBundle:Service:afficher }
+front_detailsService:
+  path:     /detailsService/{id}
+  defaults: { _controller: FrontBundle:Service:details }
+front_gererService:
+  path:     /compte/gererService
+  defaults: { _controller: FrontBundle:Service:gerer }
+front_gestionService:
+  path:     /compte/gestionService
+  defaults: { _controller: FrontBundle:Service:listServiceCat }
+  methods:  GET
+front_ajouterServiceUser:
+  path:     /compte/ajouterServiceUser
+  defaults: { _controller: FrontBundle:Service:ajouter }
+front_afficherServiceUser:
+  path:     /compte/afficherServiceUser
+  defaults: { _controller: FrontBundle:Service:afficherService }
+front_supprimerServiceUser:
+  path:     /compte/supprimerServiceUser/{id}
+  defaults: { _controller: FrontBundle:Service:supprimer }
+front_proposerServiceUser:
+  path:     /compte/proposerServiceUser
+  defaults: { _controller: FrontBundle:Service:ajouterProposition }
+front_listerServiceUser:
+  path:     /compte/listeService
+  defaults: { _controller: FrontBundle:Service:lister }
+front_search:
+  path:     /compte/search
+  defaults: { _controller: FrontBundle:Service:search }
+  methods:  GET

@@ -37,32 +37,8 @@ main_mes_produit:
     ################# ROUTING DE Sl-Wassim PLEASE DON'T TOUCH #####################
 
 ############################ END ROUNTING DE Sl-Wassim ##########################
+
 ########################### Routing de Slim PLEASE DON'T TOUCH ####################
-main_ajouterCategorieService:
-    path: /ajouterCategorieService
-    defaults: { _controller: MainBundle:CategorieService:ajouter }
 
-main_afficherCategorieService:
-    path: /afficherCategorieService
-    defaults: { _controller: MainBundle:CategorieService:afficher }
-main_modifierCategorieService:
-    path: /modifierCategorieService/{id}
-    defaults: { _controller: MainBundle:CategorieService:modifier }
-main_supprimerCategorieService:
-    path: /supprimerCategorieService/{id}
-    defaults: { _controller: MainBundle:CategorieService:supprimer }
-
-main_ajouterService:
-    path: /ajouterService
-    defaults: { _controller: MainBundle:Service:ajouter }
-main_afficherService:
-    path: /afficherService
-    defaults: { _controller: MainBundle:Service:afficher }
-main_modifierService:
-    path: /modifierService
-    defaults: { _controller: MainBundle:Service:modifier }
-main_supprimerService:
-    path: /supprimerService
-    defaults: { _controller: MainBundle:Service:supprimer }
 
 ########################### END Routing de Slim ######################################

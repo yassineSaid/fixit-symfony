@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{% block title %}Service Provider{% endblock %}</title>
+    <title>{% block title %}Fixit{% endblock %}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="rel" type="image/png"  href="{{ asset("service/images/icon.png") }}">
@@ -145,9 +145,9 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="dashboardmanageservice.html">
+                                                    <a href="{{ path('front_gererService') }}">
                                                         <i class="lnr lnr-briefcase"></i>
-                                                        <span>Manage Services</span>
+                                                        <span>Mes Services</span>
                                                     </a>
                                                 </li>
                                                 <li>
@@ -262,7 +262,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12 col-xs-12">
-                        <strong class="tg-logo"><a href="index.html"><img src="{{ asset("service/images/logo.png") }}" alt="image description"></a></strong>
+                        <strong class="tg-logo"><a href="{{ path('front_homepage') }}"><img src="{{ asset("service/images/logo.png") }}" alt="image description"></a></strong>
                         <div class="tg-rightarea">
                             <nav id="tg-nav" class="tg-nav">
                                 <div class="navbar-header">
@@ -276,7 +276,7 @@
                                 <div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
                                     <ul>
                                         <li class="menu-item-has-children current-menu-item">
-                                            <a href="#">Home</a>
+                                            <a href="{{ path('front_homepage') }}">Accueil</a>
                                             <ul class="sub-menu">
                                                 <li class="current-menu-item">
                                                     <a href="index.html">Home-1</a>
@@ -305,15 +305,17 @@
                                             </ul>
                                         </li>
                                         <li class="menu-item-has-children">
-                                            <a href="javascript:void(0);">Categories</a>
+                                            <a href="{{ path('front_listeService') }}">services</a>
                                             <ul class="sub-menu">
+
                                                 <li class="menu-item-has-children">
-                                                    <a href="#">Automotive</a>
+                                                    <a href="#">automotive</a>
                                                     <ul class="sub-menu">
                                                         <li><a href="categories3col.html">Catagories</a></li>
                                                         <li><a href="categories4col.html">Catagories 2</a></li>
                                                     </ul>
                                                 </li>
+
                                                 <li class="menu-item-has-children">
                                                     <a href="#">Beauty &amp; Personal Care</a>
                                                     <ul class="sub-menu">

@@ -3,35 +3,31 @@
     <main class="content">
         <div class="container-fluid p-0">
 
-            <h1 class="h3 mb-3">Liste des Services</h1>
+            <h1 class="h3 mb-3">Historique</h1>
             <div class="row">
-
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <a href="{{ path('back_ajouterService') }}"><button class="btn btn-pill btn-primary"> Ajouter un Service</button></a>
-                        </div>
                         <div class="card-body">
 
                             <table id="datatables-basic" class="table table-striped" style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th>Image</th>
                                     <th>Nom</th>
                                     <th>Categorie</th>
+                                    <th>Date</th>
                                     <th>Actions</th>
 
 
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for s in service %}
+                                {% for s in historique %}
                                     <tr>
-                                        <td><img src="{{ asset('uploads/images/service/' ~ s.imageService ) }}" style="width: 150px"> </td>
-                                        <td>{{ s.nom }}</td>
-                                        <td>{{ s.CategorieService.nom }}</td>
-                                        <td><a href="{{ path('back_modifierService',{'id': s.id}) }}"><i class="align-middle" data-feather="edit-2"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <a href="{{ path('back_supprimerService',{'id': s.id}) }}"><i class="align-middle" data-feather="trash"></i></a> </td>
+                                        <td>{{ s.nomService }}</td>
+                                        <td>{{ s.categorieService }}</td>
+                                        <td>{{ s.dateSuppression | date }}</td>
+                                        <td>{{ s.actions }}</td>
+                                        <td><a href="{{ path('back_recupererHistorique',{'id': s.idService,'idh':s.id}) }}"><button class="btn btn-danger">Recuperer</button></a> </td>
 
                                     </tr>
                                 {% endfor %}
@@ -40,10 +36,9 @@
 
                                 <tfoot>
                                 <tr>
-                                    <th>Image</th>
+                                    <th>Id</th>
                                     <th>Nom</th>
-                                    <th>Categorie</th>
-                                    <th>Actions</th>
+                                    <th>Description</th>
 
                                 </tr>
                                 </tfoot>
@@ -55,6 +50,7 @@
 
 
             </div>
+
             <script>
                 document.addEventListener("DOMContentLoaded", function(event) {
                     // Datatables basic

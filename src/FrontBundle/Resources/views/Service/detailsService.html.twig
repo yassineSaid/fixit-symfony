@@ -1,0 +1,281 @@
+{% extends "front.html.twig" %}
+{% block content %}
+<main id="tg-main" class="tg-main tg-haslayout">
+    <div class="tg-detailpage tg-jobdetail">
+        <div class="tg-detailpagehead">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="tg-detailpageheadcontent">
+                            <div class="tg-companylogo"><img src="{{ asset('uploads/images/service/' ~ service.imageService ) }}" alt="image description"></div>
+                            <div class="tg-companycontent">
+                                <ul class="tg-tags">
+                                    <li><a class="tg-tag" href="#">Full Time</a></li>
+                                </ul>
+                                <div class="tg-title">
+                                    <h1>{{ service.nom }}</h1>
+                                    <span class="tg-jobpostedby">Categorie: {{ service.CategorieService.nom }}</span>
+                                </div>
+                            </div>
+                            <a class="tg-btn" href="javascript:void(0);">apply now</a>
+                        </div>
+                        <ul class="tg-jobmatadata">
+                            <li>
+                                <div class="tg-box tg-posteddate">
+                                    <span class="tg-jobmataicon"><i class="lnr lnr-calendar-full"></i></span>
+                                    <div class="tg-jobmatacontent">
+                                        <strong>Posted Date</strong>
+                                        <span>January 12th, 2011</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="tg-box tg-applicantapplied">
+                                    <span class="tg-jobmataicon"><i class="lnr lnr-book"></i></span>
+                                    <div class="tg-jobmatacontent">
+                                        <strong>Applicant Applied</strong>
+                                        <span>3479  Applications Received</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="tg-box tg-views">
+                                    <span class="tg-jobmataicon"><i class="lnr lnr-eye"></i></span>
+                                    <div class="tg-jobmatacontent">
+                                        <strong>Views</strong>
+                                        <span>Total Views: 22508</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="tg-box tg-expiredate">
+                                    <span class="tg-jobmataicon"><i class="lnr lnr-warning"></i></span>
+                                    <div class="tg-jobmatacontent">
+                                        <strong>Expire Date</strong>
+                                        <span>July 27, 2017</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="tg-twocolumns" class="tg-twocolumns">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-7 col-md-8 col-lg-8 pull-left">
+                        <div id="tg-content" class="tg-content">
+                            <div class="tg-companyfeatures">
+                                <div class="tg-companyfeaturebox tg-introduction">
+                                    <div class="tg-companyfeaturetitle">
+                                        <h3>Introduction</h3>
+                                    </div>
+                                    <div class="tg-description">
+                                        <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minimat quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat aute irure dolor reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam ab illo inventore veritatis quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut fugit sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                                        <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+                                        <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minimat quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat aute irure dolor reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam ab illo inventore veritatis quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut fugit sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                                        <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+                                    </div>
+                                </div>
+                                <div class="tg-companyfeaturebox tg-jobdetails">
+                                    <div class="tg-companyfeaturetitle">
+                                        <h3>Job Details</h3>
+                                    </div>
+                                    <ul>
+                                        <li>
+                                            <span>Career Level:</span>
+                                            <span>Professional</span>
+                                        </li>
+                                        <li>
+                                            <span>Experience:</span>
+                                            <span>04 Years</span>
+                                        </li>
+                                        <li>
+                                            <span>Salary:</span>
+                                            <span><a href="#">Login To View</a></span>
+                                        </li>
+                                        <li>
+                                            <span>Manages Others:</span>
+                                            <span>No</span>
+                                        </li>
+                                        <li>
+                                            <span>Job Type:</span>
+                                            <span>Full Time</span>
+                                        </li>
+                                        <li>
+                                            <span>Travel:</span>
+                                            <span>No Travel</span>
+                                        </li>
+                                        <li>
+                                            <span>Qualification:</span>
+                                            <span>Graduate</span>
+                                        </li>
+                                        <li>
+                                            <span>Language:</span>
+                                            <span>English, Arabic, Chinese</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tg-companyfeaturebox tg-jobrequirments">
+                                    <div class="tg-companyfeaturetitle">
+                                        <h3>Job Requirements</h3>
+                                    </div>
+                                    <div class="tg-description">
+                                        <p>Tempor incididunt ut labore et dolore magna aliqua enim ad minimat quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat aute irure dolor reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur cupidatat non proident.</p>
+                                    </div>
+                                    <ul class="tg-themeliststyle tg-themeliststyletick">
+                                        <li>Minimum 200hr Yoga Certification</li>
+                                        <li>1+ years experience teaching regular group classes</li>
+                                        <li>Current CPR</li>
+                                        <li>Agree to 6 month minimum commitment</li>
+                                        <li>Ability to approach challenges in a creative, positive and team-centered manner</li>
+                                        <li>Strong communication and interpersonal skills</li>
+                                    </ul>
+                                </div>
+                                <div class="tg-companyfeaturebox tg-benefitsallowances">
+                                    <div class="tg-companyfeaturetitle">
+                                        <h3>Benefits / Allowances</h3>
+                                    </div>
+                                    <ul class="tg-themeliststyle tg-themeliststylecircletick">
+                                        <li>Consectetur Adipisicing</li>
+                                        <li>Eiusmod Tempor</li>
+                                        <li>Incididunt Ut Labore</li>
+                                        <li>Dolore Magna Aliqua</li>
+                                        <li>Ad Minim Veniam</li>
+                                        <li>Exercitation Ullamco</li>
+                                        <li>Laboris Nisi Ut Aliquip</li>
+                                        <li>Commodo Consequat</li>
+                                        <li>Reprehenderit In Voluptate</li>
+                                        <li>Velit Esse Cillum Dolore</li>
+                                        <li>Fugiat Nulla Pariatur</li>
+                                        <li>Excepteur Sint Occaecat</li>
+                                        <li>Cupidatat Non Proident</li>
+                                        <li>Officia Deserunt Mollit</li>
+                                        <li>Perspiciatis Unde Omnis Iste</li>
+                                        <li>Natus Error Sit</li>
+                                        <li>Voluptatem Accusantium</li>
+                                        <li>Laudantium</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-5 col-md-4 col-lg-4 pull-right">
+                        <aside id="tg-sidebar" class="tg-sidebar">
+                            <div class="tg-widget tg-widgetlocationandcontactinfo">
+                                <div class="tg-mapbox">
+                                    <div id="tg-joblocationmap" class="tg-locationmap"></div>
+                                </div>
+                                <div class="tg-contactinfobox">
+                                    <ul class="tg-contactinfo">
+                                        <li>
+                                            <i class="lnr lnr-location"></i>
+                                            <address>Abc tower, xyz street UK, HG521A</address>
+                                        </li>
+                                        <li>
+                                            <i class="lnr lnr-phone-handset"></i>
+                                            <span>0800 - 1234 - 562 - 6</span>
+                                        </li>
+                                        <li>
+                                            <i class="lnr lnr-printer"></i>
+                                            <span>+4 1234 567 - 9</span>
+                                        </li>
+                                        <li>
+                                            <i class="lnr lnr-envelope"></i>
+                                            <span><a href="mailto:query@domain.com">query@domain.com</a></span>
+                                        </li>
+                                        <li>
+                                            <i class="lnr lnr-construction"></i>
+                                            <span><a href="mailto:complaint@domain.com">complaint@domain.com</a></span>
+                                        </li>
+                                        <li>
+                                            <i class="lnr lnr-screen"></i>
+                                            <span><a href="www.domainurl.com" target="_blank">www.domainurl.com</a></span>
+                                        </li>
+                                    </ul>
+                                    <ul class="tg-socialicons">
+                                        <li class="tg-facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                        <li class="tg-twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li class="tg-linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                        <li class="tg-googleplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                        <li class="tg-rss"><a href="#"><i class="fa fa-rss"></i></a></li>
+                                    </ul>
+                                    <a class="tg-btn tg-btn-lg" href="javascript:void(0);">get direction</a>
+                                </div>
+                            </div>
+                            <div class="tg-widget tg-widgetshare">
+                                <div class="tg-widgettitle">
+                                    <h3>Share this job</h3>
+                                </div>
+                                <div class="tg-widgetcontent">
+                                    <ul class="tg-socialicons">
+                                        <li class="tg-facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                        <li class="tg-twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li class="tg-linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                        <li class="tg-googleplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                        <li class="tg-rss"><a href="#"><i class="fa fa-rss"></i></a></li>
+                                        <li class="tg-vimeo"><a href="#"><i class="fa fa-vimeo"></i></a></li>
+                                        <li class="tg-tumblr"><a href="#"><i class="fa fa-tumblr"></i></a></li>
+                                        <li class="tg-yahoo"><a href="#"><i class="fa fa-yahoo"></i></a></li>
+                                        <li class="tg-yelp"><a href="#"><i class="fa fa-yelp"></i></a></li>
+                                        <li class="tg-pinterestp"><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
+                                        <li class="tg-youtube"><a href="#"><i class="fa fa-youtube"></i></a></li>
+                                        <li class="tg-stumbleupon"><a href="#"><i class="fa fa-stumbleupon"></i></a></li>
+                                        <li class="tg-reddit"><a href="#"><i class="fa fa-reddit"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="tg-widget tg-widgetrelatedjobs">
+                                <div class="tg-widgettitle">
+                                    <h3>Related Jobs</h3>
+                                </div>
+                                <div class="tg-widgetcontent">
+                                    <ul>
+                                        <li>
+                                            <div class="tg-serviceprovidercontent">
+                                                <div class="tg-companylogo"><a href="#"><img src="images/logos/img-01.png" alt="image description"></a></div>
+                                                <div class="tg-companycontent">
+                                                    <a class="tg-tag tg-tagjobtype" href="#">fix</a>
+                                                    <div class="tg-title">
+                                                        <h3><a href="#">Carpenter Required</a></h3>
+                                                    </div>
+                                                    <span class="tg-jobpostedby">By: <a href="javascript:void(0);">Blue Bird Organization</a></span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="tg-serviceprovidercontent">
+                                                <div class="tg-companylogo"><a href="#"><img src="images/logos/img-02.png" alt="image description"></a></div>
+                                                <div class="tg-companycontent">
+                                                    <a class="tg-tag tg-tagjobtype" href="#">Internship</a>
+                                                    <div class="tg-title">
+                                                        <h3><a href="#">Electrician For Fixing Required</a></h3>
+                                                    </div>
+                                                    <span class="tg-jobpostedby">By: <a href="javascript:void(0);">On Fleek Spa &amp; Beauty Saloon</a></span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="tg-serviceprovidercontent">
+                                                <div class="tg-companylogo"><a href="#"><img src="images/logos/img-03.png" alt="image description"></a></div>
+                                                <div class="tg-companycontent">
+                                                    <a class="tg-tag tg-tagjobtype" href="#">Temporary</a>
+                                                    <div class="tg-title">
+                                                        <h3><a href="#">Car Fixing Mechanic Required</a></h3>
+                                                    </div>
+                                                    <span class="tg-jobpostedby">By: <a href="javascript:void(0);">Eldridge Hemenway</a></span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

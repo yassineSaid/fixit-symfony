@@ -55,10 +55,10 @@
                                             <span>Reclamations</span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="dashboardmanageservice.html">
+                                    <li{% if menu_selected == 'front_gererService' %} class="tg-active"{% endif %}>
+                                        <a href="{{ path('front_gererService') }}">
                                             <i class="lnr lnr-briefcase"></i>
-                                            <span>Manage Services</span>
+                                            <span>Mes Services</span>
                                         </a>
                                     </li>
                                     <li>

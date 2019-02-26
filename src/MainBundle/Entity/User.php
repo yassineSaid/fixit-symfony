@@ -90,15 +90,7 @@ class User extends BaseUser
      */
     protected $solde = 0;
 
-    /**
-     * Many Users have Many Services.
-     * @ORM\ManyToMany(targetEntity="Service")
-     * @ORM\JoinTable(name="ServiceUser",
-     *      joinColumns={@ORM\JoinColumn(name="id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="Service", referencedColumnName="id")}
-     *      )
-     */
-    private $Services;
+
     /**
      * Constructor
      */
