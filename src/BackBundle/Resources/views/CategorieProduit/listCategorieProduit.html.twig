@@ -15,9 +15,9 @@
                             <table id="datatables-basic" class="table table-striped" style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th>Nom</th>
-                                    <th>Description</th>
                                     <th>Image</th>
+                                    <th>Catégorie</th>
+                                    <th>Description</th>
                                     <th>Action</th>
 
 
@@ -27,11 +27,15 @@
                                 <tbody>
                                 {% for categorie in categorie %}
                                     <tr>
+                                        <td><img src="{{ asset('uploads/images/categorieProduit/' ~ categorie.image ) }}" width="150"></td>
                                         <td>{{  categorie.nom}}</td>
                                         <td>{{  categorie.description}}</td>
-                                        <td><img src="{{ asset('uploads/images/categorieProduit/' ~ categorie.image ) }}" width="150"></td>
+                                        <td>
+                                            <a href="{{ path('main_modifierCategorie_Produit',{'cat': categorie.id})}}" ><i class="align-middle" data-feather="edit-2"></i></a>
+                                            <a href="{{ path('main_supprimerCategorie_Produit',{'cat': categorie.id})}}" ><i class="align-middle" data-feather="trash"></i></a>
 
-                                        <td><a href="{{ path('main_modifierCategorie_Produit',{'cat': categorie.id}) }}"><button class="btn btn-warning"> Modifier</button><a href="{{ path('main_supprimerCategorie_Produit',{'cat': categorie.id}) }}"><button class="btn btn-danger">Supprimer</button></a> </td>
+                                        </td>
+
 
                                     </tr>
                                 {% endfor %}
@@ -60,7 +64,37 @@
                 document.addEventListener("DOMContentLoaded", function(event) {
                     // Datatables basic
                     $('#datatables-basic').DataTable({
-                        responsive: true
+                        responsive: true,
+                        "language": {
+                            "sEmptyTable":     "Aucune donnée disponible dans le tableau",
+                            "sInfo":           "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
+                            "sInfoEmpty":      "Affichage de l'élément 0 à 0 sur 0 élément",
+                            "sInfoFiltered":   "(filtré à partir de _MAX_ éléments au total)",
+                            "sInfoPostFix":    "",
+                            "sInfoThousands":  ",",
+                            "sLengthMenu":     "Afficher _MENU_ éléments",
+                            "sLoadingRecords": "Chargement...",
+                            "sProcessing":     "Traitement...",
+                            "sSearch":         "Rechercher :",
+                            "sZeroRecords":    "Aucun élément correspondant trouvé",
+                            "oPaginate": {
+                                "sFirst":    "Premier",
+                                "sLast":     "Dernier",
+                                "sNext":     "Suivant",
+                                "sPrevious": "Précédent"
+                            },
+                            "oAria": {
+                                "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
+                                "sSortDescending": ": activer pour trier la colonne par ordre décroissant"
+                            },
+                            "select": {
+                                "rows": {
+                                    "_": "%d lignes sélectionnées",
+                                    "0": "Aucune ligne sélectionnée",
+                                    "1": "1 ligne sélectionnée"
+                                }
+                            }
+                        }
                     });
                     // Datatables with Buttons
                     var datatablesButtons = $('#datatables-buttons').DataTable({

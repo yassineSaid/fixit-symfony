@@ -1,0 +1,278 @@
+{% extends "front.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block title %}liste des produits{% endblock %}
+{% block sidebar %}{% endblock %}
+{% block content %}
+    <main id="tg-main" class="tg-main tg-haslayout">
+        <div class="container">
+            <div class="row">
+                <div id="tg-twocolumns" class="tg-twocolumns">
+                    <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9 pull-right">
+                        <div class="row">
+                            <div id="tg-content" class="tg-content">
+                                <div class="tg-listing">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <span class="tg-totallistingfound">256 Results Found</span>
+                                        <div class="tg-sortfilters">
+                                            <div class="tg-sortfilter tg-sortby">
+                                                <span>Sort By:</span>
+                                                <div class="tg-select">
+                                                    <select id="tri">
+                                                        <option value="nom" {% if tri=="nom" %}selected{% endif %}>Nom </option>
+                                                        <option value="prix" {% if tri=="prix" %}selected{% endif %}>Prix</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="tg-sortfilter tg-arrange">
+                                                <span>Arrange:</span>
+                                                <div class="tg-select">
+                                                    <select id="triDSC">
+                                                        <option value="asc" {% if triDSC=="asc" %}selected{% endif %}>Asc</option>
+                                                        <option value="dsc" {% if triDSC=="dsc" %}selected{% endif %}>DES</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="tg-sortfilter tg-show">
+                                                <span>Show:</span>
+                                                <div class="tg-select">
+                                                    <select>
+                                                        <option>12</option>
+                                                        <option>24</option>
+                                                        <option>all</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="tg-serviceproviders">
+                                        {% for p in produit %}
+                                            <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                                                <div class="tg-serviceprovider tg-computermobile">
+                                                    <figure class="tg-featuredimg">
+                                                        <img src="{{ asset('uploads/images/produit/' ~ p.image ) }}" width="150">
+                                                        <figcaption>
+                                                            <a class="tg-themetag tg-categorytag" href="javascript:void(0);">{{ p.quantite }}pcs</a>
+                                                            <a class="tg-heart tg-liked" href="javascript:void(0);"><i class="fa fa-heart"></i></a>
+                                                        </figcaption>
+                                                    </figure>
+                                                    <div class="tg-companycontent">
+                                                        <ul class="tg-tags">
+                                                            <li><a class="tg-tag tg-featuredtag"  href="{{ path("main_modifier_Produit",{'prod':p.id}) }}">modifier</a></li>
+                                                        </ul>
+                                                        <ul class="tg-tags">
+                                                            <li><a class="tg-tag tg-eaturedtag" href="{{ path("main_Detaille_produit",{'prod':p.id}) }}">acheter</a></li>
+                                                        </ul>
+                                                        <div class="tg-title">
+                                                            <h3>{{ p.nom }} {{ p.prix }} sc</h3>
+                                                        </div>
+                                                        <ul class="tg-matadata">
+                                                            <li><span> date d'expiration<span></span></span></li>
+                                                            <li>
+                                                                <em>{{ p.dateExp  |  date('d/m/Y H:i:s') }}</em>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <a class="tg-btn tg-btnpostanewjob" href="{{ path('main_user_produit') }}">Ajouter produit</a>
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <nav class="tg-pagination">
+                                            <ul>
+                                                <li class="tg-prevpage"><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                                                <li><a href="#">1</a></li>
+                                                <li><a href="#">2</a></li>
+                                                <li><a href="#">3</a></li>
+                                                <li><a href="#">4</a></li>
+                                                <li class="tg-active"><a href="#">5</a></li>
+                                                <li>...</li>
+                                                <li><a href="#">10</a></li>
+                                                <li class="tg-nextpage"><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3 pull-left">
+                        <aside id="tg-sidebar" class="tg-sidebar">
+                            <form class="tg-themeform tg-formrefinesearch">
+                                <fieldset>
+                                    <h4>Sub Categories</h4>
+                                    <div class="tg-checkboxgroup">
+											<span class="tg-checkbox">
+												<input type="checkbox" id="tg-cabservice" name="subcategories" value="Any" checked="">
+												<label for="tg-cabservice">Cab Service</label>
+											</span>
+                                        <span class="tg-checkbox">
+												<input type="checkbox" id="tg-carcareservicing" name="subcategories" value="Car Care &amp; Servicing">
+												<label for="tg-carcareservicing">Car Care &amp; Servicing</label>
+											</span>
+                                        <span class="tg-checkbox">
+												<input type="checkbox" id="tg-cardealer" name="subcategories" value="Car Dealer">
+												<label for="tg-cardealer">Car Dealer</label>
+											</span>
+                                        <span class="tg-checkbox">
+												<input type="checkbox" id="tg-rebtacar" name="subcategories" value="Rent A Car">
+												<label for="tg-rebtacar">Rent A Car</label>
+											</span>
+                                        <a href="javascript:void(0);" data-toggle="modal" data-target=".tg-categoryModal">View All</a>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <h4>Filter By Location</h4>
+                                    <div class="tg-checkboxgroup">
+                                        <div class="form-group">
+												<span class="tg-select">
+													<select>
+														<option>Select Country</option>
+														<option>Pakistan</option>
+														<option>United States</option>
+														<option>United Kingdom</option>
+														<option>United Arab Emirates</option>
+													</select>
+												</span>
+                                        </div>
+                                        <div class="form-group">
+												<span class="tg-select">
+													<select>
+														<option>Select States</option>
+														<option>Texas</option>
+														<option>Virginia</option>
+														<option>New York</option>
+														<option>Washington</option>
+													</select>
+												</span>
+                                        </div>
+                                        <div class="form-group tg-inpuicon">
+                                            <i class="lnr lnr-magnifier"></i>
+                                            <input type="text" name="zipcode" class="form-control" placeholder="Zip Codes">
+                                        </div>
+                                        <span class="tg-checkbox">
+												<input type="checkbox" id="tg-abbeywood" name="filterbylocation" value="abbeywood">
+												<label for="tg-abbeywood">Abbey Wood</label>
+											</span>
+                                        <span class="tg-checkbox">
+												<input type="checkbox" id="tg-addington" name="filterbylocation" value="Addington">
+												<label for="tg-addington">Addington</label>
+											</span>
+                                        <span class="tg-checkbox">
+												<input type="checkbox" id="tg-addiscombe" name="filterbylocation" value="Addiscombe">
+												<label for="tg-addiscombe">Addiscombe</label>
+											</span>
+                                        <span class="tg-checkbox">
+												<input type="checkbox" id="tg-aldboroughhatch" name="filterbylocation" value="Aldborough Hatch">
+												<label for="tg-aldboroughhatch">Aldborough Hatch</label>
+											</span>
+                                        <span class="tg-checkbox">
+												<input type="checkbox" id="tg-aperfield" name="filterbylocation" value="Aperfield">
+												<label for="tg-aperfield">Aperfield</label>
+											</span>
+                                        <a href="javascript:void(0);" data-toggle="modal" data-target=".tg-categoryModal">View All</a>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <h4>Filter By Language</h4>
+                                    <div class="tg-checkboxgroup">
+											<span class="tg-checkbox">
+												<input type="checkbox" id="alllanguages" name="languages" value="all languages" checked="">
+												<label for="alllanguages"> All Languages</label>
+											</span>
+                                        <span class="tg-checkbox">
+												<input type="checkbox" id="chinese" name="languages" value="Chinese">
+												<label for="chinese">Chinese</label>
+											</span>
+                                        <span class="tg-checkbox">
+												<input type="checkbox" id="english" name="languages" value="English">
+												<label for="english">English</label>
+											</span>
+                                        <span class="tg-checkbox">
+												<input type="checkbox" id="french" name="languages" value="French">
+												<label for="french">French</label>
+											</span>
+                                        <span class="tg-checkbox">
+												<input type="checkbox" id="german" name="languages" value="German">
+												<label for="german">German</label>
+											</span>
+                                        <a href="javascript:void(0);" data-toggle="modal" data-target=".tg-categoryModal">View All</a>
+                                        <!-- <span class="tg-checkbox">
+                                            <input type="checkbox" id="czech" name="languages" value="Czech">
+                                            <label for="czech">Czech</label>
+                                        </span>
+                                        <span class="tg-checkbox">
+                                            <input type="checkbox" id="arabic" name="languages" value="Arabic">
+                                            <label for="arabic">Arabic</label>
+                                        </span>
+                                        <span class="tg-checkbox">
+                                            <input type="checkbox" id="spanish" name="languages" value="Spanish">
+                                            <label for="spanish">Spanish</label>
+                                        </span>
+                                        <span class="tg-checkbox">
+                                            <input type="checkbox" id="russian" name="languages" value="Russian">
+                                            <label for="russian">Russian</label>
+                                        </span> -->
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <h4>Filter By Rating</h4>
+                                    <div class="tg-checkboxgroup tg-ratingcheckbox">
+											<span class="tg-checkbox">
+												<input type="checkbox" id="nostar" name="ratingfilter" value="nostar">
+												<label for="nostar"><span class="tg-stars"><span></span></span></label>
+											</span>
+                                        <span class="tg-checkbox">
+												<input type="checkbox" id="onestar" name="ratingfilter" value="onestar">
+												<label for="onestar"><span class="tg-stars"><span></span></span></label>
+											</span>
+                                        <span class="tg-checkbox">
+												<input type="checkbox" id="twostar" name="ratingfilter" value="twostar">
+												<label for="twostar"><span class="tg-stars"><span></span></span></label>
+											</span>
+                                        <span class="tg-checkbox">
+												<input type="checkbox" id="threestar" name="ratingfilter" value="threestar">
+												<label for="threestar"><span class="tg-stars"><span></span></span></label>
+											</span>
+                                        <span class="tg-checkbox">
+												<input type="checkbox" id="fourstar" name="ratingfilter" value="fourstar">
+												<label for="fourstar"><span class="tg-stars"><span></span></span></label>
+											</span>
+                                        <span class="tg-checkbox">
+												<input type="checkbox" id="fivestar" name="ratingfilter" value="fivestar">
+												<label for="fivestar"><span class="tg-stars"><span></span></span></label>
+											</span>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <h4>Misc</h4>
+                                    <div class="tg-checkboxgroup">
+											<span class="tg-checkbox">
+												<input type="checkbox" id="offerfreeinspection" name="misc" value="Offer Free Inspection">
+												<label for="offerfreeinspection">Offer Free Inspection</label>
+											</span>
+                                        <span class="tg-checkbox">
+												<input type="checkbox" id="onlineappointment" name="misc" value="Online Appointment">
+												<label for="onlineappointment">Online Appointment</label>
+											</span>
+                                        <span class="tg-checkbox">
+												<input type="checkbox" id="withprofilephoto" name="misc" value="With Profile Photo">
+												<label for="withprofilephoto">With Profile Photo</label>
+											</span>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </aside>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        </div>
+        </div>
+    </main>
+
+{% endblock %}

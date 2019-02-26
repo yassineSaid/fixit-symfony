@@ -1,0 +1,139 @@
+<main id="tg-main" class="tg-main tg-paddingzero tg-haslayout">
+    <!--************************************
+            Login Register Start
+    *************************************-->
+
+    <div class="tg-main-section tg-haslayout">
+        <div class="container">
+            <div class="row">
+                <div id="tg-content" class="tg-content">
+                    <div class="tg-themeform tg-formlogin-register">
+                        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                            <div class="tg-heading">
+                                <h2>Register As</h2>
+                            </div>
+
+                            <fieldset>
+                                <form name="fos_user_registration_form" method="post" action="/fixit/web/app_dev.php/register/" class="fos_user_registration_register">
+
+                                    <div class="tg-themetabcontent tab-content">
+                                        <div class="tab-pane active fade in" id="regularuser">
+                                            <div class="form-group">
+                                                <div class="tg-registeras">
+                                                    <span>Already have an account?<a href="#"> Login Now</a></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" id="fos_user_registration_form_username" name="fos_user_registration_form[username]" required="required" maxlength="180" pattern=".{2,}" class="form-control" placeholder="Pseudo">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="email" id="fos_user_registration_form_email" name="fos_user_registration_form[email]" required="required" class="form-control" placeholder="Email">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" id="fos_user_registration_form_firstname" name="fos_user_registration_form[firstname]" maxlength="255" class="form-control" placeholder="Prenom">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" id="fos_user_registration_form_lastname" name="fos_user_registration_form[lastname]" maxlength="255" class="form-control" placeholder="Nom">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" id="fos_user_registration_form_plainPassword_first" name="fos_user_registration_form[plainPassword][first]" required="required" autocomplete="new-password" class="form-control" placeholder="Mot de passe">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" id="fos_user_registration_form_plainPassword_second" name="fos_user_registration_form[plainPassword][second]" required="required" autocomplete="new-password" class="form-control" placeholder="Confirmez votre mot de passe">
+                                            </div>
+                                            <div class="form-group">
+                                                <img src="images/placeholder/img-02.png" alt="image description">
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="tg-checkbox">
+                                                    <input type="checkbox" id="terms">
+                                                    <label for="terms">I have read the <a href="#">Terms &amp; Conditions</a> and accept them</label>
+                                                </div>
+                                            </div>
+                                            <button class="tg-btn" type="submit" value="Register">Register Now</button>
+                                            <ul class="tg-socialicons tg-socialsharewithtext">
+                                                <li class="tg-facebook">
+                                                    <a class="tg-roundicontext" href="javascript:void(0);">
+                                                        <em class="tg-usericonholder">
+                                                            <i class="fa fa-facebook-f"></i>
+                                                            <span>facebook</span>
+                                                        </em>
+                                                    </a>
+                                                </li>
+                                                <li class="tg-twitter">
+                                                    <a class="tg-roundicontext" href="javascript:void(0);">
+                                                        <em class="tg-usericonholder">
+                                                            <i class="fa fa-twitter"></i>
+                                                            <span>twitter</span>
+                                                        </em>
+                                                    </a>
+                                                </li>
+                                                <li class="tg-linkedin">
+                                                    <a class="tg-roundicontext" href="javascript:void(0);">
+                                                        <em class="tg-usericonholder">
+                                                            <i class="fa fa-linkedin"></i>
+                                                            <span>linkdin</span>
+                                                        </em>
+                                                    </a>
+                                                </li>
+                                                <li class="tg-googleplus">
+                                                    <a class="tg-roundicontext" href="javascript:void(0);">
+                                                        <em class="tg-usericonholder">
+                                                            <i class="fa fa-google-plus"></i>
+                                                            <span>googl+</span>
+                                                        </em>
+                                                    </a>
+                                                </li>
+                                                <li class="tg-tumblr">
+                                                    <a class="tg-roundicontext" href="javascript:void(0);">
+                                                        <em class="tg-usericonholder">
+                                                            <i class="fa fa-tumblr"></i>
+                                                            <span>tumblr</span>
+                                                        </em>
+                                                    </a>
+                                                </li>
+                                                <li class="tg-vimeo">
+                                                    <a class="tg-roundicontext" href="javascript:void(0);">
+                                                        <em class="tg-usericonholder">
+                                                            <i class="fa fa-vimeo"></i>
+                                                            <span>vimeo</span>
+                                                        </em>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" id="fos_user_registration_form__token" name="fos_user_registration_form[_token]" value="16VP7NJ0cez-F-IuvntlfXYZroP0yOroNbOK9iHgsrY"></form>
+                            </fieldset>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                            <div class="tg-loginarea">
+                                <div class="tg-bordertitle">
+                                    <h3>Login Now</h3>
+                                </div>
+                                <fieldset>
+                                    <form action="/fixit/web/app_dev.php/login_check" method="post">
+
+                                        <div class="form-group">
+                                            <input type="username" id="username" name="_username" class="form-control" placeholder="Email">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" id="password" name="_password" class="form-control" placeholder="Password">
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="tg-btn tg-btn-lg" id="_submit" name="_submit" type="submit">Login Now</button>
+                                        </div>
+                                        <a class="tg-btnforgotpass" href="#">Forgot your password?</a>
+                                    </form>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--************************************
+            Login Register End
+    *************************************-->
+</main>
