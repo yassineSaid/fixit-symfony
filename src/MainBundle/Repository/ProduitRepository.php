@@ -39,5 +39,12 @@ class ProduitRepository extends \Doctrine\ORM\EntityRepository
         $query=$this->getEntityManager()->createQuery("SELECT o FROM MainBundle:Produit p ORDER BY p.prix DESC");
         return $query->getResult();
     }
+    public function listMeilleursProduits($solde)
+    {
+        $query=$this->getEntityManager()->createQuery(
+            "SELECT p FROM MainBundle:Produit p WHERE p.prix<=:solde ORDER BY p.prix DESC")->setMaxResults(3);
+        $query->setParameter(":solde",$solde);
+        return $query->getResult();
+    }
 
 }

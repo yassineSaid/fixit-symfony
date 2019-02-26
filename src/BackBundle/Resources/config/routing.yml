@@ -25,6 +25,15 @@ users_list:
 users_solde:
   path:     /admin/listSolde
   defaults: { _controller: BackBundle:Paiement:list }
+admin_langues:
+  path:     /admin/langues
+  defaults: { _controller: BackBundle:Langue:list }
+back_supprimerLangue:
+  path:     /admin/supprimerLangue/{id}
+  defaults: { _controller: BackBundle:Langue:supprimer }
+back_ajouterLangue:
+  path:     /admin/ajouterLangue
+  defaults: { _controller: BackBundle:Langue:ajouter }
 paiement_historique:
   path:     /admin/historiquePaiement/{id}
   defaults: { _controller: BackBundle:Paiement:historiqueUser }

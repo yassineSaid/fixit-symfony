@@ -16,16 +16,16 @@ class UserLangue
     /**
      * @var int
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="idUser",referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="User", cascade={"remove"})
+     * @ORM\JoinColumn(name="idUser",referencedColumnName="id", onDelete="CASCADE")
      */
     private $idUser;
 
     /**
      * @var int
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Langue")
-     * @ORM\JoinColumn(name="idLangue",referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Langue", cascade={"remove"})
+     * @ORM\JoinColumn(name="idLangue",referencedColumnName="id", onDelete="CASCADE")
      */
     private $idLangue;
 

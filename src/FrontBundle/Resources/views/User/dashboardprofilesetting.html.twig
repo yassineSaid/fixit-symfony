@@ -198,7 +198,7 @@
                                                                             style="max-width: 400px;max-height: 200px">
                                                                     {% else %}
                                                                     <i class="lnr lnr-cloud-upload"></i>
-                                                                    <span>Or Drag Your Files Here To Upload</span>
+                                                                    <span>Cliquez ici pour ajouter une photo</span>
                                                                     {% endif %}
                                                                     <input id="tg-photoandlogo" class="tg-fileinput" type="file" name="image">
                                                                 </label>
@@ -238,7 +238,61 @@
                                                     </div>
                                                 </form>
                                                 <p>0,5 DT/SCoin</p>
-                                                <p><a href="{{ path('liste_paiement') }}">Mon historique de paiements</a></p>
+                                                <span><a href="{{ path('liste_paiement') }}">Mon historique de paiements</a>
+                                                </span>
+                                                <div id="tg-accordion" class="tg-accordion">
+                                                    <div class="tg-service tg-panel tg-active" style="display: none">
+                                                        <div class="tg-accordionheading">
+                                                            <h4><span></span>Ce que vous pouvez acheter avec votre solde</h4>
+                                                        </div>
+                                                        <div class="tg-panelcontent">
+                                                            <div class="tg-description">
+                                                                <p>aaaaaa</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tg-service tg-panel tg-active" style="display: none">
+                                                        <div class="tg-accordionheading">
+                                                            <h4><span></span>Ce que vous pouvez acheter avec votre solde</h4>
+                                                        </div>
+                                                        <div class="tg-panelcontent">
+                                                            <div class="tg-description">
+                                                                <p>aaaaaa</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tg-service tg-panel">
+                                                        <div class="tg-accordionheading">
+                                                            <h4><span></span>Ce que vous pourriez acheter avec votre solde</h4>
+                                                        </div>
+                                                        <div class="tg-panelcontent">
+                                                            <div class="tg-description">
+                                                                {% for produit in produits %}
+                                                                <div class="tg-feedback" style="display: block;">
+                                                                    <figure><a href="{{ path('main_Detaille_produit',{"prod":produit.id}) }}"><img src="{{ asset('uploads/images/produit/' ~ produit.image ) }}" alt="image description"></a></figure>
+                                                                    <div class="tg-feedbackcontent">
+                                                                        <div class="tg-feedbackbox">
+                                                                            <div class="tg-contenthead">
+                                                                                <div class="tg-leftbox">
+                                                                                    <div class="tg-name">
+                                                                                        <h4><a href="{{ path('main_Detaille_produit',{"prod":produit.id}) }}">{{ produit.nom }}</a></h4>
+                                                                                    </div>
+                                                                                    <ul class="tg-matadata">
+                                                                                        <li>{{ produit.CategorieProduit.nom }}</li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                                <div class="tg-overallratingbox">
+                                                                                    <span>{{ produit.prix }} SCoins</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                {% endfor %}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="tg-dashboardbox tg-basicinformation">

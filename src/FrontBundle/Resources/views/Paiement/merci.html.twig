@@ -2,6 +2,12 @@
 {% trans_default_domain 'FOSUserBundle' %}
 {% block title %}Paramètres du compte{% endblock %}
 {% block content %}
+    <script>
+        setTimeout(function () {
+            window.location.href= '{{ path("profile_setting") }}'; // the redirect goes here
+
+        },5000);
+    </script>
     <!--************************************
 				Inner Page Banner Start
 		*************************************-->

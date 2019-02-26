@@ -4,68 +4,49 @@
         <div class="container-fluid p-0">
 
             <div class="row">
-
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Liste des utilisateurs</h5>
-                            <h6 class="card-subtitle text-muted">{{ users|length }} utilisateurs inscrits</h6>
+                            <h5 class="card-title">Langues</h5>
+                            <h6 class="card-subtitle text-muted">Voici les langues disponible sur notre plateforme</h6>
+                            <a href="#ajouter" id="desc"><button class="btn btn-primary" style="float: right">Ajouter une langue</button></a>
                         </div>
                         <div class="card-body">
                             <table id="datatables-basic" class="table table-striped" style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th>Prénom</th>
-                                    <th>Nom</th>
-                                    <th>Pseudo</th>
-                                    <th>Email</th>
-                                    <th>Role</th>
+                                    <th style="width:40%;">Libelle</th>
+                                    <th>Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for user in users %}
-                                    <tr>
-                                        <td>{{ user.firstname }}</td>
-                                        <td>{{ user.lastname }}</td>
-                                        <td>{{ user.username }}</td>
-                                        <td>{{ user.email }}</td>
-
-                                            {% if "ROLE_SUPER_ADMIN" in user.roles %}
-                                                <td>Administrateur
-                                                {% if  app.user.id  != user.id %}
-                                                    <a href="{{ path('user_downgrade',{'id': user.id}) }}">
-                                                        <i class="align-middle mr-2 fas fa-fw fa-arrow-down" style="color:red;"></i>
-                                                    </a>
-                                                {% endif %}
-                                                </td>
-                                            {% else %}
-                                                <td>Utilisateur
-                                                {% if  app.user.id  != user.id %}
-                                                    <a href="{{ path('user_upgrade',{'id': user.id}) }}">
-                                                        <i class="align-middle mr-2 fas fa-fw fa-arrow-up" style="color:forestgreen;"></i>
-                                                    </a>
-                                                {% endif %}
-                                                </td>
-                                            {% endif %}
-                                    </tr>
+                                {% for langue in langues %}
+                                        <tr>
+                                            <td>{{ langue.libelle }}</td>
+                                            <td class="table-action">
+                                                <a href="{{ path('back_supprimerLangue',{'id':langue.id}) }}"><i class="align-middle" data-feather="trash"></i></a>
+                                            </td>
+                                        </tr>
                                 {% endfor %}
                                 </tbody>
-                                <tfoot>
-                                <tr>
-                                    <th>Prénom</th>
-                                    <th>Nom</th>
-                                    <th>Pseudo</th>
-                                    <th>Email</th>
-                                    <th>Role</th>
-                                </tr>
-                                </tfoot>
                             </table>
+                        </div>
+                    </div>
+                    <div class="card" id="ajouter">
+                        <div class="card-header">
+                            <h5 class="card-title">Ajouter une langue</h5>
+                        </div>
+                        <div class="card-body">
+                            <form class="form-inline" method="post" action="{{ path('back_ajouterLangue') }}">
+                                <label class="sr-only" for="inlineFormInputName2">Libelle</label>
+                                <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Français" name="libelle">
+
+                                <button type="submit" class="btn btn-primary mb-2">Ajouter</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-
-
         </div>
     </main>
     <script>
@@ -111,6 +92,28 @@
                 responsive: true
             });
             datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
+        });
+    </script>
+{% endblock %}
+{% block js %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function(){
+            // au clic sur un lien
+            $('#desc').on('click', function(evt){
+                // bloquer le comportement par défaut: on ne rechargera pas la page
+                evt.preventDefault();
+                // enregistre la valeur de l'attribut  href dans la variable target
+                var target = $(this).attr('href');
+                /* le sélecteur $(html, body) permet de corriger un bug sur chrome
+                et safari (webkit) */
+                $('html, body')
+                // on arrête toutes les animations en cours
+                    .stop()
+                    /* on fait maintenant l'animation vers le haut (scrollTop) vers
+                     notre ancre target */
+                    .animate({scrollTop: $(target).offset().top}, 1000 );
+            });
         });
     </script>
 {% endblock %}

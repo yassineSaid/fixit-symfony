@@ -5,6 +5,7 @@ namespace FrontBundle\Controller;
 use FOS\UserBundle\Model\UserInterface;
 use MainBundle\Entity\Horraire;
 use MainBundle\Entity\Langue;
+use MainBundle\Entity\Produit;
 use MainBundle\Entity\Repos;
 use MainBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -15,15 +16,14 @@ class UserController extends Controller
 {
     public function profilAction(Request $request)
     {
-        if ($request->isMethod('post'))
-        {
-
-        }
+        $connect1=$this->getDoctrine()->getManager();
+        $produits=$connect1->getRepository(Produit::class)->listMeilleursProduits($this->getUser()->getSolde());
         $connect=$this->getDoctrine()->getManager();
         $langues=$connect->getRepository(Langue::class)->findAll();
 
         return $this->render('@Front/User/dashboardprofilesetting.html.twig',array(
             "langues"=>$langues,
+            "produits"=>$produits
         ));
     }
     public function rechercherAction(Request $request)

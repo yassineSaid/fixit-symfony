@@ -8,35 +8,32 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Default</h5>
-                            <h6 class="card-subtitle text-muted">Highly flexible tool that many advanced features to any HTML table.</h6>
+                            <h5 class="card-title">Soldes</h5>
+                            <h6 class="card-subtitle text-muted">Vous pouvez consulter les soldes des utilisateurs ainsi que leurs historiques d'achats de SCoins</h6>
                         </div>
                         <div class="card-body">
                             <table id="datatables-basic" class="table table-striped" style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>Prénom</th>
                                     <th>Nom</th>
                                     <th>Pseudo</th>
                                     <th>Email</th>
                                     <th>Solde</th>
-                                    <th>Historique</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 {% for user in users %}
                                     {% if "ROLE_SUPER_ADMIN" not in user.roles %}
                                             <tr>
-                                                <td>{{ user.id }}</td>
                                                 <td>{{ user.firstname }}</td>
                                                 <td>{{ user.lastname }}</td>
                                                 <td>{{ user.username }}</td>
                                                 <td>{{ user.email }}</td>
                                                 <td>{{ user.solde }}</td>
                                                 <td>
-                                                    <a href="{{ path('paiement_historique',{'id': user.id}) }}">Paiements</a>
-                                                    <a href="">Transactions</a>
+                                                    <a href="{{ path('paiement_historique',{'id': user.id}) }}">Historique de paiements</a>
                                                 </td>
                                             </tr>
                                     {% endif %}
@@ -44,13 +41,12 @@
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <th>ID</th>
                                     <th>Prénom</th>
                                     <th>Nom</th>
                                     <th>Pseudo</th>
                                     <th>Email</th>
                                     <th>Solde</th>
-                                    <th>Historique</th>
+                                    <th></th>
                                 </tr>
                                 </tfoot>
                             </table>
