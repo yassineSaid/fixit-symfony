@@ -35,6 +35,10 @@ class CategorieProduit
      */
     private $description;
 
+
+
+
+
     /**
      * @return string
      */

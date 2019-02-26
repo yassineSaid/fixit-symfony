@@ -10,4 +10,26 @@ namespace MainBundle\Repository;
  */
 class ProduitLikeRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function counDQL($id)
+    {
+
+        $query=$this->getEntityManager()->createQuery("SELECT COUNT(p) FROM MainBundle:ProduitLike p where p.produit = :id ");
+        $query->setParameter('id',$id);
+        return $query->getResult();
+    }
+    public function TotalDQL()
+    {
+
+        $query=$this->getEntityManager()->createQuery("SELECT COUNT(p) FROM MainBundle:ProduitLike p ");
+        return $query->getResult();
+    }
+    public function SupLikesDQL($id)
+    {
+
+        $query=$this->getEntityManager()->createQuery("DELETE FROM MainBundle:ProduitLike p where p.produit = :id ");
+        $query->setParameter('id',$id);
+        return $query->getResult();
+    }
+
+
 }

@@ -24,14 +24,16 @@ class ProduitLike
     /**
      * @var int
      *
-     * @ORM\Column(name="produit", type="integer")
+     * @ORM\ManyToOne(targetEntity="Produit")
+     * @ORM\JoinColumn(name="produit", referencedColumnName="id")
      */
     private $produit;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="user", type="integer")
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user", referencedColumnName="id")
      */
     private $user;
 

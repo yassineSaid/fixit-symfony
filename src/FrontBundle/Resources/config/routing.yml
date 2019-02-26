@@ -147,6 +147,9 @@ front_search:
 main_ajouter_Produit:
     path:    /ajoutProduit
     defaults: { _controller: FrontBundle:Produit:ajouter }
+main_acheter_Produit:
+  path:    acheterProduit/{prod}
+  defaults: { _controller: FrontBundle:Produit:acheter }
 main_modifier_Produit:
     path:    modifierProduits/{prod}
     defaults: { _controller: FrontBundle:Produit:modifier }
@@ -155,8 +158,21 @@ main_supprimer_Produit:
     defaults: { _controller: FrontBundle:Produit:Supprimer }
 main_mes_produit:
     path:     /listproduit
-    defaults: { _controller: FrontBundle:Produit:MesProduit }
+    defaults: { _controller: FrontBundle:Produit:liste }
 main_Detaille_produit:
   path:     detailleProduit/{prod}
   defaults: { _controller: FrontBundle:Produit:Detaill }
+main_user_produit:
+  path:     MesProduits/
+  defaults: { _controller: FrontBundle:Produit:MesProduits }
+main_affichageTriee:
+  path: tri/
+  defaults: { _controller: FrontBundle:Produit:afficherTriFront }
+like_produit:
+  path: /likeProduit/{id}
+  defaults: { _controller: FrontBundle:Produit:like}
+Top_produit:
+  path: /meilleurProduit
+  defaults: { _controller: FrontBundle:Produit:meilleurProduit}
+
       ###############end routing of ali############

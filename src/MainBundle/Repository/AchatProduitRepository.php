@@ -10,4 +10,11 @@ namespace MainBundle\Repository;
  */
 class AchatProduitRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function TopDQL()
+    {
+
+        $query=$this->getEntityManager()->createQuery("SELECT SUM(p.quantite) s, p.produit, p.image FROM MainBundle:AchatProduit p  GROUP BY p.idProduit  ORDER BY s DESC");
+        $query->setMaxResults(4);
+        return $query->getResult();
+    }
 }

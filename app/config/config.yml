@@ -39,7 +39,8 @@ framework:
     assets: ~
     php_errors:
         log: true
-
+    templating:
+        engines: [twig, php]
 # Twig Configuration
 twig:
     debug: '%kernel.debug%'
@@ -115,16 +116,35 @@ fos_user:
     from_email:
         address: mail@domain.tld
         sender_name: user
-knp_snappy:
-    temporary_folder: '%kernel.root_dir%/../web/RapportsReclamation'
-    pdf:
-        enabled:    true
-        binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\""
-        options:    []
-    image:
-        enabled:    true
-        binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltoimage.exe\""
-        options:    []
+        #partage facebook : [Profile, Default]
+nomaya_social:
+     buttons:
+        facebook:
+            url:            null
+            locale:         "fr_FR"
+            send:           false
+            width:          300
+            showFaces:      false
+            layout:         "button_count"
+        twitter:
+            url:            null
+            locale:         "fr"
+            message:        "Je veux partager ça avec vous"
+            text:           "Tweet"
+            via:            "L'Equipe challengers@esprit.tn"
+            tag:            "ttot"
+        googleplus:
+            url:            null
+            locale:        "fr"
+            size:          "medium"
+            annotation:    "bubble"
+            width:         300
+        pinterest:
+            url:            null
+     links:
+        facebook:           "https://www.facebook.com/"
+        twitter:            "https://twitter.com"
+        googleplus:         "https://plus.google.com"
 
 knp_paginator:
   page_range: 5                       # number of links showed in the pagination menu (e.g: you have 10 pages, a page_range of 3, on the 5th page you'll see links to page 4, 5, 6)

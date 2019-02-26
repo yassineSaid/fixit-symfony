@@ -3,6 +3,7 @@
 namespace MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * AchatProduit
@@ -24,17 +25,60 @@ class AchatProduit
     /**
      * @var int
      *
-     * @ORM\Column(name="Produit", type="integer")
+     * @ORM\Column(name="Produit", type="string", length=255,)
      */
     private $produit;
 
     /**
+     * @return int
+     */
+    public function getIdProduit()
+    {
+        return $this->idProduit;
+    }
+
+    /**
+     * @param int $idProduit
+     */
+    public function setIdProduit($idProduit)
+    {
+        $this->idProduit = $idProduit;
+    }
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="idProduit", type="integer")
+     */
+    private $idProduit;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="acheteur", type="string", length=255)
+     * @ORM\Column(name="acheteur", type="string", length=255, nullable=true)
      */
     private $acheteur;
 
+    /**
+     * @return datetime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param datetime $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="date", type="datetime" )
+     */
+    private $date;
     /**
      * @var int
      *
@@ -43,11 +87,55 @@ class AchatProduit
     private $quantite;
 
     /**
+     * @return int
+     */
+    public function getIdAcheteur()
+    {
+        return $this->idAcheteur;
+    }
+
+    /**
+     * @param int $idAcheteur
+     */
+    public function setIdAcheteur($idAcheteur)
+    {
+        $this->idAcheteur = $idAcheteur;
+    }
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="idAcheteur", type="integer")
+     */
+    private $idAcheteur;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="prix", type="integer")
      */
     private $prix;
+
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+    /**
+     * @var string
+     * @Assert\File(mimeTypes={ "image/jpeg", "image/png"})
+     * @ORM\Column(name="image", type="string")
+     */
+    private $image;
 
 
     /**

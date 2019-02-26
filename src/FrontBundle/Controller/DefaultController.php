@@ -5,6 +5,7 @@ namespace FrontBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use MainBundle\Entity\Avis;
+use MainBundle\Controller\AchatProduit;
 
 class DefaultController extends Controller
 {
@@ -46,8 +47,8 @@ class DefaultController extends Controller
                 $em->persist($Avis);
                 $em->flush();
 
-            }
 
+            }
             return $this->render('@Front/Default/index.html.twig', array("lastavis" => $lastfiveratings,"service"=>$service,"categorie"=>$categorie));
         }
 
