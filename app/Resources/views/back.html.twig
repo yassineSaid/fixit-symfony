@@ -41,15 +41,13 @@
             {% endblock %}
             <ul class="sidebar-nav">
                 <li class="sidebar-header">
-                    Main
+                    MENU
                 </li>
                 <li class="sidebar-item active">
                     <a href="{{ path('users_list') }}" class="font-weight-bold sidebar-link">
                         <i class="align-middle" data-feather="users"></i> <span class="align-middle">Utilisateurs</span>
                     </a>
                 </li>
-
-
                 <li class="sidebar-item active">
                     <a href="#Reclamation" data-toggle="collapse" class="font-weight-bold sidebar-link collapsed">
                         <i class="fa fa-envelope" aria-hidden="true"></i><span class="align-middle">Espace Reclamation</span>
@@ -72,7 +70,6 @@
                         <li class="sidebar-item"><a class="sidebar-link" href="{{ path('back_historique') }}">Historique</a></li>
                     </ul>
                 </li>
-
                 <li class="sidebar-item">
                     <a href="#paiement" data-toggle="collapse" class="font-weight-bold sidebar-link collapsed">
                         <i class="fas fa-coins" data-feather="sidebar"></i> <span class="align-middle">Paiement</span>
@@ -81,7 +78,6 @@
                         <li class="sidebar-item"><a class="sidebar-link" href="{{ path('users_solde') }}">Solde des utilisateurs</a></li>
                     </ul>
                 </li>
-
                 <li class="sidebar-item">
                     <a href="#outils" data-toggle="collapse" class="font-weight-bold sidebar-link collapsed">
                         <i class="fas fa-tools" data-feather="sidebar"></i> <span class="align-middle">Espace Outils</span>
@@ -107,15 +103,13 @@
                         <i class="fas fa-language" ></i> <span class="">Langues</span>
                     </a>
                 </li>
-                <li class="sidebar-header">
-                    Components
-                </li>
                 <li class="sidebar-item">
                     <a href="{{ path('main_afficher_note_admin') }}"  class="font-weight-bold sidebar-link collapsed">
                         <i class="align-middle" data-feather="grid"></i> <span class="">Avis</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
+
+                {#<li class="sidebar-item">
                     <a href="#charts" data-toggle="collapse" class="font-weight-bold sidebar-link collapsed">
                         <i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Charts</span>
                         <span class="sidebar-badge badge badge-warning">New</span>
@@ -195,14 +189,14 @@
                         <li class="sidebar-item"><a class="sidebar-link" href="pages-500.html">500 Page</a></li>
                         <li class="sidebar-item"><a class="sidebar-link" href="pages-blank.html">Blank Page</a></li>
                     </ul>
-                </li>
+                </li>#}
             </ul>
 
-            <div class="sidebar-cta">
+            {#<div class="sidebar-cta">
                 <button type="button" class="close sidebar-cta-close" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div>
+            </div>#}
         </div>
     </nav>
     {% endblock %}
@@ -226,19 +220,12 @@
                             </div>
                         </a>
                         <a class="nav-link nav-link-user dropdown-toggle d-none d-sm-inline-block" href="#" data-toggle="dropdown">
-                            <img src="https://via.placeholder.com/156x156" class="avatar img-fluid rounded mr-1" alt="{{  app.user.firstname }} {{  app.user.lastname }}" /> <span class="text-dark">{{  app.user.firstname }} {{  app.user.lastname }}</span>
+                            <img src="https://via.placeholder.com/156x156" class="avatar img-fluid rounded mr-1" alt="{{  app.user.firstname }} {{  app.user.lastname }}" />
+                            <span class="text-dark">{{  app.user.firstname }} {{  app.user.lastname }}</span>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="pages-profile.html">Profile</a>
-                            <a class="dropdown-item" href="#">Analytics</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="pages-settings.html">Settings & Privacy</a>
-                            <a class="dropdown-item" href="#">Help</a>
-                            <a class="dropdown-item" href="{{ path('logout') }}">Sign out</a>
-                        </div>
                     </li>
 
-                    <li class="nav-item dropdown">
+                    {#<li class="nav-item dropdown">
                         <a class="nav-icon dropdown-toggle ml-2" href="#" data-toggle="dropdown">
                             <div class="position-relative">
                                 <i class="align-middle" data-feather="message-square"></i>
@@ -305,7 +292,7 @@
                                 <a href="#" class="text-muted">Show all messages</a>
                             </div>
                         </div>
-                    </li>
+                    </li>#}
                     <li class="nav-item dropdown">
                         <a class="nav-icon dropdown-toggle ml-2" href="#" id="alertsDropdown" data-toggle="dropdown">
                             <div class="position-relative">
@@ -386,7 +373,7 @@
                             &copy; <a href="{{ path('back_homepage') }}" class="text-muted">FixIt</a>
                         </p>
                     </div>
-                    <div class="col-6 text-right">
+                    {#<div class="col-6 text-right">
                         <ul class="list-inline">
                             <li class="list-inline-item">
                                 <a class="text-muted" href="#">About us</a>
@@ -401,7 +388,7 @@
                                 <a class="text-muted" href="#">Terms & Conditions</a>
                             </li>
                         </ul>
-                    </div>
+                    </div>#}
                 </div>
             </div>
         </footer>
