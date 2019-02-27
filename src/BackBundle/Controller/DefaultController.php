@@ -2,6 +2,7 @@
 
 namespace BackBundle\Controller;
 
+use MainBundle\Entity\Langue;
 use MainBundle\Entity\Paiement;
 use MainBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -21,6 +22,7 @@ class DefaultController extends Controller
         $revenusAnnee=$connect->getRepository(Paiement::class)->venteCetteAnnee();
         $revenusTotal=$connect->getRepository(Paiement::class)->venteTotal();
         $visitorsToday=$connect->getRepository(User::class)->visitorsToday();
+        $languesParlees=$connect->getRepository(Langue::class)->languesParlees();
         //var_dump($statAnnee);
         return $this->render('@Back/Default/index.html.twig',array(
             "categorie"=>$cat,
@@ -28,7 +30,8 @@ class DefaultController extends Controller
             "statAnnee"=>$statAnnee,
             "revenusAnnee"=>$revenusAnnee,
             "revenusTotal"=>$revenusTotal,
-            "visitorsToday"=>$visitorsToday
+            "visitorsToday"=>$visitorsToday,
+            "languesParlees"=>$languesParlees
         ));
     }
 }

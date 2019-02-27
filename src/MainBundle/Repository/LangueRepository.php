@@ -10,4 +10,11 @@ namespace MainBundle\Repository;
  */
 class LangueRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function languesParlees()
+    {
+        $query=$this->getEntityManager()->createQuery("
+                  SELECT l.libelle,COUNT(lu.idUser) AS NB FROM MainBundle:UserLangue lu, MainBundle:Langue l 
+                  WHERE l.id=lu.idLangue GROUP BY lu.idLangue ORDER BY NB DESC");
+        return $query->execute();
+    }
 }

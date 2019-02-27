@@ -6,6 +6,7 @@
             <div class="row">
                 <div class="col-12 col-md-6 col-xl d-none d-xxl-flex">
                     <div class="card flex-fill">
+                        {{ dump(languesParlees) }}
                         <div class="card-body py-4">
                             <div class="row">
                                 <div class="col-8">
@@ -97,154 +98,77 @@
             </div>
 
             <div class="row">
-                <div class="col-12 col-lg-8 d-flex">
+                <div class="col-12 col-xl-6 d-none d-xl-flex">
                     <div class="card flex-fill w-100">
                         <div class="card-header">
                             <div class="card-actions float-right">
-                                <div class="dropdown show">
-                                    <a href="#" data-toggle="dropdown" data-display="static">
-                                        <i class="align-middle" data-feather="more-horizontal"></i>
-                                    </a>
-
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                            <h5 class="card-title mb-0">Langues parlées</h5>
+                        </div>
+                        <div class="card-body d-flex">
+                            <div class="align-self-center w-100">
+                                <div class="py-3">
+                                    <div class="chart chart-xs">
+                                        <canvas id="chartjs-dashboard-pie1"></canvas>
                                     </div>
                                 </div>
+
+                                <table class="table mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th>Langue</th>
+                                        <th class="text-right">Nombre de personnes</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for langue in languesParlees %}
+                                        <tr>
+                                            <td>{{ langue.libelle }}</td>
+                                            <td class="text-right">{{ langue.NB }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
                             </div>
-                            <h5 class="card-title mb-0">Real-Time</h5>
-                        </div>
-                        <div class="card-body p-2">
-                            <div id="world_map" style="height:350px;"></div>
                         </div>
                     </div>
+                    <script>
+                        let labelsL=[];
+                        let dataL=[];
+                        {% for langue in languesParlees %}
+                        labelsL.push("{{ langue.libelle }}");
+                        dataL.push({{ langue.NB }});
+                        {% endfor %}
+                    </script>
 
                     <script>
                         document.addEventListener("DOMContentLoaded", function(event) {
-                            $('#world_map').vectorMap({
-                                map: "world_mill",
-                                normalizeFunction: "polynomial",
-                                hoverOpacity: .7,
-                                hoverColor: false,
-                                regionStyle: {
-                                    initial: {
-                                        fill: "#e3eaef"
-                                    }
+                            // Pie chart
+                            new Chart(document.getElementById("chartjs-dashboard-pie1"), {
+                                type: 'pie',
+                                data: {
+                                    labels: labelsL,
+                                    datasets: [{
+                                        data: dataL,
+                                        backgroundColor: ["#2979ff", "#ff9100", "#ff1744", "#E8EAED"],
+                                        borderColor: "transparent"
+                                    }]
                                 },
-                                markerStyle: {
-                                    initial: {
-                                        "r": 9,
-                                        "fill": "#2979ff",
-                                        "fill-opacity": .95,
-                                        "stroke": "#fff",
-                                        "stroke-width": 7,
-                                        "stroke-opacity": .4
-                                    },
-                                    hover: {
-                                        "stroke": "#fff",
-                                        "fill-opacity": 1,
-                                        "stroke-width": 1.5
+                                options: {
+                                    responsive: !window.MSInputMethodContext,
+                                    maintainAspectRatio: false,
+                                    legend: {
+                                        display: false
                                     }
-                                },
-                                backgroundColor: "transparent",
-                                zoomOnScroll: false,
-                                markers: [{
-                                    latLng: [31.230391, 121.473701],
-                                    name: "Shanghai"
-                                },
-                                    {
-                                        latLng: [39.904202, 116.407394],
-                                        name: "Beijing"
-                                    },
-                                    {
-                                        latLng: [28.704060, 77.102493],
-                                        name: "Delhi"
-                                    },
-                                    {
-                                        latLng: [6.524379, 3.379206],
-                                        name: "Lagos"
-                                    },
-                                    {
-                                        latLng: [39.343357, 117.361649],
-                                        name: "Tianjin"
-                                    },
-                                    {
-                                        latLng: [24.860735, 67.001137],
-                                        name: "Karachi"
-                                    },
-                                    {
-                                        latLng: [41.008240, 28.978359],
-                                        name: "Istanbul"
-                                    },
-                                    {
-                                        latLng: [35.689487, 139.691711],
-                                        name: "Tokyo"
-                                    },
-                                    {
-                                        latLng: [23.129110, 113.264381],
-                                        name: "Guangzhou"
-                                    },
-                                    {
-                                        latLng: [19.075983, 72.877655],
-                                        name: "Mumbai"
-                                    },
-                                    {
-                                        latLng: [40.7127837, -74.0059413],
-                                        name: "New York"
-                                    },
-                                    {
-                                        latLng: [34.052235, -118.243683],
-                                        name: "Los Angeles"
-                                    },
-                                    {
-                                        latLng: [41.878113, -87.629799],
-                                        name: "Chicago"
-                                    },
-                                    {
-                                        latLng: [29.760427, -95.369804],
-                                        name: "Houston"
-                                    },
-                                    {
-                                        latLng: [33.448376, -112.074036],
-                                        name: "Phoenix"
-                                    },
-                                    {
-                                        latLng: [51.507351, -0.127758],
-                                        name: "London"
-                                    },
-                                    {
-                                        latLng: [48.856613, 2.352222],
-                                        name: "Paris"
-                                    },
-                                    {
-                                        latLng: [55.755825, 37.617298],
-                                        name: "Moscow"
-                                    },
-                                    {
-                                        latLng: [40.416775, -3.703790],
-                                        name: "Madrid"
-                                    }
-                                ]
+                                }
                             });
                         });
                     </script>
                 </div>
-                <div class="col-12 col-lg-4 d-flex">
+                <div class="col-12 col-lg-6 d-flex">
                     <div class="card flex-fill w-100">
                         <div class="card-header">
                             <div class="card-actions float-right">
-                                <div class="dropdown show">
-                                    <a href="#" data-toggle="dropdown" data-display="static">
-                                        <i class="align-middle" data-feather="more-horizontal"></i>
-                                    </a>
-
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </div>
                             </div>
                             <h5 class="card-title mb-0">Revenus provenants de la vente de SCoins (DT)</h5>
                         </div>
