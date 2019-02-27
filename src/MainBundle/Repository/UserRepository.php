@@ -42,4 +42,11 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
         $query->setParameter('name',"%".strtoupper($nom)."%");
         return $query->getResult();
     }
+    public function visitorsToday()
+    {
+        $query=$this->getEntityManager()->createQuery("
+                  SELECT sum(u.id) VIS from MainBundle:User u 
+                  where date(u.lastLogin)=date(now())");
+        return $query->execute();
+    }
 }

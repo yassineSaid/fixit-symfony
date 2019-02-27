@@ -2,6 +2,8 @@
 
 namespace BackBundle\Controller;
 
+use MainBundle\Entity\Paiement;
+use MainBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
@@ -12,8 +14,21 @@ class DefaultController extends Controller
         $em1=$this->getDoctrine()->getManager();
         $cat=$em->getRepository("MainBundle:CategorieService")->findAll();
         $nbr=$em1->getRepository("MainBundle:Service")->nbrByCat();
-        var_dump($nbr);
 
-        return $this->render('@Back/Default/index.html.twig',array("categorie"=>$cat,"nbr"=>$nbr));
+
+        $connect=$this->getDoctrine()->getManager();
+        $statAnnee=$connect->getRepository(Paiement::class)->statAnnee();
+        $revenusAnnee=$connect->getRepository(Paiement::class)->venteCetteAnnee();
+        $revenusTotal=$connect->getRepository(Paiement::class)->venteTotal();
+        $visitorsToday=$connect->getRepository(User::class)->visitorsToday();
+        //var_dump($statAnnee);
+        return $this->render('@Back/Default/index.html.twig',array(
+            "categorie"=>$cat,
+            "nbr"=>$nbr,
+            "statAnnee"=>$statAnnee,
+            "revenusAnnee"=>$revenusAnnee,
+            "revenusTotal"=>$revenusTotal,
+            "visitorsToday"=>$visitorsToday
+        ));
     }
 }

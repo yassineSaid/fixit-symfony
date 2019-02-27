@@ -16,4 +16,24 @@ class PaiementRepository extends \Doctrine\ORM\EntityRepository
         $query->setParameter('id',$id);
         return $query->getResult();
     }
+    public function statAnnee()
+    {
+        $query=$this->getEntityManager()->createQuery("
+                  SELECT month(p.datePaiement) AS M,sum(p.montant) MON from MainBundle:Paiement p 
+                  where datediff(now(),p.datePaiement)/365<=1 group BY M ORDER BY p.datePaiement");
+        return $query->execute();
+    }
+    public function venteCetteAnnee()
+    {
+        $query=$this->getEntityManager()->createQuery("
+                  SELECT sum(p.montant) MON from MainBundle:Paiement p 
+                  where year(p.datePaiement)=year(now())");
+        return $query->execute();
+    }
+    public function venteTotal()
+    {
+        $query=$this->getEntityManager()->createQuery("
+                  SELECT sum(p.montant) MON from MainBundle:Paiement p ");
+        return $query->execute();
+    }
 }

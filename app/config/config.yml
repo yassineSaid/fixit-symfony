@@ -67,6 +67,14 @@ doctrine:
         auto_generate_proxy_classes: '%kernel.debug%'
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        dql:
+          string_functions:
+            MONTHNAME: DoctrineExtensions\Query\Mysql\MonthName
+            MONTH: DoctrineExtensions\Query\Mysql\Month
+            YEAR: DoctrineExtensions\Query\Mysql\Year
+            DATE: DoctrineExtensions\Query\Mysql\Date
+            DATEDIFF: DoctrineExtensions\Query\Mysql\DateDiff
+            NOW: DoctrineExtensions\Query\Mysql\Now
 
 # Swiftmailer Configuration
 
