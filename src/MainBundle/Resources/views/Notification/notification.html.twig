@@ -1,0 +1,62 @@
+<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right py-0" aria-labelledby="alertsDropdown">
+    <div class="dropdown-menu-header">
+        4 New Notifications
+    </div>
+    <div class="list-group" id="notification">
+        {% for n in notification %}
+        <a href="#" class="list-group-item">
+            <div id="dicGlobal" class="row no-gutters align-items-center">
+                <div id="divIcon" class="col-2">
+                    <i id="icon" class="text-danger" data-feather="alert-circle"></i>
+                </div>
+                <div id="divDetail" class="col-10">
+                    <div id="t" class="text-dark">{{ n.title }}</div>
+                    <div id="d" class="text-muted small mt-1">{{ n.description }}</div>
+                    <div id="date" class="text-muted small mt-1">{{ n.date |date('F jS \\a\\t g:ia') }}</div>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    <div class="dropdown-menu-footer">
+        <a href="#" class="text-muted">Show all notifications</a>
+    </div>
+</div>
+<script type="text/javascript">
+    $( document ).ready(function() {
+       // ajaxCall();
+        function ajaxCall(){
+            $.ajax({
+                url: '{{ path('main_notification') }}',
+                method: 'post',
+                data: {},
+                success: function(msg) {
+                    //refreshList(msg);
+                }
+            });
+        }
+        function refreshList(msg) {
+            console.log(msg)
+            $('#notification').html="";
+            $.each(msg.notification, function (item) {
+                let li = '<a href="#" class="list-group-item">\n' +
+                                     '            <div class="row no-gutters align-items-center">\n' +
+                                    '                <div class="col-2">\n' +
+                                    '                    <i class="text-danger" data-feather="alert-circle"></i>\n' +
+                                    '                </div>\n' +
+                                    '                <div class="col-10">\n' +
+                                   '                    <div class="text-dark">' + item.titre + '</div>\n' +
+                                     '                    <div class="text-muted small mt-1">' + item.description + '</div>\n' +
+                                    '                    <div class="text-muted small mt-1">2h ago</div>\n' +
+                                    '                </div>\n' +
+                                     '            </div>\n' +
+                                    '        </a>';
+                $('#notification').append(li);
+            });
+        }
+        setInterval(function(){
+            //ajaxCall();
+        }, 5000);
+
+    });
+</script>

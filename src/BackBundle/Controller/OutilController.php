@@ -114,6 +114,8 @@ class OutilController extends Controller
         $idUser=$_GET['idUser'];
         $em=$this->getDoctrine()->getManager();
         $outil=$em->getRepository(Outils::class)->find($idOutil);
+        $em6=$this->getDoctrine()->getManager();
+        $user=$em6->getRepository(User::class)->find($idUser);
         $outil->setQuantite($outil->getQuantite()+1);
         $em1=$this->getDoctrine()->getManager();
         $userOutil=$em1->getRepository(UserOutil::class)->location($idOutil,$idUser);
@@ -124,6 +126,13 @@ class OutilController extends Controller
         $historique->setDateLocation($userOutil[0]->getDateLocation());
         $historique->setDateRetour($userOutil[0]->getDateRetour());
         $historique->setTotal($userOutil[0]->getTotal());
+        $em4=$this->getDoctrine()->getManager();
+        $notification= $em4->getRepository('MainBundle:Notification')->findNotification($outil,$user);
+        if($notification!=null)
+        {
+            $em4->remove($notification[0]);
+            $em->flush();
+        }
         $em2->persist($historique);
         $em2->flush();
         $em1->remove($userOutil[0]);

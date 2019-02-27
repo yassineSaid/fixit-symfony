@@ -9,7 +9,9 @@ main_homepage:
 
 ############################ END ROUNTING DE MUSTAPHA ##########################
     ################# ROUTING DE Sl-Wassim PLEASE DON'T TOUCH #####################
-
+main_notification:
+    path:     /notification
+    defaults: { _controller: MainBundle:Notification:list }
 ############################ END ROUNTING DE Sl-Wassim ##########################
 
 ########################### Routing de Slim PLEASE DON'T TOUCH ####################
