@@ -168,3 +168,8 @@ knp_paginator:
     pagination: '@Front/Pagination/sliding.html.twig'     # sliding pagination controls template
     sortable: '@Front/Pagination/sortable_link.html.twig' # sort link template
     filtration: '@Front/Pagination/filtration.html.twig'  # filters template
+notifications:
+  app_id:     723233
+  app_key:    2b4b6c4b476a93d1de9e
+  app_secret: 181ede81fad3c808e42c
+  cluster:    eu

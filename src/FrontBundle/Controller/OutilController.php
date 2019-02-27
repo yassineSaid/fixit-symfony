@@ -2,6 +2,7 @@
 
 namespace FrontBundle\Controller;
 
+use MainBundle\Entity\Notification;
 use MainBundle\Entity\UserOutil;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -56,31 +57,31 @@ class OutilController extends Controller
 
         }
 
-            return $this->render("@Front/Outil/liste.html.twig",array("categorie2"=>$categorie2,"categorie"=>$categorie,"outil"=>$outil,"tri"=>"","triDSC"=>""));
+        return $this->render("@Front/Outil/liste.html.twig",array("categorie2"=>$categorie2,"categorie"=>$categorie,"outil"=>$outil,"tri"=>"","triDSC"=>""));
 
 
     }
     public function detailAction(Request $request)
     {
         $id=$_GET['id'];
+        $user=$this->getUser();
         $em=$this->getDoctrine()->getManager();
+        $em1=$this->getDoctrine()->getManager();
         $em2=$this->getDoctrine()->getManager();
         $outil=$em->getRepository(Outils::class)->find($id);
         $userOutil=$em2->getRepository(UserOutil::class)->premierOutilDQL($id);
-        $user=$this->getUser();
+        $userOutil2=$em1->getRepository(UserOutil::class)->location($outil,$user);
+
+
         if($outil->getQuantite()>0)
         {
-            if($userOutil==null)
+            if($userOutil2==null)
             {
                 return $this->render("@Front/Outil/deatils.html.twig",array("outil"=>$outil,"user"=>$user));
             }
-            elseif ($userOutil[0]->getIdUser()==$user)
-            {
-                return $this->render("@Front/Outil/dejaLoue.html.twig",array("uo"=>$userOutil,"outil"=>$outil));
-            }
             else
             {
-                return $this->render("@Front/Outil/indisponible.html.twig",array("outil"=>$outil,"userOutil"=>$userOutil));
+                return $this->render("@Front/Outil/dejaLoue.html.twig",array("uo"=>$userOutil2,"outil"=>$outil));
             }
         }
         else
@@ -89,9 +90,9 @@ class OutilController extends Controller
             {
                 return $this->render("@Front/Outil/epuiser.html.twig",array("outil"=>$outil));
             }
-            elseif ($userOutil[0]->getIdUser()==$user)
+            elseif ($userOutil2!=null)
             {
-                return $this->render("@Front/Outil/dejaLoue.html.twig",array("uo"=>$userOutil,"outil"=>$outil));
+                return $this->render("@Front/Outil/dejaLoue.html.twig",array("uo"=>$userOutil2,"outil"=>$outil));
             }
             else
             {
@@ -105,29 +106,37 @@ class OutilController extends Controller
         $idOutil=$_GET['id'];
         $user=$this->getUser();
         if($user->getSolde()>=($request->get("prixTotal")))
-            {
+        {
 
-                $connect1=$this->getDoctrine()->getManager();
-                $connect2=$this->getDoctrine()->getManager();
-                $outil=$connect2->getRepository(Outils::class)->find($idOutil);
-                $outil->setQuantite($outil->getQuantite()-1);
-                $user->setSolde($user->getSolde()-($request->get("prixTotal")));
-                $userOutil=new UserOutil();
-                $userOutil->setIdUser($user);
-                $userOutil->setIdOutil($outil);
-                $userOutil->setDateLocation(new \DateTime($request->get("dateLocation")));
-                $userOutil->setDateRetour(new \DateTime($request->get("dateRetour")));
-                $userOutil->setTotal($request->get("prixTotal"));
-                $connect1->persist($userOutil);
-                $connect1->flush();
+            $connect1=$this->getDoctrine()->getManager();
+            $connect2=$this->getDoctrine()->getManager();
+            $outil=$connect2->getRepository(Outils::class)->find($idOutil);
+            $outil->setQuantite($outil->getQuantite()-1);
+            $user->setSolde($user->getSolde()-($request->get("prixTotal")));
+            $userOutil=new UserOutil();
+            $userOutil->setIdUser($user);
+            $userOutil->setIdOutil($outil);
+            $userOutil->setDateLocation(new \DateTime($request->get("dateLocation")));
+            $userOutil->setDateRetour(new \DateTime($request->get("dateRetour")));
+            $userOutil->setTotal($request->get("prixTotal"));
+            $connect1->persist($userOutil);
+            $connect1->flush();
+            return $this->redirectToRoute("front_afficherFrontOutil");
 
-                return $this->redirectToRoute("front_afficherFrontOutil");
+        }
+        else
+        {
+            return $this->redirectToRoute("profile_setting");
+        }
 
-            }
-            else
-            {
-                return $this->redirectToRoute("profile_setting");
-            }
+    }
+    public function ListeCategorieAction()
+    {
+        $em=$this->getDoctrine()->getManager();
+        $categorie=$em->getRepository(CategorieOutils::class)->findAll();
+        $em=$this->getDoctrine()->getManager();
+        $outil=$em->getRepository(Outils::class)->findAll();
+        return $this->render('@Front/Outil/listCategorieFront.html.twig',array("categorie"=>$categorie,"outil"=>$outil));
 
     }
 

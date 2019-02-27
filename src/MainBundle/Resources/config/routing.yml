@@ -1,18 +1,9 @@
 main_homepage:
     path:     /
     defaults: { _controller: MainBundle:Default:index }
-
-################# ROUTING DE MUSTAPHA PLEASE DON'T TOUCH #####################
-
-
-
-
-############################ END ROUNTING DE MUSTAPHA ##########################
-    ################# ROUTING DE Sl-Wassim PLEASE DON'T TOUCH #####################
-
+################# ROUTING DE Sl-Wassim PLEASE DON'T TOUCH #####################
+main_notification:
+    path:     /notification
+    defaults: { _controller: MainBundle:Notification:list }
+    methods: [post]
 ############################ END ROUNTING DE Sl-Wassim ##########################
-
-########################### Routing de Slim PLEASE DON'T TOUCH ####################
-
-
-########################### END Routing de Slim ######################################

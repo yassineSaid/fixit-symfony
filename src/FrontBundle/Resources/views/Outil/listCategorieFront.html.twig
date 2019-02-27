@@ -1,0 +1,19 @@
+<li class="menu-item-has-children">
+    <a href="{{ path('front_afficherFrontOutil') }}">Outils</a>
+    <ul class="sub-menu">
+
+        {% for c in categorie %}
+        <li class="menu-item-has-children">
+            <a href="#">{{ c.nom }}</a>
+            <ul class="sub-menu">
+                {% for o in outil %}
+                {% if c.id==o.CategorieOutils.id%}
+                <li><a href="categories3col.html">{{ o.nom }}</a></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+
+    </ul>
+</li>

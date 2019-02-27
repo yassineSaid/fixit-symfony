@@ -95,7 +95,7 @@
                     </a>
                     <ul id="layouts" class="sidebar-dropdown list-unstyled collapse ">
                         <li class="sidebar-item"><a class="sidebar-link" href="{{ path('main_listCategorie_Produit') }}">Catégories</a></li>
-                        <li class="sidebar-item"><a class="sidebar-link" href="{{ path('main_ListAchat_Produit') }}">Liste d'achat</a></li>
+                        <li class="sidebar-item"><a class="sidebar-link" href="{{ path('back_ListAchat_Produit') }}">Liste d'achat</a></li>
                         <li class="sidebar-item"><a class="sidebar-link" href="{{ path('List_Produit') }}">Liste des Produits</a></li>
 
                     </ul>
@@ -301,23 +301,11 @@
                                 <i class="align-middle" data-feather="bell"></i>
                             </div>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right py-0" aria-labelledby="alertsDropdown">
+                        <div  class="dropdown-menu dropdown-menu-lg dropdown-menu-right py-0" aria-labelledby="alertsDropdown" >
                             <div class="dropdown-menu-header">
-                                4 New Notifications
+                                Notifications
                             </div>
-                            <div class="list-group">
-                                <a href="#" class="list-group-item">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col-2">
-                                            <i class="text-danger" data-feather="alert-circle"></i>
-                                        </div>
-                                        <div class="col-10">
-                                            <div class="text-dark">Update completed</div>
-                                            <div class="text-muted small mt-1">Restart server 12 to complete the update.</div>
-                                            <div class="text-muted small mt-1">2h ago</div>
-                                        </div>
-                                    </div>
-                                </a>
+                            <div class="list-group" id="notification" style="overflow-y: scroll;height:250px;">
                                 <a href="#" class="list-group-item">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col-2">
@@ -330,32 +318,6 @@
                                         </div>
                                     </div>
                                 </a>
-                                <a href="#" class="list-group-item">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col-2">
-                                            <i class="text-primary" data-feather="home"></i>
-                                        </div>
-                                        <div class="col-10">
-                                            <div class="text-dark">Login from 192.186.1.1</div>
-                                            <div class="text-muted small mt-1">8h ago</div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col-2">
-                                            <i class="text-success" data-feather="user-plus"></i>
-                                        </div>
-                                        <div class="col-10">
-                                            <div class="text-dark">New connection</div>
-                                            <div class="text-muted small mt-1">Anna accepted your request.</div>
-                                            <div class="text-muted small mt-1">12h ago</div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="dropdown-menu-footer">
-                                <a href="#" class="text-muted">Show all notifications</a>
                             </div>
                         </div>
                     </li>
@@ -399,6 +361,42 @@
 {% endblock %}
 {% block js %}
 <script src="{{ asset("BackResources/js/app.js") }}"></script>
+<script>$( document ).ready(function() {
+        ajaxCall();
+        function ajaxCall(){
+            $.ajax({
+                url: '{{ path('main_notification') }}',
+                method: 'post',
+                data: {},
+                success: function(msg) {
+                    refreshList(msg);
+                }
+            });
+        }
+
+        function refreshList(msg) {
+            $('#notification').html("");
+            $.each(msg.notification, function (i,item) {
+
+                let li = '<a href="#" class="list-group-item">\n' +
+                    '            <div class="row no-gutters align-items-center">\n' +
+                    '                <div class="col-2">\n' +
+                    '                    <img src="../../../../fixit/web/uploads/images/outil/'+item.icon+'" width=40">\n' +
+                    '                </div>\n' +
+                    '                <div class="col-10">\n' +
+                    '                    <div class="text-dark">' + item.title + '</div>\n' +
+                    '                    <div class="text-muted small mt-1">' + item.description + '</div>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '        </a>';
+                $('#notification').append(li);
+            });
+        }
+        setInterval(function(){
+            ajaxCall();
+        }, 5000);
+
+    });</script>
 </body>
 
 </html>

@@ -60,7 +60,7 @@ supprimerProduit:
   path:   admin/supprimerProduit/{prod}
   defaults: { _controller: BackBundle:CategorieProduit:SupprimerProduit }
 
-main_ListAchat_Produit:
+back_ListAchat_Produit:
   path:    /admin/ListAchat
   defaults: { _controller: BackBundle:CategorieProduit:ListeAchat }
 main_listCategorie_Produit:
