@@ -14,7 +14,7 @@ class LangueRepository extends \Doctrine\ORM\EntityRepository
     {
         $query=$this->getEntityManager()->createQuery("
                   SELECT l.libelle,COUNT(lu.idUser) AS NB FROM MainBundle:UserLangue lu, MainBundle:Langue l 
-                  WHERE l.id=lu.idLangue GROUP BY lu.idLangue ORDER BY NB DESC");
+                  WHERE l.id=lu.idLangue GROUP BY lu.idLangue ORDER BY NB DESC")->setMaxResults(3);
         return $query->execute();
     }
 }

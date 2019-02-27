@@ -6,7 +6,6 @@
             <div class="row">
                 <div class="col-12 col-md-6 col-xl d-none d-xxl-flex">
                     <div class="card flex-fill">
-                        {{ dump(languesParlees) }}
                         <div class="card-body py-4">
                             <div class="row">
                                 <div class="col-8">
@@ -102,8 +101,9 @@
                     <div class="card flex-fill w-100">
                         <div class="card-header">
                             <div class="card-actions float-right">
+                                <button class="btn btn-success"><i class="fas fa-download"></i> Success</button>
                             </div>
-                            <h5 class="card-title mb-0">Langues parlées</h5>
+                            <h5 class="card-title mb-0">TOP 3 des langues parlées</h5>
                         </div>
                         <div class="card-body d-flex">
                             <div class="align-self-center w-100">
@@ -121,11 +121,17 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    {% set i=0 %}
                                     {% for langue in languesParlees %}
                                         <tr>
-                                            <td>{{ langue.libelle }}</td>
+                                            <td>
+                                                    {% if i==0 %} <i class="fas fa-square-full text-primary"></i>
+                                                    {% elseif i==1 %} <i class="fas fa-square-full text-warning"></i>
+                                                    {% elseif i==2 %} <i class="fas fa-square-full text-danger"></i>
+                                                    {% endif %} {{ langue.libelle }}</td>
                                             <td class="text-right">{{ langue.NB }}</td>
                                         </tr>
+                                        {% set i=i+1 %}
                                     {% endfor %}
                                     </tbody>
                                 </table>
@@ -599,4 +605,9 @@
         </div>
     </main>
 
+{% endblock %}
+{% block js %}
+    {{ parent() }}
+    <script src="{{ asset("BackResources/js/fileSaver.js") }}"></script>
+    <script src="{{ asset("BackResources/js/canvas-toBlob.js") }}"></script>
 {% endblock %}
