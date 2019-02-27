@@ -53,7 +53,7 @@ class Produit
     private $quantite;
     /**
      * @ORM\ManyToOne(targetEntity="CategorieProduit")
-     * @ORM\JoinColumn(name="idCategorieProduit", referencedColumnName="id")
+     * @ORM\JoinColumn(name="idCategorieProduit", referencedColumnName="id", onDelete="CASCADE")
      */
     private $CategorieProduit;
     /**

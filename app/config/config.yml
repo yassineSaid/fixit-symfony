@@ -16,6 +16,7 @@ parameters:
     pdf_directory: '%kernel.root_dir%/../web/RapportsReclamation/'
     produit_directory: '%kernel.root_dir%/../web/uploads/images/produit'
     categorieProduit_directory: '%kernel.root_dir%/../web/uploads/images/categorieProduit'
+    achat_directory: '%kernel.root_dir%/../web/uploads/images/AchatProduit'
 
 framework:
     #esi: ~

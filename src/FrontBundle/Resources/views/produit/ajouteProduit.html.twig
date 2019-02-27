@@ -1,9 +1,9 @@
  {% extends "front.html.twig" %}
 {% trans_default_domain 'FOSUserBundle' %}
-{% block title %}Réclamer un service{% endblock %}
+{% block title %}Ajouter un produit{% endblock %}
 {% block sidebar %}{% endblock %}
 {% block content %}
-
+    <script src="{{ asset("service/js/moment.js") }}"></script>
 
     {% block js %}
         {{ parent() }}
@@ -115,6 +115,7 @@
 
             <div class="tg-themetabcontent tab-content">
                 <div class="tab-pane active fade in" id="regularuser">
+                    {% if error is defined %}<div class="alert alert-danger" id="error">{{ error }}</div>{% endif %}
                     <div id="erreur" style="display: none">
                         <p style="color: red">Vous n'avez pas rempli correctement les champs du formulaire !</p>
                     </div>

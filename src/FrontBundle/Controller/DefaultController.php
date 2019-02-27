@@ -5,8 +5,9 @@ namespace FrontBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use MainBundle\Entity\Avis;
-use MainBundle\Controller\AchatProduit;
+use MainBundle\Entity\AchatProduit;
 use MainBundle\Entity\User;
+
 
 class DefaultController extends Controller
 {
@@ -60,7 +61,11 @@ class DefaultController extends Controller
 
 
             }
-            return $this->render('@Front/Default/index.html.twig', array("lastavis" => $lastfiveratings,"service"=>$service,"categorie"=>$categorie));
+            $em1 = $this->getDoctrine()->getManager();
+            $prod = $em1->getRepository(AchatProduit::class)->TopDQL();
+
+
+            return $this->render('@Front/Default/index.html.twig', array("lastavis" => $lastfiveratings,"service"=>$service,"categorie"=>$categorie,"produit"=>$prod));
         }
 
     }

@@ -4,6 +4,7 @@ namespace BackBundle\Controller;
 use MainBundle\Entity\Produit;
 use MainBundle\Entity\AchatProduit;
 use MainBundle\Entity\CategorieProduit;
+use MainBundle\Entity\ProduitLike;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -120,6 +121,23 @@ class CategorieProduitController extends Controller
             "produit" => $prod
         ));
 
+    }
+    public function SupprimerProduitAction($prod)
+    {
+        if ($this->getUser() == null) {
+            return $this->redirectToRoute('login');
+        }
+        $em = $this->getDoctrine()->getManager();
+        $em1 = $this->getDoctrine()->getManager();
+        $em1->getRepository(ProduitLike::class)->SupLikesDQL($prod);
+        $produit = $em->getRepository(produit::class)->find($prod);
+        $image = $produit->getImage();
+        if ($image != null) {
+            unlink($this->getParameter('produit_directory') . '/' . $image);
+        }
+        $em->remove($produit);
+        $em->flush();
+        return $this->redirectToRoute("List_Produit");
     }
 
 }

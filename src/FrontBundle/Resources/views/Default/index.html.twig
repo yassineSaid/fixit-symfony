@@ -377,6 +377,7 @@
         <!--************************************
                 Top Categories Start
         *************************************-->
+
         <section class="tg-main-section tg-haslayout">
             <div class="container">
                 <div class="row">
@@ -416,12 +417,62 @@
                 </div>
             </div>
         </section>
+        <section class="tg-main-section tg-haslayout">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-10 col-md-push-1 col-lg-8 col-lg-push-2">
+                        <div class="tg-sectionhead">
+                            <div class="tg-sectiontitle">
+                                <h2>Top 4 Produits</h2>
+                            </div>
+                            <div class="tg-description">
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tg-newsandposts">
+                        {% for p in produit %}
+                            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                                <article class="tg-post">
+                                    <figure class="tg-featuredimg">
+                                        <a href="javascript:void(0);">
+                                            <img src="{{ asset('uploads/images/produit/' ~ p.image ) }}"  style="width: 150px;height: 150px" alt="image description"   >
+                                        </a>
+                                    </figure>
+                                    <div class="tg-postcontent">
+                                        <div class="tg-title">
+                                            <h3><a href="#">{{ p.produit }}</a></h3>
+                                        </div>
+                                        <ul class="tg-postmatadata">
+                                            <li>
+                                                <a href="#">
+                                                    <span>quantite vendu :  {{ p.s }}</span>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+
+                                </article>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+            <div class="tg-btnbox">
+                <a class="tg-btn tg-btnviewall" href=" {{ path('main_mes_produit' )}}">Voir tout</a>
+            </div>
+        </section>
+
         <!--************************************
                 Top Categories End
         *************************************-->
         <!--************************************
                 Advantagies Start
         *************************************-->
+
         <section class="tg-main-section tg-haslayout tg-bglight" style="align-items: center;">
             <div class="container">
                 <div class="row">
@@ -677,128 +728,6 @@
         <!--************************************
                 News & Posts Start
         *************************************-->
-        <section class="tg-main-section tg-haslayout">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-10 col-md-push-1 col-lg-8 col-lg-push-2">
-                        <div class="tg-sectionhead">
-                            <div class="tg-sectiontitle">
-                                <h2>News Articles &amp; Tips</h2>
-                            </div>
-                            <div class="tg-description">
-                                <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim adia minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip extea commodo consequat.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tg-newsandposts">
-                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                            <article class="tg-post">
-                                <figure class="tg-featuredimg">
-                                    <a href="javascript:void(0);"><img src="{{ asset("service/images/post/img-01.jpg") }}" alt="image description"></a>
-                                </figure>
-                                <div class="tg-postcontent">
-                                    <div class="tg-title">
-                                        <h3><a href="#">Manchester Cleaning Service</a></h3>
-                                    </div>
-                                    <ul class="tg-postmatadata">
-                                        <li>
-                                            <a href="#">
-                                                <i class="lnr lnr-user"></i>
-                                                <span>BY: Tamika Darbonne</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="lnr lnr-calendar-full"></i>
-                                                <span>June 27, 2017</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                            <article class="tg-post">
-                                <figure class="tg-featuredimg">
-                                    <a href="javascript:void(0);"><img src="{{ asset("service/images/post/img-02.jpg") }}" alt="image description"></a>
-                                </figure>
-                                <div class="tg-postcontent">
-                                    <div class="tg-title">
-                                        <h3><a href="#">Manchester Cleaning Service</a></h3>
-                                    </div>
-                                    <ul class="tg-postmatadata">
-                                        <li>
-                                            <a href="#">
-                                                <i class="lnr lnr-user"></i>
-                                                <span>BY: Tamika Darbonne</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="lnr lnr-calendar-full"></i>
-                                                <span>June 27, 2017</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                            <article class="tg-post">
-                                <figure class="tg-featuredimg">
-                                    <a href="javascript:void(0);"><img src="{{ asset("service/images/post/img-03.jpg") }}" alt="image description"></a>
-                                </figure>
-                                <div class="tg-postcontent">
-                                    <div class="tg-title">
-                                        <h3><a href="#">Manchester Cleaning Service</a></h3>
-                                    </div>
-                                    <ul class="tg-postmatadata">
-                                        <li>
-                                            <a href="#">
-                                                <i class="lnr lnr-user"></i>
-                                                <span>BY: Tamika Darbonne</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="lnr lnr-calendar-full"></i>
-                                                <span>June 27, 2017</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                            <article class="tg-post">
-                                <figure class="tg-featuredimg">
-                                    <a href="javascript:void(0);"><img src="{{ asset("service/images/post/img-04.jpg") }}" alt="image description"></a>
-                                </figure>
-                                <div class="tg-postcontent">
-                                    <div class="tg-title">
-                                        <h3><a href="#">Manchester Cleaning Service</a></h3>
-                                    </div>
-                                    <ul class="tg-postmatadata">
-                                        <li>
-                                            <a href="#">
-                                                <i class="lnr lnr-user"></i>
-                                                <span>BY: Tamika Darbonne</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="lnr lnr-calendar-full"></i>
-                                                <span>June 27, 2017</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
         <!--************************************
                 News & Posts End
         *************************************-->

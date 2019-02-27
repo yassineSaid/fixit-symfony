@@ -1,11 +1,12 @@
 <?php
  namespace FrontBundle\Controller;
 
- use MainBundle\Entity\AchatProduit;
- use MainBundle\Entity\ProduitLike;
+
  use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MainBundle\Entity\Produit;
+ use MainBundle\Entity\AchatProduit;
+ use MainBundle\Entity\ProduitLike;
 use MainBundle\Entity\User;
 use MainBundle\Entity\RealisationService;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,16 +17,29 @@ class ProduitController extends Controller
     public function ajouterAction(Request $request)
     {
 
-
+        $connexion1 = $this->getDoctrine();
         $connexion = $this->getDoctrine();
         $categorie = $connexion->getRepository("MainBundle:CategorieProduit")->findAll();
         $en = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $rec = $en->getRepository(RealisationService::class)->findAll();
         $produit = new produit();
+        $cate=$em->getRepository(Produit::class)->findAll();
         if ($request->isMethod("POST")) {
 
-            $connexion1 = $this->getDoctrine();
-            {
+
+
+
+                foreach ($cate as $value)
+                {
+
+                if ($value->getNom()==$request->get('nom'))
+                 {
+                        return $this->render('@Front/produit/ajouteProduit.html.twig',array("categorie" => $categorie,"error"=>"cette produit est existe deja "));
+
+                 }
+
+                }
 
                 $produit->setUser($this->getUser());
                 $produit->setNom($request->get("nom"));
@@ -44,8 +58,9 @@ class ProduitController extends Controller
                 $em->flush();
                 //return $this->render('@Front/Produit/ajouterProduit.html.twig');
 
-            }
+
             return $this->redirectToRoute("main_mes_produit");
+
         }
         return $this->render('@Front/produit/ajouteProduit.html.twig', array("categorie" => $categorie, "user" => $rec));
     }

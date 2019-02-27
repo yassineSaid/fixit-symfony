@@ -25,7 +25,7 @@ class ProduitLike
      * @var int
      *
      * @ORM\ManyToOne(targetEntity="Produit")
-     * @ORM\JoinColumn(name="produit", referencedColumnName="id")
+     * @ORM\JoinColumn(name="produit", referencedColumnName="id", onDelete="CASCADE")
      */
     private $produit;
 

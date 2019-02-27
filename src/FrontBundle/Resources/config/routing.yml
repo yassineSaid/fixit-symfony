@@ -172,34 +172,34 @@ front_search:
 
     ############routing ali##############
 main_ajouter_Produit:
-    path:    /ajoutProduit
+    path:     compte/ajoutProduit
     defaults: { _controller: FrontBundle:Produit:ajouter }
 main_acheter_Produit:
-  path:    acheterProduit/{prod}
+  path:     compte/acheterProduit/{prod}
   defaults: { _controller: FrontBundle:Produit:acheter }
 main_modifier_Produit:
-    path:    modifierProduits/{prod}
+    path:     compte/modifierProduits/{prod}
     defaults: { _controller: FrontBundle:Produit:modifier }
 main_supprimer_Produit:
-    path:    supprimerProduits/{prod}
+    path:     compte/supprimerProduits/{prod}
     defaults: { _controller: FrontBundle:Produit:Supprimer }
 main_mes_produit:
-    path:     /listproduit
+    path:     /compte/listproduit
     defaults: { _controller: FrontBundle:Produit:liste }
 main_Detaille_produit:
-  path:     detailleProduit/{prod}
+  path:      compte/detailleProduit/{prod}
   defaults: { _controller: FrontBundle:Produit:Detaill }
 main_user_produit:
-  path:     MesProduits/
+  path:     /compte/MesProduits
   defaults: { _controller: FrontBundle:Produit:MesProduits }
 main_affichageTriee:
-  path: tri/
+  path: /compte/tri
   defaults: { _controller: FrontBundle:Produit:afficherTriFront }
 like_produit:
-  path: /likeProduit/{id}
+  path:  compte/likeProduit/{id}
   defaults: { _controller: FrontBundle:Produit:like}
 Top_produit:
-  path: /meilleurProduit
+  path: /compte/meilleurProduit
   defaults: { _controller: FrontBundle:Produit:meilleurProduit}
 
       ###############end routing of ali############

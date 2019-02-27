@@ -47,4 +47,19 @@ class ProduitRepository extends \Doctrine\ORM\EntityRepository
         return $query->getResult();
     }
 
+    public function SuppDQL($id)
+    {
+
+        $query=$this->getEntityManager()->createQuery("DELETE p FROM MainBundle:Produit p where p.CategorieProduit = :id ");
+        $query->setParameter('id',$id);
+        return $query->getResult();
+    }
+    public function RechercherDQL($id)
+    {
+
+        $query=$this->getEntityManager()->createQuery("SELECT p.id FROM MainBundle:Produit p where p.CategorieProduit = :id ");
+        $query->setParameter('id',$id);
+        return $query->getResult();
+    }
+
 }

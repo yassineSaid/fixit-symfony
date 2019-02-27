@@ -51,7 +51,7 @@
                                                     <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
                                                         <div class="tg-serviceprovider tg-computermobile">
                                                             <figure class="tg-featuredimg">
-                                                                <img src="{{ asset('uploads/images/produit/' ~ p.image ) }}"  style="width: 150px"   >
+                                                                <img src="{{ asset('uploads/images/produit/' ~ p.image ) }}"  style="width: 150px;height: 150px"   >
                                                                 <figcaption>
                                                                     <a class="tg-themetag tg-categorytag" href="javascript:void(0);">{{ p.quantite }}pcs</a>
                                                                     {% set hasVoted = false %}
@@ -85,7 +85,7 @@
                                                     </div>
                                                     {% endfor %}
                                                 </div>
-                                                <a class="tg-btn tg-btnpostanewjob" href="{{ path('main_user_produit') }}">Ajouter produit</a>
+
 
                                     </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

@@ -53,6 +53,16 @@ ajouter_service:
 main_ajouterCategori_Produit:
   path:    /admin/ajouterCategorieProduits
   defaults: { _controller: BackBundle:CategorieProduit:ajouter }
+List_Produit:
+  path:   /admin/listProduit
+  defaults: { _controller: BackBundle:CategorieProduit:listeProduit }
+supprimerProduit:
+  path:   admin/supprimerProduit/{prod}
+  defaults: { _controller: BackBundle:CategorieProduit:SupprimerProduit }
+
+main_ListAchat_Produit:
+  path:    /admin/ListAchat
+  defaults: { _controller: BackBundle:CategorieProduit:ListeAchat }
 main_listCategorie_Produit:
   path:    /admin/listCategorieProduits
   defaults: { _controller: BackBundle:CategorieProduit:lister }
