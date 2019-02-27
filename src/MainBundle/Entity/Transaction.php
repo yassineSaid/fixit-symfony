@@ -29,6 +29,20 @@ class Transaction
     private $monatantScoin;
 
     /**
+     * @var datetime
+     *
+     * @ORM\Column(name="date", type="datetime")
+     */
+    private $date;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string")
+     */
+    private $type;
+
+    /**
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="iduserPayant", referencedColumnName="id")
      */
@@ -75,5 +89,70 @@ class Transaction
     {
         return $this->monatantScoin;
     }
+
+    /**
+     * @return datetime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param datetime $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserP()
+    {
+        return $this->UserP;
+    }
+
+    /**
+     * @param mixed $UserP
+     */
+    public function setUserP($UserP)
+    {
+        $this->UserP = $UserP;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserR()
+    {
+        return $this->UserR;
+    }
+
+    /**
+     * @param mixed $UserR
+     */
+    public function setUserR($UserR)
+    {
+        $this->UserR = $UserR;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
 }
 

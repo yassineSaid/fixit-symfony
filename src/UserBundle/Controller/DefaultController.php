@@ -11,19 +11,4 @@ class DefaultController extends Controller
     {
         return $this->render('@User/Default/index.html.twig');
     }
-    public function acheterProduit($idUser,$montant)
-    {
-        $connect=$this->getDoctrine()->getManager();
-        $user=$connect->getRepository(User::class)->find($idUser);
-        if ($user->getSolde()<$montant)
-        {
-            return false;
-        }
-        else
-        {
-            $user->setSolde($user->getSolde()-$montant);
-            $connect->flush();
-            return true;
-        }
-    }
 }

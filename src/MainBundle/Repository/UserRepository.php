@@ -2,6 +2,10 @@
 
 namespace MainBundle\Repository;
 
+use MainBundle\Entity\Paiement;
+use MainBundle\Entity\Transaction;
+use MainBundle\Entity\User;
+
 /**
  * UserRepository
  *
@@ -48,5 +52,56 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
                   SELECT sum(u.id) VIS from MainBundle:User u 
                   where date(u.lastLogin)=date(now())");
         return $query->execute();
+    }
+    public function acheterProduit($idA,$idV,$montant)
+    {
+        $connect=$this->getEntityManager();
+        $userA=$connect->getRepository(User::class)->find($idA);
+        $userV=$connect->getRepository(User::class)->find($idV);
+        if ($userA->getSolde()<$montant)
+        {
+            return false;
+        }
+        else
+        {
+            $transaction=new Transaction();
+            $transaction->setMonatantScoin($montant);
+            $transaction->setType("Achat");
+            $transaction->setUserP($userA);
+            $transaction->setUserR($userV);
+            $transaction->setDate(new \DateTime());
+            $connect->persist($transaction);
+            $connect->flush();
+
+            $userA->setSolde($userA->getSolde()-$montant);
+            $connect->flush();
+
+            $userV->setSolde($userV->getSolde()+$montant);
+            $connect->flush();
+            return true;
+        }
+    }
+    public function louerOutil($idA,$montant)
+    {
+        $connect=$this->getEntityManager();
+        $userA=$connect->getRepository(User::class)->find($idA);
+        if ($userA->getSolde()<$montant)
+        {
+            return false;
+        }
+        else
+        {
+            $transaction=new Transaction();
+            $transaction->setMonatantScoin($montant);
+            $transaction->setType("Location");
+            $transaction->setUserP($userA);
+            $transaction->setDate(new \DateTime());
+            $connect->persist($transaction);
+            $connect->flush();
+
+            $userA->setSolde($userA->getSolde()-$montant);
+            $connect->flush();
+            return true;
+        }
     }
 }

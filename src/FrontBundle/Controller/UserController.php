@@ -11,6 +11,7 @@ use MainBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use UserBundle\UserBundle;
 
 class UserController extends Controller
 {
@@ -80,6 +81,7 @@ class UserController extends Controller
     }
     public function afficherUserAction($id)
     {
+        
         $connect=$this->getDoctrine()->getManager();
         $user=$connect->getRepository(User::class)->find($id);
         $connexion=$this->getDoctrine();
