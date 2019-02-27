@@ -9,7 +9,7 @@
     <meta name="description" content="Responsive Bootstrap 4 Admin Template">
     <meta name="author" content="Bootlab">
 
-    <title>{% block title %}Vuze - Responsive Admin Template{% endblock %}</title>
+    <title>{% block title %}FixIt-Administration{% endblock %}</title>
 
     <link href="{{ asset("BackResources/css/app.css") }}" rel="stylesheet">
 
@@ -20,9 +20,9 @@
 <div class="wrapper">
     <nav class="sidebar sidebar-sticky">
         <div class="sidebar-content  js-simplebar">
-            <a class="sidebar-brand" href="index.html">
-                <i class="align-middle" data-feather="layers"></i>
-                <span class="align-middle">Vuze</span>
+            <a class="sidebar-brand" href="{{ path('back_homepage') }}">
+                <i class="align-middle" data-feather="map-pin" style="color: forestgreen;"></i>
+                <span class="align-middle">FixIt</span>
             </a>
             {% block flash %}
 
@@ -383,7 +383,7 @@
                 <div class="row text-muted">
                     <div class="col-6 text-left">
                         <p class="mb-0">
-                            &copy; <a href="index.html" class="text-muted">Vuze</a>
+                            &copy; <a href="{{ path('back_homepage') }}" class="text-muted">FixIt</a>
                         </p>
                     </div>
                     <div class="col-6 text-right">

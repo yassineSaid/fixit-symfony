@@ -81,6 +81,34 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
             return true;
         }
     }
+    public function payerService($idA,$idV,$montant)
+    {
+        $connect=$this->getEntityManager();
+        $userA=$connect->getRepository(User::class)->find($idA);
+        $userV=$connect->getRepository(User::class)->find($idV);
+        if ($userA->getSolde()<$montant)
+        {
+            return false;
+        }
+        else
+        {
+            $transaction=new Transaction();
+            $transaction->setMonatantScoin($montant);
+            $transaction->setType("Service");
+            $transaction->setUserP($userA);
+            $transaction->setUserR($userV);
+            $transaction->setDate(new \DateTime());
+            $connect->persist($transaction);
+            $connect->flush();
+
+            $userA->setSolde($userA->getSolde()-$montant);
+            $connect->flush();
+
+            $userV->setSolde($userV->getSolde()+$montant);
+            $connect->flush();
+            return true;
+        }
+    }
     public function louerOutil($idA,$montant)
     {
         $connect=$this->getEntityManager();

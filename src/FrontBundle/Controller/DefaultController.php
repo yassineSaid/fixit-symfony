@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use MainBundle\Entity\Avis;
 use MainBundle\Controller\AchatProduit;
+use MainBundle\Entity\User;
 
 class DefaultController extends Controller
 {

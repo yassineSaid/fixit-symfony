@@ -364,9 +364,9 @@ class PaiementController extends Controller
 			</figure>
 			<div class="company-info">
 				<h2 class="title">FixIt</h2>
-				<span>455 Foggy Heights, AZ 85004, US</span>
+				<span>Z.I. Chotrana II B.P. 160 Pôle Technologique El Ghazela - Ariana 2083</span>
 				<span class="line"></span>
-				<a class="phone" href="tel:602-519-0450">(602) 519-0450</a>
+				<a class="phone" href="tel:602-519-0450">(+216) 70 250 000</a>
 				<span class="line"></span>
 				<a class="email" href="mailto:fixitnom.tn@gmail.com">fixitnom.tn@gmail.com</a>
 			</div>

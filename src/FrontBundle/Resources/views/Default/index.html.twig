@@ -554,23 +554,11 @@
                                         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" style="width: 400px">
                                             <div class="form-group">
                                                 <select class="form-control" name="satisfaction">
-                                                    {% if note is not defined %}
+
                                                     <option value="Non satisfait" selected>Non satisfait</option>
                                                     <option value="Moyennement Satisfait">Moyennement Satisfait</option>
                                                     <option value="Totalement satisfait">Totalement satisfait</option>
-                                                    {% elseif note[0].satisfaction =="Non satisfait" %}
-                                                    <option value="Non satisfait" selected="selected">Non satisfait</option>
-                                                    <option value="Moyennement Satisfait">Moyennement Satisfait</option>
-                                                    <option value="Totalement satisfait">Totalement satisfait</option>
-                                                    {% elseif note[0].satisfaction =="Moyennement satisfait" %}
-                                                    <option value="Non satisfait">Non satisfait</option>
-                                                    <option value="Moyennement Satisfait">Moyennement Satisfait</option>
-                                                    <option value="Totalement satisfait">Totalement satisfait</option>
-                                                    {% elseif note[0].satisfaction =="Totalement satisfait" %}
-                                                    <option value="Non satisfait">Non satisfait</option>
-                                                    <option value="Moyennement Satisfait">Moyennement Satisfait</option>
-                                                    <option value="Totalement satisfait">Totalement satisfait</option>
-                                                    {% endif %}
+
                                                 </select>
                                             </div>
                                         </div>

@@ -29,6 +29,7 @@ class ReclamationFrontController extends Controller
             $reclamation->setUser($this->getUser());
             $reclamation->setSeen(0);
             $reclamation->setTraite(0);
+            $reclamation->setShow(0);
             $em=$this->getDoctrine()->getManager();
             $em->persist($reclamation);
             $em->flush();
