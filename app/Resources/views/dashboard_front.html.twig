@@ -2,8 +2,8 @@
 {% block sidebar %}
 <script>
     $( document ).ready(function() {
-        ajaxCall();
-        function ajaxCall() {
+        getData();
+        function getData() {
             $.ajax({
                 url: '{{ path('main_count_like_currentuser') }}',
                 method: 'post',
@@ -16,7 +16,7 @@
             });
         }
        setInterval(function(){
-            ajaxCall();
+            getData();
         }, 5000);
 
     });

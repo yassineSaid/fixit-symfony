@@ -5,24 +5,24 @@
 {% block content %}
 <script>
     $(document).ready(function () {
-        ajaxCall();
+        getData();
         $("#like").click(
             function () {
                 //console.log(msg);
-                ajaxVerify();
+                verifyData(); //verifyData
             }
         )
-        function ajaxAdd(){
+        function addData(){ //addData
             $.ajax({
                 url: "{{ path('main_ajouter_like') }}",
                 method: "post",
                 data: {idUser: "{{ app.user.id }}",idUserl:"{{ user.id}}",like:1}
             }).success(function(msg) {
 
-                ajaxCall();
+                getData(); //getData
             });
         }
-        function ajaxVerify(){
+        function verifyData(){ //verifyData
             $.ajax({
                 url: "{{ path('main_verify') }}",
                 method: "post",
@@ -31,25 +31,25 @@
                 console.log(msg);
                 if(msg.like[0]==null)
                 {
-                    ajaxAdd();
+                    addData(); //addData
 
                 }
                 else
                 {
-                    ajaxRemove();
+                    removeData(); //removeData
                 }
             });
         }
-        function ajaxRemove(){
+        function removeData(){ //removeData
             $.ajax({
                 url: "{{ path('main_remove_likes') }}",
                 method: "post",
                 data: {idUser: "{{ app.user.id }}",idUserl:"{{ user.id}}"}
             }).success(function(msg) {
-                ajaxCall();
+                getData(); //getData
             });
         }
-        function ajaxCall(){
+        function getData(){ //getData
             $.ajax({
                 url: "{{ path('main_count_likes') }}",
                 method: "post",
@@ -60,7 +60,7 @@
 
         }
         setInterval(function(){
-            ajaxCall();
+            getData(); //getData
         }, 5000);
         /*function refreshList(msg) {
             $('#nbrl').html(" "+msg.nbr[0][1]+" ");
@@ -70,14 +70,14 @@
     });
 
     $(document).ready(function () {
-        ajaxCall();
+        getData(); //getData
         $("#dislike").click(
             function () {
 
-                ajaxVerify();
+                verifyData(); //verifyData
             }
         )
-        function ajaxVerify(){
+        function verifyData(){ //verifyData
             $.ajax({
                 url: "{{ path('main_verify') }}",
                 method: "post",
@@ -85,25 +85,25 @@
             }).success(function(msg) {
                 if(msg.like[0]==null)
                 {
-                    ajaxAdd();
+                    addData(); //addData
                 }
                 else
                 {
-                    ajaxRemove();
+                    removeData(); //removeData
                 }
             });
         }
-        function ajaxAdd(){
+        function addData(){ //addData
             $.ajax({
                 url: "{{ path('main_ajouter_like') }}",
                 method: "post",
                 data: {idUser: "{{ app.user.id }}",idUserl:"{{ user.id}}",like:0}
             }).success(function(msg) {
                 console.log(msg);
-                ajaxCall();
+                getData(); //getData
             });
         }
-        function ajaxCall(){
+        function getData(){ //getData
             $.ajax({
                 url: "{{ path('main_count_dislikes') }}",
                 method: "post",
@@ -118,17 +118,17 @@
 
 
         }*/
-        function ajaxRemove(){
+        function removeData(){ //removeData
             $.ajax({
                 url: "{{ path('main_remove_dislikes') }}",
                 method: "post",
                 data: {idUser: "{{ app.user.id }}",idUserl:"{{ user.id}}"}
             }).success(function(msg) {
-                ajaxCall();
+                getData(); //getData
             });
         }
         setInterval(function(){
-            ajaxCall();
+            getData(); //getData
         }, 5000);
     });
 </script>
