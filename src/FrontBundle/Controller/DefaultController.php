@@ -37,7 +37,9 @@ class DefaultController extends Controller
                 $em->flush();
                 return $this->render('@Front/Default/index.html.twig',array("note"=>$avis,"lastavis"=>$lastfiveratings,"service"=>$service,"categorie"=>$categorie));
             }
-            return $this->render('@Front/Default/index.html.twig',array("note"=>$avis,"lastavis"=>$lastfiveratings,"service"=>$service,"categorie"=>$categorie));
+            $em1 = $this->getDoctrine()->getManager();
+            $prod = $em1->getRepository(AchatProduit::class)->TopDQL();
+            return $this->render('@Front/Default/index.html.twig',array("note"=>$avis,"lastavis"=>$lastfiveratings,"service"=>$service,"categorie"=>$categorie,"produits"=>$prod));
         }
         else {
 
@@ -64,8 +66,8 @@ class DefaultController extends Controller
             $em1 = $this->getDoctrine()->getManager();
             $prod = $em1->getRepository(AchatProduit::class)->TopDQL();
 
-
-            return $this->render('@Front/Default/index.html.twig', array("lastavis" => $lastfiveratings,"service"=>$service,"categorie"=>$categorie,"produit"=>$prod));
+              var_dump($prod);
+            return $this->render('@Front/Default/index.html.twig', array("lastavis" => $lastfiveratings,"service"=>$service,"categorie"=>$categorie,"produits"=>$prod));
         }
 
     }

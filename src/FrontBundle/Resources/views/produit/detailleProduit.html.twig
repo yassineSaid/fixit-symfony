@@ -34,7 +34,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="tg-serviceprovider tg-automotive">
                             <figure class="tg-featuredimg">
-                                <img src="{{ asset('uploads/images/produit/' ~ produit.image ) }}" width="50">
+                                <img src="{{ asset('uploads/images/produit/' ~ produit.image ) }}" style="width: 150px;height: 150px">
                             </figure>
                             <div class="tg-companycontent">
 
@@ -53,10 +53,11 @@
 
                                     <li>
                                         <img src="{{ asset("service/images/icons/scoin.png") }}" width="30">
-                                        <span data-toggle="tooltip" data-placement="top" title="Click to view Number" data-last="34 - 562 - 6">{{ produit.prix }}</em></span>
+                                        <span data-toggle="tooltip" data-placement="top" title="Click to view Number" data-last="34 - 562 - 6">{{ produit.prix}}</span>
+
                                     </li>
                                     <li>
-                                        <img src="{{ asset("service/images/icons/quantite.png") }}" width="30">
+                                        <img src="{{ asset("service/images/icons/quantite.png") }}" width="30"> </em></span>
                                         <span data-toggle="tooltip" data-placement="top" title="Click to view Number" data-last="34 - 562 - 6">{{ produit.quantite}}</em></span>
                                     </li>
                                     <li>
@@ -76,7 +77,7 @@
 
 
 <a class="tg-btn tg-btnpostanewjob" href="{{ path('main_acheter_Produit',{'prod':produit.id}) }}">Acheter</a>
-                                           
+
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
     <nav class="tg-pagination">

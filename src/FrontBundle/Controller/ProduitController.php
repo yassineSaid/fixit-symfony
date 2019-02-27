@@ -198,12 +198,12 @@ class ProduitController extends Controller
                 $achat->setImage($prod->getImage());
                 $connect2->persist($achat);
                 $connect2->flush();
-                $transport = \Swift_SmtpTransport::newInstance('smtp.gmail.com', 465,'ssl')->setUsername('mustapha.benhajminyaoui@esprit.tn')->setPassword('icarus09626776');
+                $transport = \Swift_SmtpTransport::newInstance('smtp.gmail.com', 465,'ssl')->setUsername('fixitnow.tn@gmail.com')->setPassword('challengers123');
 
                 $mailer = \Swift_Mailer::newInstance($transport);
                 $message = \Swift_Message::newInstance()
                     ->setSubject("produit est vendu ")
-                    ->setFrom(array('mustapha.benhajminyaoui@esprit.tn' => 'mustapha.benhajminyaoui@esprit.tn'))
+                    ->setFrom(array('fixitnow.tn@gmail.com' => 'fixitnow.tn@gmail.com'))
                     ->setTo(array($user->getEmail() => $user->getEmail()))// email du client pour teste replacer par son @
                     ->setBody(
                         '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
