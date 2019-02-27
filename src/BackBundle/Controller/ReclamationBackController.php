@@ -581,17 +581,26 @@ table[class=hide], img[class=hide], td[class=hide] {
     {
         $em=$this->getDoctrine()->getManager();
         $reclamation=$em->getRepository(Reclamation::class)->find($rec);
-        $em->remove($reclamation);
+        $reclamation->setShow(1);
+        var_dump($reclamation);
         $em->flush();
         return $this->redirectToRoute('main_liste_reclamation_admin');
     }
 
-    public function afficherReclamationTraite()
+    public function afficherReclamationTraiteAction()
     {
         $em=$this->getDoctrine()->getManager();
         $reclamation=$em->getRepository(Reclamation::class)->findReclamationTraite();
-        return $this->render('@Back/Reclamations/ListReclamationAdmin.html.twig',array("recs"=>$reclamation));
+        return $this->render('@Back/Reclamations/listreclamationnontraite.html.twig',array("recs"=>$reclamation));
     }
+
+    public function afficherReclamationArchiveAction()
+    {
+        $em=$this->getDoctrine()->getManager();
+        $reclamation=$em->getRepository(Reclamation::class)->findReclamationArchive();
+        return $this->render('@Back/Reclamations/archivereclamation.html.twig',array("recs"=>$reclamation));
+    }
+
 
 
 }

@@ -12,24 +12,48 @@ class AvisFrontController extends Controller
 {
     public function NoterServiceAction(Request $request)
     {
-        $Avis= new Avis();
-        if($request->isMethod('POST'))
+        $em=$this->getDoctrine()->getManager();
+        $avis=$em->getRepository(Avis::class)->findAvis($this->getUser()->getId());
+        $categorie=$em->getRepository("MainBundle:CategorieService")->findAll();
+        $service=$em->getRepository("MainBundle:Service")->findAll();
+        if($avis!=null)
         {
 
-            $em=$this->getDoctrine()->getManager();
-            $iduser=$this->getUser()->getId();
-            $user=$em->getRepository(User::class)->find($iduser);
-            $Avis->setUser($user);
-            $Avis->setSatisfaction($request->get("satisfaction"));
-            $Avis->setDescription($request->get("Description"));
-            $Avis->setNote($request->get("rating"));
-            $em=$this->getDoctrine()->getManager();
-            $em->persist($Avis);
-            $em->flush();
+            if($request->isMethod('POST'))
+            {
+                $avis[0]->setSatisfaction($request->get("satisfaction"));
+                $avis[0]->setDescription($request->get("Description"));
+                $avis[0]->setNote($request->get("rating"));
+                $em=$this->getDoctrine()->getManager();
+                $em->flush();
+                return $this->render('@Front/Reclamation/noter.html.twig',array("note"=>$avis));
+            }
+            return $this->render('@Front/Reclamation/noter.html.twig',array("note"=>$avis));
+        }
+        else {
 
+
+            $Avis = new Avis();
+            if ($request->isMethod('POST')) {
+
+                $em = $this->getDoctrine()->getManager();
+                $iduser = $this->getUser()->getId();
+                $user = $em->getRepository(User::class)->find($iduser);
+                $Avis->setUser($user);
+                $Avis->setSatisfaction($request->get("satisfaction"));
+                $Avis->setDescription($request->get("Description"));
+                $Avis->setNote($request->get("rating"));
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($Avis);
+                $em->flush();
+
+
+            }
+            return $this->render('@Front/Reclamation/noter.html.twig');
         }
 
-        return $this->render('@Front/Reclamation/noter.html.twig');
+
+
     }
 
     public function NoterServiceindexAction(Request $request)

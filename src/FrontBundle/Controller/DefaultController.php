@@ -12,10 +12,17 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         $em=$this->getDoctrine()->getManager();
-        $avis=$em->getRepository(Avis::class)->findAvis($this->getUser()->getId());
+        if($this->getUser()==null)
+        {
+            $avis=null;
+        }
+        else
+        {
+            $avis=$em->getRepository(Avis::class)->findAvis($this->getUser()->getId());
+        }
         $categorie=$em->getRepository("MainBundle:CategorieService")->findAll();
         $service=$em->getRepository("MainBundle:Service")->findAll();
-        $lastfiveratings=$em->getRepository(Avis::class)->findfivelastAvis($this->getUser()->getId());
+        $lastfiveratings=$em->getRepository(Avis::class)->findfivelastAvis();
         if($avis!=null)
         {
 
@@ -35,7 +42,10 @@ class DefaultController extends Controller
 
             $Avis = new Avis();
             if ($request->isMethod('POST')) {
-
+                if($this->getUser()==null)
+                {
+                    $this->redirectToRoute('login');
+                }
                 $em = $this->getDoctrine()->getManager();
                 $iduser = $this->getUser()->getId();
                 $user = $em->getRepository(User::class)->find($iduser);

@@ -29,12 +29,16 @@
                     <div class="tab-pane" id="primary-tab-2" role="tabpanel">
                         <h4 class="tab-title">Actions</h4>
                         <form action="{{ path('main_traite_reclamation_admin',{'rec':rec.id}) }}">
+                            {% if rec.traite == 0  %}
                             <button class="btn btn-success">Traiter cette reclamation</button>
+                            {% else %}
+                            <p>Cette Reclamation est traitée</p>
+                            {% endif %}
                         </form>
                         <br>
                         <br>
                         <form action="{{ path('main_supprimer_reclamation_admin',{'rec':rec.id}) }} }}">
-                            <button class="btn btn-danger">Supprimer cette reclamation</button>
+                            <button class="btn btn-danger">Archiver</button>
                         </form>
                     </div>
                 </div>

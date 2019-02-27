@@ -21,7 +21,13 @@ class ReclamationRepository extends \Doctrine\ORM\EntityRepository
     public function findReclamationTraite()
     {
         $query=$this->getEntityManager()
-            ->createQuery("SELECT r FROM MainBundle:Reclamation r where r.traite=1");
+            ->createQuery("SELECT r FROM MainBundle:Reclamation r where r.traite=0");
+        return $query->getResult();
+    }
+    public function findReclamationArchive()
+    {
+        $query=$this->getEntityManager()
+            ->createQuery("SELECT r FROM MainBundle:Reclamation r where r.show=1");
         return $query->getResult();
     }
 

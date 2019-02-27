@@ -83,6 +83,33 @@ main_select_service_a_reclame:
   path:     /compte/ssar
   defaults: { _controller: FrontBundle:ReclamationFront:selectserviceareclamer }
   methods: [get]
+main_ajouter_like:
+  path:     /compte/ajouterlike
+  defaults: { _controller: FrontBundle:LikeDislike:AjouterLike }
+main_count_likes:
+  path:     /compte/countlike
+  defaults: { _controller: FrontBundle:LikeDislike:NombreLike }
+  methods: [post]
+main_remove_likes:
+  path:     /compte/removelike
+  defaults: { _controller: FrontBundle:LikeDislike:removelike }
+  methods: [post]
+main_remove_dislikes:
+  path:     /compte/removedislike
+  defaults: { _controller: FrontBundle:LikeDislike:removedislike }
+  methods: [post]
+main_count_dislikes:
+  path:     /compte/countdislike
+  defaults: { _controller: FrontBundle:LikeDislike:NombreDislike }
+  methods: [post]
+main_verify:
+  path:     /compte/verify
+  defaults: { _controller: FrontBundle:LikeDislike:verify }
+  methods: [post]
+main_count_like_currentuser:
+  path:     /compte/countlikecurrent
+  defaults: { _controller: FrontBundle:LikeDislike:countcurrent }
+  methods: [post]
 ############################        END ROUTING DE MUSTAPHA         #######################
 languesUser:
   path:     /compte/langues

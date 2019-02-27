@@ -3,7 +3,135 @@
 {% block title %}Profil de {{ user.firstname }}{% endblock %}
 {% block sidebar %}{% endblock %}
 {% block content %}
+<script>
+    $(document).ready(function () {
+        ajaxCall();
+        $("#like").click(
+            function () {
+                //console.log(msg);
+                ajaxVerify();
+            }
+        )
+        function ajaxAdd(){
+            $.ajax({
+                url: "{{ path('main_ajouter_like') }}",
+                method: "post",
+                data: {idUser: "{{ app.user.id }}",idUserl:"{{ user.id}}",like:1}
+            }).success(function(msg) {
 
+                ajaxCall();
+            });
+        }
+        function ajaxVerify(){
+            $.ajax({
+                url: "{{ path('main_verify') }}",
+                method: "post",
+                data: {idUser: "{{ app.user.id }}",idUserl:"{{ user.id}}"}
+            }).success(function(msg) {
+                console.log(msg);
+                if(msg.like[0]==null)
+                {
+                    ajaxAdd();
+
+                }
+                else
+                {
+                    ajaxRemove();
+                }
+            });
+        }
+        function ajaxRemove(){
+            $.ajax({
+                url: "{{ path('main_remove_likes') }}",
+                method: "post",
+                data: {idUser: "{{ app.user.id }}",idUserl:"{{ user.id}}"}
+            }).success(function(msg) {
+                ajaxCall();
+            });
+        }
+        function ajaxCall(){
+            $.ajax({
+                url: "{{ path('main_count_likes') }}",
+                method: "post",
+                data: {id: "{{ user.id }}"}
+            }).success(function(msg) {
+                $('#nbrl').html(" "+msg.nbr[0][1]+" ");
+            });
+
+        }
+        setInterval(function(){
+            ajaxCall();
+        }, 5000);
+        /*function refreshList(msg) {
+            $('#nbrl').html(" "+msg.nbr[0][1]+" ");
+
+
+        }*/
+    });
+
+    $(document).ready(function () {
+        ajaxCall();
+        $("#dislike").click(
+            function () {
+
+                ajaxVerify();
+            }
+        )
+        function ajaxVerify(){
+            $.ajax({
+                url: "{{ path('main_verify') }}",
+                method: "post",
+                data: {idUser: "{{ app.user.id }}",idUserl:"{{ user.id}}"}
+            }).success(function(msg) {
+                if(msg.like[0]==null)
+                {
+                    ajaxAdd();
+                }
+                else
+                {
+                    ajaxRemove();
+                }
+            });
+        }
+        function ajaxAdd(){
+            $.ajax({
+                url: "{{ path('main_ajouter_like') }}",
+                method: "post",
+                data: {idUser: "{{ app.user.id }}",idUserl:"{{ user.id}}",like:0}
+            }).success(function(msg) {
+                console.log(msg);
+                ajaxCall();
+            });
+        }
+        function ajaxCall(){
+            $.ajax({
+                url: "{{ path('main_count_dislikes') }}",
+                method: "post",
+                data: {id: "{{ user.id }}"}
+            }).success(function(msg) {
+                $('#nbrd').html(" "+msg.nbrd[0][1]+" ");
+            });
+
+        }
+        /*function refreshList(msg) {
+            $('#nbrd').html(" "+msg.nbrd[0][1]+" ");
+
+
+        }*/
+        function ajaxRemove(){
+            $.ajax({
+                url: "{{ path('main_remove_dislikes') }}",
+                method: "post",
+                data: {idUser: "{{ app.user.id }}",idUserl:"{{ user.id}}"}
+            }).success(function(msg) {
+                ajaxCall();
+            });
+        }
+        setInterval(function(){
+            ajaxCall();
+        }, 5000);
+    });
+</script>
     <!--************************************
 				Inner Page Banner Start
 		*************************************-->
@@ -50,6 +178,39 @@
                                             <div class="tg-title">
                                                 <h1>{{ user.firstname }} {{ user.lastname }}</h1>
                                             </div>
+                                            <br>
+                                            <br>
+                                            <ul class="tg-matadata" style="height: 50px; margin-top: 30px;">
+                                                {% if app.user.id != user.id %}
+                                                <li>
+                                                <a id="like" >
+                                                    <i class="fa fa-thumbs-o-up"  style="font-size: 30px; color: whitesmoke;"></i>
+
+                                                </a>
+                                                </li>
+
+                                                <li id="nbrl">0</li>
+                                                    <li style="margin-left: 20px;">
+                                                        <a id="dislike" >
+                                                            <i class="fa fa-thumbs-o-down"  style="font-size: 30px; color: white;"></i>
+                                                        </a>
+
+                                                    </li>
+                                                    <li id="nbrd">0</li>
+
+                                                {% else %}
+                                                <li>
+                                                    <i class="fa fa-thumbs-o-up"  style="font-size: 30px; color: whitesmoke;"></i>
+                                                </li>
+                                                    <li id="nbrl">0</li>
+                                                    <li style="margin-left: 20px;">
+                                                            <i class="fa fa-thumbs-o-down"  style="font-size: 30px; color: white;"></i>
+                                                    </li>
+                                                    <li id="nbrd">0</li>
+                                                {% endif %}
+
+
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -259,6 +420,9 @@
                                                     {% endif %}
                                                 {% endfor %}
                                             </li>
+                                          <li id="sh-SAT">
+
+                                          </li>
                                         </ul>
                                     </div>
                                 </div>

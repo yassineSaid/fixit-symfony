@@ -1,5 +1,26 @@
 {% extends "front.html.twig" %}
 {% block sidebar %}
+<script>
+    $( document ).ready(function() {
+        ajaxCall();
+        function ajaxCall() {
+            $.ajax({
+                url: '{{ path('main_count_like_currentuser') }}',
+                method: 'post',
+                data: {id : "{{ app.user.id }}"},
+                success: function(msg) {
+                    console.log(msg.nbrl);
+                    $('#likes').html(" "+msg.nbrl[0][1]+" ");
+                    $('#dislikes').html(" "+msg.nbrd[0][1]+" ");
+                }
+            });
+        }
+       setInterval(function(){
+            ajaxCall();
+        }, 5000);
+
+    });
+</script>
 <main id="tg-main" class="tg-main tg-haslayout">
     <div class="container">
         <div class="row">
@@ -25,12 +46,14 @@
                                 </figure>
                                 <div class="tg-admininfo">
                                     <h3>{{  app.user.firstname }} {{  app.user.lastname }}</h3>
-                                    <h4>Bright Future Group &amp; Company</h4>
                                     <ul class="tg-matadata">
-                                        <li><span class="tg-stars"><span></span></span></li>
                                         <li>
                                             <i class="fa fa-thumbs-o-up"></i>
-                                            <em>99% (1009 votes)</em>
+                                            <em id="likes"></em>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-thumbs-o-down"></i>
+                                            <em id="dislikes"></em>
                                         </li>
                                     </ul>
                                 </div>

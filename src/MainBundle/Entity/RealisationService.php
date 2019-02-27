@@ -45,6 +45,12 @@ class RealisationService
      * @ORM\JoinColumn(name="idoutil", referencedColumnName="id")
      */
     private $outil;
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="DateRealisation", type="date")
+     */
+    private $DateRealisation;
 
 
     /**
@@ -108,6 +114,23 @@ class RealisationService
     {
         $this->outil = $outil;
     }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateRealisation()
+    {
+        return $this->DateRealisation;
+    }
+
+    /**
+     * @param \DateTime $DateRealisation
+     */
+    public function setDateRealisation($DateRealisation)
+    {
+        $this->DateRealisation = $DateRealisation;
+    }
+
 
 
 }

@@ -48,10 +48,17 @@
                         <i class="align-middle" data-feather="users"></i> <span class="align-middle">Utilisateurs</span>
                     </a>
                 </li>
+
+
                 <li class="sidebar-item active">
-                    <a href="{{ path('main_liste_reclamation_admin') }}" class="font-weight-bold sidebar-link">
-                        <i class="fa fa-envelope" aria-hidden="true"></i>Espace Reclamation
+                    <a href="#Reclamation" data-toggle="collapse" class="font-weight-bold sidebar-link collapsed">
+                        <i class="fa fa-envelope" aria-hidden="true"></i><span class="align-middle">Espace Reclamation</span>
                     </a>
+                    <ul id="Reclamation" class="sidebar-dropdown list-unstyled collapse ">
+                        <li class="sidebar-item"><a class="sidebar-link" href="{{ path('main_liste_reclamation_admin') }}">toutes les réclamations</a></li>
+                        <li class="sidebar-item"><a class="sidebar-link" href="{{ path('main_liste_reclamation_traite') }}">Reclamation non traité</a></li>
+                        <li class="sidebar-item"><a class="sidebar-link" href="{{ path('main_liste_reclamation_archive') }}">Reclamation archivé</a></li>
+                    </ul>
 
                 </li>
                 <li class="sidebar-item">

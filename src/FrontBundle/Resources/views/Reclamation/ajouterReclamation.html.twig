@@ -2,7 +2,10 @@
 {% set menu_selected = 'main_reclamation_Ajout' %}{% extends "dashboard_front.html.twig" %}
 {% trans_default_domain 'FOSUserBundle' %}
 {% block title %}Réclamer un service{% endblock %}
+
 {% block content %}
+
+
     <!--************************************
 				Inner Page Banner Start
 		*************************************-->
@@ -79,30 +82,24 @@
                                                             <div class="form-group">
                                                                 <select class="form-control" name="cc" id="cc">
                                                                     {% for u in user %}
-                                                                        <option value="{{ u.UserOffreur.id}}">{{ u.UserOffreur.firstname }}</option>
+                                                                        <option value="{{ u.UserOffreur.id}}">{{ u.UserOffreur.firstname }} - {{ u.service.nom }} - {{ u.daterealisation|date('"m/d/Y"') }}</option>
                                                                     {% endfor %}
                                                                 </select>
                                                             </div>
                                                         </div>
                                                         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                                                             <div class="form-group">
-                                                                <select class="form-control" name="cc" id="us">
-
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                                            <div class="form-group">
-                                                                <input type="text" name="Object" class="form-control" placeholder="Object" style="width: 440px">
+                                                                <input type="text" name="Object" id="Object" class="form-control" placeholder="Object" style="width: 440px">
                                                             </div>
                                                         </div>
                                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                                             <div class="form-group">
-                                                                <textarea placeholder="Description" name="Description"></textarea>
+                                                                <textarea placeholder="Description" id="Description" name="Description"></textarea>
                                                             </div>
                                                         </div>
                                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                                             <button type="submit" class="tg-btn">Submit</button>
+                                                            <a  class="tg-btn">Retour à la page d'accueil</a>
                                                         </div>
                                                     </div>
                                                 </fieldset>
@@ -116,34 +113,41 @@
                 </div>
             </div>
         </div>
-        <script>
-            $('#cc').change(function () {
-                alert("aaaaa");
-                var serviceSelector = $(this);
-
-                // Request the neighborhoods of the selected city.
-                $.ajax({
-                    url: "{{ path('main_select_service_a_reclame') }}",
-                    type: "GET",
-                    dataType: "JSON",
-                    data: {
-                        serviceid: serviceSelector.val()
-                    },
-                    success: function (neighborhoods) {
-                        alert("aaaaaaa");
-                        console.log(neighborhoods);
-                        $('#us').text("");
-                        $.each(neighborhoods, function (id, item) {
-                            var option=document.createElement('option');
-                            option.value=item.id;
-                            //option.attr("value",item.id)
-                            var text = document.createTextNode(item.nom);
-                            option.appendChild(text);
-                            $('#addService').append(option);
-                        });
-                    },
+    {% endblock %}
+{% block js %}
+    {{ parent() }}
+    <script>
+        $("#Object").keyup(function(){
+            if($(this).val().length < 5){
+                $(this).css({
+                    borderColor : 'red',
+                    color : 'red'
+                });
+            }
+            else{
+                $(this).css({
+                    borderColor : 'green',
+                    color : 'grey'
 
                 });
-            });
-        </script>
-    {% endblock %}
+            }
+        });
+
+        $("#Description").keyup(function(){
+            if($(this).val().length < 5){
+                $(this).css({
+                    borderColor : 'red',
+                    color : 'red'
+                });
+            }
+            else{
+                $(this).css({
+                    borderColor : 'green',
+                    color : 'grey'
+                });
+            }
+        });
+
+
+    </script>
+{% endblock %}

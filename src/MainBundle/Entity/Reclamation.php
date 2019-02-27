@@ -66,6 +66,12 @@ class Reclamation
      */
     private $traite;
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="archive", type="integer")
+     */
+    private $show;
+    /**
      * Get id
      *
      * @return int
@@ -203,12 +209,20 @@ class Reclamation
         $this->traite = $traite;
     }
 
+    /**
+     * @return int
+     */
+    public function getShow()
+    {
+        return $this->show;
+    }
 
-
-
-
-
-
-
+    /**
+     * @param int $show
+     */
+    public function setShow($show)
+    {
+        $this->show = $show;
+    }
 }
 

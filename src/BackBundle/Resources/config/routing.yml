@@ -69,6 +69,12 @@ main_modifierCategorie_Produit:
 main_liste_reclamation_admin:
   path:     /admin/listeReclamation
   defaults: { _controller: BackBundle:ReclamationBack:ListeReclamationAdmin }
+main_liste_reclamation_traite:
+  path:     /admin/listeReclamationtraite
+  defaults: { _controller: BackBundle:ReclamationBack:afficherReclamationTraite }
+main_liste_reclamation_archive:
+  path:     /admin/listeReclamationarchive
+  defaults: { _controller: BackBundle:ReclamationBack:afficherReclamationArchive }
 main_change_status_reclamation:
   path:     /admin/detaillerec/{rec}
   defaults: { _controller: BackBundle:ReclamationBack:detaillerecadmin }

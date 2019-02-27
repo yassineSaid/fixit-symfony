@@ -86,7 +86,7 @@ class HorraireController extends Controller
             $heureFin=\DateTime::createFromFormat('H:i',$request->get('heureFin'));
             $connect1=$this->getDoctrine()->getManager();
             $connect2=$this->getDoctrine()->getManager();
-            $user=$connect2->getRepository(User::class)->find(12);
+            $user=$connect2->getRepository(User::class)->find($request->get('idUser'));
             $horraire=new Horraire();
             $horraire->setUser($user);
             $horraire->setHeureDebut($heureDebut);

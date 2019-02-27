@@ -128,8 +128,11 @@
                                                     style="height: 30px; width: 30px;"
                                             ></em>
                                         {% endif %}
-
+                                        {% if app.user==null %}
+                                        <span>Bonjour</span>
+                                        {% else %}
                                         <span>Bonjour {{  app.user.firstname }} {{  app.user.lastname }}  </span>
+                                        {% endif %}
                                         <i class="fa fa-angle-down"></i>
                                     </a>
                                     <div class="tg-dropdownmenu tg-usermenu" aria-labelledby="tg-usermenu">
