@@ -160,12 +160,15 @@ back_etudeProposition:
 back_ajouterProposition:
   path: /admin/ajouterServiceProposes
   defaults: { _controller: BackBundle:Service:ajouterProposition }
-back_historique:
+back_historiqueService:
   path: /admin/historiqueService
   defaults: { _controller: BackBundle:Service:afficherHistorique }
 back_recupererHistorique:
   path: /admin/recupererHistoriqueService/{id}/{idh}
   defaults: { _controller: BackBundle:Service:recupererHistorique }
+back_supprimerProposiion:
+  path: /admin/supprimerProposition/{id}
+  defaults: { _controller: BackBundle:Service:supprimerProposition }
 
 
 ########################### END Routing de Slim ######################################
