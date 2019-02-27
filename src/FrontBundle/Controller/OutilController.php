@@ -2,7 +2,6 @@
 
 namespace FrontBundle\Controller;
 
-use MainBundle\Entity\Notification;
 use MainBundle\Entity\UserOutil;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -64,24 +63,24 @@ class OutilController extends Controller
     public function detailAction(Request $request)
     {
         $id=$_GET['id'];
-        $user=$this->getUser();
         $em=$this->getDoctrine()->getManager();
-        $em1=$this->getDoctrine()->getManager();
         $em2=$this->getDoctrine()->getManager();
         $outil=$em->getRepository(Outils::class)->find($id);
         $userOutil=$em2->getRepository(UserOutil::class)->premierOutilDQL($id);
-        $userOutil2=$em1->getRepository(UserOutil::class)->location($outil,$user);
-
-
+        $user=$this->getUser();
         if($outil->getQuantite()>0)
         {
-            if($userOutil2==null)
+            if($userOutil==null)
             {
                 return $this->render("@Front/Outil/deatils.html.twig",array("outil"=>$outil,"user"=>$user));
             }
+            elseif ($userOutil[0]->getIdUser()==$user)
+            {
+                return $this->render("@Front/Outil/dejaLoue.html.twig",array("uo"=>$userOutil,"outil"=>$outil));
+            }
             else
             {
-                return $this->render("@Front/Outil/dejaLoue.html.twig",array("uo"=>$userOutil2,"outil"=>$outil));
+                return $this->render("@Front/Outil/indisponible.html.twig",array("outil"=>$outil,"userOutil"=>$userOutil));
             }
         }
         else
@@ -90,9 +89,9 @@ class OutilController extends Controller
             {
                 return $this->render("@Front/Outil/epuiser.html.twig",array("outil"=>$outil));
             }
-            elseif ($userOutil2!=null)
+            elseif ($userOutil[0]->getIdUser()==$user)
             {
-                return $this->render("@Front/Outil/dejaLoue.html.twig",array("uo"=>$userOutil2,"outil"=>$outil));
+                return $this->render("@Front/Outil/dejaLoue.html.twig",array("uo"=>$userOutil,"outil"=>$outil));
             }
             else
             {
@@ -121,6 +120,7 @@ class OutilController extends Controller
                 $userOutil->setTotal($request->get("prixTotal"));
                 $connect1->persist($userOutil);
                 $connect1->flush();
+
                 return $this->redirectToRoute("front_afficherFrontOutil");
 
             }

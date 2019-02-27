@@ -1,0 +1,38 @@
+{% extends "front.html.twig" %}
+{% block content %}
+    <main id="tg-main" class="tg-main tg-paddingzero tg-haslayout">
+        <!--************************************
+                404 Error Start
+        *************************************-->
+        <div class="tg-main-section tg-haslayout">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-10 col-md-push-1 col-lg-10 col-lg-push-1">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-5 col-md-5 col-lg-4">
+                                <figure class="tg-404errorimg">
+                                    <img src="{{ asset('img/logoemail.png') }}" alt="image description">
+                                </figure>
+                            </div>
+                            <div class="col-xs-12 col-sm-7 col-md-7 col-lg-8">
+                                <div class="tg-404errorcontent">
+                                    <div class="tg-bordertitle">
+                                        <h3>Un email de confirmation</h3>
+                                        <h3>Veuillez confirmer votre oompte via email</h3>
+                                    </div>
+                                    <div class="tg-description">
+                                        <p>Un email est envoyé à {{ email }} Cliquer sur le lien pour confirmer votre compte</p>
+                                    </div>
+                                    <span class="tg-gobackhome">Ou retournez à la <a href="{{ path('front_homepage') }}">page d 'accueil</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--************************************
+                404 Error End
+        *************************************-->
+    </main>
+{% endblock %}

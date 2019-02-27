@@ -1,0 +1,117 @@
+{% extends "back.html.twig" %}
+{% block content %}
+    <main class="content">
+        <div class="container-fluid p-0">
+
+            <h1 class="h3 mb-3">Liste des Categories de Service</h1>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <a href="{{ path('main_ajouterCategori_Produit') }}"><button class="btn btn-pill btn-primary"> Ajouter une categorie</button></a>
+                        </div>
+                        <div class="card-body">
+                            <table id="datatables-basic" class="table table-striped" style="width:100%">
+                                <thead>
+                                <tr> <th>image</th>
+                                    <th>produit</th>
+                                    <th>Acheteur</th>
+                                    <th>Quantite</th>
+                                    <th>Prix</th>
+                                    <th>date d'achat</th>
+
+
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for a in achat %}
+                                    <tr>
+                                        <td> <figure class="tg-featuredimg">
+                                                <img src="{{ asset('uploads/images/produit/' ~ a.image ) }}" width="150">
+                                                <figcaption></td>
+                                        <td>{{  a.produit}}</td>
+                                        <td>{{  a.acheteur}}</td>
+                                        <td>{{  a.quantite}}</td>
+                                        <td>{{  a.prix}}</td>
+                                        <td>{{  a.date |  date('d/m/Y H:i:s')}}</td>
+
+
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>
+                                        image
+                                   </th>
+                                    <th>Produit</th>
+                                    <th>acheteur</th>
+                                    <th>quantite</th>
+                                    <th>prix</th>
+                                    <th>date d'achat</th>
+
+
+
+
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function(event) {
+                    // Datatables basic
+                    $('#datatables-basic').DataTable({
+                        responsive: true,
+                        "language": {
+                            "sEmptyTable":     "Aucune donnée disponible dans le tableau",
+                            "sInfo":           "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
+                            "sInfoEmpty":      "Affichage de l'élément 0 à 0 sur 0 élément",
+                            "sInfoFiltered":   "(filtré à partir de _MAX_ éléments au total)",
+                            "sInfoPostFix":    "",
+                            "sInfoThousands":  ",",
+                            "sLengthMenu":     "Afficher _MENU_ éléments",
+                            "sLoadingRecords": "Chargement...",
+                            "sProcessing":     "Traitement...",
+                            "sSearch":         "Rechercher :",
+                            "sZeroRecords":    "Aucun élément correspondant trouvé",
+                            "oPaginate": {
+                                "sFirst":    "Premier",
+                                "sLast":     "Dernier",
+                                "sNext":     "Suivant",
+                                "sPrevious": "Précédent"
+                            },
+                            "oAria": {
+                                "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
+                                "sSortDescending": ": activer pour trier la colonne par ordre décroissant"
+                            },
+                            "select": {
+                                "rows": {
+                                    "_": "%d lignes sélectionnées",
+                                    "0": "Aucune ligne sélectionnée",
+                                    "1": "1 ligne sélectionnée"
+                                }
+                            }
+                        }
+                    });
+                    // Datatables with Buttons
+                    var datatablesButtons = $('#datatables-buttons').DataTable({
+                        lengthChange: !1,
+                        buttons: ["copy", "print"],
+                        responsive: true
+                    });
+                    datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
+                });
+            </script>
+
+        </div>
+    </main>
+{% endblock %}

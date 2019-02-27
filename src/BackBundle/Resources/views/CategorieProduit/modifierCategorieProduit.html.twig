@@ -1,0 +1,123 @@
+{% extends "back.html.twig" %}
+{% block title %}Ajouter categorie Produit{% endblock %}
+{% block content %}
+    {% block js %}
+        {{ parent() }}
+    {% endblock %}
+    <script> $(document).ready(function(){
+
+            var $nom = $('#inputNom'),
+                $description = $('#description'),
+                $image = $('#inputLogo'),
+                $confirmer = $('#confirmer'),
+                $reset = $('#reset'),
+                $erreur = $('#erreur'),
+                $champ= $('.form-control');
+
+            $champ.keyup(function(){
+                if($(this).val().length ==0){ // si la chaîne de caractères est inférieure à 5
+                    $(this).css({ // on rend le champ rouge
+                        borderColor : 'red',
+                        color : 'red'
+                    });
+                }
+                else{
+                    $(this).css({ // si tout est bon, on le rend vert
+                        borderColor : 'green',
+                        color : 'green'
+                    });
+                }
+            });
+            $image.change(function(){
+                console.log($(this).val());
+                if($(this).val() ==""){ // si la chaîne de caractères est inférieure à 5
+                    $(this).css({ // on rend le champ rouge
+                        borderColor : 'red',
+                        color : 'red'
+                    });
+                }
+                else{
+                    $(this).css({ // si tout est bon, on le rend vert
+                        borderColor : 'green',
+                        color : 'green'
+                    });
+                }
+            });
+            $confirmer.click(function(e){
+                if(!verifier($nom)||!verifier($description)||!verifier($image))
+                {
+                    e.preventDefault();
+                    verifier($nom);
+                    verifier($description);
+                    verifier($image);
+                }
+
+            });
+
+            $reset.click(function(){
+                $image.css({ // on remet le style des champs comme on l'avait défini dans le style CSS
+                    borderColor : '#ccc',
+                    color : '#555'
+                });
+                $champ.css({ // on remet le style des champs comme on l'avait défini dans le style CSS
+                    borderColor : '#ccc',
+                    color : '#555'
+                });
+                $erreur.css('display', 'none'); // on prend soin de cacher le message d'erreur
+
+            });
+
+            function verifier(champ){
+                if(champ.val() == "")
+                { // si le champ est vide
+                    $erreur.css('display', 'block'); // on affiche le message d'erreur
+                    champ.css({ // on rend le champ rouge
+                        borderColor : 'red',
+                        color : 'red'
+                    });
+                    return false;
+                }
+                else
+                {
+                    champ.css({ // on remet le style des champs comme on l'avait défini dans le style CSS
+                        borderColor : 'green',
+                        color : 'green'
+                    });
+                    return true;
+                }
+            }
+
+        });
+
+    </script>
+    <main class="content">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Ajouter catégorie produit</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+
+                        <div class="form-group col-md-2">
+                            <label for="inputZip">Nom</label>
+                            <input type="text" class="form-control" name="categorie" id="inputNom" value="{{ nom }}" disabled="disabled" >
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputZip">Description</label>
+                            <input type="text" class="form-control" name="description" id="description">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputZip">Image</label>
+                            <input type="file" name="inputImage" id="inputLogo">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" id="confirmer">Confirmer</button>
+                        <button type="reset" class="btn btn-primary" id="reset">reset</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}

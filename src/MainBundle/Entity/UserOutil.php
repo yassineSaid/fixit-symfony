@@ -3,9 +3,6 @@
 namespace MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use SBC\NotificationsBundle\Builder\NotificationBuilder;
-use SBC\NotificationsBundle\Model\NotifiableInterface;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * UserOutil
@@ -13,7 +10,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
  * @ORM\Table(name="user_outil")
  * @ORM\Entity(repositoryClass="MainBundle\Repository\UserOutilRepository")
  */
-class UserOutil implements NotifiableInterface
+class UserOutil
 {
     /**
      * @var int
@@ -127,36 +124,6 @@ class UserOutil implements NotifiableInterface
     {
         $this->total = $total;
     }
-
-    public function notificationsOnCreate(NotificationBuilder $builder)
-    {
-        $date =$this->dateLocation;
-        echo $date->format('Y-m-d ');
-        $d = new \DateTime();
-        //echo $d->format('Y-m-d ');
-        $notificataion= new Notification();
-        $notificataion->setTitle("Location");
-        $notificataion->setDescription($this->idUser." va louer l'outil ".$this->idOutil->getNom()." le ".$date->format('Y-m-d')."         ".$d->format('Y-m-d H:i:s'));
-        $notificataion->setIcon($this->idOutil->getImage());
-        $builder->addNotification($notificataion);
-        return $builder;
-    }
-
-    public function notificationsOnUpdate(NotificationBuilder $builder)
-    {
-
-        $notificataion= new Notification();
-        $notificataion->setTitle("Location");
-        $notificataion->setDescription($this->idUser." va louer l'outil".$this->idOutil."le");
-        $builder->addNotification($notificataion);
-        return $builder;
-    }
-
-    public function notificationsOnDelete(NotificationBuilder $builder)
-    {
-        return $builder;
-    }
-
 
 }
 

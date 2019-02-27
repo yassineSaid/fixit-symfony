@@ -1,0 +1,105 @@
+{% extends "back.html.twig" %}
+{% block content %}
+    <main class="content">
+        <div class="container-fluid p-0">
+
+            <div class="row">
+
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Les avis des utilisateurs</h5>
+                            <h6 class="card-subtitle text-muted">la moyenne des notes est :</h6>
+                        </div>
+                        <div class="card-body">
+                            {% if avg == 1 %}
+                                <i class="fa fa-star" aria-hidden="true" style="color:gold; font-size: 50px;"></i>
+                                <i class="far fa-star" aria-hidden="true" style="color:gold;font-size: 50px;"></i>
+                                <i class="far fa-star" aria-hidden="true" style="color:gold;font-size: 50px;"></i>
+                                <i class="far fa-star" aria-hidden="true" style="color:gold;font-size: 50px;"></i>
+                                <i class="far fa-star" aria-hidden="true" style="color:gold;font-size: 50px;"></i>
+                            {% elseif avg == 2 %}
+                                <i class="fa fa-star" aria-hidden="true" style="color:gold;font-size: 50px;"></i>
+                                <i class="fa fa-star" aria-hidden="true" style="color:gold;font-size: 50px;"></i>
+                                <i class="far fa-star" aria-hidden="true" style="color:gold;font-size: 50px;"></i>
+                                <i class="far fa-star" aria-hidden="true" style="color:gold;font-size: 50px;"></i>
+                                <i class="far fa-star" aria-hidden="true" style="color:gold;font-size: 50px;"></i>
+                            {% elseif avg == 3 %}
+                                <i class="fa fa-star" aria-hidden="true" style="color:gold;font-size: 50px;"></i>
+                                <i class="fa fa-star" aria-hidden="true" style="color:gold;font-size: 50px;"></i>
+                                <i class="fa fa-star" aria-hidden="true" style="color:gold;font-size: 50px;"></i>
+                                <i class="far fa-star" aria-hidden="true" style="color:gold;font-size: 50px;"></i>
+                                <i class="far fa-star" aria-hidden="true" style="color:gold;font-size: 50px;"></i>
+                            {% elseif avg == 4 %}
+                                <i class="fa fa-star" aria-hidden="true" style="color:gold;font-size: 50px;"></i>
+                                <i class="fa fa-star" aria-hidden="true" style="color:gold;font-size: 50px;"></i>
+                                <i class="fa fa-star" aria-hidden="true" style="color:gold;font-size: 50px;"></i>
+                                <i class="fa fa-star" aria-hidden="true" style="color:gold;font-size: 50px;"></i>
+                                <i class="far fa-star" aria-hidden="true" style="color:gold;font-size: 50px;"></i>
+                            {% elseif avg == 5 %}
+                                <i class="fa fa-star" aria-hidden="true" style="color:gold;font-size: 50px;"></i>
+                                <i class="fa fa-star" aria-hidden="true" style="color:gold;font-size: 50px;"></i>
+                                <i class="fa fa-star" aria-hidden="true" style="color:gold;font-size: 50px;"></i>
+                                <i class="fa fa-star" aria-hidden="true" style="color:gold;font-size: 50px;"></i>
+                                <i class="fa fa-star" aria-hidden="true" style="color:gold;font-size: 50px;"></i>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Graphe de satisfaction des utilisateurs</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="col-12 col-lg-6">
+                                <div class="card" >
+                                    <div class="card-header">
+                                        <h5 class="card-title">Pie Chart </h5>
+                                        <h6 class="card-subtitle text-muted">Pie charts are an instrumental visualization tool useful in expressing data and information in terms of percentages, ratio.</h6>
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <div class="chart">
+                                            <div id="apexcharts-pie" style="max-width: 440px;margin:auto;">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <script>
+
+
+                                    document.addEventListener("DOMContentLoaded", function(event) {
+                                        // Pie chart
+                                        var options = {
+                                            chart: {
+                                                height: 350,
+
+                                                type: 'donut',
+                                            },
+                                            dataLabels: {
+                                                enabled: false,
+                                            },
+                                            labels : [":(",":)",":D"],
+                                            series: [{{ nbrnon }}, {{ nbrmoy }}, {{ nbrtot }}]
+                                        }
+                                        var chart = new ApexCharts(
+                                            document.querySelector("#apexcharts-pie"),
+                                            options
+                                        );
+                                        chart.render();
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+        </div>
+    </main>
+{% endblock %}
