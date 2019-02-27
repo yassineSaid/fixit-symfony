@@ -19,8 +19,8 @@ class PaiementRepository extends \Doctrine\ORM\EntityRepository
     public function statAnnee()
     {
         $query=$this->getEntityManager()->createQuery("
-                  SELECT month(p.datePaiement) AS M,year(p.datePaiement) AS Y,sum(p.montant) MON from MainBundle:Paiement p 
-                  where datediff(now(),p.datePaiement)/365<=1 group BY Y,M ORDER BY Y,M");
+                  SELECT month(p.datePaiement) AS M,sum(p.montant) MON from MainBundle:Paiement p 
+                  where datediff(now(),p.datePaiement)/365<=1 group BY M ORDER BY p.datePaiement");
         return $query->execute();
     }
     public function venteCetteAnnee()

@@ -1,0 +1,174 @@
+{% extends "front.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block title %}Modifier un produit{% endblock %}
+{% block sidebar %}{% endblock %}
+{% block content %}
+    {% block js %}
+        {{ parent() }}
+    {% endblock %}
+    <script> $(document).ready(function(){
+
+            var $nom = $('#inputNom'),
+                $quantite = $('#quantite'),
+                $image = $('#inputLogo'),
+                $prix = $('#prix'),
+                $date = $('#date'),
+                $confirmer = $('#confirmer'),
+                $reset = $('#reset'),
+                $erreur = $('#erreur'),
+                $champ= $('.form-control');
+
+            $champ.keyup(function(){
+                if($(this).val().length ==0){ // si la chaîne de caractères est inférieure à 5
+                    $(this).css({ // on rend le champ rouge
+                        borderColor : 'red',
+                        color : 'red'
+                    });
+                }
+                else{
+                    $(this).css({ // si tout est bon, on le rend vert
+                        borderColor : 'green',
+                        color : 'green'
+                    });
+                }
+            });
+            $image.change(function(){
+                console.log($(this).val());
+                if($(this).val() ==""){ // si la chaîne de caractères est inférieure à 5
+                    $(this).css({ // on rend le champ rouge
+                        borderColor : 'red',
+                        color : 'red'
+                    });
+                }
+                else{
+                    $(this).css({ // si tout est bon, on le rend vert
+                        borderColor : 'green',
+                        color : 'green'
+                    });
+                }
+            });
+            $confirmer.click(function(e){
+                if(!verifier($nom)||!verifier($quantite)||!verifier($prix)||!verifier($image)||!verifier($date))
+                {
+                    e.preventDefault();
+                    verifier($nom);
+                    verifier($quantite);
+                    verifier($prix);
+                    verifier($image);
+                    verifier($date);
+                }
+
+            });
+
+            $reset.click(function(){
+                $image.css({ // on remet le style des champs comme on l'avait défini dans le style CSS
+                    borderColor : '#ccc',
+                    color : '#555'
+                });
+                $champ.css({ // on remet le style des champs comme on l'avait défini dans le style CSS
+                    borderColor : '#ccc',
+                    color : '#555'
+                });
+                $erreur.css('display', 'none'); // on prend soin de cacher le message d'erreur
+            });
+
+            function verifier(champ){
+                if(champ.val() == "")
+                { // si le champ est vide
+                    $erreur.css('display', 'block'); // on affiche le message d'erreur
+                    champ.css({ // on rend le champ rouge
+                        borderColor : 'red',
+                        color : 'red'
+                    });
+                    return false;
+                }
+                else
+                {
+                    champ.css({ // on remet le style des champs comme on l'avait défini dans le style CSS
+                        borderColor : 'green',
+                        color : 'green'
+                    });
+                    return true;
+                }
+            }
+
+        });
+
+    </script>
+
+    <div class="tg-main-section tg-haslayout">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-10 col-md-push-1 col-lg-8 col-lg-push-2">
+                    <div class="tg-sectionhead">
+                        <div class="tg-sectiontitle">
+                            <h2>Modifier un produit </h2>
+                        </div>
+                        <div class="tg-description">
+                        </div>
+                    </div>
+                </div>
+                <div class="tg-contactusarea">
+                    <div class="col-xs-12 col-sm-12 col-md-10 col-md-push-1 col-lg-10 col-lg-push-1">
+                        <form class="tg-themeform" method="post" enctype="multipart/form-data">
+                            <fieldset>
+                                <div class="row">
+                                    <div id="erreur" style="display: none">
+                                        <p style="color: red">Vous n'avez pas rempli correctement les champs du formulaire !</p>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <input type="text" name="nom" class="form-control" placeholder="nom" id="inputNom">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <input type="text" name="quantite" class="form-control" placeholder="quantite" id="quantite">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <input type="text" name="prix" class="form-control" placeholder="prix en scoins" id="prix">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <input type="date" name="date" class="form-control" placeholder="date d'expiration" id="date">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <select class="form-control" name="Categorie" >
+                                                {% for u in categorie %}
+                                                    <option value="{{ u.id}}">{{ u.nom }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-label w-100">Ajouter un logo</label>
+                                            <input type="file" name="inputLogo" id="inputLogo">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <button type="submit" class="tg-btn" id="confirmer">confirmer</button>
+                                        <button type="reset" class="tg-btn" id="reset">réinitialiser</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+{% endblock %}

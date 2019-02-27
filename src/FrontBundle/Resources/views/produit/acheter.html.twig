@@ -1,0 +1,134 @@
+
+{% extends "front.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block title %}acheter un Produit{% endblock %}
+{% block sidebar %}{% endblock %}
+{% block content %}
+    <script type="text/javascript">
+        function amount() {
+            //document.getElementById("scoins").value=toString().concat('scoins');
+
+        }
+        function  compare() {
+            var quantiteStock=document.getElementById("quantitee")-document.getElementById("quantite");
+            console.log(quantiteStock);
+
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#quantite").keyup(function () {
+                console.log(this.value);
+                if (parseInt(this.value)<={{ produit.quantite }})
+                {
+                    document.getElementById("total").value=(parseInt(document.getElementById("quantite").value)*parseInt(document.getElementById("prix").value));
+                    $("#quantite").css("color","#000");
+                    $("#quantite").css("border-color","#ddd");
+                }
+                else
+                {
+                    $("#quantite").css("color","red");
+                    $("#quantite").css("border-color","red");
+                    document.getElementById("total").value="";
+                }
+            });
+            $("#acheter").click(function (e) {
+                if (parseInt($("#quantite").val())>{{ produit.quantite }})
+                {
+                    e.preventDefault();
+                }
+            })
+        })
+    </script>
+    <main id="tg-main" class="tg-main tg-haslayout">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-10 col-md-push-1 col-lg-8 col-lg-push-2">
+                    <div class="tg-sectionhead">
+                        <div class="tg-sectiontitle">
+                            <h2>Notre produits</h2>
+                            <div id="tg-twocolumns" class="tg-twocolumns">
+                                <div class="col-xs-12 col-sm-12 col-md-10 col-md-push-1 col-lg-8 col-lg-push-2">
+                                    <div class="row">
+                                        <div id="tg-content" class="tg-content">
+                                            <div class="tg-listing">
+                                                <div class="col-xs-12 col-sm-12 col-md-10 col-md-push-1 col-lg-8 col-lg-push-2">
+
+                                                    <div class="tg-serviceprovider tg-automotive">
+                                                        <figure class="tg-featuredimg">
+
+                                                        </figure>
+                                                        <div class="tg-companycontent">
+
+                                                            <div class="tg-title">
+                                                                <h2><a href="#"></a></h2>
+                                                            </div>
+                                                            <div class="tg-serviceproviders">
+                                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                                    <div class="tg-serviceprovider tg-automotive">
+                                                                        <figure class="tg-featuredimg">
+                                                                            <img src="{{ asset('uploads/images/produit/' ~ produit.image ) }}" width="150">
+                                                                        </figure>
+                                                                        <div class="tg-companycontent">
+                                                                            {% if message is defined %}<div class="alert alert-success">{{ message }}</div>{% endif %}
+                                                                            {% if error is defined %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
+                                                                            <form method="post" onkeyup="amount()">
+                                                                            <div class="tg-title">
+                                                                                <h2><a href="#">{{ produit.nom }}</a></h2>
+                                                                            </div>
+
+                                                                            <ul class="tg-companycontactinfo">
+                                                                                <li>
+                                                                                    <span data-toggle="tooltip" data-placement="top" title="Click to view Number" data-last="34 - 562 - 6">{{ produit.CategorieProduit.nom }}</em></span>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <img src="{{ asset("service/images/icons/date.png") }}" width="30">
+                                                                                    <span data-toggle="tooltip" data-placement="top" title="Click to view Number" data-last="34 - 562 - 6">{{ produit.dateExp  |  date('d/m/Y H:i:s') }}</em></span>
+                                                                                </li>
+
+                                                                                <li>
+                                                                                    <img src="{{ asset("service/images/icons/scoin.png") }}" width="30">
+                                                                                    <div class="form-group">
+                                                                                        <input type="text" name="quantite" class="form-control" placeholder="prix" id="prix" value="{{produit.prix }}" disabled>
+                                                                                    </div> </li>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <img src="{{ asset("service/images/icons/quantite.png") }}" width="30">
+                                                                                    <span>Quantite disponible</span>
+                                                                                    <span data-toggle="tooltip" data-placement="top" title="Click to view Number" data-last="34 - 562 - 6" id="quantitee">{{ produit.quantite}}</em></span>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="form-group">
+                                                                                        <input type="text" name="quantite" class="form-control" placeholder="quantite" id="quantite">
+                                                                                    </div> </li>
+                                                                                <li>
+                                                                                    <div class="form-group">
+                                                                                        <img src="{{ asset("service/images/icons/scoin.png") }}" width="30">
+                                                                                        <input type="text" id="total" name="total" class="form-control" placeholder="prix total " disabled="disabled" >
+
+                                                                                    </div> </li>
+                                                                            </ul>
+                                                                                <button class="tg-btn tg-btnpostanewjob" id="acheter">Acheter</button>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+    </main>
+{% endblock %}
