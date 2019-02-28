@@ -1,0 +1,19 @@
+<li class="menu-item-has-children">
+    <a href="{{ path('front_listeService') }}">Services</a>
+    <ul class="sub-menu">
+
+        {% for c in categorie %}
+        <li class="menu-item-has-children">
+            <a href="#">{{ c.nom }}</a>
+            <ul class="sub-menu">
+                {% for s in service %}
+                {% if c.id==s.CategorieService.id %}
+                <li><a href="{{ path('front_detailsService',{'id': s.id})  }}">{{ s.nom }}</a></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+
+    </ul>
+</li>

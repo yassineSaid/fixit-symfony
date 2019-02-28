@@ -4,6 +4,7 @@ namespace BackBundle\Controller;
 
 use MainBundle\Entity\CategorieService;
 use MainBundle\Entity\HistoriqueService;
+use MainBundle\Entity\ServicesProposes;
 use MainBundle\Repository\HistoriqueServiceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,8 +24,7 @@ class ServiceController extends Controller
             $service->setCategorieService($connexion1->getRepository("MainBundle:CategorieService")->find($request->get("IdCat")));
             $service->setNbrProviders(0);
             $service->setVisible(1);
-            $service->setPrixMini($request->get("prixMin"));
-            $service->setPrixMax($request->get("prixMax"));
+            $service->setDescription($request->get("Nom"));
             $file=$request->files->get("image");
             $fileName = md5(uniqid()) . '.' . $file->guessExtension();
             $service->setImageService($fileName);
@@ -56,6 +56,16 @@ class ServiceController extends Controller
             $connexion1=$this->getDoctrine();
             $service->setNom($r->get("Nom"));
             $service->setCategorieService($connexion1->getRepository("MainBundle:CategorieService")->find($r->get("IdCat")));
+            $image = $service->getImageService();
+            if($image!=null)
+            {unlink($this->getParameter('service_directory').'/'.$image);}
+            $file=$r->files->get("image");
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+            $service->setImageService($fileName);
+            $file->move(
+                $this->getParameter('service_directory'),
+                $fileName
+            );
             $em->flush();
             return $this->redirectToRoute("back_afficherService");
         }
@@ -86,7 +96,7 @@ class ServiceController extends Controller
 
             $service->setVisible(0);
             $em->flush();
-           //return $this->redirectToRoute("back_afficherService");
+           return $this->redirectToRoute("back_afficherService");
        // }
 
         return $this->render("@Back/Service/afficherService.html.twig",array("service"=>$service));
@@ -106,17 +116,20 @@ class ServiceController extends Controller
         $cat=$connexion->getRepository("MainBundle:CategorieService")->findAll();
         return $this->render('@Back/Service/etudeProposition.html.twig',array("service"=>$service,"categorie"=>$cat));
     }
-    public function ajouterPropositionAction(Request $request)
+    public function ajouterPropositionAction(Request $request,$id)
     {
         $connexion=$this->getDoctrine();
         $categorie=$connexion->getRepository("MainBundle:CategorieService")->findAll();
         $service = new Service();
         if ($request->isMethod("POST"))
         {
+        var_dump($request->get("nom"));
             $connexion1=$this->getDoctrine();
-            $service->setNom($request->get("nomService"));
+            $service->setNom($request->get("nom"));
+            $service->setDescription($request->get("description"));
             $service->setCategorieService($connexion1->getRepository("MainBundle:CategorieService")->find($request->get("IdCat")));
             $service->setNbrProviders(0);
+            $service->setVisible(1);
             $file=$request->files->get("image");
             $fileName = md5(uniqid()) . '.' . $file->guessExtension();
             $service->setImageService($fileName);
@@ -125,6 +138,14 @@ class ServiceController extends Controller
                 $fileName
             );
             $em=$this->getDoctrine()->getManager();
+            var_dump($service);
+
+            $cnx=$this->getDoctrine()->getManager();
+            $prop=$cnx->getRepository(ServicesProposes::class)->find($id);
+
+            $cnx->remove($prop);
+
+            $cnx->flush();
             $em->persist($service);
             $em->flush();
             return $this->redirectToRoute("back_afficherService");
@@ -142,7 +163,7 @@ class ServiceController extends Controller
         $connexion=$this->getDoctrine()->getManager();
         $em=$this->getDoctrine()->getManager();
        $historique=$em->getRepository(HistoriqueService::class)->find($idh);
-       $historique->setActions("Récupérer");
+       $historique->setActions("Récupéré");
 
         //if($r->isMethod("POST"))
         //{
@@ -152,6 +173,15 @@ class ServiceController extends Controller
         return $this->redirectToRoute("back_afficherService");
         //}
         //return $this->render('@Back/Service/afficherService.html.twig');
+    }
+    public function SupprimerPropositionAction($id)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $categorie=$em->getRepository(ServicesProposes::class)->find($id);
+
+        $em->remove($categorie);
+        $em->flush();
+        return $this->redirectToRoute("back_afficherServiceProposes");
     }
 
 }

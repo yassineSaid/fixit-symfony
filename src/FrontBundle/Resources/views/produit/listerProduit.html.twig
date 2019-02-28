@@ -12,37 +12,13 @@
                             <div id="tg-content" class="tg-content">
                                 <div class="tg-listing">
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                        <span class="tg-totallistingfound">256 Results Found</span>
+                                        {% set nbrr=0 %}
+                                        {% for cc in produit %}
+                                            {% set nbrr=(nbrr+1) %}
+                                        {% endfor %}
+                                        <span class="
+                                        <span class="tg-totallistingfound">{{ nbrr }} Résultas trouvés</span>
                                         <div class="tg-sortfilters">
-                                            <div class="tg-sortfilter tg-sortby">
-                                                <span>Sort By:</span>
-                                                <div class="tg-select">
-                                                    <select>
-                                                        <option>Name</option>
-                                                        <option>Type</option>
-                                                        <option>date</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="tg-sortfilter tg-arrange">
-                                                <span>Arrange:</span>
-                                                <div class="tg-select">
-                                                    <select>
-                                                        <option>des</option>
-                                                        <option>Asc</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="tg-sortfilter tg-show">
-                                                <span>Show:</span>
-                                                <div class="tg-select">
-                                                    <select>
-                                                        <option>12</option>
-                                                        <option>24</option>
-                                                        <option>all</option>
-                                                    </select>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
 

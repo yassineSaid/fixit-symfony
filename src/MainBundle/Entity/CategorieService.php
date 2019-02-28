@@ -37,51 +37,6 @@ class CategorieService
     private $description;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="prixMin", type="integer")
-     */
-    private $prixMin;
-
-    /**
-     * @return int
-     */
-    public function getPrixMin()
-    {
-        return $this->prixMin;
-    }
-
-    /**
-     * @param int $prixMin
-     */
-    public function setPrixMin($prixMin)
-    {
-        $this->prixMin = $prixMin;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPrixMax()
-    {
-        return $this->prixMax;
-    }
-
-    /**
-     * @param int $prixMax
-     */
-    public function setPrixMax($prixMax)
-    {
-        $this->prixMax = $prixMax;
-    }
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="prixMax", type="integer")
-     */
-    private $prixMax;
-    /**
      * @var string
      * @Assert\File(mimeTypes={ "image/jpeg", "image/png"})
      * @ORM\Column(name="image_categorie", type="string")

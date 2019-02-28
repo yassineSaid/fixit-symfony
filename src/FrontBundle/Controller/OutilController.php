@@ -139,5 +139,13 @@ class OutilController extends Controller
         return $this->render('@Front/Outil/listCategorieFront.html.twig',array("categorie"=>$categorie,"outil"=>$outil));
 
     }
+    public function mesOutilsAction(Request $request)
+    {
+        $user=$this->getUser();
+        $em=$this->getDoctrine()->getManager();
+        $mesOutils=$em->getRepository(UserOutil::class)->mesOutilsDQL($user);
+
+        return $this->render("@Front/Outil/mesOutils.html.twig",array("mesOutils"=>$mesOutils));
+    }
 
 }

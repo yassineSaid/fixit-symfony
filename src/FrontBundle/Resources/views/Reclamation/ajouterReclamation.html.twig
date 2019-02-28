@@ -98,7 +98,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                                            <button type="submit" class="tg-btn">Submit</button>
+                                                            <button type="submit" class="tg-btn" id="valider">Valider</button>
                                                             <a  class="tg-btn">Retour à la page d'accueil</a>
                                                         </div>
                                                     </div>
@@ -139,12 +139,14 @@
                     borderColor : 'red',
                     color : 'red'
                 });
+                document.getElementById("valider").disabled = true;
             }
             else{
                 $(this).css({
                     borderColor : 'green',
                     color : 'grey'
                 });
+                document.getElementById("valider").disabled = false;
             }
         });
 

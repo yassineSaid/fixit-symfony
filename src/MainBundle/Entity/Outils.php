@@ -78,7 +78,7 @@ class Outils
     /**
      *
      * @ORM\ManyToOne(targetEntity="CategorieOutils")
-     * @ORM\JoinColumn(name="idCategorieOutils", referencedColumnName="id")
+     * @ORM\JoinColumn(name="idCategorieOutils", referencedColumnName="id", onDelete="CASCADE")
      */
     private $CategorieOutils;
 

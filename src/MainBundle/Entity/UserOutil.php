@@ -19,14 +19,14 @@ class UserOutil implements NotifiableInterface
      * @var int
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="idUser",referencedColumnName="id")
+     * @ORM\JoinColumn(name="idUser",referencedColumnName="id", onDelete="CASCADE")
      */
     private $idUser;
     /**
      * @var int
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Outils")
-     * @ORM\JoinColumn(name="idOutil",referencedColumnName="id")
+     * @ORM\JoinColumn(name="idOutil",referencedColumnName="id", onDelete="CASCADE")
      */
     private $idOutil;
     /**

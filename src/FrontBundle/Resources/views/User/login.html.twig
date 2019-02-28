@@ -39,7 +39,7 @@
                         <div class="tg-themeform tg-formlogin-register">
                             <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
                                 <div class="tg-heading">
-                                    <h2>Register As</h2>
+                                    <h2>S'inscrire</h2>
                                 </div>
 
                                 <fieldset>
@@ -50,11 +50,6 @@
 
                                     <div class="tg-themetabcontent tab-content">
                                         <div class="tab-pane active fade in" id="regularuser">
-                                            <div class="form-group">
-                                                <div class="tg-registeras">
-                                                    <span>Already have an account?<a href="#"> Login Now</a></span>
-                                                </div>
-                                            </div>
                                             <div class="form-group">
                                                 {{ form_widget(form.username, {'attr': {'class': 'form-control','placeholder':'Pseudo'}}) }}
                                             </div>
@@ -73,16 +68,7 @@
                                             <div class="form-group">
                                                 {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control','placeholder':'Confirmez votre mot de passe'}}) }}
                                             </div>
-                                            <div class="form-group">
-                                                <img src="images/placeholder/img-02.png" alt="image description">
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="tg-checkbox">
-                                                    <input type="checkbox" id="terms">
-                                                    <label for="terms">I have read the <a href="#">Terms &amp; Conditions</a> and accept them</label>
-                                                </div>
-                                            </div>
-                                            <button class="tg-btn" type="submit" value="{{ 'registration.submit'|trans }}">Register Now</button>
+                                            <button class="tg-btn" type="submit" value="{{ 'registration.submit'|trans }}">S'inscrire</button>
                                             <ul class="tg-socialicons tg-socialsharewithtext">
                                                 <li class="tg-facebook">
                                                     <a class="tg-roundicontext" href="javascript:void(0);">
@@ -157,9 +143,8 @@
                                             <input type="password" id="password" name="_password" class="form-control" placeholder="Password">
                                         </div>
                                         <div class="form-group">
-                                            <button class="tg-btn tg-btn-lg" id="_submit" name="_submit" type="submit">Login Now</button>
+                                            <button class="tg-btn tg-btn-lg" id="_submit" name="_submit" type="submit">Se Connecter</button>
                                         </div>
-                                        <a class="tg-btnforgotpass" href="#">Forgot your password?</a>
                                         </form>
                                     </fieldset>
                                 </div>

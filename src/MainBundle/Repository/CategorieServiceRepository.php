@@ -10,9 +10,9 @@ namespace MainBundle\Repository;
  */
 class CategorieServiceRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function recherche()
+    public function recherche($id)
     {
-        $query=$this->getEntityManager()->createQuery("SELECT m from MainBundle:CategorieService m where m.nom like :nom")->setParameter('nom','%'.$_GET['search'].'%');
+        $query=$this->getEntityManager()->createQuery("SELECT m from MainBundle:CategorieService m where m.nom like :nom")->setParameter('nom','%'.$id.'%');
         return $query->getResult();
 
     }

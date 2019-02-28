@@ -31,55 +31,9 @@ class Service
 
     /**
      * @ORM\ManyToOne(targetEntity="CategorieService")
-     * @ORM\JoinColumn(name="idCategorieService", referencedColumnName="id")
+     * @ORM\JoinColumn(name="idCategorieService", referencedColumnName="id" , onDelete="CASCADE")
      */
     private $CategorieService;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="prixMini", type="integer")
-     */
-    private $prixMini;
-
-    /**
-     * @return int
-     */
-    public function getPrixMini()
-    {
-        return $this->prixMini;
-    }
-
-    /**
-     * @param int $prixMini
-     */
-    public function setPrixMini($prixMini)
-    {
-        $this->prixMini = $prixMini;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPrixMax()
-    {
-        return $this->prixMax;
-    }
-
-    /**
-     * @param int $prixMax
-     */
-    public function setPrixMax($prixMax)
-    {
-        $this->prixMax = $prixMax;
-    }
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="prixMax", type="integer")
-     */
-    private $prixMax;
 
     /**
      * @var integer
@@ -87,6 +41,28 @@ class Service
      * @ORM\Column(name="visible", type="integer")
      */
     private $visible;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Description", type="string", length=255, unique=false)
+     */
+    private $description;
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
 
     /**
      * @return int

@@ -1,56 +1,178 @@
 {% extends "dashboard_front.html.twig" %}{% set menu_selected='profile_setting' %}
+ {% block js %}
+     {{ parent() }}
+     <script>$(document).ready(function(){
+
+             var $nom = $('#NomService'),
+                 $description = $('#DescriptionService'),
+                 $prix = $('#prixService'),
+                 $confirmer = $('#confirmer'),
+                 $idCat=$('#IdCat'),
+                 $reset = $('#reset'),
+                 $erreur = $('#erreur'),
+                 $category = $('#category'),
+                 $champ= $('.form-control');
+
+             $description.change(function () {
+
+
+             })
+
+
+
+
+             $champ.keyup(function(){
+                 if($(this).val().length ==0){ // si la chaîne de caractères est inférieure à 5
+                     $(this).css({ // on rend le champ rouge
+                         borderColor : 'red',
+                         color : 'red'
+                     });
+                 }
+                 else{
+                     $(this).css({ // si tout est bon, on le rend vert
+                         borderColor : 'green',
+                         color : 'green'
+                     });
+                 }
+             });
+
+             $reset.click(function(){
+                 $idCat.css({ // on remet le style des champs comme on l'avait défini dans le style CSS
+                     borderColor : '#ccc',
+                     color : '#555'
+                 });
+                 $champ.css({ // on remet le style des champs comme on l'avait défini dans le style CSS
+                     borderColor : '#ccc',
+                     color : '#555'
+                 });
+                 $erreur.css('display', 'none'); // on prend soin de cacher le message d'erreur
+             });
+
+             $confirmer.click(function(e){
+                 if(!verifier($nom)||!verifier($description)||!verifier($prix))
+                 {
+                     e.preventDefault();
+                     verifier($nom);
+                     verifier($description);
+                     verifier($prix);
+                     /*verifier($prixMax);
+                     verifier($image);*/
+                 }
+                 else if($prixMin>$prixMax)
+                 {
+                     /*console.log("rrr");
+                     e.preventDefault();
+                     $erreur.html("Le prix minimal doit être inférieure au prix maximal");
+                     $erreur.css({borderColor : 'red',
+                         color : 'red'});
+                     $prixMin.css({ // on rend le champ rouge
+                         borderColor : 'red',
+                         color : 'red'
+                     });
+                     $prixMax.css({ // on rend le champ rouge
+                         borderColor : 'red',
+                         color : 'red'
+                     });
+                     $erreur.css('display', 'block'); // on affiche le message d'erreur*/
+
+                 }
+
+             });
+
+
+
+             function verifier(champ){
+                 if(champ.val() == "")
+                 { // si le champ est vide
+                     $erreur.css('display', 'block'); // on affiche le message d'erreur
+                     champ.css({ // on rend le champ rouge
+                         borderColor : 'red',
+                         color : 'red'
+                     });
+                     return false;
+                 }
+                 else
+                 {
+                     champ.css({ // on remet le style des champs comme on l'avait défini dans le style CSS
+                         borderColor : 'green',
+                         color : 'green'
+                     });
+                     return true;
+                 }
+             }
+
+         });
+
+     </script>
+ {% endblock %}
 {% block content %}
-<main id="tg-main" class="tg-main tg-paddingzero tg-haslayout">
-    <!--************************************
-            Login Register Start
-    *************************************-->
-    <div class="tg-main-section tg-haslayout">
-        <div class="container">
-            <div class="row">
-                <div id="tg-content" class="tg-content">
-                    <form class="tg-themeform tg-formlogin-register" method="POST" action="{{ path('front_proposerServiceUser') }}">
-                        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-                            <div class="tg-heading">
-                                <h2>Proposer un service</h2>
-                            </div>
-                            <fieldset>
-                                <div class="tg-themetabcontent tab-content">
-                                    <div class="tab-pane active fade in" id="regularuser">
-
-
-                                        <div class="form-group">
-                                            <input type="text" name="DescriptionService" class="form-control" placeholder="Decrire le Service" value="">
-
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="text" name="NomService" class="form-control" placeholder="Nom du service" value="">
-                                        </div>
-                                            <div class="form-group">
-                                                <select class="form-control" name="IdCat">
-                                                {% for c in categorie %}
-                                                    <option value="{{ c.nom }}">{{ c.nom }}</option>
-                                                {% endfor %}
-                                                </select>
-                                            </div>
-                                        <div class="form-group">
-                                            <input type="number" name="prixService" class="form-control" placeholder="prix" value="">
-                                        </div>
-
-                                        <button class="tg-btn" type="submit">Envoyer</button>
-
-                                    </div>
-
-                                </div>
-                            </fieldset>
-                        </div>
-
-                    </form>
+<div class="tg-innerpagebanner">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="tg-pagetitle">
+                    <h1>Profil</h1>
                 </div>
+                <ol class="tg-breadcrumb">
+                    <li><a href="{{ path('front_homepage') }}">Accueil</a></li>
+                    <li class="tg-active">Mes services</li>
+                </ol>
             </div>
         </div>
     </div>
+</div>
+{% endblock %}
+{% block content_dashboard %}
+    <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
+        <div id="tg-content" class="tg-content">
+            <div class="tg-dashboard tg-dashboardmanageservices">
+                <div class="tg-dashboardhead">
+                    <div class="tg-dashboardtitle">
+                        <h2>Proposer un Services</h2>
+                    </div>
+
+                </div>
+                        <div class="tg-dashboardservices">
+                            <form method="POST" action="{{ path('front_proposerServiceUser') }}">
+
+                            <div class="tg-themetabcontent tab-content">
+                                <div class="tab-pane active fade in" id="regularuser">
+
+
+                                    <div class="form-group">
+                                        <input type="text" name="DescriptionService" class="form-control" placeholder="Decrire le Service" value="" id="DescriptionService">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="NomService" class="form-control" placeholder="Nom du service" value="" id="NomService">
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control" name="IdCat" id="IdCat">
+                                            {% for c in categorie %}
+                                                <option value="{{ c.nom }}">{{ c.nom }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="number" name="prixService" class="form-control" placeholder="prix" value="">
+                                    </div>
+
+                                   <a href="{{ path('front_proposerServiceUser') }}"> <button class="tg-btn" type="submit" id="confirmer">Envoyer</button></a>
+                                    <button class="tg-btn" type="reset" id="reset">Reset</button>
+
+
+                                </div>
+
+                            </div>
+                            </form>
+
+                    </div>
+
+            </div>
+        </div>
+    </div>
+
     <!--************************************
             Login Register End
     *************************************-->
-</main>
 {% endblock %}

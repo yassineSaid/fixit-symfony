@@ -17,4 +17,11 @@ class LangueRepository extends \Doctrine\ORM\EntityRepository
                   WHERE l.id=lu.idLangue GROUP BY lu.idLangue ORDER BY NB DESC")->setMaxResults(3);
         return $query->execute();
     }
+    public function findByLibelle($libelle)
+    {
+        $query=$this->getEntityManager()->createQuery("
+            SELECT count(l.libelle) FROM MainBundle:Langue l where upper(l.libelle) = :libelle");
+        $query->setParameter(":libelle",strtoupper($libelle));
+        return $query->execute();
+    }
 }

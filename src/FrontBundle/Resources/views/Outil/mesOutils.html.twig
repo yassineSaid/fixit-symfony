@@ -1,0 +1,70 @@
+{% extends "dashboard_front.html.twig" %}{% set menu_selected='profile_setting' %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block title %}Profil{% endblock %}
+{% block content %}
+    <!--************************************
+				Inner Page Banner Start
+		*************************************-->
+    <div class="tg-innerpagebanner">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="tg-pagetitle">
+                        <h1>Profil</h1>
+                    </div>
+                    <ol class="tg-breadcrumb">
+                        <li><a href="{{ path('front_homepage') }}">Accueil</a></li>
+                        <li><a href="{{ path('profile_setting') }}">Profil</a></li>
+                        <li class="tg-active">Historique de paiement</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block sidebar %}
+    {{ parent() }}
+{% endblock %}
+    {% block content_dashboard %}
+        <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
+            <div id="tg-content" class="tg-content">
+                <div class="tg-dashboard tg-dashboardprofilesetting">
+                    <div class="tg-dashboardtitle" style="padding-bottom: 20px">
+                        <h2>Votre historique de paiement</h2>
+                    </div>
+                    <table id="example" class="display">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Outil</th>
+                            <th>Date de location</th>
+                            <th>Date de retour</th>
+                            <th>Prix</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for o in mesOutils %}
+                            <tr>
+                                <td><img src="{{ asset('uploads/images/outil/' ~ o.idOutil.image ) }}" width="150"></td>
+                                <td>
+                                    {{ o.idOutil.nom }}
+                                </td>
+                                <td>
+                                    {{ o.dateLocation|date("d/m/Y") }}
+                                </td>
+                                <td>
+                                    {{ o.dateRetour|date("d/m/Y") }}
+                                </td>
+                                <td>
+                                    {{ o.total }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <p><a href="{{ path('profile_setting') }}">Retour</a></p>
+                </div>
+            </div>
+        </div>
+    {% endblock %}

@@ -25,9 +25,9 @@ class ServiceUserRepository extends \Doctrine\ORM\EntityRepository
         //return $query->getResult();
 
     }
-    public function moyennePrix()
+    public function moyennePrix($ids)
     {
-        $query=$this->getEntityManager()->createQuery("SELECT m.idService,AVG(prix) as moyenne from MainBundle:ServiceUser m group by m.idService");
+        $query=$this->getEntityManager()->createQuery("SELECT AVG(m.prix) as moyenne from MainBundle:ServiceUser m where m.idService=:ids")->setParameter('ids',$ids);
         return $query->getResult();
     }
 }

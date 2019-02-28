@@ -2,6 +2,7 @@
  namespace FrontBundle\Controller;
 
 
+ use MainBundle\Entity\CategorieProduit;
  use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MainBundle\Entity\Produit;
@@ -65,7 +66,7 @@ class ProduitController extends Controller
         return $this->render('@Front/produit/ajouteProduit.html.twig', array("categorie" => $categorie, "user" => $rec));
     }
 
-    public function listeAction()
+    public function listeAction(Request $r)
     {
         if ($this->getUser() == null) {
             return $this->redirectToRoute('login');
@@ -454,7 +455,7 @@ class ProduitController extends Controller
         return $this->render('@Front/produit/acheter.html.twig', array("produit" => $prod));
     }
 
-    public function MesProduitsAction()
+    public function MesProduitsAction(Request $r)
     {
         if ($this->getUser() == null) {
             return $this->redirectToRoute('login');
@@ -463,7 +464,8 @@ class ProduitController extends Controller
         $id = $user->getId();
         $em = $this->getDoctrine()->getManager();
         $prod = $em->getRepository(Produit::class)->mesProduitsDQL($id);
-        return $this->render('@Front/produit/mesProduit.html.twig', array("produit" => $prod));
+
+                return $this->render('@Front/produit/mesProduit.html.twig', array("produit" => $prod));
     }
 
     public function EchangeAction()
@@ -521,6 +523,15 @@ class ProduitController extends Controller
         $prod = $em->getRepository(AchatProduit::class)->TopDQL();
         var_dump($prod);
         return $this->render('@Front/produit/produitTop.html.twig',array("pro"=>$prod));
+
+    }
+    public function ListeCategorieAction()
+    {
+        $em=$this->getDoctrine()->getManager();
+        $categorie=$em->getRepository(CategorieProduit::class)->findAll();
+        $em=$this->getDoctrine()->getManager();
+        $produit=$em->getRepository(Produit::class)->findAll();
+        return $this->render('@Front/produit/listCategorieFront.html.twig',array("categorie"=>$categorie,"produit"=>$produit));
 
     }
 }

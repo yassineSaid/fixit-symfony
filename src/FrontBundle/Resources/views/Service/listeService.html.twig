@@ -40,21 +40,29 @@
                                                 </div>
                                             </div>
                                             <div class="tg-sortfilter tg-show">
-                                                <span>Show:</span>
-                                                <div class="tg-select">
-                                                    <select>
+                                                {#<span>Show:</span>#}
+                                                <div>
+                                                   {# <select>
                                                         <option>12</option>
                                                         <option>24</option>
                                                         <option>all</option>
-                                                    </select>
+                                                    </select>#}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <div>
+                                        {# <select>
+                                             <option>12</option>
+                                             <option>24</option>
+                                             <option>all</option>
+                                         </select>#}
+                                        <span> {{ pagination.getTotalItemCount }} élements trouvés</span>
+                                    </div>
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                         <table class="tg-tablejoblidting">
                                             <tbody>
-                                            {% for s in service %}
+                                            {% for s in pagination %}
                                                 <tr>
                                                     <td>
                                                         <figure>
@@ -81,7 +89,7 @@
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                         <nav class="tg-pagination">
-                                            <ul>
+                                            {#<ul>
                                                 <li class="tg-prevpage"><a href="#"><i class="fa fa-angle-left"></i></a></li>
                                                 <li><a href="#">1</a></li>
                                                 <li><a href="#">2</a></li>
@@ -91,7 +99,8 @@
                                                 <li>...</li>
                                                 <li><a href="#">10</a></li>
                                                 <li class="tg-nextpage"><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                                            </ul>
+                                            </ul>#}
+                                            {{ knp_pagination_render(pagination) }}
                                         </nav>
                                     </div>
                                 </div>

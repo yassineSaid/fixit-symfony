@@ -49,6 +49,8 @@ registration_confirmed:
 ajouter_service:
   path:     /service/ajouter
   defaults: { _controller: BackBundle:CategorieService:confirmed }
+
+
   #############routing ali######################
 main_ajouterCategori_Produit:
   path:    /admin/ajouterCategorieProduits
@@ -98,6 +100,23 @@ main_afficher_note_admin:
   path:     /admin/Avis
   defaults: { _controller: BackBundle:AvisBack:AvisStatistics }
   ############################        END ROUTING DE MUSTAPHA         #######################
+  #############################  ROUTING ACHREF ######################################
+liste_annonce:
+  path:     /admin/annonce
+  defaults: { _controller: BackBundle:Annonce:afficher }
+candidat:
+  path:     /admin/candidats/{id}
+  defaults: { _controller: BackBundle:Annonce:candidat }
+supprimer_annonce:
+  path:     /admin/annonce/{id}
+  defaults: { _controller: BackBundle:Annonce:supprimer }
+supprimer_candidature:
+  path:     /admin/candidature/{id}
+  defaults: { _controller: BackBundle:Candidature:supprimer }
+listeCandidature:
+  path:     /admin/candidature
+  defaults: { _controller: BackBundle:Annonce:afficher }
+  ############################        END ROUTING DE ACHREF         #######################
 ################# ROUTING DE Sl-Wassim PLEASE DON'T TOUCH #####################
 back_ajouterCategorieOutil:
   path: /admin/ajouterCategorieOutil
@@ -168,7 +187,7 @@ back_etudeProposition:
   path: /admin/afficherServiceProposes/{id}
   defaults: { _controller: BackBundle:Service:etudierProposition }
 back_ajouterProposition:
-  path: /admin/ajouterServiceProposes
+  path: /admin/ajouterServiceProposes/{id}
   defaults: { _controller: BackBundle:Service:ajouterProposition }
 back_historiqueService:
   path: /admin/historiqueService
@@ -179,6 +198,7 @@ back_recupererHistorique:
 back_supprimerProposiion:
   path: /admin/supprimerProposition/{id}
   defaults: { _controller: BackBundle:Service:supprimerProposition }
+
 
 
 ########################### END Routing de Slim ######################################

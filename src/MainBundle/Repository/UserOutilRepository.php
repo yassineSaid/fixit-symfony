@@ -19,6 +19,13 @@ class UserOutilRepository extends \Doctrine\ORM\EntityRepository
         $query->setMaxResults(1);
         return $query->getResult();
     }
+    public function mesOutilsDQL($iduser)
+    {
+        $query=$this->getEntityManager()->createQuery("SELECT uo FROM MainBundle:UserOutil uo 
+                                                            where uo.idUser=:iduser");
+        $query->setParameter('iduser',$iduser);
+        return $query->getResult();
+    }
     public function location($idOutil,$idUser)
     {
         $query=$this->getEntityManager()->createQuery("SELECT uo FROM MainBundle:UserOutil uo 

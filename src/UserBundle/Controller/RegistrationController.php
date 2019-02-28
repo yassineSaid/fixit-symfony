@@ -116,7 +116,7 @@ class RegistrationController extends Controller
                 ->addPart('Hello !','text/html');
             $result = $mailer->send($message);*/
 
-            return $this->redirectToRoute('attente_de_confirmation');
+            return $this->redirectToRoute('front_homepage');
         }
 
         return $this->render('@Front/User/register.html.twig', array(

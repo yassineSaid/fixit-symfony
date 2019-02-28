@@ -48,6 +48,11 @@
                         <i class="align-middle" data-feather="users"></i> <span class="align-middle">Utilisateurs</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a href="{{ path('liste_annonce') }}"  class="font-weight-bold sidebar-link collapsed">
+                        <i class="align-middle" data-feather="tag"></i>Annonces
+                    </a>
+                </li>
                 <li class="sidebar-item active">
                     <a href="#Reclamation" data-toggle="collapse" class="font-weight-bold sidebar-link collapsed">
                         <i class="fa fa-envelope" aria-hidden="true"></i><span class="align-middle">Espace Reclamation</span>
@@ -67,7 +72,7 @@
                         <li class="sidebar-item"><a class="sidebar-link" href="{{ path('back_afficherCategorieService') }}">Catégories</a></li>
                         <li class="sidebar-item"><a class="sidebar-link" href="{{ path('back_afficherService') }}">Services</a></li>
                         <li class="sidebar-item"><a class="sidebar-link" href="{{ path('back_afficherServiceProposes') }}">Proposition</a></li>
-                        <li class="sidebar-item"><a class="sidebar-link" href="{{ path('back_historique') }}">Historique</a></li>
+                        <li class="sidebar-item"><a class="sidebar-link" href="{{ path('back_historiqueService') }}">Historique</a></li>
                     </ul>
                 </li>
                 <li class="sidebar-item">
@@ -99,6 +104,11 @@
                         <li class="sidebar-item"><a class="sidebar-link" href="{{ path('List_Produit') }}">Liste des Produits</a></li>
 
                     </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{ path('_graphePie') }}"  class="font-weight-bold sidebar-link collapsed">
+                        <i class="align-middle" data-feather="bar-chart-2"></i>Statistiques
+                    </a>
                 </li>
                 <li class="sidebar-item">
                     <a href="{{ path('admin_langues') }}"  class="font-weight-bold sidebar-link collapsed">
@@ -209,9 +219,9 @@
                 <i class="align-self-center" data-feather="menu"></i>
             </a>
 
-            <form class="form-inline d-none d-sm-inline-block">
+            {#<form class="form-inline d-none d-sm-inline-block">
                 <input class="form-control form-control-no-border navbar-search mr-sm-2" type="text" placeholder="Search topics..." aria-label="Search">
-            </form>
+            </form>#}
 
             <div class="navbar-collapse collapse">
                 <ul class="navbar-nav ml-auto">
@@ -225,6 +235,9 @@
                             <img src="https://via.placeholder.com/156x156" class="avatar img-fluid rounded mr-1" alt="{{  app.user.firstname }} {{  app.user.lastname }}" />
                             <span class="text-dark">{{  app.user.firstname }} {{  app.user.lastname }}</span>
                         </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="{{ path('logout') }}">Déconnexion</a>
+                        </div>
                     </li>
 
                     {#<li class="nav-item dropdown">

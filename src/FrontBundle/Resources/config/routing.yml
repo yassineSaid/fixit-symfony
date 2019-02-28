@@ -52,6 +52,55 @@ fos_user_registration_check_email:
     path:     /register/check-email
     defaults: { _controller: UserBundle:Registration:checkEmail }
 
+ ############################ ROUTING DE ACHREF #######################
+listeAnnonce:
+  path:     /annonce/offres
+  defaults: { _controller: FrontBundle:Annonce:listeOffre }
+modifierAnnonce:
+  path:     /annonce/modifier/{id}
+  defaults: { _controller: FrontBundle:Annonce:modifier }
+ajouterAnnonce:
+  path:     /annonce/ajouter
+  defaults: { _controller: FrontBundle:Annonce:ajouter }
+mesAnnonces:
+    path:     /compte/annonce
+    defaults: { _controller: FrontBundle:Annonce:mesAnnonces }
+listeDem:
+  path:     /annonce/demandes
+  defaults: { _controller: FrontBundle:Annonce:listeDem }
+detailAnnonce:
+  path:     /annonce/detail/{id}
+  defaults: { _controller: FrontBundle:Annonce:detail }
+supprimerAnnonce:
+  path:     /annonce/supprimer/{id}
+  defaults: { _controller: FrontBundle:Annonce:supprimer }
+recherche:
+  path:     /recherche
+  defaults: { _controller: FrontBundle:Service:recherche }
+  methods:  GET
+postuler:
+  path:     /postuler/{id}
+  defaults: { _controller: FrontBundle:Candidature:ajouter }
+mesCandidatures:
+      path:     /compte/candidatures
+      defaults: { _controller: FrontBundle:Candidature:mesCandidatures }
+supprimerCandidature:
+  path:     /candidature/supprimer/{id}
+  defaults: { _controller: FrontBundle:Candidature:supprimer }
+modifierCandidature:
+    path:     /candidature/modifier/{id}
+    defaults: { _controller: FrontBundle:Candidature:modifier }
+listeCandidats:
+  path:     /candidats/liste/{id}
+  defaults: { _controller: FrontBundle:Annonce:candidat }
+confirmerCandidat:
+      path:     /confirmer/{id}
+      defaults: { _controller: FrontBundle:Annonce:confirmer }
+ajouter_gestionService:
+    path:     /compte/gestionAnnonce
+    defaults: { _controller: FrontBundle:Annonce:gest }
+    ############################ FIN ROUTING DE ACHREF #######################
+
 ############################ ROUTING DE MUSTAPHA PLEASE DON'T TOUCH #######################
 main_reclamation_Ajout:
   path:     /compte/reclamer
@@ -136,6 +185,9 @@ front_detailOutil:
 front_louerOutil:
   path: /compte/louerOutil
   defaults: { _controller: FrontBundle:Outil:louer }
+front_mesOutils:
+  path: /compte/mesOutils
+  defaults: { _controller: FrontBundle:Outil:mesOutils }
 ############################ END ROUNTING DE Sl-Wassim ##########################
 front_listeService:
   path:     /listeService

@@ -21,9 +21,31 @@ class ServiceUser
     /**
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Service")
-     * @ORM\JoinColumn(name="idService", referencedColumnName="id")
+     * @ORM\JoinColumn(name="idService", referencedColumnName="id" , onDelete="CASCADE")
      */
     private $idService;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Description", type="string", length=255, unique=false)
+     */
+    private $description;
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
     /**
      * @var integer
      *

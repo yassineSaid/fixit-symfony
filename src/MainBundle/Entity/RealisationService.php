@@ -35,14 +35,14 @@ class RealisationService
 
     /**
      * @ORM\ManyToOne(targetEntity="Service")
-     * @ORM\JoinColumn(name="idservice", referencedColumnName="id")
+     * @ORM\JoinColumn(name="idservice", referencedColumnName="id" , onDelete="CASCADE")
      */
 
     private $service;
 
     /**
      * @ORM\ManyToOne(targetEntity="Outils")
-     * @ORM\JoinColumn(name="idoutil", referencedColumnName="id")
+     * @ORM\JoinColumn(name="idoutil", referencedColumnName="id" , onDelete="CASCADE")
      */
     private $outil;
     /**
@@ -121,6 +121,22 @@ class RealisationService
     public function getDateRealisation()
     {
         return $this->DateRealisation;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @param mixed $UserDemandeur
+     */
+    public function setUserDemandeur($UserDemandeur)
+    {
+        $this->UserDemandeur = $UserDemandeur;
     }
 
     /**

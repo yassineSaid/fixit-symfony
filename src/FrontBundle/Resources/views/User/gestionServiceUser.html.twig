@@ -112,9 +112,12 @@
                 <div class="tg-dashboardhead">
                     <div class="tg-dashboardtitle">
                         <h2>Mes Services</h2>
+                        <a href="{{ path('front_proposerServiceUser') }}">Proposer un service</a>
                     </div>
-                    <button class="tg-btnaddservices" data-toggle="modal" data-target=".tg-categoryModal">+ Ajouter un Service</button>
-                    <button class="tg-btnaddservices" data-toggle="modal" data-target=".tg-categoryModal">Proposer un service</button>
+                    <button class="tg-btnaddservices" data-toggle="modal" data-target=".tg-categoryModal">+ Ajouter un Service </button>
+
+
+
                 </div>
                 {% for s in su %}
                     <div class="tg-dashboardservices">
@@ -154,7 +157,7 @@
         <div class="modal-dialog tg-modaldialog" role="document">
             <div class="modal-content tg-modalcontent">
                 <div class="tg-modalhead">
-                    <h2>Add Service</h2>
+                    <h2>Ajouter un service</h2>
                 </div>
                 <div class="tg-modalbody">
                     <form class="tg-themeform tg-formaddservices" name="form" method="POST" action="{{ path('front_ajouterServiceUser') }}">
@@ -183,26 +186,17 @@
                                         </select>
                                     </div>
                                 </div>
+                                <span id="prixMoyen"></span>
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                     <div class="form-group">
-                                        <input type="number" name="prix" placeholder="prix">
+                                        <input type="number" name="prix" placeholder="prix" id="prix">
 
                                     </div>
                                 </div>
 
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                     <div class="form-group">
-                                        <textarea placeholder="Description"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="tg-checkbox">
-                                        <input type="checkbox" name="appointment" id="appointment">
-                                        <label for="appointment">Add This Service in Appointment List</label>
-                                    </div>
-                                    <div class="tg-checkbox">
-                                        <input type="checkbox" name="freeservice" id="freeservice">
-                                        <label for="freeservice">This is a Free Service</label>
+                                        <input type="text" name="description" id="description" placeholder="Description" >
                                     </div>
                                 </div>
                             </div>
@@ -218,8 +212,17 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
+
         $('#addCategorie').change(function () {
+
+            $('#prixMoyen').empty();
+            $("#prixMoyen").html("");
+
             var serviceSelector = $(this);
+            var serv=$('#addService');
+
+
+            var ca=$('#addCategorie').val();
 
             // Request the neighborhoods of the selected city.
             $.ajax({
@@ -227,27 +230,84 @@
                 type: "GET",
                 dataType: "JSON",
                 data: {
-                    serviceid: serviceSelector.val()
+                    serviceid: serviceSelector.val(),
+                    moy: serv.val()
+
                 },
                 success: function (neighborhoods) {
-                    //console.log(neighborhoods);
-                    console.log(neighborhoods);
 
                     $('#addService').text("");
-                   $.each(neighborhoods.services, function (id, item) {
-                       var option=document.createElement('option');
-                       option.value=item.id;
-                       //option.attr("value",item.id)
-                       var text = document.createTextNode(item.nom);
-                       option.appendChild(text);
-                       $('#addService').append(option);
+                    console.log("moy");
+                    console.log(neighborhoods.moyenne);
+                    $.each(neighborhoods.moyenne,function (id,item) {
+                        var inp=document.createElement('input');
+                        inp.value=item.id;
+                        inp.append(item.moyenne);
+                        console.log(item.moyenne);
+                        $('#prix').append(item.moyenne);
+                    })
+
+                    $.each(neighborhoods.service, function (id, item) {
+                        // console.log(item.nom)
+                        var option=document.createElement('option');
+                        option.value=item.id;
+                        //option.attr("value",item.id)
+                        //var text = "item.nom;
+                        option.append(item.nom);
+
+                        //     console.log();
+                        $('#addService').append(option);
                     });
+
+                },
+
+            });
+        });
+        $('#addService').change(function () {
+
+            $("#prixMoyen").html("");
+            var serv=$(this);
+            // Request the neighborhoods of the selected city.
+            $.ajax({
+                url: "{{ path('front_gestionService') }}",
+                type: "GET",
+                dataType: "JSON",
+                data: {
+                    moy: serv.val()
+
+                },
+                success: function (neighborhoods) {
+                    $("#prixMoyen").html("");
+                    $('#description').text("");
+                    console.log("moy");
+                    console.log(neighborhoods.moyenne);
+                    $.each(neighborhoods.moyenne,function (id,item) {
+                        var inp=document.createElement('input');
+                        inp.value=item.id;
+                        inp.append(item.moyenne);
+                        console.log(item.moyenne);
+                        if(item.moyenne != null)
+                        {
+                            $('#prixMoyen').append("   Le prix Moyen pour ce service est ",item.moyenne," ","SCoins");
+                            $('#prixMoyen').css({
+                                font: 12 ,
+                                color : 'red', // bordure rouge
+                                paddingLeft : '20px', // marge intérieure de 30px
+                                'margin-left' : '10px', // marge extérieure de 10px
+
+                            });
+                            $('#prixMoyen').show();
+                        }
+                    })
+
                 },
 
             });
         });
 
+
     </script>
+
 
 
 {% endblock %}

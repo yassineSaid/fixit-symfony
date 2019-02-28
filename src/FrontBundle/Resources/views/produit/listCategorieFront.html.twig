@@ -1,0 +1,19 @@
+<li class="menu-item-has-children">
+    <a href="{{ path('main_mes_produit') }}">Produits</a>
+    <ul class="sub-menu">
+
+        {% for c in categorie %}
+        <li class="menu-item-has-children">
+            <a href="#">{{ c.nom }}</a>
+            <ul class="sub-menu">
+                {% for p in produit %}
+                {% if c.id==p.CategorieProduit.id %}
+                <li><a href="{{ path("main_Detaille_produit",{'prod':p.id}) }}">{{ p.nom }}</a></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+
+    </ul>
+</li>

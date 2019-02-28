@@ -7,8 +7,8 @@
             <a href="#">{{ c.nom }}</a>
             <ul class="sub-menu">
                 {% for o in outil %}
-                {% if c.id==o.CategorieOutils.id%}
-                <li><a href="categories3col.html">{{ o.nom }}</a></li>
+                {% if c.id==o.CategorieOutils.id %}
+                <li><a >{{ o.nom }}</a></li>
                 {% endif %}
                 {% endfor %}
             </ul>

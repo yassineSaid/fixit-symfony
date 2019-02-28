@@ -67,7 +67,7 @@ class DefaultController extends Controller
             $em1 = $this->getDoctrine()->getManager();
             $prod = $em1->getRepository(AchatProduit::class)->TopDQL();
 
-              var_dump($prod);
+
             return $this->render('@Front/Default/index.html.twig', array("lastavis" => $lastfiveratings,"service"=>$service,"categorie"=>$categorie,"produits"=>$prod));
         }
 

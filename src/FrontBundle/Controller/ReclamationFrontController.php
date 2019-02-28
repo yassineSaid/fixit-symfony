@@ -55,7 +55,7 @@ class ReclamationFrontController extends Controller
         $em=$this->getDoctrine()->getManager();
         $user=$em->getRepository(RealisationService::class)->findAll();
         $em=$this->getDoctrine()->getManager();
-        $reclamation=$em->getRepository(Reclamation::class)->find($rec);
+        $reclamation=$em->getRepository(Reclamation::class)->find(intval($rec));
 
         if($request->isMethod('POST'))
         {
@@ -66,7 +66,7 @@ class ReclamationFrontController extends Controller
             $reclamation->setDescription($request->get("Description"));
             $em=$this->getDoctrine()->getManager();
             $em->flush();
-            return $this->redirectToRoute('main_affiche_Detail_Reclamation',array("reclamation"=>$reclamation->getId()));
+            $this->redirectToRoute('main_reclamation_Ajout');
         }
         return $this->render('@Front/Reclamation/modifierReclamation.html.twig',array("user"=>$user,"reclamation"=>$reclamation));
     }
@@ -84,7 +84,7 @@ class ReclamationFrontController extends Controller
         $reclamation=$em->getRepository(Reclamation::class)->find($rec);
         $em->remove($reclamation);
         $em->flush();
-        return $this->redirectToRoute("main_mes_reclamation");
+        return $this->redirectToRoute("main_reclamation_Ajout");
     }
     public function  ListRecAction(Request $request)
     {

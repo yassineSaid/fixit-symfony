@@ -10,4 +10,79 @@ namespace MainBundle\Repository;
  */
 class AnnonceRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findAnnonce($idUser)
+    {
+        $query=$this->getEntityManager()
+            ->createQuery("SELECT r FROM MainBundle:Annonce r where r.User=:id")
+            ->setParameter('id',$idUser);
+        return $query->getResult();
+    }
+
+    public function demAnnonce()
+    {
+    $query=$this->getEntityManager()
+        ->createQuery("SELECT a FROM MainBundle:Annonce a where a.type='demande' AND (a.date>=CURRENT_DATE()) ORDER BY a.date ASC");
+    return $query->getResult();
+    }
+
+    public function offAnnonce()
+    {
+        $query=$this->getEntityManager()
+            ->createQuery("SELECT a FROM MainBundle:Annonce a where (a.type='offre') AND (a.date>=CURRENT_DATE()) ORDER BY a.date ASC ");
+        return $query->getResult();
+    }
+
+
+    public function countC($id)
+    {
+        $query=$this->getEntityManager()
+            ->createQuery("SELECT Count(c.id) nbr FROM MainBundle:Candidature c where c.annonce=:id")
+            ->setParameter('id',$id);
+        return $query->getResult();
+    }
+
+    public function nbrDem()
+    {
+        $query=$this->getEntityManager()
+            ->createQuery("SELECT Count (a.type) FROM MainBundle:Annonce a where a.type='demande'");
+        return $query->getResult();
+    }
+
+    public function nbrOff()
+    {
+        $query=$this->getEntityManager()
+            ->createQuery("SELECT Count (a.type) FROM MainBundle:Annonce a where a.type='offre'");
+        return $query->getResult();
+    }
+
+    public function findRecent()
+    {
+        $query=$this->getEntityManager()
+            ->createQuery("SELECT a FROM MainBundle:Annonce a where a.date>=CURRENT_DATE() ORDER BY a.date ASC");
+        return $query->getResult();
+    }
+
+    public function findByIdJoinedToCategory()
+    {
+        $query = $this->getEntityManager()
+            ->createQuery(
+                'SELECT a, q FROM MainBundle:Annonce a
+                JOIN a.candidatures q');
+        try {
+            return $query->getResult();
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+
+    }
+    public function confirmer($idc,$ida)
+    {
+        $query=$this->getEntityManager()->createQuery("UPDATE MainBundle:Candidature c SET c.etat='confirmée' WHERE c.id=:idc ");
+        $query->setParameter("idc",$idc);
+        $query->execute();
+        $query1=$this->getEntityManager()->createQuery("UPDATE MainBundle:Candidature c SET c.etat='refusée' WHERE not(c.id=:idc) AND c.annonce=:ida");
+        $query1->setParameter("idc",$idc);
+        $query1->setParameter("ida",$ida);
+        $query1->execute();
+    }
 }

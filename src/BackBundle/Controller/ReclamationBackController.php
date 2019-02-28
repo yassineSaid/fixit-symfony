@@ -557,7 +557,7 @@ table[class=hide], img[class=hide], td[class=hide] {
 			<u><p>Reclamation :</p></u>
 			<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Objet : '.$rec->getObject().'</p>
 			<p>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Description :'.$rec->getDescription().'</p>
-			<p>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;La person que vous avez réclamer :'.$userrec->getFirstname().' </p>
+			<p>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;La personne que vous avez réclamer :'.$userrec->getFirstname().' </p>
 
 			<p>
 			 Nous sommes désolés de cet incident et nous vous prions de bien vouloir nous en excuser. 

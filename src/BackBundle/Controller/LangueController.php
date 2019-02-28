@@ -28,14 +28,30 @@ class LangueController extends Controller
     }
     public function ajouterAction(Request $request)
     {
+        $connect=$this->getDoctrine()->getManager();
+        $langues=$connect->getRepository(Langue::class)->findAll();
         if ($request->isMethod('post'))
         {
-            $langue=new Langue();
-            $langue->setLibelle($request->get('libelle'));
-            $connect=$this->getDoctrine()->getManager();
-            $connect->persist($langue);
-            $connect->flush();
+            $em=$this->getDoctrine()->getManager();
+            $l=$em->getRepository(Langue::class)->findByLibelle($request->get('libelle'));
+            if ($l[0]==0)
+            {
+                $langue=new Langue();
+                $langue->setLibelle($request->get('libelle'));
+                $connect=$this->getDoctrine()->getManager();
+                $connect->persist($langue);
+                $connect->flush();
+            }
+            else
+            {
+                return $this->render('@Back/Langue/liste.html.twig',array(
+                    "langues"=>$langues,
+                    "erreur"=>"erreur"
+                ));
+            }
         }
-        return $this->redirectToRoute('admin_langues');
+        return $this->render('@Back/Langue/liste.html.twig',array(
+            "langues"=>$langues
+        ));
     }
 }

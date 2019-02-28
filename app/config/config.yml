@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: "@FrontBundle/Resources/config/services.yml" }
+    - { resource: "@GrapheBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -104,7 +105,7 @@ fos_user:
             name: fos_user_registration_form
             validation_groups: [Registration, Default]
         confirmation:
-            enabled: true
+            enabled: false
             template: '@FOSUser/Registration/email.txt.twig'
             from_email:
                 address:        fixitnow.tn@gmail.com

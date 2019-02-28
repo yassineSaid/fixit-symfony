@@ -16,8 +16,6 @@ class CategorieServiceController extends Controller
 
             $categorie->setNom($request->get("Nom"));
             $categorie->setDescription($request->get("Description"));
-            $categorie->setPrixMin($request->get("prixMin"));
-            $categorie->setPrixMax($request->get("prixMax"));
             $file=$request->files->get("image");
             $fileName = md5(uniqid()) . '.' . $file->guessExtension();
             $categorie->setImageCategorie($fileName);
@@ -51,6 +49,16 @@ class CategorieServiceController extends Controller
         {
             $categorie->setNom($r->get("Nom"));
             $categorie->setDescription($r->get("Description"));
+            $image = $categorie->getImageCategorie();
+            if($image!=null)
+            {unlink($this->getParameter('categorieService_directory').'/'.$image);}
+            $file=$r->files->get("image");
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+            $categorie->setImageCategorie($fileName);
+            $file->move(
+                $this->getParameter('categorieService_directory'),
+                $fileName
+            );
             $em->flush();
             return $this->redirectToRoute("back_afficherCategorieService");
         }
@@ -61,6 +69,9 @@ class CategorieServiceController extends Controller
     {
         $em=$this->getDoctrine()->getManager();
         $categorie=$em->getRepository(CategorieService::class)->find($id);
+        $image = $categorie->getImageCategorie();
+        if($image!=null)
+        {unlink($this->getParameter('categorieService_directory').'/'.$image);}
         $em->remove($categorie);
         $em->flush();
         return $this->redirectToRoute("back_afficherCategorieService");

@@ -30,7 +30,8 @@ class ServiceRepository extends \Doctrine\ORM\EntityRepository
     }
     public function nbrByCat()
     {
-        $query=$this->getEntityManager()->createQuery("SELECT SUM(m.NbrProviders),p.id from MainBundle:Service m,MainBundle:CategorieService p where m.CategorieService=p.id group by p.id ");
+
+        $query=$this->getEntityManager()->createQuery("SELECT p.id,SUM(m.NbrProviders) as somme from MainBundle:Service m,MainBundle:CategorieService p where p.id=m.CategorieService group by m.CategorieService");
         return $query->getResult();
     }
 
