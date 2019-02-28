@@ -43,6 +43,7 @@ class AvisFrontController extends Controller
                 $Avis->setSatisfaction($request->get("satisfaction"));
                 $Avis->setDescription($request->get("Description"));
                 $Avis->setNote($request->get("rating"));
+                $this->getUser()->setSolde($this->getUser()->getSolde()+2);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($Avis);
                 $em->flush();

@@ -21,6 +21,11 @@ class ReclamationFrontController extends Controller
         {
             $iduser=intval($request->get("UserAReclamer"));
             $user=$em->getRepository(User::class)->find($iduser);
+            $count=$em->getRepository(Reclamation::class)->findCountBann($iduser);
+            if($count>=3)
+            {
+                $user->setEnabled(0);
+            }
             $reclamation->setUserreclame($user);
             $reclamation->setObject($request->get("Object"));
             $reclamation->setDescription($request->get("Description"));

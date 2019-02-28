@@ -31,5 +31,15 @@ class ReclamationRepository extends \Doctrine\ORM\EntityRepository
         return $query->getResult();
     }
 
+    public function findCountBann($idUser)
+    {
+        $query=$this->getEntityManager()
+            ->createQuery("SELECT COUNT(r.userreclame) FROM MainBundle:Reclamation r where r.userreclame=:id")
+            ->setParameter('id',$idUser);
+        return $query->getResult();
+    }
+    
+    
+
 
 }

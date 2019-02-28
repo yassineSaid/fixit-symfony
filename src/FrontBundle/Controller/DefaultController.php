@@ -50,6 +50,7 @@ class DefaultController extends Controller
                 {
                     $this->redirectToRoute('login');
                 }
+                $this->getUser()->setSolde($this->getUser()->getSolde()+2);
                 $em = $this->getDoctrine()->getManager();
                 $iduser = $this->getUser()->getId();
                 $user = $em->getRepository(User::class)->find($iduser);
