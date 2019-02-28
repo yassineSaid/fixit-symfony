@@ -12,11 +12,15 @@ class NotificationRepository extends \Doctrine\ORM\EntityRepository
 {
     public function findNotification($idOutil,$idUser)
     {
-        var_dump($idUser->getFirstname());
         $query=$this->getEntityManager()->createQuery("SELECT n FROM MainBundle:Notification n 
                                                             where n.description like :idOutil and n.description like :idUser");
         $query->setParameter('idOutil','%'.$idOutil->getNom().'%');
         $query->setParameter('idUser','%'.$idUser->getFirstname().'%');
+        return $query->getResult();
+    }
+    public function triNotificationASC()
+    {
+        $query=$this->getEntityManager()->createQuery("SELECT n FROM MainBundle:Notification n ORDER BY n.notification_date ");
         return $query->getResult();
     }
 }
