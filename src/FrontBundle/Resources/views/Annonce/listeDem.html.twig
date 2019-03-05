@@ -1,0 +1,77 @@
+{% set menu_selected = 'ajouterAnnonce' %}{% extends "dashboard_front.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block title %}Les Demandes{% endblock %}
+{% block content %}
+    <!--************************************
+				Inner Page Banner Start
+		*************************************-->
+    <div class="tg-innerpagebanner">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="tg-pagetitle">
+                        <h1>Profil</h1>
+                    </div>
+                    <ol class="tg-breadcrumb">
+                        <li><a href="{{ path('front_homepage') }}">Accueil</a></li>
+                        <li class="tg-active">Les demandes</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block sidebar %}
+    {{ parent() }}
+{% endblock %}
+    {% block content_dashboard %}
+                <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9 pull-right">
+                    <div class="row">
+                        <div id="tg-content" class="tg-content">
+                            <div class="tg-joblisting">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="tg-sortfilters">
+                                        <h3>Les Demandes</h3>
+                                    </div>
+                                </div>
+                                <div class="count">
+                                </div>
+                                {% for a in pagination %}
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <table class="tg-tablejoblidting">
+                                            <tr>
+                                                <td>
+                                                    <figure class="tg-companylogo">
+                                                        <img src="{{ asset('uploads/images/service/'~a.Service.imageService) }}" alt="">
+                                                    </figure>
+                                                    <div class="tg-contentbox">
+                                                        <a class="tg-tag tg-featuredtag" href="">{{ a.Service.nom }}</a>
+                                                        <div class="tg-title">
+                                                            <h3><a href="{{ path('detailAnnonce',{'id':a.id}) }}">{{ a.Description }}</a></h3>
+                                                        </div>
+                                                        <span>Par: {{ a.User }}</span>
+                                                    </div>
+                                                </td><td><span>{{ a.prix}}<img src="{{ asset("service/images/icons/scoin.png") }}" width="15"></span></td>
+                                                <td><span>{{ a.adresse }}</span></td>
+                                                <td><span>{{ a.date|date("d/m/Y") }}</span></td>
+                                                <td><span>{{ a.tel }}</span></td>
+                                            </tr>
+
+                                        </table>
+                                    </div>
+                                {% endfor %}
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <nav class="tg-pagination">
+
+                                        {{ knp_pagination_render(pagination) }}
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

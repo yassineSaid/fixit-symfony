@@ -1,0 +1,120 @@
+{% extends "front.html.twig" %}
+{% block sidebar %}
+    {{ parent() }}
+{% endblock %}
+{% block content %}
+<main id="tg-main" class="tg-main tg-haslayout">
+    <div class="tg-detailpage tg-jobdetail">
+        <div class="tg-detailpagehead">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="tg-detailpageheadcontent">
+                            <div class="tg-companylogo"><<img src="{{ asset('uploads/images/service/'~annonce.Service.imageService) }}" alt="">></div>
+                            <div class="tg-companycontent">
+                                <ul class="tg-tags">
+                                    <li><div class="tg-tag" >{{ annonce.Service.nom }}</div></li>
+                                </ul>
+                                <div class="tg-title">
+                                    <h1>{{ annonce.description }}</h1>
+                                    <span class="tg-jobpostedby">Par: {{ annonce.User }} </span>
+                                </div>
+                            </div>
+                            <a class="tg-btn" href="{{ path('postuler',{'id':annonce.id}) }}">Postuler</a>
+                        </div>
+                        <ul class="tg-jobmatadata">
+                            <li>
+                                <div class="tg-box tg-expiredate">
+                                    <span class="tg-jobmataicon"><img src="{{ asset("service/images/icons/scoin.png") }}" width="60"></span>
+                                    <div class="tg-jobmatacontent">
+                                        <strong>Prix</strong>
+                                        <span>{{ annonce.prix }}</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="tg-box tg-posteddate">
+                                    <span class="tg-jobmataicon"><i class="lnr lnr-calendar-full"></i></span>
+                                    <div class="tg-jobmatacontent">
+
+                                        <strong>Date </strong>
+                                        <span>{{ annonce.date|date("d/m/Y") }}</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="tg-box tg-applicantapplied">
+                                    <span class="tg-jobmataicon"><i class="lnr lnr-book"></i></span>
+                                    <div class="tg-jobmatacontent">
+                                        <strong><a href="{{ path('listeCandidats',{'id':annonce.id}) }}">Nombre de candidats</a></strong>
+                                        {% for i in annonce.nbrC %}
+                                        <span>{{ i.nbr }}</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="tg-box tg-expiredate">
+                                    <span class="tg-jobmataicon"><i class="lnr lnr-warning"></i></span>
+                                    <div class="tg-jobmatacontent">
+                                        <strong>Catégorie du service</strong>
+                                        <span>{{ annonce.CategorieService.nom }}</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="tg-twocolumns" class="tg-twocolumns">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-7 col-md-8 col-lg-8 pull-left">
+                        <div id="tg-content" class="tg-content">
+                            <div class="tg-companyfeatures">
+                                <div class="tg-companyfeaturebox tg-introduction">
+                                    <div class="tg-companyfeaturetitle">
+                                        <h3>Description</h3>
+                                    </div>
+                                    <div class="tg-description">
+                                        {{ annonce.description }}
+                                    </div>
+                                </div>
+                                <div class="tg-companyfeaturebox tg-jobdetails">
+                                    <div class="tg-companyfeaturetitle">
+                                        <h3>Plus de détails</h3>
+                                    </div>
+                                    <ul>
+                                        <li>
+                                            <span>Catégorie du service</span>
+                                            <span>{{ annonce.CategorieService.nom }}</span>
+                                        </li>
+                                        <li>
+                                            <span>Service</span>
+                                            <span>{{ annonce.Service.nom }}</span>
+                                        </li>
+                                        <li>
+                                            <span>Date:</span>
+                                            <span>{{ annonce.date|date("d/m/Y") }}</span>
+                                        </li>
+                                        <li>
+                                            <span>Adresse</span>
+                                            <span>{{ annonce.adresse }}</span>
+                                        </li>
+                                        <li>
+                                            <span>Téléphone:</span>
+                                            <span>{{ annonce.tel }}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

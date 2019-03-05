@@ -1,0 +1,72 @@
+{% extends "back.html.twig" %}
+{% block content %}
+    <main class="content">
+        <div class="container-fluid p-0">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Liste des annonces</h5>
+                        </div>
+                        <div class="card-body">
+                            <a href="{{ path('back_ajouterOutil') }}"><button class="btn btn-pill btn-primary" >Ajouter un outil</button></a><br /><br />
+
+                            <table id="datatables-basic" class="table table-striped" style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>Publié par</th>
+                                    <th>Type</th>
+                                    <th>Prix</th>
+                                    <th>description</th>
+                                    <th>Adresse</th>
+                                    <th>Téléphone</th>
+                                    <th>Catégorie Service</th>
+                                    <th>Service</th>
+                                    <th>Date</th>
+                                    <th>nombre de candidatures</th>
+                                    <th>nombre d'offres</th>
+                                    <th>nombre de demandes</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for c in candidature %}
+                                    <tr>
+                                        <td>
+                                            {{ c.User}}
+                                        </td>
+                                        <td>
+                                            {{ c.type }}
+                                        </td>
+                                        <td>
+                                            {{ c.annonce.prix }}
+                                        </td>
+                                        <td>
+                                            {{ c.description }}
+                                        </td>
+                                        <td>
+                                            {{ c.adresse }}
+                                        </td>
+                                        <td>
+                                            {{ c.tel }}
+                                        </td>
+                                        <td>
+                                            {{ c.CategorieService.nom }}
+                                        </td>
+                                        <td>
+                                            {{ c.Service.nom }}
+                                        </td>
+                                        <td>
+                                            {{ c.date|date("d/m/Y") }}
+                                        </td>
+                                        <td><a class="tg-btn tg-btnpostanewjob" href="{{ path('supprimer_annonce',{'id':a.id}) }}">Supprimer</a></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

@@ -1,0 +1,115 @@
+{% set menu_selected = 'ajouterAnnonce' %}{% extends "dashboard_front.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block title %}Vos candidatures{% endblock %}{% block content %}
+    <main id="tg-main" class="tg-main tg-haslayout">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-10 col-md-push-1 col-lg-8 col-lg-push-2">
+                    <div class="tg-sectionhead">
+                        <div class="tg-sectiontitle">
+                            <h2>Vos candidatures</h2>
+                        </div>
+                        <div class="tg-description">
+                            <p>Vous trouvez toutes les annonces pour lesquelles vous pouvez postulez</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="tg-twocolumns" class="tg-twocolumns">
+                    {% endblock %}
+                    {% block sidebar %}
+                        {{ parent() }}
+                    {% endblock %}
+                    {% block content_dashboard %}
+                    <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9 pull-right">
+                        <div class="row">
+                            <div id="tg-content" class="tg-content">
+                                <div class="tg-joblisting">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <div class="tg-sortfilters">
+                                            <div class="tg-sortfilter tg-sortby">
+                                                <input type="text" name="recherche" id="recherche" placeholder="Rechercher">
+                                            </div>
+                                            <div class="tg-sortfilter tg-sortby">
+                                                <span>Sort By:</span>
+                                                <div class="tg-select">
+                                                    <select>
+                                                        <option>Name</option>
+                                                        <option>Type</option>
+                                                        <option>date</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="tg-sortfilter tg-arrange">
+                                                <span>Arrange:</span>
+                                                <div class="tg-select">
+                                                    <select>
+                                                        <option>des</option>
+                                                        <option>Asc</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="tg-sortfilter tg-show">
+                                                <span>Show:</span>
+                                                <div class="tg-select">
+                                                    <select>
+                                                        <option>12</option>
+                                                        <option>24</option>
+                                                        <option>all</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="count">
+                                    </div>
+                                    {% for c in candidatures %}
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <table class="tg-tablejoblidting">
+                                                <tr>
+                                                    <td>
+                                                        <figure class="tg-companylogo">
+                                                            <img src="{{ asset('uploads/images/service/'~c.annonce.Service.imageService) }}" alt="">
+                                                        </figure>
+                                                        <div class="tg-contentbox">
+                                                            {{ c.annonce.Service.nom }}
+                                                            <div class="tg-title">
+                                                                <h3><a href="{{ path('modifierCandidature',{'id':c.id}) }}">{{ c.message }}</a></h3>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td><span>{{ c.annonce.prix }}</span></td>
+                                                    <td><span>{{ c.annonce.adresse }}</span></td>
+                                                    <td><span>{{ c.annonce.tel }}</span></td>
+                                                    <td><span>{{ c.etat }}</span></td>
+                                                    <td><a class="tg-btn tg-btnpostanewjob" href="{{ path('supprimerCandidature',{'id':c.id}) }}" >Supprimer</a></td>
+
+                                                </tr>
+
+                                            </table>
+                                        </div>
+                                    {% endfor %}
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <nav class="tg-pagination">
+                                            <ul>
+                                                <li class="tg-prevpage"><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                                                <li><a href="#">1</a></li>
+                                                <li><a href="#">2</a></li>
+                                                <li><a href="#">3</a></li>
+                                                <li><a href="#">4</a></li>
+                                                <li class="tg-active"><a href="#">5</a></li>
+                                                <li>...</li>
+                                                <li><a href="#">10</a></li>
+                                                <li class="tg-nextpage"><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
