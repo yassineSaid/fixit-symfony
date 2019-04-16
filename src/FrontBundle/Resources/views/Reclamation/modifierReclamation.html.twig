@@ -64,7 +64,7 @@
                                                             <div class="form-group">
                                                                 <select class="form-control" name="UserAReclamer">
                                                                     {% for u in user %}
-                                                                        <option value="{{ u.UserDemandeur.id}}">{{ u.UserDemandeur.firstname }}</option>
+                                                                        <option value="{{ u.UserOffreur.id}}">{{ u.UserOffreur.firstname}} - {{ u.service.nom }} - {{ u.daterealisation|date('"m/d/Y"')}}</option>
                                                                     {% endfor %}
                                                                 </select>
                                                             </div>

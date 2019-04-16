@@ -41,10 +41,11 @@ class RealisationService
     private $service;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Outils")
-     * @ORM\JoinColumn(name="idoutil", referencedColumnName="id" , onDelete="CASCADE")
+     * @var int
+     *
+     * @ORM\Column(name="note", type="integer")
      */
-    private $outil;
+    private $note;
     /**
      * @var \DateTime
      *
@@ -146,6 +147,23 @@ class RealisationService
     {
         $this->DateRealisation = $DateRealisation;
     }
+
+    /**
+     * @return int
+     */
+    public function getNote()
+    {
+        return $this->note;
+    }
+
+    /**
+     * @param int $note
+     */
+    public function setNote($note)
+    {
+        $this->note = $note;
+    }
+
 
 
 

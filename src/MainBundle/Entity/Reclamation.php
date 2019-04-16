@@ -71,6 +71,18 @@ class Reclamation
      * @ORM\Column(name="archive", type="integer")
      */
     private $show;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Service")
+     * @ORM\JoinColumn(name="idServiceRealise", referencedColumnName="id" , onDelete="CASCADE")
+     */
+    private $servicerealise;
+    /**
+     * @var Date
+     *
+     * @ORM\Column(name="dateRealisation", type="date")
+     */
+    private  $dateRealisation;
     /**
      * Get id
      *
@@ -224,5 +236,38 @@ class Reclamation
     {
         $this->show = $show;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getServicerealise()
+    {
+        return $this->servicerealise;
+    }
+
+    /**
+     * @param mixed $servicerealise
+     */
+    public function setServicerealise($servicerealise)
+    {
+        $this->servicerealise = $servicerealise;
+    }
+
+    /**
+     * @return Date
+     */
+    public function getDateRealisation()
+    {
+        return $this->dateRealisation;
+    }
+
+    /**
+     * @param Date $dateRealisation
+     */
+    public function setDateRealisation($dateRealisation)
+    {
+        $this->dateRealisation = $dateRealisation;
+    }
+
 }
 

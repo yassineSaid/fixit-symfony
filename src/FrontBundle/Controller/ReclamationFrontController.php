@@ -4,6 +4,7 @@ namespace FrontBundle\Controller;
 
 use MainBundle\Entity\RealisationService;
 use MainBundle\Entity\Reclamation;
+use MainBundle\Entity\Service;
 use MainBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -22,11 +23,14 @@ class ReclamationFrontController extends Controller
             $iduser=intval($request->get("UserAReclamer"));
             $user=$em->getRepository(User::class)->find($iduser);
             $count=$em->getRepository(Reclamation::class)->findCountBann($iduser);
+            $service=$em->getRepository(Service::class)->find($rec[0]->getService()->getId());
             if($count>=3)
             {
                 $user->setEnabled(0);
             }
             $reclamation->setUserreclame($user);
+            $reclamation->setServicerealise($service);
+            $reclamation->setDateRealisation($rec[0]->getDateRealisation());
             $reclamation->setObject($request->get("Object"));
             $reclamation->setDescription($request->get("Description"));
             $dater=new \DateTime();
@@ -52,13 +56,18 @@ class ReclamationFrontController extends Controller
 
     public function ModifierReclamationAction($rec,Request $request)
     {
+
         $em=$this->getDoctrine()->getManager();
-        $user=$em->getRepository(RealisationService::class)->findAll();
+        $recc=$em->getRepository(RealisationService::class)->findServiceRealise($this->getUser()->getId());
+        //$user=$em->getRepository(RealisationService::class)->findAll();
         $em=$this->getDoctrine()->getManager();
         $reclamation=$em->getRepository(Reclamation::class)->find(intval($rec));
 
         if($request->isMethod('POST'))
         {
+            $service=$em->getRepository(Service::class)->find($recc[0]->getService()->getId());
+            $reclamation->setServicerealise($service);
+            $reclamation->setDateRealisation($recc[0]->getDateRealisation());
             $iduser=intval($request->get("UserAReclamer"));
             $user=$em->getRepository(User::class)->find($iduser);
             $reclamation->setUserreclame($user);
@@ -68,7 +77,7 @@ class ReclamationFrontController extends Controller
             $em->flush();
             $this->redirectToRoute('main_reclamation_Ajout');
         }
-        return $this->render('@Front/Reclamation/modifierReclamation.html.twig',array("user"=>$user,"reclamation"=>$reclamation));
+        return $this->render('@Front/Reclamation/modifierReclamation.html.twig',array("user"=>$recc,"reclamation"=>$reclamation));
     }
 
     public function MesReclamationAction()
