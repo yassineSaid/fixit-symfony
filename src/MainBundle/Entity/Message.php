@@ -41,11 +41,18 @@ class Message
     private $contenu;
 
     /**
-     * @var binary
+     * @var int
      *
-     * @ORM\Column(name="vu", type="binary")
+     * @ORM\Column(name="vu", type="integer", length=1)
      */
     private $vu;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="notified", type="integer", length=1)
+     */
+    private $notified;
 
     /**
      * @var \DateTime
@@ -92,7 +99,7 @@ class Message
     /**
      * Set vu
      *
-     * @param binary $vu
+     * @param int $vu
      *
      * @return Message
      */
@@ -106,11 +113,35 @@ class Message
     /**
      * Get vu
      *
-     * @return binary
+     * @return int
      */
     public function getVu()
     {
         return $this->vu;
+    }
+
+    /**
+     * Set notified
+     *
+     * @param int $notified
+     *
+     * @return Message
+     */
+    public function setNotified($notified)
+    {
+        $this->notified = $notified;
+
+        return $this;
+    }
+
+    /**
+     * Get notified
+     *
+     * @return int
+     */
+    public function getNotified()
+    {
+        return $this->notified;
     }
 
     /**
@@ -136,5 +167,6 @@ class Message
     {
         return $this->date;
     }
+
 }
 
