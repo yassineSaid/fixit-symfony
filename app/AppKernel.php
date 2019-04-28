@@ -28,6 +28,7 @@ class AppKernel extends Kernel
             new \SBC\NotificationsBundle\NotificationsBundle(),
             new GrapheBundle\GrapheBundle(),
             new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
+            new WebServicesBundle\WebServicesBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
