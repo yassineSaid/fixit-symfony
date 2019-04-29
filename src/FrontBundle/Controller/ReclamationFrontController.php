@@ -15,7 +15,7 @@ class ReclamationFrontController extends Controller
     public function AjouterReclamationAction(Request $request)
     {
         $em=$this->getDoctrine()->getManager();
-        $rec=$em->getRepository(RealisationService::class)->findServiceRealise($this->getUser()->getId());
+
         $recs=$em->getRepository(Reclamation::class)->findReclamation($this->getUser()->getId());
         $reclamation= new Reclamation();
         if($request->isMethod('POST'))

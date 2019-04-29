@@ -63,6 +63,9 @@ class RealisationService
     {
         return $this->id;
     }
+    /**
+     * @return mixed
+     */
     public function getUserDemandeur()
     {
         return $this->UserDemandeur;
@@ -100,21 +103,6 @@ class RealisationService
         $this->service = $service;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getOutil()
-    {
-        return $this->outil;
-    }
-
-    /**
-     * @param mixed $outil
-     */
-    public function setOutil($outil)
-    {
-        $this->outil = $outil;
-    }
 
     /**
      * @return \DateTime

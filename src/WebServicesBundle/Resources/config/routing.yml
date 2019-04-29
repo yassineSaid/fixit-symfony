@@ -1,3 +1,11 @@
 web_services_homepage:
     path:     /
     defaults: { _controller: WebServicesBundle:Default:index }
+########## ROUTING DE MUSTAPHA ###############
+web_services_getUserReclame:
+    path:     /getusersreclame/{idUser}
+    defaults: { _controller: WebServicesBundle:ReclamationWS:getUserReclame }
+web_services_getServiceRealise:
+    path:     /getservicerealise/{idUser}
+    defaults: { _controller: WebServicesBundle:ReclamationWS:getServiceRealise }
+########## END ROUTING DE MUSTAPHA ###########

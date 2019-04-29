@@ -17,4 +17,21 @@ class RealisationServiceRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter('id',$idUser);
         return $query->getResult();
     }
+
+    public function findUsersReclame($idUser)
+    {
+        $query=$this->getEntityManager()
+            ->createQuery("SELECT u from MainBundle:User u JOIN MainBundle:RealisationService s where s.UserOffreur = u.id  and s.UserDemandeur=:id ")
+            ->setParameter('id',$idUser);
+        return $query->getResult();
+    }
+
+    public function findServicesRealise($idUser)
+    {
+        $query=$this->getEntityManager()
+            ->createQuery("SELECT ser from MainBundle:Service ser JOIN MainBundle:RealisationService s where ser.id = s.service  and s.UserOffreur=:id ")
+            ->setParameter('id',$idUser);
+        return $query->getResult();
+    }
+
 }

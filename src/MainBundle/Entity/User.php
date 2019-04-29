@@ -283,10 +283,12 @@ class User extends BaseUser
     /**
      * @return mixed
      */
+    /*
     public function getLangues()
     {
         return $this->Langues;
     }
+    */
 
     /**
      * @return string
