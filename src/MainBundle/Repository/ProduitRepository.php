@@ -62,4 +62,12 @@ class ProduitRepository extends \Doctrine\ORM\EntityRepository
         return $query->getResult();
     }
 
+    public function ListeProduitsDQL($user)
+    {
+
+        $query=$this->getEntityManager()->createQuery("Select DISTINCT p from MainBundle:Produit p where p.user not in (select pp.user from MainBundle:Produit pp WHERE pp.user= :user) ");
+        $query->setParameter('user',$user);
+        return $query->getResult();
+    }
+
 }

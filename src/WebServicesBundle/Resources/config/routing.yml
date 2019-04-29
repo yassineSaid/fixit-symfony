@@ -1,6 +1,11 @@
 web_services_homepage:
     path:     /
     defaults: { _controller: WebServicesBundle:Default:index }
+################# ROUTING DE Sl-Wassim PLEASE DON'T TOUCH #####################
+web_services_affichage_outils:
+    path:     /affichageOutilsWS
+    defaults: { _controller: WebServicesBundle:Outils:afficherWS }
+############################ END ROUNTING DE Sl-Wassim ##########################
 ########## ROUTING DE MUSTAPHA ###############
 web_services_getUserReclame:
     path:     /getusersreclame/{idUser}
@@ -12,3 +17,8 @@ web_services_getDateRealise:
     path:     /getservicerealise/{idUserOffreur}/{idUserDemandeur}/{idService}
     defaults: { _controller: WebServicesBundle:ReclamationWS:getDateRealisation }
 ########## END ROUTING DE MUSTAPHA ###########
+########## ROUTING DE Ali ###############
+web_services_getAllProduits:
+    path:     /getAllProduitsWS
+    defaults: { _controller: WebServicesBundle:Produits:afficherWS }
+########## END ROUTING DE Ali ###########
