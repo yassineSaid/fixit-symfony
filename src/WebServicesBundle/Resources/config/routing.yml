@@ -22,3 +22,8 @@ web_services_getAllProduits:
     path:     /getAllProduitsWS
     defaults: { _controller: WebServicesBundle:Produits:afficherWS }
 ########## END ROUTING DE Ali ###########
+########## ROUTING DE YASSINE ###############
+web_services_getUser:
+    path:       /getUserWs/
+    defaults: { _controller: WebServicesBundle:User:getUser }
+########## END ROUTING DE YASSINE ###########

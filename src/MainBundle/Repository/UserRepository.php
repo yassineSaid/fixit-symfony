@@ -132,4 +132,13 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
             return true;
         }
     }
+    public function getPassword($email)
+    {
+        $query=$this->getEntityManager()->createQuery("
+        SELECT u
+        FROM MainBundle:User u
+        where u.email=:email OR u.username=:email");
+        $query->setParameter('email',$email);
+        return $query->getResult();
+    }
 }
