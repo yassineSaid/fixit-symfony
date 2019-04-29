@@ -26,12 +26,23 @@ class RealisationServiceRepository extends \Doctrine\ORM\EntityRepository
         return $query->getResult();
     }
 
-    public function findServicesRealise($idUser)
+    public function findServicesRealise($idUserOffreur,$idUserDemandeur)
     {
         $query=$this->getEntityManager()
-            ->createQuery("SELECT ser from MainBundle:Service ser JOIN MainBundle:RealisationService s where ser.id = s.service  and s.UserOffreur=:id ")
-            ->setParameter('id',$idUser);
+            ->createQuery("SELECT ser from MainBundle:Service ser JOIN MainBundle:RealisationService s where ser.id = s.service  and s.UserOffreur=:id and
+             s.UserDemandeur=:id1")
+            ->setParameter('id1',$idUserDemandeur)
+            ->setParameter('id',$idUserOffreur);
         return $query->getResult();
     }
-
+    public function findDateRealisation($idUserOffreur,$idUserDemandeur,$idService)
+    {
+        $query=$this->getEntityManager()
+            ->createQuery("SELECT s.DateRealisation FROM MainBundle:RealisationService s where s.UserOffreur=:id and s.UserDemandeur=:id1
+             and s.service=:id2")
+            ->setParameter('id1',$idUserDemandeur)
+            ->setParameter('id2',$idService)
+            ->setParameter('id',$idUserOffreur);
+        return $query->getResult();
+    }
 }

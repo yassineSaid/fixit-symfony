@@ -6,6 +6,9 @@ web_services_getUserReclame:
     path:     /getusersreclame/{idUser}
     defaults: { _controller: WebServicesBundle:ReclamationWS:getUserReclame }
 web_services_getServiceRealise:
-    path:     /getservicerealise/{idUser}
+    path:     /getservicerealise/{idUser}/{idUserDemandeur}
     defaults: { _controller: WebServicesBundle:ReclamationWS:getServiceRealise }
+web_services_getDateRealise:
+    path:     /getservicerealise/{idUserOffreur}/{idUserDemandeur}/{idService}
+    defaults: { _controller: WebServicesBundle:ReclamationWS:getDateRealisation }
 ########## END ROUTING DE MUSTAPHA ###########
