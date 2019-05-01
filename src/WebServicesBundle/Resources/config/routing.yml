@@ -38,9 +38,18 @@ web_services_getUser:
 web_services_getUserById:
     path:       /getUserByIdWs/
     defaults: { _controller: WebServicesBundle:User:getUserById }
+web_services_getUserByEmail:
+    path:       /getUserByEmailWs/
+    defaults: { _controller: WebServicesBundle:User:getUserByEmail }
+web_services_getUserByUsername:
+    path:       /getUserByUsernameWs/
+    defaults: { _controller: WebServicesBundle:User:getUserByUsername }
 web_services_modifierUser:
     path:       /modifierUserWs/
     defaults: { _controller: WebServicesBundle:User:modifierUser }
+web_services_inscriptionUser:
+    path:       /inscriptionUserWs/
+    defaults: { _controller: WebServicesBundle:User:inscriptionUser }
 ########## END ROUTING DE YASSINE ###########
 
 ########## ROUTING DE SLIM ###############

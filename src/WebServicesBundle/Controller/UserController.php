@@ -27,6 +27,22 @@ class UserController extends Controller
         $formatted = $serializer->normalize($user);
         return new JsonResponse($formatted);
     }
+    public function getUserByUsernameAction(Request $request)
+    {
+        $connect=$this->getDoctrine()->getManager();
+        $user=$connect->getRepository(User::class)->getUsername($request->get("username"));
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($user);
+        return new JsonResponse($formatted);
+    }
+    public function getUserByEmailAction(Request $request)
+    {
+        $connect=$this->getDoctrine()->getManager();
+        $user=$connect->getRepository(User::class)->getEmail($request->get("email"));
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($user);
+        return new JsonResponse($formatted);
+    }
     public function modifierUserAction(Request $request)
     {
         if ($request->isMethod("post")) {
@@ -35,10 +51,35 @@ class UserController extends Controller
             $user->setFirstname($request->get("firstname"));
             $user->setLastname($request->get("lastname"));
             $user->setAddress($request->get("address"));
-            $user->setZip($request->get("address"));
+            $user->setZipCode($request->get("zipCode"));
+            $user->setPhone($request->get("phone"));
+            $user->setCity($request->get("city"));
+            $connect->persist($user);
+            $connect->flush();
+            return new JsonResponse(200);
+        }
+        return new JsonResponse(500);
+    }
+    public function inscriptionUserAction(Request $request)
+    {
+        if ($request->isMethod("post")) {
+            $connect = $this->getDoctrine()->getManager();
+            //$user = $connect->getRepository(User::class)->find($request->get("id"));
+            $user = new User();
+            $user->setEmail($request->get("email"));
+            $user->setEmailCanonical($request->get("email_canonical"));
+            $user->setUsername($request->get("username"));
+            $user->setUsernameCanonical($request->get("username_canonical"));
+            $user->setPassword($request->get("password"));
+            $user->setSolde(0);
+            $user->setEnabled(1);
+            $user->addRole('ROLE_USER');
+            $user->setFirstname($request->get("firstname"));
+            $user->setLastname($request->get("lastname"));
             $user->setAddress($request->get("address"));
-            $user->setAddress($request->get("address"));
-            $user->setAddress($request->get("address"));
+            $user->setZipCode($request->get("zipCode"));
+            $user->setPhone($request->get("phone"));
+            $user->setCity($request->get("city"));
             $connect->persist($user);
             $connect->flush();
             return new JsonResponse(200);

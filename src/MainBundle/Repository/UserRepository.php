@@ -141,4 +141,22 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
         $query->setParameter('email',$email);
         return $query->getResult();
     }
+    public function getEmail($email)
+    {
+        $query=$this->getEntityManager()->createQuery("
+        SELECT u
+        FROM MainBundle:User u
+        where u.email=:email");
+        $query->setParameter('email',$email);
+        return $query->getResult();
+    }
+    public function getUsername($username)
+    {
+        $query=$this->getEntityManager()->createQuery("
+        SELECT u
+        FROM MainBundle:User u
+        where u.username=:username");
+        $query->setParameter('username',$username);
+        return $query->getResult();
+    }
 }
