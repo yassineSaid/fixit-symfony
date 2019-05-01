@@ -19,6 +19,14 @@ class UserController extends Controller
         $formatted = $serializer->normalize($user);
         return new JsonResponse($formatted);
     }
+    public function getUsersAction(Request $request)
+    {
+        $connect=$this->getDoctrine()->getManager();
+        $users=$connect->getRepository(User::class)->listUsers($request->get("nom"),"");
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($users);
+        return new JsonResponse($formatted);
+    }
     public function getUserByIdAction(Request $request)
     {
         $connect=$this->getDoctrine()->getManager();

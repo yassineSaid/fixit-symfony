@@ -35,6 +35,9 @@ web_services_getAllMesProduits:
 web_services_getUser:
     path:       /getUserWs/
     defaults: { _controller: WebServicesBundle:User:getUser }
+web_services_getUsers:
+    path:       /getUsersWs/
+    defaults: { _controller: WebServicesBundle:User:getUsers }
 web_services_getUserById:
     path:       /getUserByIdWs/
     defaults: { _controller: WebServicesBundle:User:getUserById }
