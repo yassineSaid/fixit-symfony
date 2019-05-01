@@ -39,3 +39,15 @@ web_services_modifierUser:
     path:       /modifierUserWs/
     defaults: { _controller: WebServicesBundle:User:modifierUser }
 ########## END ROUTING DE YASSINE ###########
+
+########## ROUTING DE SLIM ###############
+web_services_affichageService:
+    path:       /affichageServiceWS/
+    defaults: { _controller: WebServicesBundle:Service:afficherWS }
+web_services_affichageServiceUser:
+    path:       /affichageServiceUserWS/{idUser}
+    defaults: { _controller: WebServicesBundle:Service:afficherMesServicesWS }
+web_services_getImageServiceUser:
+  path:       /getImageServiceUserWS/{idService}
+  defaults: { _controller: WebServicesBundle:Service:getImageServiceWS }
+########## END ROUTING DE SLIM ###########

@@ -30,4 +30,9 @@ class ServiceUserRepository extends \Doctrine\ORM\EntityRepository
         $query=$this->getEntityManager()->createQuery("SELECT AVG(m.prix) as moyenne from MainBundle:ServiceUser m where m.idService=:ids")->setParameter('ids',$ids);
         return $query->getResult();
     }
+    public function serviceImage($ids)
+    {
+        $query=$this->getEntityManager()->createQuery("SELECT m.imageService from MainBundle:Service m where m.id=:ids")->setParameter('ids',$ids);
+        return $query->getResult();
+    }
 }
