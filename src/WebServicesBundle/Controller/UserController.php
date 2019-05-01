@@ -35,6 +35,10 @@ class UserController extends Controller
             $user->setFirstname($request->get("firstname"));
             $user->setLastname($request->get("lastname"));
             $user->setAddress($request->get("address"));
+            $user->setZip($request->get("address"));
+            $user->setAddress($request->get("address"));
+            $user->setAddress($request->get("address"));
+            $user->setAddress($request->get("address"));
             $connect->persist($user);
             $connect->flush();
             return new JsonResponse(200);
