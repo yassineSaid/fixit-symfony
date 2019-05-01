@@ -45,4 +45,5 @@ class RealisationServiceRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter('id',$idUserOffreur);
         return $query->getResult();
     }
+
 }
