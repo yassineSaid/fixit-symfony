@@ -30,4 +30,9 @@ class OutilsRepository extends \Doctrine\ORM\EntityRepository
         $query=$this->getEntityManager()->createQuery("SELECT o FROM MainBundle:Outils o ORDER BY o.prix DESC");
         return $query->getResult();
     }
+    public function outilDisponible()
+    {
+        $query=$this->getEntityManager()->createQuery("SELECT o FROM MainBundle:Outils o Where o.quantite>0 ");
+        return $query->getResult();
+    }
 }

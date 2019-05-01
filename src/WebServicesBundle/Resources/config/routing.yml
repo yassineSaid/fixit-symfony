@@ -5,6 +5,15 @@ web_services_homepage:
 web_services_affichage_outils:
     path:     /affichageOutilsWS
     defaults: { _controller: WebServicesBundle:Outils:afficherWS }
+web_services_detail_outil:
+    path:     /detailOutilWS
+    defaults: { _controller: WebServicesBundle:Outils:detailWS }
+web_services_louer:
+    path:     /louerWS
+    defaults: { _controller: WebServicesBundle:Outils:louerWS }
+web_services_outilDisponibleWS:
+    path:     /outilDisponibleWS
+    defaults: { _controller: WebServicesBundle:Outils:outilDisponibleWS }
 ############################ END ROUNTING DE Sl-Wassim ##########################
 ########## ROUTING DE MUSTAPHA ###############
 web_services_getUserReclame:
