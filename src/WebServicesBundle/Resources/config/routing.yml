@@ -22,6 +22,15 @@ web_services_ajouterReclamation:
 web_services_afficherReclamations:
     path: /afficherReclamationsWS/{idUser}
     defaults: { _controller: WebServicesBundle:ReclamationWS:afficherReclamations }
+web_services_getAvisUser:
+    path: /getAvisWS/{idUser}
+    defaults: { _controller: WebServicesBundle:Avis:getAvisUser}
+web_services_modifierAvis:
+    path: /modifierAvisWS/
+    defaults: { _controller: WebServicesBundle:Avis:modifierAvis }
+web_services_ajouterAvis:
+    path: /ajouterAvisWS/
+    defaults: { _controller: WebServicesBundle:Avis:ajouterAvis }
 ########## END ROUTING DE MUSTAPHA ###########
 ########## ROUTING DE Ali ###############
 web_services_getAllProduits:
