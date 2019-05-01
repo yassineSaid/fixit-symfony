@@ -32,4 +32,10 @@ web_services_getAllProduits:
 web_services_getUser:
     path:       /getUserWs/
     defaults: { _controller: WebServicesBundle:User:getUser }
+web_services_getUserById:
+    path:       /getUserByIdWs/
+    defaults: { _controller: WebServicesBundle:User:getUserById }
+web_services_modifierUser:
+    path:       /modifierUserWs/
+    defaults: { _controller: WebServicesBundle:User:modifierUser }
 ########## END ROUTING DE YASSINE ###########
