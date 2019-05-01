@@ -20,4 +20,12 @@ class ProduitsController extends Controller
         $formatted = $serializer->normalize($produit);
         return new JsonResponse($formatted);
     }
+    public function MesProduitsWSAction(int $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $prod = $em->getRepository(Produit::class)->mesProduitsDQL($id);
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($prod);
+        return new JsonResponse($formatted);
+    }
 }

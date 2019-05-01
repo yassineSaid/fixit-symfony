@@ -27,6 +27,9 @@ web_services_afficherReclamations:
 web_services_getAllProduits:
     path:     /getAllProduitsWS
     defaults: { _controller: WebServicesBundle:Produits:afficherWS }
+web_services_getAllMesProduits:
+    path:     /getAllMesroduitsWS/{id}
+    defaults: { _controller: WebServicesBundle:Produits:MesProduitsWS }
 ########## END ROUTING DE Ali ###########
 ########## ROUTING DE YASSINE ###############
 web_services_getUser:
