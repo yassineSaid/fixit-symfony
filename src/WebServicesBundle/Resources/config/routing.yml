@@ -62,4 +62,10 @@ web_services_affichageServiceUser:
 web_services_getImageServiceUser:
   path:       /getImageServiceUserWS/{idService}
   defaults: { _controller: WebServicesBundle:Service:getImageServiceWS }
+web_services_getAllCategorie:
+  path:       /getAllCategorieWS/
+  defaults: { _controller: WebServicesBundle:Service:getAllCategorieWS }
+web_service_getServiceCategorie:
+  path:     /getServiceCategorieWS/{idc}
+  defaults: {_controller:WebServicesBundle:Service:getServiceCategorieWS}
 ########## END ROUTING DE SLIM ###########

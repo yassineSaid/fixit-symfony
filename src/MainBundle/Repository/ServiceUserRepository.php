@@ -35,4 +35,9 @@ class ServiceUserRepository extends \Doctrine\ORM\EntityRepository
         $query=$this->getEntityManager()->createQuery("SELECT m.imageService from MainBundle:Service m where m.id=:ids")->setParameter('ids',$ids);
         return $query->getResult();
     }
+    public function serviceCategorie($idc)
+    {
+        $query=$this->getEntityManager()->createQuery("SELECT m from MainBundle:Service m where m.CategorieService=:ids")->setParameter('ids',$idc);
+        return $query->getResult();
+    }
 }

@@ -45,4 +45,20 @@ class ServiceController extends Controller
         $formatted = $serializer->normalize($image);
         return new JsonResponse($formatted);
     }
+    public function getAllCategorieWSAction(Request $request)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $categorie=$em->getRepository(CategorieService::class)->findAll();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($categorie);
+        return new JsonResponse($formatted);
+    }
+    public function getServiceCategorieWSAction($idc)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $categorie=$em->getRepository("MainBundle:ServiceUser")->serviceCategorie($idc);
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($categorie);
+        return new JsonResponse($formatted);
+    }
 }
