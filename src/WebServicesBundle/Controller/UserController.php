@@ -68,6 +68,18 @@ class UserController extends Controller
         }
         return new JsonResponse(500);
     }
+    public function modifierSoldeUserAction(Request $request)
+    {
+        if ($request->isMethod("post")) {
+            $connect = $this->getDoctrine()->getManager();
+            $user = $connect->getRepository(User::class)->find($request->get("id"));
+            $user->setSolde($request->get("montant"));
+            $connect->persist($user);
+            $connect->flush();
+            return new JsonResponse(200);
+        }
+        return new JsonResponse(500);
+    }
     public function inscriptionUserAction(Request $request)
     {
         if ($request->isMethod("post")) {

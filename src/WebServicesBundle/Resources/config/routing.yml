@@ -62,6 +62,9 @@ web_services_modifierUser:
 web_services_inscriptionUser:
     path:       /inscriptionUserWs/
     defaults: { _controller: WebServicesBundle:User:inscriptionUser }
+web_services_modifierSoldeUser:
+    path:       /modifierSoldeUserWs/
+    defaults: { _controller: WebServicesBundle:User:modifierSoldeUser }
 ########## END ROUTING DE YASSINE ###########
 
 ########## ROUTING DE SLIM ###############
