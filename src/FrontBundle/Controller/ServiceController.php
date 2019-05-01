@@ -95,6 +95,7 @@ class ServiceController extends Controller
         // [{"id":"3","name":"Treasure Island"},{"id":"4","name":"Presidio of San Francisco"}]
     }
     public function ajouterAction(Request $request)
+
     {
         $serviceUser = new ServiceUser();
         if ($request->isMethod("POST"))
