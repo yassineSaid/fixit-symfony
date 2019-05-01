@@ -48,6 +48,15 @@ web_services_getAllProduits:
 web_services_getAllMesProduits:
     path:     /getAllMesroduitsWS/{id}
     defaults: { _controller: WebServicesBundle:Produits:MesProduitsWS }
+web_services_getAllMCategorue:
+    path:     /getAllCateorieWS
+    defaults: { _controller: WebServicesBundle:Produits:GetAllCategorieWS }
+web_services_ModifierProduit:
+    path:     /ModifierProduitWS/
+    defaults: { _controller: WebServicesBundle:Produits:modifierProduitWS }
+web_services_AcheterProduit:
+    path:     /AcheterProduitWS/{pro}/{us}/{quantite}
+    defaults: { _controller: WebServicesBundle:Produits:acheterWS }
 ########## END ROUTING DE Ali ###########
 ########## ROUTING DE YASSINE ###############
 web_services_getUser:
