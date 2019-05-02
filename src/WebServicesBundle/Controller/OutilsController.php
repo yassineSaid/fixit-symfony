@@ -105,4 +105,12 @@ class OutilsController extends Controller
         return new JsonResponse(200);
 
     }
+    public function rechercheOutilWSAction(Request $request)
+    {
+        $connect=$this->getDoctrine()->getManager();
+        $outil=$connect->getRepository(Outils::class)->listOutils($request->get("nom"));
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($outil);
+        return new JsonResponse($formatted);
+    }
 }

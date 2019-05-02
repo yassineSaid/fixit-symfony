@@ -14,6 +14,9 @@ web_services_louer:
 web_services_outilDisponibleWS:
     path:     /outilDisponibleWS
     defaults: { _controller: WebServicesBundle:Outils:outilDisponibleWS }
+web_services_rechercheOutilWS:
+    path:     /rechercheOutilWS
+    defaults: { _controller: WebServicesBundle:Outils:rechercheOutilWS }
 ############################ END ROUNTING DE Sl-Wassim ##########################
 ########## ROUTING DE MUSTAPHA ###############
 web_services_getUserReclame:

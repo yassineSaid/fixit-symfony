@@ -35,4 +35,13 @@ class OutilsRepository extends \Doctrine\ORM\EntityRepository
         $query=$this->getEntityManager()->createQuery("SELECT o FROM MainBundle:Outils o Where o.quantite>0 ");
         return $query->getResult();
     }
+    public function listOutils($nom)
+    {
+        $str="SELECT u
+            FROM MainBundle:Outils u
+            where  (upper(u.nom) LIKE :name )";
+        $query=$this->getEntityManager()->createQuery($str);
+        $query->setParameter('name',"%".strtoupper($nom)."%");
+        return $query->getResult();
+    }
 }
